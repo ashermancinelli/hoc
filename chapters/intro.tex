@@ -1,0 +1,43 @@
+\chapter{Introduction}
+
+While the modern programmer may consider the term \emph{compiler} to be a specific one, it is specific only in the
+sense that users of the word tend to mean the same thing when they say it.
+The details of what a compiler does are often obscure to even professional software engineers.
+This is especially evident when they feel the need to use a term like \emph{transpiler} to distinguish between a
+"true" compiler and one that emits code another programming language.
+Of course, to someone more familiar with the workings of compilers, this distinction is not so useful.
+Brian Kernighan described compilers in this seemingly general way\cite{new_history_of_modern_computing}:
+
+\begin{quotation}
+\textit{
+A compiler is a program that translates something written in one language into something semantically equivalent in another language.
+For example, compilers for high-level languages like C and Fortran might translate into assembly language for a particular kind of computer; some compilers translate from other languages such as Ratfor into Fortran.
+}
+\end{quotation}
+
+However, this is not sufficiently general.
+Two key counter examples are \TeX and \texttt{METAFONT}, which are compilers that
+transform text into PDF documents and renderable fonts.
+Transforming text into an executable program is not the same process as
+transforming text into a document or font, yet both are considered compilation.
+
+When students are first introduced to compilers, the first sort of program they are contrasted with is interpreters,
+but again, this distinction is not necessarily meaningful either.
+The conventional notion of an interpreter is a program that performs the actions
+specified by the source code as chunks of the code are consumed;
+perhaps this was the case with early \texttt{BASIC} interpreters, but one is hard-pressed
+to find a modern interpreter that does not perform some sort of compilation step.
+The most popular interpreters for today's most popular interpreted languages,
+Python and Javascript, both use relatively sophisticated compilation techniques.
+There are even many Python \textit{libraries} that perform
+just-in-time (JIT) compilation, targetting CPUs, GPUs, and other specialized hardware
+\cite{jax-compiler}\cite{lam_numba}\cite{numba_cuda}\cite{triton_tillet}.
+
+\vspace{0.5em}
+
+The definition we will use in this book is intentionally broad:
+\begin{quotation}
+\textit{
+    A compiler analyzes, transforms, and produces code, based on source code.
+}
+\end{quotation}

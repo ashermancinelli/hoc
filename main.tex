@@ -4,9 +4,8 @@
 \usepackage{hyperref}
 \usepackage[margin=1.0in]{geometry}
 \usepackage{titlesec}
-\usepackage{natbib}
-
-% \bibliographystyle{plainnat}  % or abbrvnat, unsrtnat
+\usepackage[style=numeric,backend=biber,url=true]{biblatex}
+\addbibresource{refs.bib}
 
 \fontfamily{libertinus}
 \titleformat{\chapter}[frame]
@@ -16,8 +15,7 @@
 
 \title{A Brief History of Compilers}
 \author{Asher Mancinelli}
-% \date{3/10/2025}
-% \makeindex
+\date{}
 
 \begin{document}
 
@@ -31,34 +29,15 @@ My hope is that each chapter stands on its own, but that reading them in order w
 The reader ought to be able to read a particular chapter that suits their needs at the time.
 This book does not assume the reader is deeply familiar with compiler engineering or computer science.
 
-\chapter{Introduction}
+\input{chapters/intro.tex}
+\input{chapters/dawn.tex}
 
-While the modern programmer may consider the term \emph{compiler} to be a specific one, it is specific only in the
-sense that users of the word tend to mean the same thing when they say it.
-The details of what a compiler does are often obscure to even professional software engineers.
-This is especially evident when they feel the need to use a term like \emph{transpiler} to distinguish between a
-"true" compiler and one that emits code another programming language.
-Of course, to someone more familiar with the workings of compilers, this distinction is not so useful.
-Brian Kernighan described compilers in this seemingly general way\cite{new_history_of_modern_computing}:
-
-\begin{quotation}
-\textit{
-A compiler is a program that translates something written in one language into something semantically equivalent in another language.
-For example, compilers for high-level languages like C and Fortran might translate into assembly language for a particular kind of computer; some compilers translate from other languages such as Ratfor into Fortran.
-}
-\end{quotation}
-
-However, this is not sufficiently general.
-Two key counter examples are \TeX and \texttt{METAFONT}, which are compilers that
-transform text into PDF documents (usually) and renderable fonts, respectively.
-Transforming text into an executable program is not the same process as
-transforming text into a document or font, yet both are considered compilation.
-
-\chapter{Dawn}
 \chapter{Unices}
 \chapter{Freedom}
 \chapter{Codesign}
 
-\bibliographystyle{plain}
-\bibliography{refs}
+\input{chapters/quotes.tex}
+
+\nocite{*}
+\printbibliography
 \end{document}
