@@ -1,0 +1,40 @@
+# Core LaTeX auxiliary files
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+
+# Additional generated files from packages or tools
+*.bbl
+*.blg
+*.idx
+*.ind
+*.ilg
+*.glo
+*.gls
+*.glg
+*.ist
+*.acn
+*.acr
+*.alg
+*.dvi
+*.maf
+*.mtc
+*.mtc1
+*.synctex.gz
+*.fdb_latexmk
+*.synctex.gz(busy)
+*.pdf # if you only want to track source files and not the compiled PDF
+
+# Editor-specific or OS-specific files
+.DS_Store
+*~
+.#*
+*.bak
+*.swp
