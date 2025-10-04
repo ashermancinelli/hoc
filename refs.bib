@@ -1,6 +1,7 @@
 
 % Wikipedia has been a useful collection of primary and secondary sources
 % https://en.wikipedia.org/wiki/History_of_compiler_construction#cite_ref-8
+% https://en.wikipedia.org/wiki/History_of_programming_languages
 
 @book{new_history_of_modern_computing,
         address = {Cambridge [Massachusetts]},
@@ -278,4 +279,136 @@ month = dec,
 pages = {345-420},
 numpages = {76},
 keywords = {vectorization, superscalar processors, parallelism, optimization, multiprocessors, locality, dependence analysis, compilation}
+}
+
+@misc{henry_comp.compilers:_nodate,
+	title = {Comp.compilers: {Re}: {History} and evolution of compilers},
+	url = {https://compilers.iecc.com/comparch/article/97-10-017},
+	abstract = {From comp.compilers newsgroup: Re: History and evolution of compilers},
+	urldate = {2025-10-04},
+	author = {Henry, Spencer},
+}
+
+@misc{norman_grace_nodate,
+	title = {Grace {Hopper} and {Colleagues} {Introduce} {COBOL}},
+	url = {https://www.historyofinformation.com/detail.php?id=778},
+	author = {Norman, Jeremy},
+}
+
+@book{laplante_encyclopedia_2017,
+	address = {BOCA RATON},
+	edition = {Second edition.},
+	title = {Encyclopedia of computer science and technology. {Volume} {II}, {Fuzzy}-{XML}},
+	isbn = {9781315115887},
+	abstract = {This book covers all aspects of computer science, engineering, and technology. It includes computer scientists, computer engineers computing professionals, managers, software professionals, and other technology professionals.},
+	language = {eng},
+	publisher = {CRC Press},
+	author = {Laplante, Phillip A.},
+	year = {2017},
+	note = {OCLC: 1032027866},
+	keywords = {Information technology Encyclopedias, Computer science Encyclopedias},
+}
+
+@article{bergin_history_1996,
+	title = {History of programming languages. 2 / ed. by {Thomas} {J}. {Bergin} and {Richard} {G}. {Gibson}},
+	language = {eng},
+	editor = {Bergin, Thomas J. and Gibson, Richard G.},
+	year = {1996},
+}
+
+@article{landin_next_1966,
+	title = {The next 700 programming languages},
+	volume = {9},
+	issn = {0001-0782, 1557-7317},
+	url = {https://dl.acm.org/doi/10.1145/365230.365257},
+	doi = {10.1145/365230.365257},
+	abstract = {A family of unimplemented computing languages is described that is intended to span differences of application area by a unified framework. This framework dictates the rules about the uses of user-coined names, and the conventions about characterizing functional relationships. Within this framework the design of a specific language splits into two independent parts. One is the choice of written appearances of programs (or more generally, their physical representation). The other is the choice of the abstract entities (such as numbers, character-strings, list of them, functional relations among them) that can be referred to in the language.
+            The system is biased towards “expressions” rather than “statements.” It includes a nonprocedural (purely functional) subsystem that aims to expand the class of users' needs that can be met by a single print-instruction, without sacrificing the important properties that make conventional right-hand-side expressions easy to construct and understand.},
+	language = {en},
+	number = {3},
+	urldate = {2025-10-04},
+	journal = {Communications of the ACM},
+	author = {Landin, P. J.},
+	month = mar,
+	year = {1966},
+	pages = {157--166},
+}
+
+@article{10.1145/321992.322001,
+author = {Aho, A. V. and Johnson, S. C. and Ullman, J. D.},
+title = {Code Generation for Expressions with Common Subexpressions},
+year = {1977},
+issue_date = {Jan. 1977},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {24},
+number = {1},
+issn = {0004-5411},
+url = {https://doi.org/10.1145/321992.322001},
+doi = {10.1145/321992.322001},
+abstract = {This paper shows the problem of generating optimal code for expressions containing common subexpressions is computationally difficult, even for simple expressions and simple machines. Some heuristics for code generation are given and their worst-case behavior is analyzed. For one register machines, an optimal code generation algorithm is given whose time complexity is linear in the size of an expression and exponential only in the amount of sharing.},
+journal = {J. ACM},
+month = jan,
+pages = {146–160},
+numpages = {15}
+}
+
+@book{10.5555/6448,
+author = {Aho, Alfred V. and Sethi, Ravi and Ullman, Jeffrey D.},
+title = {Compilers: principles, techniques, and tools},
+year = {1986},
+isbn = {0201100886},
+publisher = {Addison-Wesley Longman Publishing Co., Inc.},
+address = {USA}
+}
+
+@article{10.1145/29873.29875,
+author = {Allen, Randy and Kennedy, Ken},
+title = {Automatic translation of FORTRAN programs to vector form},
+year = {1987},
+issue_date = {Oct. 1987},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {9},
+number = {4},
+issn = {0164-0925},
+url = {https://doi.org/10.1145/29873.29875},
+doi = {10.1145/29873.29875},
+abstract = {The recent success of vector computers such as the Cray-1 and array processors such as those manufactured by Floating Point Systems has increased interest in making vector operations available to the FORTRAN programmer. The FORTRAN standards committee is currently considering a successor to FORTRAN 77, usually called FORTRAN 8x, that will permit the programmer to explicitly specify vector and array operations.Although FORTRAN 8x will make it convenient to specify explicit vector operations in new programs, it does little for existing code. In order to benefit from the power of vector hardware, existing programs will need to be rewritten in some language (presumably FORTRAN 8x) that permits the explicit specification of vector operations. One way to avoid a massive manual recoding effort is to provide a translator that discovers the parallelism implicit in a FORTRAN program and automatically rewrites that program in FORTRAN 8x.Such a translation from FORTRAN to FORTRAN 8x is not straightforward because FORTRAN DO loops are not always semantically equivalent to the corresponding FORTRAN 8x parallel operation. The semantic difference between these two constructs is precisely captured by the concept of dependence. A translation from FORTRAN to FORTRAN 8x preserves the semantics of the original program if it preserves the dependences in that program.The theoretical background is developed here for employing data dependence to convert FORTRAN programs to parallel form. Dependence is defined and characterized in terms of the conditions that give rise to it; accurate tests to determine dependence are presented; and transformations that use dependence to uncover additional parallelism are discussed.},
+journal = {ACM Trans. Program. Lang. Syst.},
+month = oct,
+pages = {491–542},
+numpages = {52}
+}
+
+@book{10.5555/1097042,
+author = {Cocke, John},
+title = {Programming languages and their compilers: Preliminary notes},
+year = {1969},
+isbn = {B0007F4UOA},
+publisher = {New York University},
+address = {USA}
+}
+
+@techreport{allen_catalogue_1971,
+	title = {A {Catalogue} of {Optimizing} {Transformations}},
+	url = {https://www.clear.rice.edu/comp512/Lectures/Papers/1971-allen-catalog.pdf},
+	institution = {IBM J Watson Research Center},
+	author = {Allen, Francis and Cocke, John},
+	year = {1971},
+}
+
+@inproceedings{backus_fortran_1957,
+	address = {Los Angeles, California},
+	title = {The {FORTRAN} automatic coding system},
+	copyright = {https://www.acm.org/publications/policies/copyright\_policy\#Background},
+	url = {http://portal.acm.org/citation.cfm?doid=1455567.1455599},
+	doi = {10.1145/1455567.1455599},
+	language = {en},
+	urldate = {2025-10-04},
+	booktitle = {Papers presented at the {February} 26-28, 1957, western joint computer conference: {Techniques} for reliability on - {IRE}-{AIEE}-{ACM} '57 ({Western})},
+	publisher = {ACM Press},
+	author = {Backus, J. W. and Stern, H. and Ziller, I. and Hughes, R. A. and Nutt, R. and Beeber, R. J. and Best, S. and Goldberg, R. and Haibt, L. M. and Herrick, H. L. and Nelson, R. A. and Sayre, D. and Sheridan, P. B.},
+	year = {1957},
+	pages = {188--198},
 }

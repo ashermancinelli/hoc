@@ -9,6 +9,8 @@
 *.fmt
 *.fot
 *.cb
+*-SAVE-ERROR
+*.run.xml
 
 # Additional generated files from packages or tools
 *.bbl
