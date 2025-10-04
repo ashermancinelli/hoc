@@ -1,3 +1,7 @@
+
+% Wikipedia has been a useful collection of primary and secondary sources
+% https://en.wikipedia.org/wiki/History_of_compiler_construction#cite_ref-8
+
 @book{new_history_of_modern_computing,
         address = {Cambridge [Massachusetts]},
         series = {History of computing},
@@ -43,12 +47,13 @@
 	year = {1968},
 }
 
-@online{numba_cuda,
+@misc{numba_cuda,
     author = {{NVIDIA Corporation}},
     title = {Numba CUDA},
+	shorttitle = {Numba CUDA},
     year = {2024},
     publisher = {GitHub},
-    url = {https://github.com/NVIDIA/numba-cuda/},
+    howpublished = {\url{https://github.com/NVIDIA/numba-cuda/}},
     urldate = {2025-10-04},
     note = {The CUDA target for Numba}
 }
@@ -181,4 +186,96 @@ series = {ACM '61}
 	publisher = {Oxford university press},
 	author = {Bentley, Peter J.},
 	year = {2012},
+}
+
+@article{10.1145/99164.99179,
+author = {Whitfield, D. and Soffa, M. L.},
+title = {An approach to ordering optimizing transformations},
+year = {1990},
+issue_date = {Mar. 1990},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {25},
+number = {3},
+issn = {0362-1340},
+url = {https://doi.org/10.1145/99164.99179},
+doi = {10.1145/99164.99179},
+abstract = {As an approach to deriving an application order of optimizing transformations, a framework is developed for examining the interactions of the transformations. The framework is based on an axiomatic specification technique and includes both pre-conditions and post conditions that must exist before and after applying optimizations. For a selected set of optimizations, the framework is used to determine those interactions among the optimizations that can create conditions and those that can destroy conditions for applying other optimizations. From these interactions, an application order is derived to obtain the potential benefits of the optimizations that can be applied to a program. In some cases, the ordering of a pair of optimizations is unambiguous in that one optimization can either create or destroy the conditions for the other. In the few cases where there is a cyclic interaction, the ordering is resolved based on the perceived importance of the two optimizations.},
+journal = {SIGPLAN Not.},
+month = feb,
+pages = {137–146},
+numpages = {10}
+}
+
+@inproceedings{Whitfield1990,
+author = {Whitfield, D. and Soffa, M. L.},
+title = {An approach to ordering optimizing transformations},
+year = {1990},
+isbn = {0897913507},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/99163.99179},
+doi = {10.1145/99163.99179},
+abstract = {As an approach to deriving an application order of optimizing transformations, a framework is developed for examining the interactions of the transformations. The framework is based on an axiomatic specification technique and includes both pre-conditions and post conditions that must exist before and after applying optimizations. For a selected set of optimizations, the framework is used to determine those interactions among the optimizations that can create conditions and those that can destroy conditions for applying other optimizations. From these interactions, an application order is derived to obtain the potential benefits of the optimizations that can be applied to a program. In some cases, the ordering of a pair of optimizations is unambiguous in that one optimization can either create or destroy the conditions for the other. In the few cases where there is a cyclic interaction, the ordering is resolved based on the perceived importance of the two optimizations.},
+booktitle = {Proceedings of the Second ACM SIGPLAN Symposium on Principles \&amp; Practice of Parallel Programming},
+pages = {137–146},
+numpages = {10},
+location = {Seattle, Washington, USA},
+series = {PPOPP '90}
+}
+
+@article{10.1145/99164.99179,
+author = {Whitfield, D. and Soffa, M. L.},
+title = {An approach to ordering optimizing transformations},
+year = {1990},
+issue_date = {Mar. 1990},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {25},
+number = {3},
+issn = {0362-1340},
+url = {https://doi.org/10.1145/99164.99179},
+doi = {10.1145/99164.99179},
+abstract = {As an approach to deriving an application order of optimizing transformations, a framework is developed for examining the interactions of the transformations. The framework is based on an axiomatic specification technique and includes both pre-conditions and post conditions that must exist before and after applying optimizations. For a selected set of optimizations, the framework is used to determine those interactions among the optimizations that can create conditions and those that can destroy conditions for applying other optimizations. From these interactions, an application order is derived to obtain the potential benefits of the optimizations that can be applied to a program. In some cases, the ordering of a pair of optimizations is unambiguous in that one optimization can either create or destroy the conditions for the other. In the few cases where there is a cyclic interaction, the ordering is resolved based on the perceived importance of the two optimizations.},
+journal = {SIGPLAN Not.},
+month = feb,
+pages = {137–146},
+numpages = {10}
+}
+
+@inproceedings{10.1145/99163.99179,
+author = {Whitfield, D. and Soffa, M. L.},
+title = {An approach to ordering optimizing transformations},
+year = {1990},
+isbn = {0897913507},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/99163.99179},
+doi = {10.1145/99163.99179},
+abstract = {As an approach to deriving an application order of optimizing transformations, a framework is developed for examining the interactions of the transformations. The framework is based on an axiomatic specification technique and includes both pre-conditions and post conditions that must exist before and after applying optimizations. For a selected set of optimizations, the framework is used to determine those interactions among the optimizations that can create conditions and those that can destroy conditions for applying other optimizations. From these interactions, an application order is derived to obtain the potential benefits of the optimizations that can be applied to a program. In some cases, the ordering of a pair of optimizations is unambiguous in that one optimization can either create or destroy the conditions for the other. In the few cases where there is a cyclic interaction, the ordering is resolved based on the perceived importance of the two optimizations.},
+booktitle = {Proceedings of the Second ACM SIGPLAN Symposium on Principles \&amp; Practice of Parallel Programming},
+pages = {137–146},
+numpages = {10},
+location = {Seattle, Washington, USA},
+series = {PPOPP '90}
+}
+
+@article{bacon_compiler_1994,
+author = {Bacon, David F. and Graham, Susan L. and Sharp, Oliver J.},
+title = {Compiler transformations for high-performance computing},
+year = {1994},
+issue_date = {Dec. 1994},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {26},
+number = {4},
+issn = {0360-0300},
+url = {https://doi.org/10.1145/197405.197406},
+doi = {10.1145/197405.197406},
+abstract = {In the last three decades a large number of compiler transformations for optimizing programs have been implemented. Most optimizations for uniprocessors reduce the number of instructions executed by the program using transformations based on the analysis of scalar quantities and data-flow techniques. In contrast, optimizations for high-performance superscalar, vector, and parallel processors maximize parallelism and memory locality with transformations that rely on tracking the properties of arrays using loop dependence analysis.This survey is a comprehensive overview of the important high-level program restructuring techniques for imperative languages, such as C and Fortran. Transformations for both sequential and various types of parallel architectures are covered in depth. We describe the purpose of each transformation, explain how to determine if it is legal, and give an example of its application.Programmers wishing to enhance the performance of their code can use this survey to improve their understanding of the optimizations that compilers can perform, or as a reference for techniques to be applied manually. Students can obtain an overview of optimizing compiler technology. Compiler writers can use this survey as a reference for most of the important optimizations developed to date, and as bibliographic reference for the details of each optimization. Readers are expected to be familiar with modern computer architecture and basic program compilation techniques.},
+journal = {ACM Comput. Surv.},
+month = dec,
+pages = {345-420},
+numpages = {76},
+keywords = {vectorization, superscalar processors, parallelism, optimization, multiprocessors, locality, dependence analysis, compilation}
 }
