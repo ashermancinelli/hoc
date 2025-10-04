@@ -22,13 +22,9 @@
 \maketitle
 \tableofcontents
 
-\chapter{Preface}
+\input{macros.tex}
 
-The introduction chapter contains a brief version of the entire book; the reader is encouraged to read it first.
-My hope is that each chapter stands on its own, but that reading them in order will give a more complete picture.
-The reader ought to be able to read a particular chapter that suits their needs at the time.
-This book does not assume the reader is deeply familiar with compiler engineering or computer science.
-
+\input{chapters/preface.tex}
 \input{chapters/intro.tex}
 \input{chapters/dawn.tex}
 
@@ -39,5 +35,5 @@ This book does not assume the reader is deeply familiar with compiler engineerin
 \input{chapters/quotes.tex}
 
 \nocite{*}
-\printbibliography
+\printbibliography[heading=bibintoc]
 \end{document}

@@ -1,8 +1,7 @@
-job := "hoc"
 default := "all"
 
 all:
-    latexmk -pdflatex=lualatex -pdf -jobname={{job}}
+    latexmk -pdflatex=lualatex -pdf
 
 clean:
     latexmk -C
