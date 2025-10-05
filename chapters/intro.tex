@@ -52,3 +52,9 @@ The code being produced by the compiler may be the encoded PDF format, for insta
 So too are interpreters which produce code in some form during the interpretation process.
 The CPython interpreter produces bytecode before executing the program,
 meaning it is a compiler by our definition.
+Perhaps CPython it is a compiler the consumes Python code and produces CPython bytecode,
+which also happens to ship a CPython bytecode virtual machine which typically
+executes the bytecode as soon as it is produced.
+
+The point of this section is not pedantry, but to establish a broad definition of
+compiler technology before embarking on the details of its development.
