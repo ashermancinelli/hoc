@@ -5,4 +5,4 @@ all:
 
 clean:
     latexmk -C
-    rm *.bbl
+    rm *.bbl *-SAVE-ERROR || true
