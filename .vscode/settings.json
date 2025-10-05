@@ -1,0 +1,14 @@
+{
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "just",
+            "tools": ["just"]
+        }
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name": "just",
+            "command": "just",
+        },
+    ]
+}

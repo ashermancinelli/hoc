@@ -7,6 +7,8 @@
 \usepackage{chronology}
 \usepackage{quotchap}
 \usepackage[style=numeric,backend=biber,url=true]{biblatex}
+\usepackage{tikz}
+\usepackage{luacode}
 \addbibresource{refs.bib}
 
 \fontfamily{libertinus}
@@ -14,12 +16,15 @@
   {\normalfont\huge\bfseries}{\thechapter}{0.5em}{\Huge\centering}
 \titlespacing{\chapter}{0pt}{0pt}{40pt}
 
-
 \title{A Brief History of Compilers}
 \author{Asher Mancinelli}
 \date{}
 
 \begin{document}
+
+\directlua{
+  timeline = require("timeline")
+}
 
 \maketitle
 \tableofcontents
