@@ -4,6 +4,7 @@ import sys
 import bibtexparser
 import argparse
 import datetime
+import math
 
 TEMPLATE = """
 \\documentclass{{article}}
@@ -11,6 +12,7 @@ TEMPLATE = """
 \\usepackage{{chronology}}
 \\usepackage{{libertinus}}
 
+\\sffamily
 \\begin{{document}}
 
 \\begin{{chronology}}[5]{{{start_date}}}{{{end_date}}}{{\\textwidth-5em}}[300ex]
@@ -26,6 +28,7 @@ def main():
     argparser.add_argument(
         "--reversed", "-r", action="store_true", help="Reverse the timeline order"
     )
+    argparser.add_argument('--years', type=str, help='Comma-separated bounds of years to include (--years=1990,2000)')
     parser = bibtexparser.bparser.BibTexParser(common_strings=True)
     writer = bibtexparser.bwriter.BibTexWriter()
 
@@ -34,6 +37,7 @@ def main():
         bib = parser.parse_file(bibtex_file)
 
     entries: list[dict] = bib.entries
+    years = int(args.years[0]), int(args.years[1]) if args.years else -1, 4000
     year = str(datetime.datetime.now().year)
 
     entries = sorted(entries, key=lambda x: int(x.get("year", year)))
@@ -45,10 +49,17 @@ def main():
             print(e)
             return 1
 
-    events = "\n".join(
-        f"\\eventpoint{{{entry['year']}}}{{{entry.get('title', 'No Title').replace('_', '\\_')}}}"
-        for entry in entries if 'year' in entry
-    )
+    print('% Using entries from {} to {}'.format(min(years), max(years)))
+    events = []
+    for entry in entries:
+        if 'year' in entry and min(years) <= int(entry['year']) <= max(years):
+            title = entry.get('title', 'No Title')
+            if 'author' in entry:
+                title += ', ' + entry['author'].split(' and ')[0]
+            events.append("\\eventpoint{{{year}}}{{{title}}}".format(
+                year=entry['year'],
+                title=title
+            ))
     first, last = entries[0], entries[-1]
     if args.reversed:
         first, last = last, first
@@ -56,7 +67,7 @@ def main():
         TEMPLATE.format(
             start_date=first['year'],
             end_date=last['year'],
-            events=events,
+            events='\n'.join(events),
         )
     )
 
