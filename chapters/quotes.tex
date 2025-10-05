@@ -5,13 +5,51 @@ it contains quotes and bibliographic references that may be useful in the writin
 
 \vspace{1em}
 
-\section{}
+\section{\textcite{allen_catalogue_1971}}
 
-\begin{itemize}
-    \item On of the earliest publications about compiler optimizations
-    \item mentions inlining/IPO
-\end{itemize}
-\cite{allen_catalogue_1971}:
+One of the earliest publications about compiler optimizations. Mentions inlining/IPO.
+
 \begin{quotation}
-    The term \textit{optimization} is a misnomer in that it is not generally clear that a particular, so called, optimizing transformation even results in an improvement to the program. A more correct term would be "amelioration."
+The term \textit{optimization} is a misnomer in that it is not generally clear that a particular, so called, optimizing transformation even results in an improvement to the program. A more correct term would be "amelioration."
+\end{quotation}
+
+\section{\textcite{the_first_computers_2002}}
+
+\begin{quotation}
+The chief programmer of Mark I, Richard M. Bloch, kept a notebook in which he wrote out pieces of code
+that had been checked out and were known to be correct. One of Bloch's routines computed sines for
+positive angles less that 45 degrees to only ten digits. Rather than use the slow sine unit built into the
+machine, Grace Hopper simply copied Dick's routine into her own program whenever she knew it would suit
+her requirements. This practice ultimately allowed the programmers to dispense with the sine, logarithm, and
+exponential units altogether. Both Bloch and Bob Campbell had notebooks full of such pieces of code. Years
+later, the programmers realized that they were pioneering the art of subroutines and actually developing the
+possibility of building compilers.
+\end{quotation}
+
+\begin{quotation}
+There were sets of instructions for integers, floating-point numbers, packed decimal numbers, and character
+strings; operating in a variety of modes. This philosophy had evolved in an environment dominated by
+magnetic core memory, to which access was slow relative to processor operations. Thus it made sense to
+specify in great detail what one wanted to do with a piece of data before going off to memory to get it. The
+instruction sets also reflected the state of compiler technology. If the processor could perform a lot of
+arithmetic on data with only one instruction, then the compiler would have that much less work to do. A rich
+instruction set would reduce the "semantic gap" between the English-like commands of a high-level
+programming language and the primitive and tedious commands of machine code. Cheap read-only memory
+chips meant that the designer could create these rich instruction sets at low cost if the computer was microprogrammed.
+\end{quotation}
+
+p. 270
+\begin{quotation}
+In the following sections, expressions such as "hardware", "software", "machine language", "compiler",
+"architecture" and the like are used freely, although they were unknown in 1950. They only arrived a decade
+later, but the underlying concepts were quite familiar to us.
+\end{quotation}
+
+\begin{quotation}
+    We also made some hardware changes. Rutishauser, who was exceptionally creative, devised a way of
+letting the Z4 run as a compiler, a mode of operation which Zuse had never intended. For this purpose, the
+necessary instructions were interpreted as numbers and stored in the memory. Then, a compiler program
+calculated the program and punched it out on a tape. All this required certain hardware changes. Rutishauser
+compiled a program with as many as 4000 instructions. Zuse was quite impressed when we showed him this
+achievement.
 \end{quotation}
