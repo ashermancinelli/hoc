@@ -13,6 +13,21 @@ One of the earliest publications about compiler optimizations. Mentions inlining
 The term \textit{optimization} is a misnomer in that it is not generally clear that a particular, so called, optimizing transformation even results in an improvement to the program. A more correct term would be "amelioration."
 \end{quotation}
 
+\quotesection{hopl_keynote}
+\begin{quotation}
+    Mark I had built-in programs for sine, cosine, exponential, arctangent, .-... On the
+other hand, because they were wired into the machine, they had to be completely general.
+Any problem that we solved, we found we did not need complete generality; we always
+knew something about what we were doing--that was what the problem was. And the answer was--we started writing subroutines, only we thought they were pieces of coding.
+And if I needed a sine subroutine, angle less than zr/4, I'd whistle at Dick and say, "Can I
+have your sine subroutine?" and I'd copy it out of his notebook. We soon found that we
+needed just a generalized format of these if we were going to copy them, and I found a
+generalized subroutine for Mark I. With substitution of certain numbers, it can be copied
+into any given program. So as early as 1944 we started putting together things which would
+make it easier to write more accurate programs and get them written faster. I think we've
+forgotten to some extent how early that started.
+\end{quotation}
+
 \quotesection{the_first_computers_2002}
 
 \begin{quotation}
@@ -170,17 +185,102 @@ into “neat, effi cient, and compact little packages of potential
 computation.”29
 \end{quotation}
 
-\quotesection{hopl_keynote}
 \begin{quotation}
-    Mark I had built-in programs for sine, cosine, exponential, arctangent, .-... On the
-other hand, because they were wired into the machine, they had to be completely general.
-Any problem that we solved, we found we did not need complete generality; we always
-knew something about what we were doing--that was what the problem was. And the answer was--we started writing subroutines, only we thought they were pieces of coding.
-And if I needed a sine subroutine, angle less than zr/4, I'd whistle at Dick and say, "Can I
-have your sine subroutine?" and I'd copy it out of his notebook. We soon found that we
-needed just a generalized format of these if we were going to copy them, and I found a
-generalized subroutine for Mark I. With substitution of certain numbers, it can be copied
-into any given program. So as early as 1944 we started putting together things which would
-make it easier to write more accurate programs and get them written faster. I think we've
-forgotten to some extent how early that started.
+A closer look at the manual for the A-2 compiler (produced
+by the Computation Analysis Laboratory during the summer of
+1953) suggests that, despite the signifi cant improvements over
+the A-0 compiler, automatic programming had its limitations.
+Hopper’s vision of intuitive, user-friendly, hardware-independent
+pseudo-codes generating effi cient running programs was far
+from realization. The A-2 provided a three-address “pseudocode” specifi cally designed for the UNIVAC I 12-character standards. The manual defi ned “pseudo-code” as “computer words
+other than the machine (C-10) code, designed with regard to
+facilitating communications between programmer and computer.”32 Today we refer to it as source code. Since pseudo-code
+could not be directly executed by the UNIVAC I, the A-2 compiler included a translator routine which converted the pseudocode into machine code. (See table 8.3.)
+The manual states that the pseudo-code is “a new language
+which is easier to learn and much shorter and quicker to write.”33
+\end{quotation}
+
+\begin{quotation}
+ The most groundbreaking change was the A-2's ability to debug
+pseudo-code and fl ag errors automatically. The compiler generated twelve-character error codes that captured the nature of the
+error, a miraculous innovation for any programmer who had
+experienced the pain and monotony of debugging computer
+code. (See table 8.4.)
+\end{quotation}
+
+Pseudocode was actually the innovation of compilers as we know them today,
+which didn't wasn't part of Hopper's compilers until the A-2.
+Prior to that, it was really a way to link/load programs from a library of subroutines.
+
+\begin{quotation}
+First, the designer of the compiler now was a linguist. That is,
+the compiler programmer had the ability to design the syntax of
+the pseudo-code.
+\end{quotation}
+\begin{quotation}
+Not only would it be far easier to learn
+than machine code; its intuitive logic would help users debug
+their work. “I felt,” Hopper recalled, “that sooner or later . . .
+our attitude should be not that people should have to learn how
+to code for the computer but rather the computer should learn
+how to respond to people because I fi gured we weren’t going to
+teach the whole population of the United States how to write
+computer code, and that therefore there had to be an interface
+built that would accept things which were people-oriented and
+then use the computer to translate to machine code.”38
+
+She mentioned that compilers
+could be designed to program the machine code of any computer. “A problem stated in a basic pseudo-code can thus be
+prepared for running on one or more computers if the corresponding compiler and subroutine library is available,” she wrote.
+Just as the compiler freed the user from knowing how to program
+in machine language, pseudo-code was now liberated from a
+specifi c type of hardware. A payroll pseudo-code could run on
+a UNIVAC or an IBM computer, so long as the appropriate
+compiler was running on both. Hopper stated that as of May
+1952 such a benefi t was theoretical, insofar as her laboratory had
+tried it only once, with inconclusive results.39
+
+Though interpreters were simpler to use than programming in
+machine code, Hopper believed the approach was a step in the
+wrong direction. Compiling the A-2 pseudo-code was time consuming in the short term, but the resultant run-program eliminated these six interpretive steps and thus could run more
+effi ciently. In her fi nal comparison of interpreters and compilers,
+Hopper wrote: “In both cases, the advantage over manual programming is very great, once the basic subroutines have been
+tested and proved. The saving of time for a compiler is usually
+greater.”40
+\end{quotation}
+
+\begin{quotation}
+Moreover, Hopper’s network of invention attracted the enthusiastic participation of many women in the programming fi eld.
+Nora Moser (of the Army Map Service), Betty Holberton (at the
+David Taylor Basin), Margaret Harper (of the Remington Rand/
+Naval Aviation Supply Office), and Mildred Koss (of Remington
+Rand) viewed the compiler as more than just a new programming concept. Indeed, they saw it as the centerpiece of an innovative automated system of programming that they had a hand
+in creating.
+\end{quotation}
+\begin{quotation}
+The fact that Hopper wholeheartedly welcomed nonUNIVAC personnel to learn about the A-2 compiler sheds some
+light on her beliefs concerning intellectual property. Hopper did
+not view software as a commodity to be patented and sold.
+Rather, she took her cue from the mathematics community. Like
+most other academics, mathematicians shared information universally, in order to advance knowledge.
+\end{quotation}
+\begin{quotation}
+Refl ecting on the negative reactions of some of her fellow
+programmers, Hopper expressed the belief that arguments focusing on “effi ciency” and “creativity” covered far baser motivations:
+“Well, you see, someone learns a skill and works hard to learn
+that skill, and then if you come along and say, ‘you don’t need
+that, here’s something else that’s better,’ they are going to be quite
+indignant.” In fact, Hopper felt that by the mid 1950s many
+programmers viewed themselves as “high priests,” for only they
+could communicate with such sophisticated machines.
+
+Hopper was not the only one who came to this conclusion.
+John Backus, developer of Speedcode and later of FORTRAN,
+was conscious of the programming community’s reaction to his
+contributions: “Just as freewheeling westerners developed a chauvinistic pride in their frontiersmanship and a corresponding conservatism, so many programmers of the freewheeling 1950s began
+to regard themselves as members of a priesthood guarding skills
+and mysteries far too complex for ordinary mortals.”54 But the
+more the likes of Backus and Hopper preached the benefi ts of
+automatic programming, the more concerned the programming
+priesthood became about the spreading technology.
 \end{quotation}

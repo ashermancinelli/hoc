@@ -1,33 +1,47 @@
 \chapter{Dawn, 1940-1960}
 
-In the beginning, compilers were not important.
-Hardware was important.
-Customers cared about the instruction set,
-and if the compiler could generate those instructions too,
-it was a nice convenience, but not a nessecity.
-Compilers were not a significant part of the value chain for customers of early computers.
-
-As late as 1962, the term \textit{software} was not even in common use, as \citeauthor{the_first_computers_2002} note\cite{the_first_computers_2002}:
+There is significant debate about who created the first compiler,
+in no small part due to ambiguous nomenclature.
+As late as 1962, the term \textit{software} was not even in common use, as \citeauthor{the_first_computers_2002} note:
 
 \begin{quotation}
 [E]xpressions such as "hardware", "software", "machine language", "compiler",
 "architecture" and the like... were unknown in 1950. They only arrived a decade
 later, but the underlying concepts were quite familiar to us.
+\cite{the_first_computers_2002}
 \end{quotation}
 
-Again, this Honeywell advertisement \textit{A Few Quick Facts on Software} sought to clarify these terms as well \cite[ch.5]{new_history_of_modern_computing}:
+Again, this Honeywell advertisement \textit{A Few Quick Facts on Software} sought to clarify these terms as well:
 
 \begin{quotation}
 Software is a new and important addition to the jargon of computer users and builders.
 It refers to the automatic programming aids that simplify the task of telling the computer 'hardware' how to do its job....
 Generally there are three basic categories of software:
-1) Assembly Systems, 2) Compiler Systems, and 3) Operating Systems.
+1) Assembly Systems, 2) Compiler Systems, and 3) Operating Systems.\cite[ch.5]{new_history_of_modern_computing}
 \end{quotation}
 
-Though the nascent notion of \textit{software} was obscure, it already entailed compilers.
+It should come as no surprise, then, that the origins of our modern understanding of the
+term \textit{compiler} are similarly murky, especially when considering the fact that
+\textit{compiler} already carried meaning in English, and was repurposed for computing.
+In short, there were several early efforts to create programs that punched out instructions
+as their output.
+The output from these programs (on punchcards) could then be fed back into the computer
+to perform the instructiond produced by the compiler.
+
+In the beginning, compilers were not important.
+Hardware was important.
+Customers cared about the instruction set,
+and if a program could generate those instructions too,
+it was at best a convenience and at worst a distraction.
+Compilers were not part of the value chain for computer customers prior to the A-2.
+
+% Though the nascent notion of \textit{software} was obscure, it already entailed compilers.
 
 While GH may not have been the first to create a program that
 punched out another program as its output, she was the first to
 do so in order to support users' needs and she had a team to help her.
+They developed the first three compilers in rapid succession;
+contrast the pace of development between Hopper and her team with the rest of the world
+in Figure \ref{fig:dawn-timeline}.
 
 \input{chapters/dawn-timeline.tex}

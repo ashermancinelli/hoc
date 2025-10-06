@@ -15,7 +15,7 @@ function draw_timeline(config)
     
     -- Calculate scale
     local year_range = end_year - start_year
-    local height = config.height or tex.dimen.textheight / (40 * 65536) * scale_factor
+    local height = config.height or tex.dimen.textheight / (30 * 65536) * scale_factor
     local scale = height / year_range
     
     -- Helper to convert year to y-position
@@ -25,6 +25,7 @@ function draw_timeline(config)
     
     -- Center the tikzpicture
     tex.sprint("\\begin{center}")
+    tex.sprint("\\sffamily")
     
     -- Start TikZ picture
     tex.sprint("\\begin{tikzpicture}[")
@@ -86,6 +87,7 @@ function draw_timeline(config)
     
     tex.sprint("\\end{tikzpicture}")
     tex.sprint("\\end{center}")
+    tex.sprint("\\normalfont")
 end
 
 return {

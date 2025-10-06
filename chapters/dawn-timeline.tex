@@ -1,20 +1,29 @@
 \pagebreak
+\begin{figure}[h]
 \begin{luacode}
 timeline.draw_timeline({ 
-    start_year = 1940,
-    end_year = 1960,
+    start_year = 1942,
+    end_year = 1957,
     marker_interval = 1,
     show_year = false,
     events = {
         {1942, "Zuse conceptualizes first high-level language \\textit{Plankalkül}"},
         {1944, "Automatic Sequence Control Calculator started working"},
         {1950, "Rutishauser ran the Z4 as a compiler at ETH"},
-        {1951, "Hopper begins work on the A-0 compiler"},
+        {1951, "B{\"o}hm develops practical compiler for PhD thesis at ETH"},
+        {1951.5, "Hopper begins work on the A-0 compiler for the UNIVAC I"},
         {1952, "Hopper presents \\textit{Automatic Programming} at ACM"},
         -- {1952.5, "Alick Glennie develops first compiler in the modern sense for the U of Manchester Mark I"},
         {1952.5, "Alick Glennie develops compiler for Mark I "},
-        {1957, "John Backous at IBM released the first \\texttt{FORTRAN} compiler"},
+        {1953, "Hopper's team completes the A-1"},
+        {1953.3, "Hopper's team completes the A-2"},
+        {1953.6, "Hopper gives presentation to UNIVAC users on the A-2"},
+        {1953.9, "Numerous US government agencies have adopted the A-2"},
+        {1954.9, "Nora Moser of the Army Map Service sends Hopper a list of modifications to the A-2"},
+        {1957, "John Backous at IBM released the first \\texttt{FORTRAN} compiler, the first commerical compiler"},
     },
 })
-
 \end{luacode}
+\caption{Early compiler history, 1940--1960}
+\label{fig:dawn-timeline}
+\end{figure}
