@@ -53,21 +53,6 @@ programming language and the primitive and tedious commands of machine code. Che
 chips meant that the designer could create these rich instruction sets at low cost if the computer was microprogrammed.
 \end{quotation}
 
-p. 270
-\begin{quotation}
-In the following sections, expressions such as "hardware", "software", "machine language", "compiler",
-"architecture" and the like are used freely, although they were unknown in 1950. They only arrived a decade
-later, but the underlying concepts were quite familiar to us.
-\end{quotation}
-
-\begin{quotation}
-    We also made some hardware changes. Rutishauser, who was exceptionally creative, devised a way of
-letting the Z4 run as a compiler, a mode of operation which Zuse had never intended. For this purpose, the
-necessary instructions were interpreted as numbers and stored in the memory. Then, a compiler program
-calculated the program and punched it out on a tape. All this required certain hardware changes. Rutishauser
-compiled a program with as many as 4000 instructions. Zuse was quite impressed when we showed him this
-achievement.
-\end{quotation}
 
 \quotesection{grace_hopper_and_the_invention_of_the_information_age_2009}
 
@@ -285,7 +270,7 @@ automatic programming, the more concerned the programming
 priesthood became about the spreading technology.
 \end{quotation}
 
-\quotesection{hiltzik1999dealers}
+\quotesection{dealers_of_lightning_xerox_parc_hiltzik1999}
 
 Vendor lock-in was tremendously powerful at the time, if only for hardware reasons (expensive, difficult to move/transition).
 The instruction set was only part of the problem.
@@ -295,4 +280,94 @@ a higher-level target, but still depended on orgs being able and willing to swit
 Once IBM sold the system to United Airlines, it could rest assured that the frightful effort of rewriting software,
 retraining, staff, and moving tons of iron and steel cabinets around would make unit very long and hard before 
 replacing its IBM system by one made by, say, Honeywell.
+\end{quotation}
+
+Xerox and SDS execs wanted to try and break out of scientific computing and into business computing,
+competing with IBM.
+When the Xerox folks met with potential business customers, compilers were part of the value chain.
+
+Chapter 7. The Clone.
+
+\begin{quotation}
+"How good is your COBOL compiler?" they asked...
+On hearing the question, Bob Spinrad recognized as though for the first time the enormity of the task confronting the company.
+Scientific and reserach programmers, like thsoe who worked for SDS and its traditional customers,
+would not be caught dead working in COBOL, which they considered a lame language suitable only for clerks and drones.
+He shifted uneasily in his chari.
+
+"It's not a question of how good our COBOL compiler is," he told the visitors.
+
+"Why not?"
+
+"Because we don't have one."
+\end{quotation}
+
+The SDS folks didn't understand software's role in value chain for users,
+and they weren't willing to make hardware changes.
+
+\begin{quotation}
+    Headquarters executives thought of software as the gobbledygook that made a machine run,
+    like the hamster driving the wheel. They could not understand why the decision between the PDP-10
+    and the Sigma needed to be any more complicated than, say, choosing an albino rodent over a brown one.
+
+    But from a technical point of view, the issue was hardly tha tcasual.
+    Software was the factor that defined the fundamental incompatibility between the Sigma and PDP machines
+    and the superiority, for PARC's purposes, of the latter.
+    The architectures of the two computers were so radically different that software written for the PDP would not
+    properly fit into the memory space the Sigma allocated for data.
+
+    Although it was theoretically possible to simply "port" all the PDP software over to the Sigma, the CSL
+    engineers calculated that such a job would mean rewriting every single line of every PDP program,
+    a task that would take three years and cost \$4 million dollars.
+
+    \dots
+
+    They had made an issue out of hardware--what machine they could buy
+    --when their real concern was software--what programs they could run.
+\end{quotation}
+
+PARC folks replicated the PDP-10's instructions in microcode.
+
+\quotesection{new_history_of_modern_computing}
+
+\begin{quotation}
+The development of Unix shifted gradually from assembler to a new higher-level language…
+Instead of writing, a whole operating system, all that was needed was a C compiler able to
+generate code in the new machines language, and some work to tweak the Unix kernel and
+standard libraries to accommodate its quirks.
+\end{quotation}
+
+\quotesection{konrad_zuses_z4_2000}
+\begin{quotation}
+    [Eduard Stiefel] sent two of his assistants, Heinz Rutishauser and myself,
+to the United States with the assignment of studying the new technology in order to start a similar project at
+the ETH. We spent most of the year 1949 with Howard Aiken at Harvard and John von Neumann at
+Princeton, but we also looked at other installations, among them the ENIAC at Aberdeen and the Mark II at
+Dahlgren. We gratefully acknowledge the hospitality with which we were received and the openness with
+which we were given information.
+
+Despite the fact that the Z4 was only barely operational, he decided that the idea of transferring it to Zurich
+should by all means be considered.
+\end{quotation}
+
+Zuse introduced the \texttt{undef}/\texttt{poison} values in the original Z4!
+\begin{quotation}
+In the following sections, expressions such as "hardware", "software", "machine language", "compiler",
+"architecture" and the like are used freely, although they were unknown in 1950. They only arrived a decade
+later, but the underlying concepts were quite familiar to us.
+
+Konrad Zuse must be credited with seven fundamental inventions:\dots
+
+4. Look-ahead execution: The program's instruction stream is read two instructions in advance, testing if memory instructions can be executed ahead of time.
+
+6. Special values
+\end{quotation}
+
+\begin{quotation}
+    We also made some hardware changes. Rutishauser, who was exceptionally creative, devised a way of
+letting the Z4 run as a compiler, a mode of operation which Zuse had never intended. For this purpose, the
+necessary instructions were interpreted as numbers and stored in the memory. Then, a compiler program
+calculated the program and punched it out on a tape. All this required certain hardware changes. Rutishauser
+compiled a program with as many as 4000 instructions. Zuse was quite impressed when we showed him this
+achievement.
 \end{quotation}
