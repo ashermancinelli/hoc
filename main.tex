@@ -24,13 +24,21 @@
 
 \directlua{
   timeline = require("lua/timeline")
+  shell = require("lua/shell")
 }
 
 \maketitle
+
+% \vspace*{\fill}
+% \begin{center}
+% \small\textit{Git revision: \directlua{tex.sprint(shell.git_revision())}}
+% \end{center}
+% \clearpage
+
 \tableofcontents
 
-\input{macros.tex}
 
+\input{macros.tex}
 \input{chapters/preface.tex}
 \input{chapters/intro.tex}
 \input{chapters/dawn.tex}
