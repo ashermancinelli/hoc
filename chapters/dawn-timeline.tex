@@ -3,13 +3,18 @@
 timeline.draw_timeline({ 
     start_year = 1940,
     end_year = 1960,
-    marker_interval = 5,
+    marker_interval = 1,
+    show_year = false,
     events = {
         {1942, "Zuse conceptualizes first high-level language \\textit{Plankalkül}"},
         {1944, "Automatic Sequence Control Calculator started working"},
         {1950, "Rutishauser ran the Z4 as a compiler at ETH"},
         {1951, "Hopper begins work on the A-0 compiler"},
         {1952, "Hopper presents \\textit{Automatic Programming} at ACM"},
+        -- {1952.5, "Alick Glennie develops first compiler in the modern sense for the U of Manchester Mark I"},
+        {1952.5, "Alick Glennie develops compiler for Mark I "},
+        {1957, "John Backous at IBM released the first \\texttt{FORTRAN} compiler"},
     },
 })
+
 \end{luacode}
