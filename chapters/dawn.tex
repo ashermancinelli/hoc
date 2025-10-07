@@ -2,7 +2,8 @@
 
 There is significant debate about who created the first compiler,
 in no small part due to ambiguous nomenclature.
-As late as 1962, the term \textit{software} was not even in common use, as \citeauthor{the_first_computers_2002} note:
+As late as 1962, the term \textit{software} was not even in common use,
+as \citeauthor{the_first_computers_2002} note:
 
 \begin{quotation}
 [E]xpressions such as "hardware", "software", "machine language", "compiler",
@@ -11,37 +12,204 @@ later, but the underlying concepts were quite familiar to us.
 \cite{the_first_computers_2002}
 \end{quotation}
 
-Again, this Honeywell advertisement \textit{A Few Quick Facts on Software} sought to clarify these terms as well:
+This Honeywell advertisement \textit{A Few Quick Facts on Software} sought to clarify these terms as well:
 
 \begin{quotation}
 Software is a new and important addition to the jargon of computer users and builders.
 It refers to the automatic programming aids that simplify the task of telling the computer 'hardware' how to do its job....
-Generally there are three basic categories of software:
-1) Assembly Systems, 2) Compiler Systems, and 3) Operating Systems.\cite[ch.5]{new_history_of_modern_computing}
+% Generally there are three basic categories of software:
+% 1) Assembly Systems, 2) Compiler Systems, and 3) Operating Systems.\cite[ch.5]{new_history_of_modern_computing}
 \end{quotation}
 
+At this time, hardware was the only piece that mattered to customers.
+Software was an afterthought, if a thought at all.
+The instruction set of the machine was important, because that was the
+user's interface to the machine.
 It should come as no surprise, then, that the origins of our modern understanding of the
-term \textit{compiler} are similarly murky, especially when considering the fact that
+term \textit{compiler} are similarly murky, especially considering the fact that
 \textit{compiler} already carried meaning in English, and was repurposed for computing.
-In short, there were several early efforts to create programs that punched out instructions
-as their output.
-The output from these programs (on punchcards) could then be fed back into the computer
-to perform the instructiond produced by the compiler.
 
-In the beginning, compilers were not important.
-Hardware was important.
-Customers cared about the instruction set,
-and if a program could generate those instructions too,
-it was at best a convenience and at worst a distraction.
-Compilers were not part of the value chain for computer customers prior to the A-2.
+\section{Development of the Z4}
 
-% Though the nascent notion of \textit{software} was obscure, it already entailed compilers.
+Konrad Zuse, a German civil engineer, began work on the Z4 during World War II.
+Funded partially by his family and partially by the Nazi government, his prior works
+demonstrated significant creativity and ingenuity, and they were leveraged to build
+precursors to modern cruise missiles and guided bombs.
+Most of Zuse's machines prior to the Z4 were destroyed during the war.
 
-While GH may not have been the first to create a program that
-punched out another program as its output, she was the first to
-do so in order to support users' needs and she had a team to help her.
-They developed the first three compilers in rapid succession;
-contrast the pace of development between Hopper and her team with the rest of the world
-in Figure \ref{fig:dawn-timeline}.
+
+
+\section{The ETH's Aquisition of the Z4}
+
+There were several early efforts to create programs that produced punch cards
+which contained machine code instructions, which could then be fed back into the machine
+as input punchcards.
+The programs produced by these early compilers were called \textit{run-programs},
+and the process of using them was called \textit{automatic programming}, a term later
+coined by Grace Hopper.
+The first of these programs was run on a machine called the Z4, designed by Konrad Zuse in Germany.
+
+Professor Eduard Stiefel, shortly after establishing the Institute of Applied Mathematics
+to study numerical analysis at the Swiss Federal Institute of Technology (ETH) in Zurich,
+began searching for a computer for the institute.
+He learned of the computing advancements in the United States, Great Britain, and Germany,
+but none were readily available at the time.
+He sent his assistants Heinz Rutishauser and Ambros P. Speiser to the US to study
+the latest developments in computing; they spent most of 1949 with
+Howard Aiken at Harvard and John von Neumann at Princeton.
+
+\begin{quotation}
+    Before we returned, that is, in the middle of 1949, Stiefel was informed about the existence of Konrad Zuse's
+Z4. At that time Zuse was living in Hopferau, a German village near the Swiss border. Stiefel was told that
+the machine might be for sale. He visited Zuse, inspected the device, and reviewed the specifications.
+Despite the fact that the Z4 was only barely operational, he decided that the idea of transferring it to Zurich
+should by all means be considered. Stiefel wrote a letter to Rutishauser and me (we were at Harvard at the
+time), describing the situation and asking us to get Aiken's opinion. Aiken's reply was very critical – the
+future belonged to electronics and, rather than spending time on a relay calculator, we should now
+concentrate our efforts on building a computer of our own.\cite{konrad_zuses_z4_2000}
+\end{quotation}
+
+Stiefel was undeterred by Aiken's criticism, and convinced the ETH to purchase the Z4.
+In 1950, Heinz Rutishauser at Switzerland's ETH obtains a Z4.
+
+\begin{quotation}
+    We also made some hardware changes. Rutishauser, who was exceptionally creative, devised a way of
+letting the Z4 run as a compiler, a mode of operation which Zuse had never intended. For this purpose, the
+necessary instructions were interpreted as numbers and stored in the memory. Then, a compiler program
+calculated the program and punched it out on a tape. All this required certain hardware changes. Rutishauser
+compiled a program with as many as 4000 instructions. Zuse was quite impressed when we showed him this
+achievement.\cite{konrad_zuses_z4_2000}
+\end{quotation}
+
+Thus were the first run-programs produced.
+This is what we will consider \textbf{the first compiler}, though it was not called that at the time.
+
+\section{Introducing Grace Hopper}
+
+While Grace Hopper may not have been the first to create a program that
+punched out another program as its output, she pioneered the field of
+compilation to the extent that many consider her the inventor of compilers.
+Her innovations were also more aptly timed and readily adopted than those at the ETH.
+Consider Figure \ref{fig:dawn-timeline}, and the pace of development in Hopper's time
+compared to the years prior.
+Note that while we have ample data on \textit{how} Hopper's compiler worked and how
+she and her team developed it, the intuition behind those developments is foggy at best.
+We have recollections from Hopper and her contemporaries, but only from long after the fact.
+It was not understood at the time how important her work was, so we have
+only to speculate and piece together oral histories.
+
+Originally a mathematics professor at Vassar College, Hopper obtained waivers for her age and weight and
+joined the U.S. Navy in 1943, eventually graduating first in her class from Midshipmen's School.
+She was assigned, somewhat unexpectedly, to Commander Howard Aiken's Harvard Computation Laboratory in 1944
+as the third programmer of the Automatic Sequence Controlled Calculator (Mark I), 
+the world's first operational computer.
+
+\begin{quotation}
+    According to her friend and former Harvard colleague Edmund Berkeley, Hopper turned to
+    alcohol during this period as a way to deal with the compounding pressures at the 
+    Harvard Computation Laboratory. She had dedicated herself fully to the overwhelming task of
+    bringing Howard Aikens machines to life.
+    She used the machines to solve critical military problems, 
+    including one that resulted in an explosion over Nagasaki. 
+    As the psychological strains became increasingly pronounced, 
+    alcohol seemed to serve as an effective outlet, 
+    freeing Hopper to express emotions and to temporarily forget obstacles real and imagined. 
+    According to Berkeley, the expiration of Hoppers Harvard research contract was the best thing 
+    that could have happened to her, although in the short term unemployment added to the stress. 
+    During the last week of May 1949, the 43-year-old programmer packed up her belongings, 
+    headed to Philadelphia, and bet her future on two younger men who believed they could create 
+    the first commercial computer company.\cite{grace_hopper_and_the_invention_of_the_information_age_2009}
+\end{quotation}
+
+After a brief stint of unemployment, Hopper joined a startup called the Eckert-Mauchly Computer Corporation (EMCC)
+where she found a more congenial environment to continue her work on compilers.
+
+\section{Hopper at EMCC}
+
+The company Hopper joined was one of the earliest pure computer-focused ventures,
+founded by J. Presper Eckert Jr. and John Mauchly
+(designers of the ENIAC, or the Electronic Numerical Integrator and Computer).
+This startup environment contrasted sharply with the academic rigor of Harvard and the industrial scale of IBM.
+There she found an open-minded and welcoming environment to develop her ideas;
+Mauchly, who was to become Hopper's boss, was characterized as 
+"very broadminded, very gentle, very alive, very interested, very forward looking,"\cite{grace_hopper_and_the_invention_of_the_information_age_2009}
+creating a tolerant, flexible company atmosphere in contrast to the pressure she experienced at Harvard.
+A majority of their programming staff consisted of mathematically inclined women
+who had served as ENIAC operators at the Moore School.
+
+When Hopper arrived in 1949, EMCC had two major projects underway:
+the BINAC (Binary Automatic Computer), which was close to completion,
+and the UNIVAC I (Universal Automatic Computer), which would be running within a year.
+The work environment and upcoming UNIVAC project excited Hopper and enticed her to join the company
+after walking out of an interview with IBM.
+
+While the organization was grounds for fruitful and innovative research and development team,
+EMCC was under financial strain; they depended on partial payments for UNIVAC-I orders to stay afloat.
+The unexpected death of EMCC's chairman Henry Straus forced Eckert and Mauchly to seek a buyer,
+which they found in Remington Rand, a typewriter and office equipment manufacturer.
+
+\section{Hopper and the A-series}
+
+Hopper and her team at Remington Rand developed three "compilers"
+in rapid succession, the A-0, A-1, and A-2, for the UNIVAC I.
+I quote "compilers" because the A-0 and A-1 were not compilers in the modern sense.
+Her work was grounded in intellectual openness, collaboration, and accessability;
+she pioneered the debuggability of programming languages, compiler error reporting,
+and new ways to share code and collaborate, for example.
+
+\begin{quotation}
+Hopper's recollections point to motivations
+ranging from an altruistic desire to allow "plain, ordinary people"
+to program to dealing with her own laziness. Naturally one must
+be skeptical of such claims, for they were made years after the
+fact. In 1951 it was difficult for even a visionary like Hopper to
+imagine the eventual ubiquity of computer technology, and one
+can be pretty confident that Hopper was not a lazy person.\cite{grace_hopper_and_the_invention_of_the_information_age_2009}
+\end{quotation}
+
+She began work on the A-0 in October 1951 in her spare time in order to address
+the mounting crisis facing Remington Rand: they were unable to fully support their
+customers, and their sales teams were, to put it kindly, incompetent with respect
+to their product, and they supported their customers as well as one might expect.
+
+\begin{quotation}
+    Another Hopper programmer, Adele Mildred Koss, was
+assigned to Commonwealth Edison when the utility approached
+the Chicago sales office concerning a potential purchase of a
+UNIVAC for billing and payroll. At the time, Koss was 7 months
+pregnant and working part time. Since her pregnancy precluded
+travel, Commonwealth Edison management was forced to come
+to Philadelphia in order to discuss their billing needs. In the end,
+the utility did not buy a UNIVAC, but instead purchased an IBM
+701 when it became available. Koss recalled: "I remember Grace
+Hopper's memo to management saying 'This is a multi-million
+dollar client and you are not treating them like one. You have
+only assigned a part time programmer to work with.'"
+\cite[Adele Mildred Koss, interviewed by Kathy Kleiman]{grace_hopper_and_the_invention_of_the_information_age_2009}
+\end{quotation}
+
+Shortly after this fiasco, Hopper's team was tasked with supporting UNIVAC I customers
+at the US Census Bureau, a task she thought no one in the company was prepared for.
+
+\begin{quotation}
+Inspired by Holberton's Sort-Merge Generator, Hopper conceived the idea of writing a 
+program to create a program, or in modern day terms, building a compiler. 
+The idea was to get commonly used subroutines automatically inserted into another program based on calculated offsets. 
+Most people at the time considered this impossible. As Hopper recalled:\cite{women_in_computing_history_2002}
+\end{quotation}
+
+\begin{quotation}
+The Establishment promptly told us, at least they told me, quite frequently that a
+computer could not write a program; it was totally impossible; that all computers
+could do was arithmetic, and that it couldn't write programs.\cite{hopl_keynote}
+\end{quotation}
+
+- the A-2 was a front-end translator to the A-0, more like a complete toolchain with a front end to a language,
+
+\section{After the A-2}
+
+a linker and a standard library.
+- later developed the A-3 and AT-3 \\
+- FLOW-MATIC, \FTN, COBOL
 
 \input{chapters/dawn-timeline.tex}

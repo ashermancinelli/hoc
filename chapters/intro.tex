@@ -1,11 +1,14 @@
 \chapter{Introduction}
 
-While the modern programmer may consider the term \emph{compiler} to be a specific one, it is specific only in the
-sense that users of the word tend to mean the same thing when they say it.
-The details of what a compiler does are often obscure to even professional software engineers.
-This is especially evident when they feel the need to use a term like \emph{transpiler} to distinguish between a
-"true" compiler and one that emits code another programming language.
-Of course, to someone more familiar with the workings of compilers, this distinction is not so useful.
+While the modern programmer may consider the term \emph{compiler} to be a specific one,
+it is still often misunderstood.
+Moreover, in the beginning, the term was more ambiguous than it is today.
+% it is specific only in the
+% sense that users of the word tend to mean the same thing when they say it.
+% The details of what a compiler does are often obscure to even professional software engineers.
+% This is especially evident when they feel the need to use a term like \emph{transpiler} to distinguish between a
+% "true" compiler and one that emits code another programming language.
+% Of course, to someone more familiar with the workings of compilers, this distinction is not so useful.
 Brian Kernighan described compilers in this seemingly general way\cite{new_history_of_modern_computing}:
 
 \begin{quotation}
@@ -16,21 +19,22 @@ For example, compilers for high-level languages like C and Fortran might transla
 \end{quotation}
 
 However, this is not sufficiently general.
-Two key counter examples are \tex and \metafont, which are compilers that
-transform text into PDF documents and renderable fonts.
-Transforming text into an executable program is not the same process as
+Two counter examples are \tex and \metafont, which are compilers that
+transform text into PDF documents and renderable fonts, respectively.
+Transforming text into an executable program is not the same operation as
 transforming text into a document or font, yet both are considered compilation.
 
-When students are first introduced to compilers, the first sort of program they are contrasted with is interpreters.
-This distinction is not necessarily meaningful either.
+When students are first introduced to compilers,
+the first sort of program they are contrasted with is interpreters.
+This distinction is not necessarily meaningful.
 The conventional notion of an interpreter is a program that performs the actions
 specified by the source code as chunks of the code are consumed;
 perhaps this was the case with early \texttt{BASIC} interpreters
 and it may be a useful mental model when introducing interpreters to new programmers,
-but one is hard-pressed to find a modern interpreter that does not perform some sort of compilation step.
+but one is hard-pressed to find a modern interpreter that does not perform a compilation step.
 The most popular interpreters for today's most popular interpreted languages,
 Python and Javascript, both use relatively sophisticated compilation techniques.
-There are even many Python \textit{libraries} that perform
+There are even Python \textit{libraries} that perform
 just-in-time (JIT) compilation, targetting CPUs, GPUs, and other specialized hardware
 \cite{jax-compiler}\cite{lam_numba}\cite{numba_cuda}\cite{triton_tillet}.
 
@@ -42,6 +46,8 @@ the definition we will use in this book is intentionally broad:
 \textit{
     A compiler analyzes, transforms, and produces code, based on source code.
 }
+% \caption{Definition of \textit{compiler}.}
+\label{def:compiler}
 \end{quotation}
 
 In the case of \tex and \metafont, the source code
@@ -55,13 +61,12 @@ meaning it is a compiler by our definition.
 Perhaps CPython it is a compiler the consumes Python code and produces CPython bytecode,
 which also happens to ship a CPython bytecode virtual machine which typically
 executes the bytecode as soon as it is produced.
-
 The point of this section is not pedantry, but to establish a broad definition of
 compiler technology before embarking on the details of its development.
 
-We will primarily focus on compilers that actually ran on a machine at one point.
+We will primarily focus on compilers that have run on a machine.
 We largely exclude theoretical works like Ada Lovelace's notes on claculating Bournoulli numbers
-and the development of automata, for instance.
+and the development of automata theory, for instance.
 Each step in the development of compiler technology builds on the previous steps,
-and while they are important, our focus is on compiler programs and not the
-primarily theoretical or pen-and-paper works that preceded them.
+and while the prior steps are important, our focus is on compiler programs and not the
+theoretical works that preceded them, except where espeically relevant.

@@ -6,6 +6,7 @@ function draw_timeline(config)
     local scale_factor = config.scale_factor or 1.0
     local distance_from_timeline = config.distance_from_timeline or 0.5
     local marker_interval = config.marker_interval or 5
+    local line_always = config.line_always or false
     
     -- Get textwidth from LaTeX and calculate percentage
     local text_width = config.text_width
@@ -74,7 +75,7 @@ function draw_timeline(config)
         tex.sprint(string.format("\\node[event] at (0,%f) {};", ypos))
         
         -- Draw connecting line if position is different from year
-        if position or delta then
+        if position or delta or line_always then
             tex.sprint(string.format("\\draw[red, dashed, thin] (0,%f) -- (%f,%f);", ypos, distance_from_timeline, desc_ypos))
         end
         
