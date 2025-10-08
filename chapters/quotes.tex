@@ -57,16 +57,15 @@ chips meant that the designer could create these rich instruction sets at low co
 \quotesection{grace_hopper_and_the_invention_of_the_information_age_2009}
 
 \begin{quotation}
-Though it is sometimes difficult to identify the motivation behind particular i
-nventions, it appears that a dearth of talented programmers, a personal frustrat
-ion with the monotony of existing programming techniques, and the lack of resour
-ces made available by senior management at Remington Rand to support computer cl
-ients led Hopper to invent the technologies and techniques, such as the compiler
-, that allowed the computers to, in effect, help program themselves. Interesting
-ly enough, as her A-0 compiler evolved into the A-1 and the A-2, Hopper’s reason
-ing in regard to the invention changed. Compilers became less about relieving pr
-ogrammers of the monotony of coding and more about reducing programming costs an
-d processing time.
+Though it is sometimes difficult to identify the motivation behind particular 
+inventions, it appears that a dearth of talented programmers, a personal 
+frustration with the monotony of existing programming techniques, and the lack of resources 
+made available by senior management at Remington Rand to support computer 
+clients led Hopper to invent the technologies and techniques, such as the compiler, 
+that allowed the computers to, in effect, help program themselves. 
+Interestingly enough, as her A-0 compiler evolved into the A-1 and the A-2, Hopper’s reason
+ing in regard to the invention changed. Compilers became less about relieving 
+programmers of the monotony of coding and more about reducing programming costs and processing time.
 \end{quotation}
 
 \textit{Programming} was considered the action of writing machine code directly;
@@ -138,9 +137,12 @@ derivatives, only $f(x)$ and the value of n would have to be given.
 The formulas for the derivatives of $f(x)$ would be derived by
 repeated application of the type-B compiler.24
 Hopper also admits that the current version of her compiler
-did not have the ability to produce efficient code. For example,
-if both sine and cosine were called for in a routine, a smart
-programmer would fi gure out how to have the program compute them simultaneously. Hopper’s compiler would embed both
+did not have the ability to produce efficient code. 
+\C{
+For example, if both sine and cosine were called for in a routine, 
+}{make note about me doing this in NVHPC compilers}
+a smart programmer would figure out how to have the program 
+compute them simultaneously. Hopper's compiler would embed both
 a sine subroutine and a cosine subroutine in sequence, thus
 wasting valuable memory and processing time. Hopper states
 boldly that the skills of an experienced programmer could eventually be distilled and made available to the compiler. She concludes as follows:

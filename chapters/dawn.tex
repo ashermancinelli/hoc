@@ -1,5 +1,7 @@
 \chapter{Dawn, 1940-1960}
 
+\section{Where Does it Start?}
+
 There is significant debate about who created the first compiler,
 in no small part due to ambiguous nomenclature.
 As late as 1962, the term \textit{software} was not even in common use,
@@ -29,6 +31,17 @@ It should come as no surprise, then, that the origins of our modern understandin
 term \textit{compiler} are similarly murky, especially considering the fact that
 \textit{compiler} already carried meaning in English, and was repurposed for computing.
 
+\bigskip
+
+Once could argue that any of these efforts consituted the first compiler:
+\begin{itemize}
+    \item Konrad Zuse's run-programs for the Z4 at the ETH Zurich in 1950
+    \item Laning and Zierler's compiler for the Whirlwind at MIT in 1950
+    \item Grace Hopper's A-0 and A-1 compilers for the UNIVAC I at Remington Rand in 1951
+\end{itemize}
+
+We will discuss these in order.
+
 \section{Development of the Z4}
 
 Konrad Zuse, a German civil engineer, began work on the Z4 during World War II.
@@ -37,7 +50,10 @@ demonstrated significant creativity and ingenuity, and they were leveraged to bu
 precursors to modern cruise missiles and guided bombs.
 Most of Zuse's machines prior to the Z4 were destroyed during the war.
 
-
+\todo{
+Zuse's Z4 was a strange machine with bespoke memory and instruction set.
+This affected how the compilers for it were designed.
+}
 
 \section{The ETH's Aquisition of the Z4}
 
@@ -204,12 +220,54 @@ computer could not write a program; it was totally impossible; that all computer
 could do was arithmetic, and that it couldn't write programs.\cite{hopl_keynote}
 \end{quotation}
 
-- the A-2 was a front-end translator to the A-0, more like a complete toolchain with a front end to a language,
+\todo{
+the A-2 was a front-end translator to the A-0, more like a complete
+toolchain with a front end to a language, a linker and a standard library.}
 
 \section{After the A-2}
 
-a linker and a standard library.
-- later developed the A-3 and AT-3 \\
+\todo{
+- later developed the A-3 and AT-3/MATH-MATIC
 - FLOW-MATIC, \FTN, COBOL
+}
+
+\begin{quotation}
+B-0, as the business language compiler was designated, became available to 
+UNIVAC customers at the start of 1958. Before its completion, Remington Rand 
+merged with Sperry Gyroscope Corporation to form Sperry Rand. The marketing 
+department of the new company renamed the business language FLOW-MATIC. (In 
+addition, AT-3 was renamed MATH-MATIC.) The completed version of FLOW-MATIC had 
+a rich library of oper-ational verbs that appeared to meet the application 
+needs of most businesses.23 These verbs included editing commands so 
+information could be formatted before output. Furthermore, FLOW-MATIC provided 
+unparalleled flexibility in data designation, thus allowing file names to be 
+given complicated descriptions.
+\end{quotation}
+
+\section{Laning and Zierler at MIT}
+
+\todo{
+Laning and Zierler, 1954. Early 1950s. Inspiration for Backus/\FTN.
+Worked more like a modern compiler than Hopper's A-0 and A-1.
+}
+\begin{quotation}
+The first programming system to operate in the sense of a modern compiler was 
+developed by J. H. Laning and N. Zierler for the Whirlwind computer at the 
+Massachusetts Institute of Technology in the early 1950s. They described their 
+system, which never had a name, in an elegant and terse manual entitled "A 
+Program for Translation of Mathematical Equations for Whirlwind I," distributed 
+by MIT to about one-hundred locations in January 1954.26 It was, in John 
+Backus's words, "an elegant concept elegantly realized." Unlike the UNIVAC 
+compilers, this system worked much as modern compilers work; that is, it took 
+as its input commands entered by a user, and generated as output fresh and 
+novel machine code, which not only executed those commands but also kept track 
+of storage locations, handled repetitive loops, and did other housekeeping 
+chores. Laning and Zierler's "Algebraic System" took commands typed in familiar 
+algebraic form and translated them into machine codes that Whirlwind could 
+execute.27 (There was still some ambiguity as to the terminology: while Laning 
+and Zierler used the word "translate" in the title of their manual, in the 
+Abstract they call it an "interpretive program.")28
+\cite{new_history_of_modern_computing}
+\end{quotation}
 
 \input{chapters/dawn-timeline.tex}
