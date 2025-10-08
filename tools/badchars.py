@@ -3,34 +3,22 @@ import os
 import re
 import sys
 import argparse
+import sh
 from pathlib import Path
+import glob
+import logging
+# logging.basicConfig(level=logging.DEBUG)
 
-parser = argparse.ArgumentParser(
-    description='Find+replace',
-)
-parser.add_argument('dir_or_file', type=str)
-parser.add_argument('pattern', type=str)
-parser.add_argument('replace_with', default='', type=str)
-parser.add_argument('--extension', default='tex', type=str)
-parser.add_argument('--inplace', '-i', action='store_true')
+perl = sh.Command('perl')
 
-files = set()
-args = parser.parse_args()
-p = Path(args.dir_or_file)
-if p.is_file():
-    files.add(p)
-elif p.is_dir():
-    for root, dirs, fs in os.walk(p):
-        for f in fs:
-            if f.endswith('.' + args.extension):
-                files.add(Path(root) / f)
+root = Path(__file__).parent.parent.resolve()
+print(root)
+def collect(pattern):
+    return set(glob.glob((root / '**' / pattern).as_posix(), recursive=True))
+files = collect('*.tex') | collect('*.bib')
 
 print(f'Found {len(files)} files to process.')
-
-pattern = re.compile(args.pattern)
-for file in files:
-    with open(file, 'r') as f:
-        contents = f.read()
-    new_contents = pattern.sub(args.replace_with, contents)
-    f = open(file, 'w') if args.inplace else sys.stdout
-    f.write(new_contents)
+script = perl.bake("-pe", "s/–/-/g; s/‘/'/g; s/’/'/g; s/“/\"/g; s/”/\"/g; s/…/.../g", '-i')
+for f in files:
+    print(script, f)
+    script(f)

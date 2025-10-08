@@ -5,6 +5,6 @@ all:
 
 clean:
     latexmk -C
-    rm *.bbl *-SAVE-ERROR || true
+    rm *.bbl *.upa *.upb *-SAVE-ERROR || true
 
 cleanfirst: clean all
