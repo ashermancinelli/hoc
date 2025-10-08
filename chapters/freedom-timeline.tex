@@ -1,0 +1,21 @@
+\begin{figure}[h]
+\begin{luacode}
+local start = 1980
+local _end = 2010
+timeline.draw_timeline({ 
+    start_year = start,
+    end_year = _end,
+    marker_interval = 5,
+    show_year = false,
+    line_always = true,
+    events = {
+        {2004, "Development on LLVM begins", delta=0},
+        {1985, "??? gnu, gcc, stallman"},
+        {1990, "??? torvalds, linux"},
+        {1995, "??? IBM moves to linux"},
+    },
+})
+tex.sprint(string.format("\\caption{Open Source Compiler Development Timeline, %d--%d}", start, _end))
+\end{luacode}
+\label{fig:oss-timeline}
+\end{figure}

@@ -1,26 +1,4 @@
-\documentclass[12pt,openany]{book}
-\usepackage{verbatim}
-\usepackage{libertinus}
-\usepackage{hyperref}
-\usepackage[margin=1.0in]{geometry}
-\usepackage{titlesec}
-\usepackage{chronology}
-\usepackage{quotchap}
-\usepackage[style=numeric,backend=biber,url=true]{biblatex}
-\usepackage{tikz}
-\usepackage{luacode}
-
-\addbibresource{refs.bib}
-
-\fontfamily{libertinus}
-\titleformat{\chapter}[frame]
-  {\normalfont\huge\bfseries}{\thechapter}{0.5em}{\Huge\centering}
-\titlespacing{\chapter}{0pt}{0pt}{40pt}
-
-\title{A Brief History of Compilers}
-\author{Asher Mancinelli}
-\date{}
-\raggedbottom
+\input{prelude.tex}
 
 \begin{document}
 
@@ -30,15 +8,7 @@
 }
 
 \maketitle
-
-% \vspace*{\fill}
-% \begin{center}
-% \small\textit{Git revision: \directlua{tex.sprint(shell.git_revision())}}
-% \end{center}
-% \clearpage
-
 \tableofcontents
-
 
 \input{macros.tex}
 \input{chapters/preface.tex}
@@ -46,12 +16,7 @@
 \input{chapters/dawn.tex}
 \input{chapters/software.tex}
 \input{chapters/freedom.tex}
-
-% \chapter{Uniformity, 1970-1980}
-% \chapter{Freedom, 1980-1990}
-% \chapter{Dotcom, 1990-2000}
-\chapter{Codesign, 2010-Present}
-
+\input{chapters/codesign.tex}
 \input{chapters/quotes.tex}
 
 \nocite{*}

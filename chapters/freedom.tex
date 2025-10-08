@@ -17,3 +17,47 @@ founders played an important role here as well. We begin with the antitrust
 trial.
 \cite{history_of_modern_computing_2003_ceruzzi}
 \end{quotation}
+
+\section{GNU}
+
+\section{Adoption of Linux}
+
+\section{Low-Level Virtual Machine}
+
+Key innovation is that LLVM is a collection of compiler \textit{libraries} that have
+thin programs wrapping them.
+Other open-source compilers like GCC tend to be monolithic programs, which can
+be harder to compose.
+LLVM contains a collection of sub-projects that can be used independently as tools
+\textit{or libraries}; key examples being the LLVM subproject of LLVM itself
+(which contains LLVM IR, the intermediate representation, the optimizer, interpreter and code generator)
+and Clang, a C/C++/Objective-C compiler front-end for LLVM.
+Any other compiler project could emit LLVM IR and fully leverage the LLVM project after the front-end.
+LLVM's intermediate representation has become the lingua-franca of the compiler world.
+
+\begin{quotation}
+From its beginning in December 2000, LLVM was designed as a set of reusable 
+libraries with well-defined interfaces [LA04]. At the time, open source 
+programming language implementations were designed as special-purpose tools 
+which usually had monolithic executables. For example, it was very difficult to 
+reuse the parser from a static compiler (e.g., GCC) for doing static analysis 
+or refactoring. While scripting languages often provided a way to embed their 
+runtime and interpreter into larger applications, this runtime was a single 
+monolithic lump of code that was included or excluded. There was no way to 
+reuse pieces, and very little sharing across language implementation projects.
+\cite{aosa_vol1}
+\end{quotation}
+
+\begin{quotation}
+The name "LLVM" was once an acronym, but is now just a brand for the umbrella 
+project. While LLVM provides some unique capabilities, and is known for some of 
+its great tools (e.g., the Clang compiler2, a C/C++/Objective-C compiler which 
+provides a number of benefits over the GCC compiler), the main thing that sets 
+LLVM apart from other compilers is its internal architecture.
+\cite[LLVM]{aosa_vol1}
+\end{quotation}
+
+Lattner published his thesis on LLVM in 2002, and joined Apple in 2005.
+
+\pagebreak
+\input{chapters/freedom-timeline.tex}

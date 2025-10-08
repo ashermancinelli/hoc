@@ -1,0 +1,23 @@
+\documentclass[12pt,openany]{book}
+\usepackage{verbatim}
+\usepackage{libertinus}
+\usepackage{hyperref}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{titlesec}
+\usepackage{chronology}
+\usepackage{quotchap}
+\usepackage[style=numeric,backend=biber,url=true]{biblatex}
+\usepackage{tikz}
+\usepackage{luacode}
+
+\addbibresource{refs.bib}
+
+\fontfamily{libertinus}
+\titleformat{\chapter}[frame]
+  {\normalfont\huge\bfseries}{\thechapter}{0.5em}{\Huge\centering}
+\titlespacing{\chapter}{0pt}{0pt}{40pt}
+
+\title{A Brief History of Compilers}
+\author{Asher Mancinelli}
+\date{\today}
+\raggedbottom
