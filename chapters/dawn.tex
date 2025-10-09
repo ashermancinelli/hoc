@@ -40,7 +40,7 @@ Once could argue that any of these efforts consituted the first compiler:
     \item Grace Hopper's A-0 and A-1 compilers for the UNIVAC I at Remington Rand in 1951
 \end{itemize}
 
-We will discuss these in order \todo{and then COBOL and Backus+\FTN}.
+% We will discuss these in order \todo{and then COBOL and Backus+\FTN}.
 
 \section{Development of the Z4}
 
@@ -69,13 +69,13 @@ Professor Eduard Stiefel, shortly after establishing the Institute of Applied Ma
 to study numerical analysis at the Swiss Federal Institute of Technology (ETH) in Zurich,
 began searching for a computer for the institute.
 He learned of the computing advancements in the United States, Great Britain, and Germany,
-but none were readily available at the time.
+but no machines were readily available at the time.
 He sent his assistants Heinz Rutishauser and Ambros P. Speiser to the US to study
 the latest developments in computing; they spent most of 1949 with
 Howard Aiken at Harvard and John von Neumann at Princeton.
 
 \begin{quotation}
-    Before we returned, that is, in the middle of 1949, Stiefel was informed about the existence of Konrad Zuse's
+Before we returned, that is, in the middle of 1949, Stiefel was informed about the existence of Konrad Zuse's
 Z4. At that time Zuse was living in Hopferau, a German village near the Swiss border. Stiefel was told that
 the machine might be for sale. He visited Zuse, inspected the device, and reviewed the specifications.
 Despite the fact that the Z4 was only barely operational, he decided that the idea of transferring it to Zurich
@@ -85,11 +85,28 @@ future belonged to electronics and, rather than spending time on a relay calcula
 concentrate our efforts on building a computer of our own.\cite{konrad-zuses-z4-2000}
 \end{quotation}
 
+The Z4 was a bespoke machine with unique components; the computational logic was wired together with
+telephone relays and the memory was entirely mechanical.
+
+\begin{quotation}
+The Z4 could be used as a kind of manually triggered calculator: the operator 
+could enter decimal numbers through the decimal keyboard, these were 
+transformed into the floatingpoint representation of the Z4, and were loaded to 
+the CPU registers, first to OR-I, then to ORII. Then, it was possible to start 
+an operation using the "operations keyboard" (an addition, for example). The 
+result was held in OR-I and the user could continue loading numbers and 
+computing. The result in OR-I could be made visible in decimal notation by 
+transferring it to a decimal lamp array (at the push of a button). It could 
+also be printed using an electric typewriter. \cite{architecture-of-konrad-zuses-z4-computer-2021}
+\end{quotation}
+
+It notably featured instructions for conditional branching and subroutine calling, which
+both proved essential for the compiler development that would follow at the ETH.
 Stiefel was undeterred by Aiken's criticism, and convinced the ETH to purchase the Z4.
 In 1950, Heinz Rutishauser at Switzerland's ETH obtains a Z4.
 
 \begin{quotation}
-    We also made some hardware changes. Rutishauser, who was exceptionally creative, devised a way of
+We also made some hardware changes. Rutishauser, who was exceptionally creative, devised a way of
 letting the Z4 run as a compiler, a mode of operation which Zuse had never intended. For this purpose, the
 necessary instructions were interpreted as numbers and stored in the memory. Then, a compiler program
 calculated the program and punched it out on a tape. All this required certain hardware changes. Rutishauser
@@ -99,13 +116,15 @@ achievement.\cite{konrad-zuses-z4-2000}
 
 Thus were the first run-programs produced.
 This is what we will consider \textbf{the first compiler}, though it was not called that at the time.
+Shortly after Stiefel's assistants' stints in the US and correspondence with Aiken,
+one of Aiken's engineers would find considerably more success exploring related ideas.
 
-\section{Introducing Grace Hopper}
+\section{Grace Hopper}
 
 While Grace Hopper may not have been the first to create a program that
 punched out another program as its output, she pioneered the field of
 compilation to the extent that many consider her the inventor of compilers.
-Her innovations were also more aptly timed and readily adopted than those at the ETH.
+Her innovations were also more readily adopted than those at the ETH.
 Consider Figure \ref{fig:dawn-timeline}, and the pace of development in Hopper's time
 compared to the years prior.
 Note that while we have ample data on \textit{how} Hopper's compiler worked and how
@@ -119,53 +138,65 @@ joined the U.S. Navy in 1943, eventually graduating first in her class from Mids
 She was assigned, somewhat unexpectedly, to Commander Howard Aiken's Harvard Computation Laboratory in 1944
 as the third programmer of the Automatic Sequence Controlled Calculator (Mark I), 
 the world's first operational computer.
+Although it was significantly slower than the ENIAC, it was \textit{programmable};
+the ENIAC had to be physically rewired to change its program.
 
-\begin{quotation}
-    According to her friend and former Harvard colleague Edmund Berkeley, Hopper turned to
-    alcohol during this period as a way to deal with the compounding pressures at the 
-    Harvard Computation Laboratory. She had dedicated herself fully to the overwhelming task of
-    bringing Howard Aikens machines to life.
-    She used the machines to solve critical military problems, 
-    including one that resulted in an explosion over Nagasaki. 
-    As the psychological strains became increasingly pronounced, 
-    alcohol seemed to serve as an effective outlet, 
-    freeing Hopper to express emotions and to temporarily forget obstacles real and imagined. 
-    According to Berkeley, the expiration of Hoppers Harvard research contract was the best thing 
-    that could have happened to her, although in the short term unemployment added to the stress. 
-    During the last week of May 1949, the 43-year-old programmer packed up her belongings, 
-    headed to Philadelphia, and bet her future on two younger men who believed they could create 
-    the first commercial computer company.\cite{grace_hopper_and_the_invention_of_the_information_age_2009}
-\end{quotation}
-
-After a brief stint of unemployment, Hopper joined a startup called the Eckert-Mauchly Computer Corporation (EMCC)
-where she found a more congenial environment to continue her work on compilers.
-
-\section{Hopper at Harvard and the Mark I}
-
-\todo{
-ENIAC, could not be programmed (had to be rewired to be programmed)
-but was real fast. Aiken's Mark I.
-Fall 1944, Aiken wants to record technical developments at Harvard Computation Laboratory (as book),
-chose Hopper, to her disagreement. Finished 561 page manuscript, published 1946.
-She believed she was chosen for "clear, fluid prose."
-her time as a math teacher made her good at writing/explaining things.
-would force students to write essays on math topics and would grade harshely.
+Aiken built it in collaboration with IBM, though it is unclear how much either side contributed
+in its development.
+The proportion of credit given to either party would be disputed in numerous documents and press releases
+in the following years, including the
+\textit{Manual of Operation for the Automatic Sequence Controlled Calculator},
+the technical manual for the Mark I.
+In the fall of 1944, Aiken decided that his team needed to produce a book documenting the technical
+developments at the Harvard Computation Laboratory and how the Mark I was intended to be used.
+For this task, he chose Hopper; though she protested, her reputation as a clear and
+thoughtful communicator and writer had already earned her the job.
+Hopper was known for her writing ability, and it was a point of emphasis in her teaching career.
+She would assign her mathematics students onerous writing tasks to emphasize that
 "it was no use trying to learn math unless they could communicate with other people."
-Aiken and Hopper knew a large/diverse audience would need to understand it for it to
-be successful; high value on good writing+communication.
-Aiken's strict heirarchy+meritocracy allowed her to compete with the men.
-IBM tried to steal all the credit for the Mark I from Aiken.
-aiken distaste for being assigned woman officer, but meritocracy.
-}
+\cite[interview on 5 July, 1972]{grace_hopper_and_the_invention_of_the_information_age_2009}
+
+Aiken and Hopper both understood that, for the Mark I to be a success, it would be used and
+understood by a large and diverse audience, and for that to happen, they needed a detailed,
+compelling, and accessible manual.
+
+% \todo{
+% ENIAC, could not be programmed (had to be rewired to be programmed)
+% but was real fast. Aiken's Mark I.
+% Fall 1944, Aiken wants to record technical developments at Harvard Computation Laboratory (as book),
+% chose Hopper, to her disagreement. Finished 561 page manuscript, published 1946.
+% She believed she was chosen for "clear, fluid prose."
+% her time as a math teacher made her good at writing/explaining things.
+% would force students to write essays on math topics and would grade harshely.
+% "it was no use trying to learn math unless they could communicate with other people."
+% Aiken and Hopper knew a large/diverse audience would need to understand it for it to
+% be successful; high value on good writing+communication.
+% Aiken's strict heirarchy+meritocracy allowed her to compete with the men.
+% IBM tried to steal all the credit for the Mark I from Aiken.
+% aiken distaste for being assigned woman officer, but meritocracy.
+% }
 
 \section{Hopper and the Mark I's Manual}
 
-we will drift into some history, only because it was so formative for GH, who was so formative
-in the development of compilers.
+Here we drift into some general computing history, mostly because it was so 
+formative for Hopper, who was in turn so formative in the development of 
+compilers.
+Her manual for the Mark I began with a detailed and dramatic retelling of
+computing history, opening with the following quote from Charles Babbage and
+culminating with the Mark I
+\cite{annals_of_the_computation_laboratory_of_harvard_university_1946}:
 
-\todo{
-Her manual began with an historical summary of of developments in computing.
-One of earliest attempts to document computing history.
+\begin{quotation}
+If, unwarned by my example, any man shall undertake and shall succeed in 
+really constructing an engine embodying in itself the whole of the executive 
+department of mathematical analysis upon different principles or by simpler 
+mechanical means, I have no fear of leaving my reputation in his charge, for he 
+alone will be fully able to appreciate the nature of my efforts and the value 
+of their results.
+\end{quotation}
+
+Her history went on to cover:
+
 \begin{itemize}
     \item Blaise Pascal's counting machines, "foundation on which nearly all mechanical calculating machines since have been constructed."
     \item Leibniz; stepped wheels system for mul/divs.
@@ -177,11 +208,42 @@ One of earliest attempts to document computing history.
           have to wait for the Mark I before the dream could come true.
     \item Aiken's Mark I
 \end{itemize}
-Babbage's autobio, Hopper exposed to Ada King; "she wrote the first loop. I will never forget; none of us ever will."
-coworkers cast Aiken as Babbage, Hopper as Ada King.
-}
+
+At one point, all new hires into Aiken's lab were required to read
+Charles Babbage's autobiography.
+Hopper was first exposed to Ada King in this text:
+"she wrote the first loop. I will never forget; none of us ever will."
+\todo{Coworkers cast Aiken as Babbage, Hopper as Ada King.}
+
+\todo{Commander Edmund Berkeley, 1946, detailed report about how bad the
+conditions were in the lab.}
+\begin{quotation}
+In his report, Berkeley systematically detailed the unfavorable conditions at 
+the Computation Laboratory, including the length of the work day and the 
+isolation of the staff from similar projects at MIT and the University of 
+Pennsylvania. He named eleven talented people who had left or been dismissed by 
+Aiken between August 1945 and May 1946, noting that all were "very bitter over 
+the conditions on the project." The root of the problem, according to Berkeley, 
+was that "in the Computation Laboratory there is no provision for appealing any 
+decision or ruling whatsoever made by the project manager." He was amazed that 
+no one at Harvard and no one in the Navy seemed to have jurisdiction over the 
+rogue director, so that Aiken was able to rule with near absolute authority.
+\end{quotation}
+
+Aiken ran a rigidly heirarchical and meritocratic lab, which allowed Hopper
+to produce quality work and placed her on more equal footing with her
+male coworkers; Aiken openly disliked being assigned a female officer,
+but Hopper's competence outweighed any such sentiments.
+Her competence did not, however, shield her from the pressures of the environment.
+She leveraged her computing knowledge to assist the war effort,
+which included the bombing of Nagasaki.
+The stresses of the war effort and Aiken's overbearing management drove her to
+substance abuse in this time period.
 
 \section{Postwar Collaboration}
+
+Aiken started a symposium on large scale digital computing machinery in 1947 to foster
+collaboration that was not possible during the war.
 
 \todo{
 1947 Aiken grew in stature. Could relocate military staff to Harvard, which he did with Hopper and two others.
@@ -197,6 +259,33 @@ We'd all been isolated during the war, you see, classified contracts and
 everything under the sun. It was time to get together and exchange information 
 on the state of the art, so that we could all go on from there.
 \end{quotation}
+
+\todo{connect her discontent at harvard to her leaving.}
+
+After a brief stint of unemployment, Hopper joined a startup called the Eckert-Mauchly Computer Corporation (EMCC)
+where she found a more congenial environment to continue her work on compilers.
+
+\begin{quotation}
+According to her friend and former Harvard colleague Edmund Berkeley, Hopper 
+turned to alcohol during this period as a way to deal with the compounding 
+pressures at the Harvard Computation Laboratory. She had dedicated herself 
+fully to the overwhelming task of bringing Howard Aikens machines to life.  She 
+used the machines to solve critical military problems, including one that 
+resulted in an explosion over Nagasaki.  As the psychological strains became 
+increasingly pronounced, alcohol seemed to serve as an effective outlet, 
+freeing Hopper to express emotions and to temporarily forget obstacles real and 
+imagined.  According to Berkeley, the expiration of Hoppers Harvard research 
+contract was the best thing that could have happened to her, although in the 
+short term unemployment added to the stress.  During the last week of May 1949, 
+the 43-year-old programmer packed up her belongings, headed to Philadelphia, 
+and bet her future on two younger men who believed they could create the first 
+commercial computer 
+company.\cite{grace_hopper_and_the_invention_of_the_information_age_2009}
+\end{quotation}
+
+Hopper's contract at Harvard expired in May 1949, and seeking a new path, she 
+moved to Philadelphia to join the Eckert-Mauchly Computer Corporation (EMCC) as 
+a senior mathematician
 
 \section{Hopper at EMCC}
 
@@ -222,7 +311,7 @@ EMCC was under financial strain; they depended on partial payments for UNIVAC-I 
 The unexpected death of EMCC's chairman Henry Straus forced Eckert and Mauchly to seek a buyer,
 which they found in Remington Rand, a typewriter and office equipment manufacturer.
 
-\section{Hopper and the A-series}
+% \section{Hopper and the A-series}
 
 Hopper and her team at Remington Rand developed three "compilers"
 in rapid succession, the A-0, A-1, and A-2, for the UNIVAC I.
@@ -247,7 +336,7 @@ customers, and their sales teams were, to put it kindly, incompetent with respec
 to their product, and they supported their customers as well as one might expect.
 
 \begin{quotation}
-    Another Hopper programmer, Adele Mildred Koss, was
+Another Hopper programmer, Adele Mildred Koss, was
 assigned to Commonwealth Edison when the utility approached
 the Chicago sales office concerning a potential purchase of a
 UNIVAC for billing and payroll. At the time, Koss was 7 months
@@ -284,10 +373,7 @@ toolchain with a front end to a language, a linker and a standard library.}
 
 \section{After the A-2}
 
-\todo{
-- later developed the A-3 and AT-3/MATH-MATIC
-- FLOW-MATIC (B-0, 1956/58), \FTN, COBOL
-}
+\todo{later developed the A-3 and AT-3/MATH-MATIC; FLOW-MATIC (B-0, 1956/58), \FTN, COBOL}
 
 \begin{quotation}
 B-0, as the business language compiler was designated, became available to 
@@ -353,6 +439,33 @@ Abstract they call it an "interpretive program.")28
 \end{quotation}
 
 \section{IBM Mathematical FORmula TRANslating System}
+
+IBM did not feel that Aiken and the Harvard Computation Laboratory had
+given them sufficient crediti for their contributions to the Mark I,
+which Thomas Watson Sr. and the IBM folks bitter about the experience
+and eager to produce their own device entirely in-house.
+This device would become the Selective Sequence Electronic Calculator, or the SSEC.
+It was built on 57th Street in Manhattan, and it was monstrous.
+Roughly 50 by 100 feet with a giant console and hundreds of toggle switches and
+tape units and relays behind glass panels; there were giant windows that allowed
+passersby to see the machine in action.
+
+One such passerby was John Backus, a recent Masters graduate from Columbia University.
+He was intrigued by the machine, so he walked in and asked for a job.
+Robert "Rex" Seeber gave him a puzzle, which he solved, and he was hired on the spot
+\cite{backus_oral_history_2006}.
+
+Before his studies, Backus was in the Army, stationed in Camp Stewart Georgia.
+
+\todo{Backus wasn't really that involved in fortran II and III and IV.
+The rest of the team took over. He never wrote much fortran and doesn't have many thoughts
+about it today other that the "we should be making things higher level."}
+\todo{Backus moved into functional programming. Was never fruitful.
+He became a lab fellow at IBM after Watson Jr started the fellowship program,
+so he could kinda play with functional programming and not really get much done.}
+\todo{He didn't like Hopper's ideas for COBOL, thought they were crazy and too complex.
+Didn't like algol either. Really just wanted to make things simpler and higher level
+and easier to use. Pushed back against the priesthood.}
 
 \begin{quotation}
 Though the FORTRAN operator's manual was completed by the fall of 1956, the 
