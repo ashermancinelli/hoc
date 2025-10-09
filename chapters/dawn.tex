@@ -140,8 +140,11 @@ as the third programmer of the Automatic Sequence Controlled Calculator (Mark I)
 the world's first operational computer.
 Although it was significantly slower than the ENIAC, it was \textit{programmable};
 the ENIAC had to be physically rewired to change its program.
+To write a compiler for the ENIAC, one would need to plug the phone lines in the back of the machine
+together to create the compiler, feed in the input program as data, and a human operator would have
+to take the punchcards it produced and manually rewire the machine to run that program.
 
-Aiken built it in collaboration with IBM, though it is unclear how much either side contributed
+Aiken built the Mark I in collaboration with IBM, though it is unclear how much either side contributed
 in its development.
 The proportion of credit given to either party would be disputed in numerous documents and press releases
 in the following years, including the
@@ -414,10 +417,8 @@ operations;
 
 \section{Laning and Zierler at MIT}
 
-\todo{
-Laning and Zierler, 1954. Early 1950s. Inspiration for Backus/\FTN.
-Worked more like a modern compiler than Hopper's A-0 and A-1.
-}
+\todo{ Laning and Zierler, 1954. Early 1950s. Inspiration for Backus/\FTN.
+Worked more like a modern compiler than Hopper's A-0 and A-1.  }
 \begin{quotation}
 The first programming system to operate in the sense of a modern compiler was 
 developed by J. H. Laning and N. Zierler for the Whirlwind computer at the 
@@ -438,12 +439,12 @@ Abstract they call it an "interpretive program.")28
 \cite{new-history-of-modern-computing}
 \end{quotation}
 
-\section{IBM Mathematical FORmula TRANslating System}
+\section{John Backus}
 
 IBM did not feel that Aiken and the Harvard Computation Laboratory had
 given them sufficient crediti for their contributions to the Mark I,
-which Thomas Watson Sr. and the IBM folks bitter about the experience
-and eager to produce their own device entirely in-house.
+which left Thomas Watson Sr. and the IBM folks bitter about the experience
+and eager to produce a new device entirely in-house.
 This device would become the Selective Sequence Electronic Calculator, or the SSEC.
 It was built on 57th Street in Manhattan, and it was monstrous.
 Roughly 50 by 100 feet with a giant console and hundreds of toggle switches and
@@ -451,11 +452,112 @@ tape units and relays behind glass panels; there were giant windows that allowed
 passersby to see the machine in action.
 
 One such passerby was John Backus, a recent Masters graduate from Columbia University.
-He was intrigued by the machine, so he walked in and asked for a job.
+He was intrigued by the machine, which he mentioned to his tour guide,
+who suggested he go upstairs and talk to the boss about it.
 Robert "Rex" Seeber gave him a puzzle, which he solved, and he was hired on the spot
 \cite{backus_oral_history_2006}.
 
-Before his studies, Backus was in the Army, stationed in Camp Stewart Georgia.
+In 1942, Backus majored in Chemistry at the University of Virginia where he 
+struggled academically. He was expelled due to poor attendance within the first 
+year before being drafted into the US Army.
+He commanded an antiaircraft battery at Fort Steward, Georgia, remaining in the 
+US for the remainder of WWII.
+
+While he did not at first find success in academia, he got very good marks on 
+military aptitude tests. He was directed to the University of Pittsburgh's 
+engineering program and later to a premedical program at Haverford College near 
+Philadelphia (which is where he grew up). In 1945 he attended the Flower and 
+Fifth Avenue Medical School in NYC, but he was still struggling with the 
+academy.
+He was uninterested in medicine, feeling that it was all about memorization. He 
+dropped out after less than a year.
+
+He entered a radio technician school and became interested in math, which led 
+him to enroll in the math program at Columbia University. The SSEC that would 
+intrigue him at the IBM computing center was designed at the Watson Scientific 
+Computing Laboratory at Columbia.
+
+\section{IBM Mathematical FORmula TRANslating System}
+
+At IBM, Backus worked on the SSEC and later the IBM 701 and 704.
+The main use of the SSEC was aerospace calculations;
+programming calculations to predict the position of the moon was
+one of the first tasks he was given at IBM.
+He would continue writing programs for these machines in spite of their
+poor usability.
+His team's techniques would be used in the lunar missions of the 1960s.
+
+The pain of writing programs for these early machines entirely in machine code
+drove him to explore new ways to program.
+The first of these was a symbolic notation for floating point arithmetic
+and address expression calculation called Speedcoding\cite{backus_oral_history_2006}:
+
+\begin{quotation}
+    \textbf{Grady Booch:}
+    So then from your experience with the SSEC, you then went on to produce Speedcoding, the
+    Speedcoder\dots
+    What were sort of the things that influenced you to create that in the first place? 
+
+    \textbf{John Backus:}
+    Well, programming in machine code was a pretty lousy business to engage in, trying to figure
+    out how to do stuff. I mean, all that was available was a sort of a very crude assembly program. So I
+    figured, well, let's make it a little easier. I mean it was a rotten design, if I may say so, but it was better
+    than coding in machine language. 
+\end{quotation}
+
+The IBM 701 did not have an index register, so calculating addresses for array
+operations was tedious and error-prone.
+Speedcoding provided a way to express these calculations symbolically.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.5\linewidth]{resource/ibm-7094.jpeg}
+  \caption{Excerpt from \textit{The IBM 701--7094 II Sequence: A Family by Evolution} 
+  \cite{Hamming_Feigenbaum_1971_IBM7094}, illustrating the instruction structure for summing quantities.}
+  \label{fig:ibm7094-example}
+\end{figure}
+
+The 704 was the first machine to have such a register; it also had floating
+point instructions and core memory, more or less obviating the need for Speedcoding:
+"we were moving to the 704, which had built in floating point, built in index
+registers, which was all that Speedcoding was supposed to supply. So what the hell?"
+\cite{backus_oral_history_2006}
+He credits himself with getting index registers and floating point into the 704.
+
+%Here is an example from the IBM Speedcode manual\cite{IBM_1954_Speedcoding}:
+%\begin{quotation}
+%    Assume that it is necessary to compute the sum of 34 quantities stored in 
+%    locations 688 through 721 and to store the sum in cell 945. Assume further that 
+%    cell 1013 contains the number zero and that instruction 416 is the next 
+%    instruction to be executed. The sequence of instructions shown below could be 
+%    used for this purpose:
+%
+%    \begin{center}
+%    \begin{tabular}{cccccccc}
+%    \hline
+%    LOC & OP$_1$ & R & A & B & C & OP$_2$ & D \\
+%    \hline
+%    0416 & ADD  & 0 & 1013 & 1013 & 0945 & SETRA & 0000 \\
+%    0417 & ADD  & 4 & 0688 & 0945 & 0945 & SKRA  & 0033 \\
+%    0418 & NOOP & 0 & 0000 & 0000 & 0000 & TIA   & 0417 \\
+%    \hline
+%    \end{tabular}
+%    \end{center}
+%\end{quotation}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.5\linewidth]{resource/ibm-speedcoding-example.png}
+  \caption{Excerpt from \textit{IBM Speedcoding for the Type 701 Electronic Data Processing Machine} 
+  \cite{IBM_1954_Speedcoding}}
+  \label{fig:ibm-speedcoding-example}
+\end{figure}
+
+In 1953, based on his experience with Speedcoding on the 701, Backus proposed yet another language to elevate the programming experience on the 704.
+IBM management supported the proposal.
+He formed a ten-person team of his own choosing based out of IBM's Manhattan headquarters.
+They released \textit{Preliminary Report, Specifications for the IBM Mathematical FORmula TRANslating System, FORTRAN}
+after about one year of working together.
 
 \todo{Backus wasn't really that involved in fortran II and III and IV.
 The rest of the team took over. He never wrote much fortran and doesn't have many thoughts
