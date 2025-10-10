@@ -1,29 +1,12 @@
 \newcommand{\tex}{\TeX\hspace{0.3em}}
 \newcommand{\metafont}{\texttt{METAFONT}}
-
-\newcommand{\chapterstar}[1] {
-\chapter*{#1}
-\addcontentsline{toc}{chapter}{#1}
-}
-
+\newcommand{\chapterstar}[1] {\chapter*{#1}\addcontentsline{toc}{chapter}{#1}}
 \newcommand{\longcite}[1]{\citetitle{#1}, \textcite{#1}}
-
-\newcommand{\quotesection}[1]{
-\section{\citetitle{#1}}
-\textcite{#1}
-}
-
+\newcommand{\quotesection}[1]{\section{\citetitle{#1}}\textcite{#1}}
 \newcommand{\FTN}[0]{\texttt{FORTRAN}}
 \newcommand{\FTNI}[0]{\texttt{FORTRAN I}}
 \newcommand{\FTNII}[0]{\texttt{FORTRAN II}}
 \newcommand{\FTNIII}[0]{\texttt{FORTRAN III}}
-\newcommand{\ftn}[0]{\texttt{Fortran}}
-
-% Comment macro
+\newcommand{\ftn}[0]{\texttt{Fortran}}% Comment macro
 \newcommand{\C}[2]{\pdfmarkupcomment[color=yellow]{#1}{#2}}
-
-\newcommand{\todo}[1]{
-  \sffamily
-  \textcolor{red}{[\texttt{TODO:} #1]}
-  \normalfont
-}
+\newcommand{\todo}[1]{  \sffamily  \textcolor{red}{[\texttt{TODO:} #1]}  \normalfont}

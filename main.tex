@@ -1,15 +1,9 @@
-\input{prelude.tex}
-
-\begin{document}
-
-\directlua{
-  timeline = require("lua/timeline")
-  shell = require("lua/shell")
+\input{prelude.tex}\begin{document}\directlua{
+      timeline = require("lua/timeline")  
+      shell = require("lua/shell")
 }
-
 \maketitle
 \tableofcontents
-
 \input{macros.tex}
 \input{chapters/preface.tex}
 \input{chapters/intro.tex}
@@ -18,7 +12,6 @@
 \input{chapters/freedom.tex}
 \input{chapters/codesign.tex}
 \input{chapters/quotes.tex}
-
 \nocite{*}
 \printbibliography[heading=bibintoc]
 \end{document}
