@@ -70,6 +70,32 @@ Zuse's Z4 was a strange machine with bespoke memory and instruction set.
 This affected how the compilers for it were designed.
 }
 
+In a turn of events Konrad Zuse was made aware of Aiken's Mark I through his daughter:
+\begin{quotation}
+Konrad Zuse told me an amusing anecdote about how he first encountered the work of Aiken. The occasion
+of our conversation was a luncheon in Zuse's honor, hosted by Ralph Gomory at the Watson Research
+Laboratory of IBM before a lecture given by Zuse to the staff of the lab. When Zuse learned that I was
+gathering materials for a book on Aiken, he told me that he had come across Aiken and Mark I in an indirect
+manner, through the daughter of his bookkeeper. She was working for the German Secret Service
+(Geheimdienst) and knew through her father of Zuse's work on a large scale calculator. According to Zuse,
+the young woman never learned any details about his machine, which was shrouded in war-time secrecy. But
+she knew enough about Zuse's machine to recognize that the material filed in a certain drawer related to a
+device that seemed somewhat like Zuse's. She reported this event to her father, giving the file number of the
+drawer, and the father at once informed Zuse of her discovery.
+
+Zuse, of course, could not go to the Secret Service and ask for the document since that would give away the
+illegal source of his information. Zuse was well connected, however, and was able to send two of his
+assistants to the Secret Service, armed with an official demand for information from the Air Ministry,
+requesting any information that might be in the files concerning a device or machine in any way similar to
+Zuse's.
+
+Zuse's assistants were at first informed that no such material existed in the files, but they persisted and
+eventually got to the right drawer. There they found a newspaper clipping (most likely from a Swiss
+newspaper), containing a picture of Mark I and a brief description about Aiken and the new machine. But
+there was not enough technical information to enable Zuse to learn the machine's architecture.
+\cite{howard_aiken_and_the_dawn_of_the_computer_age_2000}
+\end{quotation}
+
 \section{The ETH's Aquisition of the Z4}
 
 There were several early efforts to create programs that produced punch cards
@@ -292,8 +318,6 @@ everything under the sun. It was time to get together and exchange information
 on the state of the art, so that we could all go on from there.
 \end{quotation}
 
-\todo{connect her discontent at harvard to her leaving.}
-
 Hopper's postwar fellowship with the laboratory ended in 1949;
 after a brief stint of unemployment, she joined a startup called the Eckert-Mauchly Computer Corporation (EMCC)
 where she found a more congenial environment to continue her work on compilers.
@@ -436,6 +460,28 @@ could do was arithmetic, and that it couldn't write programs.
 \cite{hopl_keynote}
 \end{quotation}
 
+Hopper was not the only member of the programming group with ideas about
+programs generating other programs:
+
+\begin{quotation}
+[Betty Holberton]'s retired. I think she's still part time at the National Bureau of Standards.
+Everybody's forgotten that she wrote the first program that wrote a program. She wrote that
+sort-merge generator, and what she did was feed in the specs for the data you were handling
+and the keys and that sort of thing, and then it generated the sort program for that specific data.
+That's the first time to my knowledge that anyone used the computer to write a program. Betty
+did that. I don't think she's ever fully received the credit for what she did in that case\dots
+
+I'm not sure that I would necessarily have gotten done what I did get done if 
+she hadn't been ahead of me, so to speak.  Knowing that she had used a program 
+to generate a program, I had a good deal more nerve to go ahead and build the 
+first A-O compiler.
+\end{quotation}
+
+Hopper and the team had decided that the atom of a programming language ought to be the
+commmand imperative; verbs and nouns.
+All programmers, no matter their native language, should be able to understand the verbs acting on nouns.
+Thus they began working on their first mneumonoics, the inputs to the A-0 compiler.
+
 \section{What Did Hopper's Compiler Really Do?}
 
 At this time we should note that the term \textit{compiler} had not yet taken on its modern meaning.
@@ -455,7 +501,31 @@ what I did.
 \cite{Hopper_1980_Oral_History}
 \end{quotation}
 
-\todo{it was really a linker. copied subroutines into a program, adjusted addresses.}
+John Backus had this to say about Hopper's A-2 compiler in 1976:
+\begin{quotation}
+The above items give some idea of what the word "compiler" meant to one
+group in early 1954. It may amuse us today to find "compiler" used for such
+a system, but it is difficult for us to imagine the constraints and difficulties
+under which its authors worked.
+\cite{Backus_1980_Programming_in_America_in_1950s}
+\end{quotation}
+
+Given that the A-2 was more sophistocated than the two prior iterations,
+this should tell us something about how far their notion of a compiler was
+from our present day understanding.
+
+% Let us turn to the paper in which Hopper announced her A-0 compiler, the 1952
+% \citetitle{education_of_a_computer_1952_hopper}, which she presented at a
+% Pittsburgh ACM meeting.
+
+% \todo{it was really a linker. copied subroutines into a program, adjusted addresses.}
+
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=.5\textwidth]{resource/gh_education_of_a_computer_type_fig_6.png}
+%     \caption{Depiction of \textit{type-B compilation} from \citetitle{education_of_a_computer_1952_hopper}.  \cite{education_of_a_computer_1952_hopper}}
+%     \label{fig:education-of-a-computer-1952-hopper-f6}
+% \end{figure}
 
 \todo{A-0 and A-1 really had mneumonics for routines that the compiler new about}.
 \section{The A-1}
@@ -465,6 +535,21 @@ the A-2 was a front-end translator to the A-0, more like a complete
 toolchain with a front end to a language, a linker and a standard library.}
 
 \section{After the A-2}
+
+\begin{quotation}
+Pantages: At that point did you have a feeling for what was happening, in terms of what you
+were contributing?
+Hopper: No. I've always objected to doing anything over again if I had already done it
+once. That was building the compiler. Then I decided there were two kinds of people in the
+world who were trying to use these things. One was people who liked using symbols -
+mathematicians and people like that. There was another bunch of people who were in data
+processing who hated symbols, and wanted words, word-oriented people very definitely. And
+that was the reason I thought we needed two languages.
+The data processors did not like symbols, abbreviations that didn't convey anything to them.
+They were totally accustomed to writing things in words. So why not give them a word-oriented
+language? And that was part of what was behind Flow-Matic B-0, which became one of the
+ancestors of COBOL.
+\end{quotation}
 
 \todo{later developed the A-3 and AT-3/MATH-MATIC; FLOW-MATIC (B-0, 1956/58), \FTN{}, COBOL}
 
