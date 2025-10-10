@@ -18,7 +18,7 @@ def collect(pattern):
 files = collect('*.tex') | collect('*.bib')
 
 print(f'Found {len(files)} files to process.')
-script = perl.bake("-pe", "s/–/-/g; s/‘‘/\\\"/g; s/’’/\\\"/g; s/‘/'/g; s/’/'/g; s/“/\"/g; s/”/\"/g; s/…/.../g; s/¬\\s+//;", '-i')
+script = perl.bake("-pe", "s/–/-/g; s/‘‘/\\\"/g; s/’’/\\\"/g; s/‘/'/g; s/’/'/g; s/“/\"/g; s/”/\"/g; s/…/.../g; s/¬\\s+//; s/\\s+$//", '-i')
 for f in files:
     print(script, f)
     script(f)
