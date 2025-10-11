@@ -669,7 +669,10 @@ all sorts of information.
 She had been successful in a more restricted environment at Harvard,
 and she was able to see clearly the merits of a more open industry.
 
-\section{After the A-2: A-3, MATH-MATIC}
+\section{After the A-2: A-3, AT-3, MATH-MATIC}
+
+\todo{Should make some mention of interpreters in here.
+Hopper made some observations that might be useful later.}
 
 Not everyone was supportive of the advancements in compiler technology.
 There was a significant chunk of the computing industry that thought
@@ -704,7 +707,43 @@ but not much else past what the A-2 could do.
 Inspired by the work coming from MIT, they attempted to extend the A-3 to
 support source code that resembled equations (more so than the three-address 
 pseudocode that preceded it, at least).
-This new compiler was renamed the AT-3, and later the MATH-MATIC.
+This new compiler was called the AT-3 and formed one of the two major
+components of the MATH-MATIC. The AT-3 was the \textit{Translator}
+and the A-3 was the \textit{Arith-Matic Compiler}
+\cite{ash_etal_1957_math-matic_manual}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=.7\textwidth]{resource/mathmatic-user-guide.png}
+    \caption{Excerpt from the MATH-MATIC User's Manual, 1957}
+    \label{fig:mathmatic-user-manual}
+\end{figure}
+
+It is worth noting that \citetitle{grace_hopper_and_the_invention_of_the_information_age_2009}
+\cite{grace_hopper_and_the_invention_of_the_information_age_2009}
+appears to have a mistake regarding the A-3 and AT-3:
+
+\begin{quotation}
+Hopper and her colleagues explored the possibility of an
+equation-based programming language, and by 1956 they had
+modified A-3 to the point where it could support a user-friendly
+source code. The resultant AT-3 compiler was later named
+MATH-MATIC.
+\end{quotation}
+
+This led me to believe that the A-3 \textit{became} the AT-3 which was
+renamed to the MATH-MATIC; however, the MATH-MATIC user manual
+\cite{ash_etal_1957_math-matic_manual} specifies that the MATH-MATIC
+is composed of the A-3 and the AT-3, which were apparently separate
+programs with separate names (the Translator and the Arith-Matic Compiler,
+respectively).
+See Figure \ref{fig:mathmatic-user-manual}.
+Because the MATH-MATIC translated source code into A-3 pseudocode
+as an intermediate step, one might also consider this the first compiler
+to have an internal intermediate representation.
+The MATH-MATIC would last until about 1961, at which point UNIVAC users
+were already expecting \FTN{} compilers available on their UNIVAC systems,
+favoring IBM's language to Hopper's.
 
 \section{B-0, FLOW-MATIC, COBOL}
 
@@ -729,10 +768,38 @@ language? And that was part of what was behind Flow-Matic B-0, which became one
 of the ancestors of COBOL.
 \end{quotation}
 
+\begin{figure}
+    \centering
+    \includegraphics[width=.7\textwidth]{resource/gh_data_processing_compiler.png}
+    \caption{Depiction of Hopper's Data Processing Compiler\cite{hopper_1955_preliminary_definitions_data_processing_compiler}}
+    \label{fig:data-processing-compiler}
+\end{figure}
+
+Hopper's interests in making programming accessible had not waned,
+however her target audience shifted.
+In January of 1955, she shared a her more radical ideas for a new
+compiler in a report titled
+\citetitle{hopper_1955_preliminary_definitions_data_processing_compiler}
+\cite{hopper_1955_preliminary_definitions_data_processing_compiler}
+.
+This compiler would take on several names: first, the data-processing
+compiler as outlined in the 1955 paper, then the B-0, the Procedure Translator,
+and finally the FLOW-MATIC.
+
+\begin{quotation}
+  This was what she originally called the data processing compiler in January,
+  1955; it was soon to be known as "B-0," later as the "Procedure
+  Translator", and finally as FLOW-MATIC, This language used English
+  words, somewhat as MATH-MATIC did but more so, and its operations concentrated
+  on business applications.
+  \cite{history_of_computing_in_the_twentieth_century_1980}
+\end{quotation}
+
+Always concerned with how intelligible her users would find her compilers
+and programming languages, she focused more on business applications and managers.
 
 
-\todo{later developed the A-3 and AT-3/MATH-MATIC; FLOW-MATIC (B-0,
-1956/58), \FTN{}, COBOL}
+\todo{later developed the A-3 and AT-3/MATH-MATIC; FLOW-MATIC (B-0, 1956/58), \FTN{}, COBOL}
 
 \begin{quotation}
   B-0, as the business language compiler was designated, became available to
@@ -749,29 +816,18 @@ of the ancestors of COBOL.
 \end{quotation}
 
 \begin{quotation}
-  her superiors that the proposed business language would only be in English.
-  B-0, as the business language compiler was designated, became available to
-  UNIVAC customers at the start of 1958. Before its completion, Remington Rand
-  merged with Sperry Gyroscope Corporation to form Sperry Rand. The marketing
-  department of the new company renamed the business language FLOW-MATIC. (In
-  addition, AT-3 was renamed MATH-MATIC.) The completed version of
-  FLOW-MATIC had
-  a rich library of operational verbs that appeared to meet the application
-  needs of most businesses.23 These verbs included editing commands so
-  information could be formatted before output. Furthermore,
-  FLOW-MATIC provided
-  unparalleled flexibility in data designation, thus allowing fi le names to be
-  given complicated descriptions.
-\end{quotation}
-
-\begin{quotation}
-  This was what she originally called the data processing compiler in January,
-  1955; it was soon to be known as "B-0," later as the "Procedure
-  Translator" [KM 57], and finally as flow-matic [HO 58, TA 60], This language used English
-  words, somewhat as math-matic did but more so, and its operations concentrated
-  on business applications. The following examples are typical of flow-matic
-  operations;
-  \cite{history_of_computing_in_the_twentieth_century_1980}
+We’d written FLOW-MATIC before that, and if you take the FLOW-MATIC
+manual and compare it with COBOL 60 you’ll find COBOL 60 is 95\% FLOW-MATIC. So the
+influence of Commercial Translator in fact was extremely small. But I figured the thing to do was
+corral those people and when we had something to say, we’d say it was a compound of FLOW-MATIC
+and Commercial Translator and keep the other people happy and wouldn’t try to knock
+us out. We’d give them some credit and they’d have to get on board with us. But if you compare
+the two manuals you’d find that it had hardly any influence at all. But if you gave them credit for
+it, why they’d go right along with you. If you didn’t, they’d fight you. You can always give credit,
+you can always afford to.
+That again is the practical. Think about the other guy and his position and his interest. You are
+always trying to work with people rather than against them. You’ve got a new idea; give the
+boss credit for it. It doesn’t cost you anything. 
 \end{quotation}
 
 \section{Laning and Zierler at MIT}

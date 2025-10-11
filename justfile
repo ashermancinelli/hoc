@@ -1,15 +1,15 @@
-default := "all"
+default := "quick"
 job := "hoc"
 latex := "lualatex --shell-escape --jobname=" + job + " main.tex"
 publish-name := "History of Compilers"
 publish-pdf := publish-name + ".pdf"
 
-default: all
+default: quick
 
 biber-clear-cache:
     rm -rf `biber --cache`
 
-all:
+full:
     {{latex}}
     biber {{job}}
     {{latex}}
@@ -18,13 +18,11 @@ all:
 quick:
     {{latex}}
 
-q: quick
-
 clean:
     latexmk -C
     rm *.bbl *.upa *.upb *-SAVE-ERROR || true
 
-cleanfirst: clean all
+cleanfirst: clean full
 
 publish: cleanfirst
     cp "{{job}}.pdf" "publish/{{publish-pdf}}"
