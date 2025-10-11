@@ -636,41 +636,100 @@ it did so.
 The a compiler should be friendly to its users was not necessarily a given at
 the time; modern compiler tools owe this to Hopper (to the extend that they
 are any better than the A-1).
+Another feature of pseudocode instructions is that programs written 
+in such a manner may be translated to run on different machines, provided
+the compiler and standard library are available on those machines.
+As far as we know, Hopper never attempted this, however.
 
-\todo{A-0 and A-1 really had mneumonics for routines that the
-compiler new about}.
-% \section{The A-1}
+By winter of 1953, the A-2 compiler was already being used heavily
+by several institutions, including the US Census Bureau and
+Lawrence Livermore National Laboratory.
+Several of these provided feedback, bug reports, and occasionally features
+back to the Remington Rand team.
+Nora Moser of the Army Map Service sent Hopper a collection of comiler
+improvements, library enhancements, and altogether new libraries in the
+winter of 1954.
+One cannot overlook the fact that Hopper was a woman in a male dominated
+industry, and a number of other women in the industry were her early
+collaborators.
 
-\todo{
-  the A-2 was a front-end translator to the A-0, more like a complete
-toolchain with a front end to a language, a linker and a standard library.}
+Hopper presented on the A-2 at the Pentagon in 1953
+\cite{pentagon_hopper_univac_workshop_1953},
+facilitating communication with and amongst her users.
+This was not the only time she sought to present her team's work
+to a wider audience.
+Non-UNIVAC customers also expressed interest; more government
+agencies and potential customers (with existing IBM machines)
+came to learn about their developments.
+This open collaboration and sharing of information would set a precedent
+for intellectual property in the budding software industry.
+She had built the compilers as a way to make programming accessible
+and facilitate the sharing of code, and this philosophy extended to
+all sorts of information.
+She had been successful in a more restricted environment at Harvard,
+and she was able to see clearly the merits of a more open industry.
 
-\section{After the A-2: B-0, FLOW-MATIC, COBOL}
+\section{After the A-2: A-3, MATH-MATIC}
+
+Not everyone was supportive of the advancements in compiler technology.
+There was a significant chunk of the computing industry that thought
+programming took too much creativity to be fully automated.
+Hopper and John Backus found themselves on the same side of the debate,
+both firm in their beliefs that computing should be made accessible.
+This is a bit ironic, because IBM would shortly mount a significant effort
+towards compilation and competition with Remington Rand, with Backus at the helm.
 
 \begin{quotation}
-  Pantages: At that point did you have a feeling for what was
-  happening, in terms of what you
-  were contributing?
-
-  Hopper: No. I've always objected to doing anything over again if I
-  had already done it
-  once. That was building the compiler. Then I decided there were two
-  kinds of people in the
-  world who were trying to use these things. One was people who liked
-  using symbols -
-  mathematicians and people like that. There was another bunch of
-  people who were in data
-  processing who hated symbols, and wanted words, word-oriented
-  people very definitely. And
-  that was the reason I thought we needed two languages.
-  The data processors did not like symbols, abbreviations that didn't
-  convey anything to them.
-  They were totally accustomed to writing things in words. So why not
-  give them a word-oriented
-  language? And that was part of what was behind Flow-Matic B-0,
-  which became one of the
-  ancestors of COBOL.
+    Just as freewheeling westerners developed a chauvinistic pride in their 
+frontiersmanship and a corresponding conservatism, so many programmers of the 
+freewheeling 1950s began to regard themselves as members of a priesthood 
+guarding skills and mysteries far too complex for ordinary mortals.
+\cite{Backus_1980_Programming_in_America_in_1950s}
 \end{quotation}
+
+Nonetheless, compiler development marched on and the number of compiler
+developers continued to grow.
+In 1954, Remington Rand formed the Automatic Programming Department
+in support of Hopper's team.
+With Hopper's ability to teach and communicate along with her compassion
+for the programmer, the group thrived.
+\todo{Adele Mildred Koss, interview by Kathy Kleiman, 1993,
+talking about how nice it was to work for her.}
+Just as Backus was inspired by Laning and Zierler's work at MIT, so too
+was Hopper.
+In preparation for the Office of Naval Research's 1954 Symposium,
+her new department was focused on extending the A-3 compiler,
+providing a compiler capable of generating more efficient machine code,
+but not much else past what the A-2 could do.
+Inspired by the work coming from MIT, they attempted to extend the A-3 to
+support source code that resembled equations (more so than the three-address 
+pseudocode that preceded it, at least).
+This new compiler was renamed the AT-3, and later the MATH-MATIC.
+
+\section{B-0, FLOW-MATIC, COBOL}
+
+In an interview for the Computer History Museum's Oral History series,
+Hopper explains her motivations for the compilers to follow the A-2
+\cite{Hopper_1980_Oral_History}:
+
+\begin{quotation}
+  \textbf{Pantages:} At that point did you have a feeling for what was 
+happening, in terms of what you were contributing?
+
+  \textbf{Hopper:} No. I've always objected to doing anything over again if I had 
+already done it once. That was building the compiler. Then I decided there were 
+two kinds of people in the world who were trying to use these things. One was 
+people who liked using symbols - mathematicians and people like that. There was 
+another bunch of people who were in data processing who hated symbols, and 
+wanted words, word-oriented people very definitely. And that was the reason I 
+thought we needed two languages.  The data processors did not like symbols, 
+abbreviations that didn't convey anything to them.  They were totally 
+accustomed to writing things in words. So why not give them a word-oriented 
+language? And that was part of what was behind Flow-Matic B-0, which became one 
+of the ancestors of COBOL.
+\end{quotation}
+
+
 
 \todo{later developed the A-3 and AT-3/MATH-MATIC; FLOW-MATIC (B-0,
 1956/58), \FTN{}, COBOL}
