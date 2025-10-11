@@ -738,12 +738,46 @@ is composed of the A-3 and the AT-3, which were apparently separate
 programs with separate names (the Translator and the Arith-Matic Compiler,
 respectively).
 See Figure \ref{fig:mathmatic-user-manual}.
+Knuth and Pardo describe the MATH-MATIC's development as:
+"The language was originally called AT-3; but it received the catchier name 
+MATH-MATIC in April, 1957, when its preliminary manual was released."
+\cite{Knuth_TrabbPardo_1976_Early_Development}
+Perhaps the \textit{language} A-3 was extended to become AT-3 which was
+renamed MATH-MATIC, while the A-3 and AT-3 compiler programs remained
+distinct; because I cannot find sources to clarify this nor the
+original programs, I cannot conclusively describe the MATH-MATIC
+and its precise relationship to the A-3 and AT-3 past what the
+user's manual describes.
+
 Because the MATH-MATIC translated source code into A-3 pseudocode
 as an intermediate step, one might also consider this the first compiler
 to have an internal intermediate representation.
 The MATH-MATIC would last until about 1961, at which point UNIVAC users
 were already expecting \FTN{} compilers available on their UNIVAC systems,
 favoring IBM's language to Hopper's.
+
+These layers of translation worked against them; the vast majority
+of codes at the time were dominated by floating point arithmetic,
+so any degradation of floating point performance would be catastrophic for the 
+overall performance of the system.
+Around the same time, John Backus had convinced IBM leadership that 
+their new machine, the IBM 704, should have index registers and floating point 
+processing hardware, which is exactly what both UNIVAC and IBM 701 customers
+lacked and were spending all their time on.
+Now that the 704 accounted for these prior deficiencies in both machines,
+Backus's \FTN{} combined with the 704's hardware entirely outclassed the
+UNIVAC I and Hopper's MATH-MATIC.
+
+\begin{quotation}
+But the MATH-MATIC programmers did not share the FORTRAN group's enthusiasm for 
+efficient machine code; they translated MATH-MATIC source language into A-3 (an 
+extension of A-2), and this produced extremely inefficient programs, especially 
+considering the fact that arithmetic was all done by floating-point 
+subroutines. The UNIVAC computer was no match for an IBM 704 even when it was 
+expertly programmed, so MATH-MATIC was of limited utility.
+
+Knuth and Pardo\cite{Knuth_TrabbPardo_1976_Early_Development}.
+\end{quotation}
 
 \section{B-0, FLOW-MATIC, COBOL}
 
@@ -795,27 +829,130 @@ and finally the FLOW-MATIC.
   \cite{history_of_computing_in_the_twentieth_century_1980}
 \end{quotation}
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=.7\textwidth]{resource/flow-matic-example-knuth-pardo.png}
+    \caption{Example FLOW-MATIC code from Knuth and Trabb Pardo\cite{Knuth_TrabbPardo_1976_Early_Development}}
+    \label{fig:knuth-pardo-flow-matic-example}
+\end{figure}
+
 Always concerned with how intelligible her users would find her compilers
 and programming languages, she focused more on business applications and managers.
+Donald Knuth and Luis Trabb Pardo describe the FLOW-MATIC as
+"far more influential and successful, since it broke important new ground."
+\cite{Knuth_TrabbPardo_1976_Early_Development}
+(see also Figure \ref{fig:knuth-pardo-flow-matic-example}).
+Instead of catering her compilers to mathematicians and scientists
+by introducing mathematical symbols and notation, she sent members of
+her team to UNIVAC customers to learn about their \textit{business} needs.
 
+\begin{figure}
+    \centering
+    \includegraphics[width=.7\textwidth]{resource/flow-matic-ad-1959.png}
+    \caption{Advertisement for FLOW-MATIC and UNIVAC II}
+    \label{fig:flow-matic-ad-1959}
+\end{figure}
 
-\todo{later developed the A-3 and AT-3/MATH-MATIC; FLOW-MATIC (B-0, 1956/58), \FTN{}, COBOL}
+The business compiler B-0 was first made available to UNIVAC customers
+at the start of 1958.
+Shortly thereafter, Remington Rand merged with Sperry Gyroscope to form Sperry Rand.
+The marketing department of the newly formed company renamed the B-0
+to FLOW-MATIC.
+Catering to business users, the FLOW-MATIC was programmed in English-like
+statements such as:
+\texttt{IF EQUAL GO TO OPERATION 5 ; OTHERWISE GO TO OPERATION 2 .}
+The group toyed with using abbreviations for common words, but
+after studying their customer's programs, they found that too many
+abbreviations could be mapped to different words based on the customer,
+so the abbreviated form was abandoned.
+Jean Sammet notes: "A preliminary manual
+for the running system was marked Company Confidential and dated July,
+1957; it was available to me at that time since I was an employee of the
+Sperry Rand Corporation"
+\cite{sammet_programming_languages_history_and_fundamentals_1969}.
+The first generally available version of this document was available
+in early 1958 in \citetitle{sperryrand_1959_flowmatic}\cite{sperryrand_1959_flowmatic}.
+In this manual, one now finds advertisements for the UNIVAC II\ref{fig:flow-matic-ad-1959}.
+
+In this document, one also finds a crude method for specifying the language,
+which the reader should note; Backus would propose a more formal method
+for specifying programming languages not long after this.
+For example, the \texttt{CLOSE-OUT} command is specified in the FLOW-MATIC manual as:
+
+\[
+\Delta \text{CLOSE-OUT} \Delta
+\left[
+\begin{array}{c}
+  \text{file} \\
+  \text{files}
+\end{array}
+\right]
+\Delta
+f_1
+\Delta
+\left[
+f_2
+\Delta
+f_3
+\Delta
+\dots
+\Delta
+f_n
+\right]
+\]
+
+There was no format method for specifying languages at the time.
+In 1959, one of the B-0 developers, Mary Hawes, contacted Sperry Rand about a meeting to
+discuss the direction of compilers for business applications.
+\todo{In some places, Hawes is described as one of the B-0 developers which leads
+me to believe she worked at RR or SR, but Sammet points out that she worked
+for the ElectroData division of the Burroughs Corporation. Need to clarify.}
+Sammet states\cite{sammet_early_history_of_cobol_1978} that Block's 1959 
+\textit{Report on Meeting held at University of Pennsylvania Computing Center} names
+Hawes as having called this meeting:
 
 \begin{quotation}
-  B-0, as the business language compiler was designated, became available to
-  UNIVAC customers at the start of 1958. Before its completion, Remington Rand
-  merged with Sperry Gyroscope Corporation to form Sperry Rand. The marketing
-  department of the new company renamed the business language FLOW-MATIC. (In
-  addition, AT-3 was renamed MATH-MATIC.) The completed version of
-  FLOW-MATIC had
-  a rich library of operational verbs that appeared to meet the application
-  needs of most businesses.23 These verbs included editing commands so
-  information could be formatted before output. Furthermore, FLOW-MATIC provided
-  unparalleled flexibility in data designation, thus allowing file names to be
-  given complicated descriptions.
+\dots meeting was the result of a request by
+Mary K. Hawes (ElectroData Division, Burroughs Corporation) to plan a formal meeting
+involving both users and manufacturers where plans could be prepared to develop the
+specifications for a common business language for automatic digital computers.
 \end{quotation}
 
-\todo{diplomacy, forming committees, working with IBM and CODASYL, forming COBOL}
+I am unable to retrieve this document; we will take Jean Sammet's word for it.
+\todo{there is not much about Mary Hawes available online,
+I can't even find the papers Hawes originally wrote.
+Try to find \textit{Mary Hawes, “Automatic Routines for Commercial Installations”}}
+Through a connection at the Department of Defense (Charles Phillips), this group
+asked the DoD to sponsor the meetings and recommended a list of attendees, including
+7 representatives from computer manufacturers and 14 from user organizations.
+In an ACM talk on September 1, 1959, Phillips remarked that "embarrassed that 
+the idea for such a common language had not had its origin by that time in 
+Defense since we would benefit so greatly from the success of such a project."
+\cite[Phillips, as quoted by Sammet in]{sammet_programming_languages_history_and_fundamentals_1969}.
+There was a great deal of discussion around a common business language
+that could be shared across different computer systems and reduce the overall cost of programming.
+\textit{Three separate committees} were formed for this purpose; a short, medium, and long-term committee.
+Sammet remarks that "the importance of the notion of Short and 
+Intermediate-Range Committees is absolutely crucial to an understanding of the 
+development of COBOL"\cite{sammet_early_history_of_cobol_1978}.
+She went on to say:
+
+\begin{quotation}
+This wording is clearly ambiguous, and at the time, there was some discussion 
+as to whether or not we were to try and create a language. It was by no means 
+clear \textit{then} that we were to do anything \textit{except} try and 
+\textit{combine} the three known languages of the time.
+These were FLOW-MATIC, \dots AIMACO, \dots and COMTRAN
+\end{quotation}
+
+AIMACO was a language developed at the Air Force, and COMTRAN (renamed to Commercial Translator)
+existed only in an IBM manual whose implementation had never even started.
+Clearly, Hopper and Sperry Rand's FLOW-MATIC was the most mature of these languages.
+Indeed, Hopper pointed out that the language resulting from these committees
+was almost entirely FLOW-MATIC\cite{Hopper_1980_Oral_History}, though the committee notes
+did not say as much. Hopper's lack of an ego and her diplomatic skills
+led her to give credit liberally in order to drive consensus.
+
 \begin{quotation}
 We'd written FLOW-MATIC before that, and if you take the FLOW-MATIC
 manual and compare it with COBOL 60 you'll find COBOL 60 is 95\% FLOW-MATIC. So the
@@ -831,6 +968,23 @@ That again is the practical. Think about the other guy and his position and his 
 always trying to work with people rather than against them. You've got a new idea; give the
 boss credit for it. It doesn't cost you anything. 
 \end{quotation}
+
+Here the reader should note Sammet's observation of the differing goals of the three committees:
+
+\begin{quotation}
+I am certainly convinced in my own mind that had the Short-Range Committee 
+realized at the outset that the language it created (i.e., COBOL) was going to 
+be in use for such a long period of time, it would have gone about the task 
+quite differently and produced a rather different result. But I believe that 
+most of us viewed our work as a stopgap measure--a very important stopgap 
+indeed, but not something intended for longevity.
+\end{quotation}
+
+Most of the disdain for COBOL may indeed come from the fact that it was designed by the \textit{short term}
+committee, which was solely trying to combine the existing compiler and programming language practices
+of the time into one language to prevent further bifurcation.
+If COBOL seems like a mishmash of different ideas designed by committee without proper
+foresight or thoughtful design, well, it more or less was.
 
 \section{Laning and Zierler at MIT}
 \label{sec:laning-zierler}
