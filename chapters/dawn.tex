@@ -779,7 +779,7 @@ expertly programmed, so MATH-MATIC was of limited utility.
 Knuth and Pardo\cite{Knuth_TrabbPardo_1976_Early_Development}.
 \end{quotation}
 
-\section{B-0, FLOW-MATIC, COBOL}
+\section{The B-0, FLOW-MATIC, and COBOL}
 
 In an interview for the Computer History Museum's Oral History series,
 Hopper explains her motivations for the compilers to follow the A-2
@@ -877,10 +877,12 @@ In this manual, one now finds advertisements for the UNIVAC II\ref{fig:flow-mati
 In this document, one also finds a crude method for specifying the language,
 which the reader should note; Backus would propose a more formal method
 for specifying programming languages not long after this.
-For example, the \texttt{CLOSE-OUT} command is specified in the FLOW-MATIC manual as:
+For example, the \texttt{CLOSE-OUT} command is specified in the FLOW-MATIC manual as
+\footnote{The $\Delta$ symbols were present in the original manual because it signified
+an empty space in the punchcards the FLOW-MATIC was written on}:
 
 \[
-\Delta \text{CLOSE-OUT} \Delta
+\Delta \text{\texttt{CLOSE-OUT}} \Delta
 \left[
 \begin{array}{c}
   \text{file} \\
@@ -985,6 +987,53 @@ committee, which was solely trying to combine the existing compiler and programm
 of the time into one language to prevent further bifurcation.
 If COBOL seems like a mishmash of different ideas designed by committee without proper
 foresight or thoughtful design, well, it more or less was.
+Yet another committee was formed on top of these three, the "Committee on Data Systems Languages"
+or CODASYL, which would be the exeucutive committee steering the direction of the other three.
+
+\section{COBOL Comes Into Focus}
+
+Throughout September and October of 1959, the short-term committee met
+regularly to build consensus around this new language.
+There were a number of similar names considered before settling on COBOL:
+
+\[
+\text{BUSY}   & \text{Business System} \\
+\text{BUSYL}  & \text{Business System Language} \\
+\text{INFOSYL} & \text{Information System Language} \\
+\text{DATASYL} & \text{Data System Language} \\
+\text{COSYL}  & \text{Common Systems Language} \\
+\text{COCOSYL} & \text{Common Computer Systems Language} \\
+\end{array}
+\]
+
+On September 18th of that year, the committee settled on
+COBOL, according to Jean Sammet's personal notes\cite{sammet_early_history_of_cobol_1978}.
+I spare the reader of the full details of the committee's meetings,
+and encourage interested readers to consult Sammet's detailed notes on the proceedings.
+Perhaps the most important conclusion from these meetings was that there existed a
+\textit{Basic COBOL}, and that no computer manufacturer could claim to support COBOL
+unless they supported this core subset of the language.
+This set the stage for numerous modern programming languages that contain a
+standard language specification that all compilers must support to claim to
+be a compiler for that language, key examples being C and C++.
+
+The first correct and complete compilation of a COBOL program was performed in
+August of 1960 on an RCA 501.
+In December of that year Sperry Rand and RCA each wrote COBOL programs,
+ran them on their own machines, exchanged programs, and verified that they ran on
+the other manufacturer's machine as well (a UNIVAC II and an RCA 501).
+Thus was the first programming language standardized to the point that different compilers
+running on different machines could compile the same program correctly.
+
+While Hopper's legacy tends to be tied to COBOL, I believe her true legacy lies in
+her passion for making programming accessible.
+She thought deeply about the needs of her users; she sent employees to study them
+and learn what their pain points were and how best the compiler developers could serve them.
+She considered how to tailor her technology to her users, how to make her compilers
+more friendly speakers of other languages, and how to make compilers produce understandable
+error message and make them more debuggable.
+This is where I think Grace Hopper's true legacy lies, not solely in the language
+cobbled together by a potpourri of committees with a short-term view.
 
 \section{Laning and Zierler at MIT}
 \label{sec:laning-zierler}
@@ -1318,138 +1367,142 @@ optimization efforts of three members of the original team:
     the problem he dealt with; his methods were the basis of many subsequent
     storage-allocation algorithms and produced code that is very difficult to
     improve. (For more details of Best's methods see [4, pp. 510-5151.)"
-  \end{itemize}
+\end{itemize}
 
-  This is, as far as I can tell, the first concerted effort to produce an
-  optimizing compiler.
+This is, as far as I can tell, the first concerted effort to produce an
+optimizing compiler.
 
-  \section{Language Specification and Backus-Naur Form}
+\section{Language Specification and Backus-Naur Form}
 
-  \todo{explain BNF and lang specs, tie in with GH algol
-  work}\cite{Backus_1980_Programming_in_America_in_1950s}:
-  \begin{quotation}
-    The notation for syntax description known as BNF offers another example of a
-    development which began with a prosaic recognition of a need.
-    After involvement
-    with two language design efforts-FORTRAN and IAL (ALGOL 58)-it
-    became clear, as
-    I was trying to describe IAL in 1959, that difficulties were
-    occurring due to
-    the absence of precise language definitions. In a recent course on
-    computability given by Martin Davis, I had been exposed to the work of the
-    logician Emil Post and his notion of a "production." As soon as the need for
-    precise description was noted, it became obvious that Post's
-    productions were
-    well suited for that purpose. I hastily adapted them for use in
-    describing the
-    syntax of IAL. The resulting paper [5] was received with a
-    silence that made it
-    seem that precise syntax description was an idea whose time had
-    not yet come.
-    As far as I know that paper had only one reader, Peter Naur. Fortunately, he
-    had independently recognized the need for precision; he improved
-    the notation
-    (replacing oi: by I and := by : =), improved its readability by not
-    abbreviating the names of metavariables, and then used it to describe the
-    syntax of ALGOL 60 in the definitive paper on that language. He
-    thus proved the
-    usefulness of the idea in a widely read paper I and it was accepted.
-  \end{quotation}
-  % \begin{figure}[h!]
-  %     \centering
-  %     \includegraphics[width=0.5\linewidth]{resource/Backus_Herrick_Speedcoding_ONR_1954.png}
-  %     \caption{Excerpt from \citetitle{Backus_Herrick_1954_Speedcoding}}
-  %     \label{fig:backus-herrick-speedcoding-onr-1954}
-  % \end{figure}
+\todo{explain BNF and lang specs, tie in with GH algol
+work}\cite{Backus_1980_Programming_in_America_in_1950s}:
+\begin{quotation}
+The notation for syntax description known as BNF offers another example of a
+development which began with a prosaic recognition of a need.
+After involvement
+with two language design efforts-FORTRAN and IAL (ALGOL 58)-it
+became clear, as
+I was trying to describe IAL in 1959, that difficulties were
+occurring due to
+the absence of precise language definitions. In a recent course on
+computability given by Martin Davis, I had been exposed to the work of the
+logician Emil Post and his notion of a "production." As soon as the need for
+precise description was noted, it became obvious that Post's
+productions were
+well suited for that purpose. I hastily adapted them for use in
+describing the
+syntax of IAL. The resulting paper [5] was received with a
+silence that made it
+seem that precise syntax description was an idea whose time had
+not yet come.
+As far as I know that paper had only one reader, Peter Naur. Fortunately, he
+had independently recognized the need for precision; he improved
+the notation
+(replacing oi: by I and := by : =), improved its readability by not
+abbreviating the names of metavariables, and then used it to describe the
+syntax of ALGOL 60 in the definitive paper on that language. He
+thus proved the
+usefulness of the idea in a widely read paper I and it was accepted.
+\end{quotation}
+% \begin{figure}[h!]
+%     \centering
+%     \includegraphics[width=0.5\linewidth]{resource/Backus_Herrick_Speedcoding_ONR_1954.png}
+%     \caption{Excerpt from \citetitle{Backus_Herrick_1954_Speedcoding}}
+%     \label{fig:backus-herrick-speedcoding-onr-1954}
+% \end{figure}
 
-  \todo{Backus wasn't really that involved in fortran II and III and IV.
-    The rest of the team took over. He never wrote much fortran and
-    doesn't have many thoughts
-  about it today other that the "we should be making things higher level."}
-  \todo{Backus moved into functional programming. Was never fruitful.
-    He became a lab fellow at IBM after Watson Jr started the
-    fellowship program,
-    so he could kinda play with functional programming and not really
-  get much done.}
-  \todo{He didn't like Hopper's ideas for COBOL, thought they were
-    crazy and too complex.
-    Didn't like algol either. Really just wanted to make things
-    simpler and higher level
-  and easier to use. Pushed back against the priesthood.}
-  \todo{the priesthood didn't like fortran because it made things easy.
-    Backus resisted this urge at every point in his career.
-    Like GH, he wanted programming to be easy and accessible
-  (tho he didn't like her direction)}
+\todo{Backus wasn't really that involved in fortran II and III and IV.
+The rest of the team took over. He never wrote much fortran and
+doesn't have many thoughts
+about it today other that the "we should be making things higher level."}
+\todo{Backus moved into functional programming. Was never fruitful.
+He became a lab fellow at IBM after Watson Jr started the
+fellowship program,
+so he could kinda play with functional programming and not really
+get much done.}
+\todo{He didn't like Hopper's ideas for COBOL, thought they were
+crazy and too complex.
+Didn't like algol either. Really just wanted to make things
+simpler and higher level
+and easier to use. Pushed back against the priesthood.}
+\todo{the priesthood didn't like fortran because it made things easy.
+Backus resisted this urge at every point in his career.
+Like GH, he wanted programming to be easy and accessible
+(tho he didn't like her direction)}
 
-  \begin{quotation}
-    Though the FORTRAN operator's manual was completed by the fall of 1956, the
-    compiler itself was not distributed to IBM 704 installations
-    until April 1957.
-    Within a year after distribution, half of the IBM 704
-    installations were using
-    FORTRAN to solve more than half of all mathematical prob-lems.16
-    Subsequently,
-    compilers were produced for the IBM 705 and the IBM 650, quickly
-    making FORTRAN
-    the most widely used automatic program of its day. By 1961, UNIVAC users
-    demanded a compatible FORTRAN compiler and abandoned Hopper's MATH-MATIC.
-    \cite{grace_hopper_and_the_invention_of_the_information_age_2009}
-  \end{quotation}
+\begin{quotation}
+Though the FORTRAN operator's manual was completed by the fall of 1956, the
+compiler itself was not distributed to IBM 704 installations
+until April 1957.
+Within a year after distribution, half of the IBM 704
+installations were using
+FORTRAN to solve more than half of all mathematical prob-lems.16
+Subsequently,
+compilers were produced for the IBM 705 and the IBM 650, quickly
+making FORTRAN
+the most widely used automatic program of its day. By 1961, UNIVAC users
+demanded a compatible FORTRAN compiler and abandoned Hopper's MATH-MATIC.
+\cite{grace_hopper_and_the_invention_of_the_information_age_2009}
+\end{quotation}
 
-  \begin{quotation}
-    It describes the system which will be made available during late
-    1956, and is
-    intended to permit planning and fortran coding in advance of that
-    time [p. 1],
-    Object programs produced by fortran will be nearly as efficient as those
-    written by good programmers [p. 2], "Late 1956" was, of course, a
-    euphemism for
-    April 1957. Here is how Saul Rosen described fortran's debut [RO
-    64, p. 4]: Like
-    most of the early hardware and software systems, fortran was late
-    in delivery,
-    and didn't really work when it was delivered.
-    \cite{history_of_computing_in_the_twentieth_century_1980}
-  \end{quotation}
+\begin{quotation}
+It describes the system which will be made available during late
+1956, and is
+intended to permit planning and fortran coding in advance of that
+time [p. 1],
+Object programs produced by fortran will be nearly as efficient as those
+written by good programmers [p. 2], "Late 1956" was, of course, a
+euphemism for
+April 1957. Here is how Saul Rosen described fortran's debut [RO
+64, p. 4]: Like
+most of the early hardware and software systems, fortran was late
+in delivery,
+and didn't really work when it was delivered.
+\cite{history_of_computing_in_the_twentieth_century_1980}
+\end{quotation}
 
-  \begin{quotation}
-    It is not my intention to give a complete description of either; hence this
-    section will describe only the main highlights of FORTRAN development. The
-    earliest significant document that seems to exist 1s one marked
-    "PRELIMINARY REPORT, Specifications for the IBM Mathematical FORmula
-    TRANslating System, FORTRAN", dated November 10, 1954 and issued by the
-    Programming Research Group, Applied Science Division, of IBM.
-    \cite{sammet_programming_languages_history_and_fundamentals_1969}
-  \end{quotation}
+\begin{quotation}
+It is not my intention to give a complete description of either; hence this
+section will describe only the main highlights of FORTRAN development. The
+earliest significant document that seems to exist 1s one marked
+"PRELIMINARY REPORT, Specifications for the IBM Mathematical FORmula
+TRANslating System, FORTRAN", dated November 10, 1954 and issued by the
+Programming Research Group, Applied Science Division, of IBM.
+\cite{sammet_programming_languages_history_and_fundamentals_1969}
+\end{quotation}
 
-  \begin{quotation}
-    Laning and Zierler's algebraic compiler served as evidence that prestigious
-    institutions such as MIT were taking automatic programming
-    seriously, prompting
-    Backus to write Laning a letter shortly after the May symposium.
-    In the letter,
-    Backus informed Laning that his team at IBM was working on a
-    similar compiler,
-    but that they had not yet done any programming or even any
-    detailed planning.12
-    To help formulate the specifications for their proposed language, Backus
-    requested a demonstration of the algebraic compiler, which he and Ziller
-    received in the summer of 1954. Much to their dismay, the two
-    experienced firsthand the efficiency dilemma of compiler-based
-    language design. The MIT
-    source code was commendable, but the compiler slowed down the Whirlwind
-    computer by a factor of 10. Since computer time was so dear a
-    commodity, Backus
-    realized that only a compiler that maximized efficiency could
-    hope to compete
-    with human programmers. Despite this initial disappointment, Laning and
-    Zierler's work inspired Backus to attempt to build a compiler that could
-    translate a rich mathematical language into a sufficiently
-    economical program
-    at a relatively low cost.13
-    \cite{grace_hopper_and_the_invention_of_the_information_age_2009}
-  \end{quotation}
+\begin{quotation}
+Laning and Zierler's algebraic compiler served as evidence that prestigious
+institutions such as MIT were taking automatic programming
+seriously, prompting
+Backus to write Laning a letter shortly after the May symposium.
+In the letter,
+Backus informed Laning that his team at IBM was working on a
+similar compiler,
+but that they had not yet done any programming or even any
+detailed planning.12
+To help formulate the specifications for their proposed language, Backus
+requested a demonstration of the algebraic compiler, which he and Ziller
+received in the summer of 1954. Much to their dismay, the two
+experienced firsthand the efficiency dilemma of compiler-based
+language design. The MIT
+source code was commendable, but the compiler slowed down the Whirlwind
+computer by a factor of 10. Since computer time was so dear a
+commodity, Backus
+realized that only a compiler that maximized efficiency could
+hope to compete
+with human programmers. Despite this initial disappointment, Laning and
+Zierler's work inspired Backus to attempt to build a compiler that could
+translate a rich mathematical language into a sufficiently
+economical program
+at a relatively low cost.13
+\cite{grace_hopper_and_the_invention_of_the_information_age_2009}
+\end{quotation}
 
-  \pagebreak
-  \section{Timeline}
-  \input{chapters/dawn-timeline.tex}
+\section{Algol 58}
+
+
+
+\pagebreak
+\section{Timeline}
+\input{chapters/dawn-timeline.tex}
