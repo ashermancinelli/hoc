@@ -15,6 +15,11 @@ all:
     {{latex}}
     {{latex}}
 
+quick:
+    {{latex}}
+
+q: quick
+
 clean:
     latexmk -C
     rm *.bbl *.upa *.upb *-SAVE-ERROR || true
