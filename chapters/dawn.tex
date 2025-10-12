@@ -1721,21 +1721,7 @@ I'd be very glad to know the right answer.
 
 The program is as follows:
 
-\begin{lstlisting}[language=algol,frame=single]
-begin
-  real procedure A(k, x1, x2, x3, x4, x5);
-  value k; integer k;
-  real x1, x2, x3, x4, x5;
-  begin
-    real procedure B;
-    begin k := k - 1;
-          B := A := A(k, B, x1, x2, x3, x4)
-    end;
-    if k ≤ 0 then A := x4 + x5 else B
-  end;
-  outreal(1, A(10, 1, -1, -1, 1, 0))
-end
-\end{lstlisting}
+\lstinputlisting[language=algol,frame=single]{chapters/dawn/knuth-man-boy-test.a68}
 
 There are some useful applications of call-by-name semantics as well;
 it is not \textit{solely} an avenue for confusion.
