@@ -1,0 +1,8 @@
+real procedure Swap(a, b)
+    real a, b;
+begin
+    integer temp;
+    temp := a;
+    a := b;
+    b := temp;
+end;

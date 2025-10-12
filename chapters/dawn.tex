@@ -1679,14 +1679,22 @@ The following example illustrates the difference:
 
 Most implementations of call-by-name use zero-argument thunks to delay
 the evaluation of arguments until they are used in the body.
-The arguments to function calls become a zero-argument closure function
-returning the value of the argument expression.
+The arguments to function calls become zero-argument closure functions
+returning the value of the argument expression and capable of being
+\textit{l-values}, or values in the left-hand side of an assignment expression.
 Then, each instance of the argument in the callee's body is replaced
 with an invocation of this function such that it is evaluated anew
 each time it appears.
 The prior Python example may be rewritten to emulate call-by-name as follows:
 
 \lstinputlisting[language=python,frame=single]{chapters/dawn/callbyname2.py}
+
+Call-by-value semantics demand that the argument to \texttt{double} be evaluated
+before entering the function, so \texttt{get\_5} is called once and
+\textit{the result} is passed to \texttt{double}.
+With call-by-name semantics, \texttt{get\_5} is passed the expression itself,
+which is the substituted into the body of the callee \textit{before}
+being evaluated.
 
 Donald Knuth proposed the \textit{man or boy} test in the \textit{ALGOL Bulletin}
 to distinguish between
@@ -1727,22 +1735,45 @@ begin
   end;
   outreal(1, A(10, 1, -1, -1, 1, 0))
 end
-
 \end{lstlisting}
 
-Call-by-value semantics demand that the argument to \texttt{double} be evaluated
-before entering the function, so \texttt{get\_5} is called once and
-\textit{the result} is passed to \texttt{double}.
-With call-by-name semantics, \texttt{get\_5} is passed the expression itself,
-which is the substituted into the body of the callee \textit{before}
-being evaluated.
+There are some useful applications of call-by-name semantics as well;
+it is not \textit{solely} an avenue for confusion.
+Jensen's Device, named in honor of Mr. J. Jensen of Regnecentralen, Copenhagen,
+is a well-known application of call-by-name semantics.
+This allows the user of a function to describe an expression to be evaluated
+in a loop body inside the function, permitting a very general summation function.
+There is not an especially elegant way to do this in a call-by-value language,
+but as Dijkstra points out\cite{dijkstra_defense_of_algol_60_1961},
+it can be implemented with this ALGOL program:
 
-Among the peculiar calling conventions, ALGOL also lacked any I/O facilities
-as we have already discussed.
-The language also made string variables available, but provided no means of
-manipulating them.
-ALGOL permitted \textit{own variables}, which are akin to static variables in C
-or SAVE variables in \FTN{}; they retain their values between entrances to the block.
+\lstinputlisting[language=algol,frame=single]{chapters/dawn/jensens-device.a68}
+
+To simply sum the values of the array \texttt{V} from 1 to 100, one would call:
+\texttt{Sum(i, 1, 100, V[i])}.
+The real power of this device is its generality;
+if a user were to need to compute $\sum_{i=1}^{100} V_{i}\times i$,
+they could call \texttt{Sum(i, 1, 100, V[i]*i)}.
+The first and final arguments to this function are not evaluated
+until they are used in the body of the loop in \texttt{Sum}.
+Others have also pointed out numerous easy-to-make mistakes
+that arise because of this feature.
+For example, a naive implementation of a swap function may easily
+cause unintended side effects:
+
+\lstinputlisting[language=algol,frame=single]{chapters/dawn/swap-error.a68}
+
+While calling \texttt{Swap(i, j)} may work correctly, calling
+\texttt{Swap(i+1, j+1)} or \texttt{Swap(A[i], A[j])} would not.
+
+Among the now-unusual argument evaluation semantics, ALGOL also lacked any I/O 
+facilities as we have already discussed.  The language also made string 
+variables available, but provided no means of manipulating them.  ALGOL 
+permitted \textit{own variables}, which are akin to static variables in C or 
+SAVE variables in \FTN{}; they retain their values between entrances to the 
+block.  Dijkstra also points out nowhere is the evaluation order of 
+subexpressions specified\cite{dijkstra_defense_of_algol_60_1961}.
+
 While the declared intent of defining a language detached from any particular
 manufacturer or machine was laudable (and profitable in the case of portable 
 languages to follow), ALGOL was so far removed from the machine to be useless without
@@ -1766,7 +1797,7 @@ and their implementation required significant library
 development to provide their programers with an environment capable of doing
 much of anything useful.
 
-
+The historian 
 
 \pagebreak
 \section{Timeline}
