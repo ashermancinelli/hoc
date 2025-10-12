@@ -1638,7 +1638,8 @@ The 14 issue of the bulletin in 1962 contained a questionnaire from Peter Naur
 about some ambiguities in the 1960 report, and the philosophy of some proposed changes and
 enhancements to the language.
 \footnote{The reader may find it interesting that in this edition of the bulletin,
-Jean Sammet submitted a paper on \textit{A Method of Combining ALGOL and COBOL}\todo{follow up on this?}}
+Jean Sammet submitted a paper on \textit{A Method of Combining ALGOL and COBOL};
+\todo{follow up on this?}}
 This questionnaire was used as a guide for another committee meeting in Rome in April of 1962
 the primary result of this meeting is detailed in Naur's
 \citetitle{naur_revised_report_algol_1962}.
@@ -1686,6 +1687,48 @@ def double(x):
 foo(double(get_5()))
 \end{lstlisting}
 
+Donald Knuth proposed the \textit{man or boy} test in the \textit{ALGOL Bulletin}
+to distinguish between
+conformant ALGOL compilers capable of handling recursion and non-local references
+using call-by-name semantics\cite{Knuth1964ManOrBoy}.
+
+\begin{quotation}
+There are quite a few ALGOL60 translators in existence which have been designed 
+to handle recursion and non-local references properly, and I thought perhaps a 
+little test-program may be of value. Hence I have written the following simple 
+routine, which may separate the man-compilers from the boy-compilers.
+
+This uses nothing known to be tricky or ambiguous. My question is: What should 
+the answer be? Unfortunately, I don't have access to a "man-compiler" myself, 
+asn do I was forced to try hand calculations. My conjecture (probably wrong) is 
+that the answer will be
+
+\[
+73 - 119 - 177 + 102 = -121 .
+\]
+
+I'd be very glad to know the right answer.
+\end{quotation}
+
+The program is as follows:
+
+\begin{lstlisting}[language=algol,frame=single]
+begin
+  real procedure A(k, x1, x2, x3, x4, x5);
+  value k; integer k;
+  real x1, x2, x3, x4, x5;
+  begin
+    real procedure B;
+    begin k := k - 1;
+          B := A := A(k, B, x1, x2, x3, x4)
+    end;
+    if k ≤ 0 then A := x4 + x5 else B
+  end;
+  outreal(1, A(10, 1, -1, -1, 1, 0))
+end
+
+\end{lstlisting}
+
 Call-by-value semantics demand that the argument to \texttt{double} be evaluated
 before entering the function, so \texttt{get\_5} is called once and
 \textit{the result} is passed to \texttt{double}.
@@ -1703,6 +1746,26 @@ While the declared intent of defining a language detached from any particular
 manufacturer or machine was laudable (and profitable in the case of portable 
 languages to follow), ALGOL was so far removed from the machine to be useless without
 supplementary libraries (for I/O, string processing, etc).
+
+\section{ALGOL 6X and 68}
+
+For years after the 1962 Rome meeting, there were discussions amongst the ALGOL
+community about potential changes and improvements to the language.
+The 1960 and 1962 meetings restricted themselves to clarifying ambiguities
+and rectifying true errors in the prior reports, but not extensions or
+significant changes.
+In the spring of 1968, a draft report of such an extension to the language 
+was released with Adriaan van Wijngaarden as the editor.
+The first programming language designed by international committee received
+significant interest and is still used in academia today, however it never
+gained significant traction.
+Outside of small snippets in academic papers, it was only ever in use by
+the Burroughs Corporation\cite{burroughs1963bac220},
+and their implementation required significant library
+development to provide their programers with an environment capable of doing
+much of anything useful.
+
+
 
 \pagebreak
 \section{Timeline}
