@@ -30,7 +30,7 @@ important, because that was the user's interface to the machine.It should come
 as no surprise, then, that the origins of our modern understanding of the term
 \textit{compiler} are similarly murky, especially considering the fact that
 \textit{compiler} already carried meaning in English, and was repurposed for
-computing.John Backus even pointed out how the ambiguity around the term
+computing. John Backus even pointed out how the ambiguity around the term
 \textit{compiler}makes computing history ca 1950s especially difficult to
 untangle:
 \begin{quotation}
@@ -1505,7 +1505,7 @@ at a relatively low cost.13
 \cite{grace_hopper_and_the_invention_of_the_information_age_2009}
 \end{quotation}
 
-\section{The International Algebraic Language}
+\section{The IAL and the ALGOrithmic Language}
 
 Before Hopper, Mayes and Phillips pulled together their committees for a common
 business language, design-by-committee was already in the academic milieu,
@@ -1523,6 +1523,7 @@ Association for Applied Mathematics and Machinery (GAMM) and the ACM met in
 Zurich, Switzerland in the summer of 1958. They had both produced similar
 reports and wanted to meet and agree on a unified language.
 John Backus, Charles Katz, Alan Perlis and Joseph Wegstein from the ACM attended this meeting.
+\todo{who were these people? Add some narrative. Maybe of Naur, then tie in with Backus.}
 They arrived at the following objectives
 \cite{perlis_samelson_1958_preliminary_report_ial}:
 
@@ -1540,7 +1541,8 @@ Manufacturers such as Burroughs found the standard to be insufficient for their 
 the operation of data-processing systems: input-output
 facilities, conventions for inclusion of segments of machine-language coding,
 and diagnostic features" \cite{burroughs1963bac220}.
-This was intentional; the specification of ALGOL was solely for the purposes of
+This was intentional; the specifications of ALGOL (both the 1958 and the 1960 versions)
+was solely for the purposes of
 describing computation; no I/O or system libraries were specified.
 Other dialects included CLIP, JOVIAL, MAD, and NELIAC.
 The first issue of the \textit{ALGOL Bulletin} was issued in March of 1959 out of Copenhagen
@@ -1562,6 +1564,145 @@ the word was used for something else) and the empty parameter positions.
 Because of this major carry-over, specific technical description of ALGOL 58 is 
 not necessary. 
 \end{quotation}
+
+\section{ALGOL 60}
+
+\todo{backstory of Peter Naur}
+
+The International Conference on Information Processing was held in Paris
+in June, 1959, where there were several key developments in ALGOL.
+Firstly, John Backus presented the now-famous paper on Backus-Naur Form
+for formal specification of programming languages\cite{backus_ial_1959}.
+Although other accounts describe this paper as having garnered significant
+attention in the IAL proceedings, Backus would recount that his paper
+"was received with a silence that made it seem that precise syntax
+description was an idea whose time had not yet come.
+As far as I know that paper had only one reader, Peter Naur"
+\cite{Backus_1980_Programming_in_America_in_1950s}.
+Backus was involved in two programming languages at the time, \FTN{} and IAL,
+having already moved on from Speedcoding.
+Backus had been made aware of the logician Emil Post and her work on computability
+in a course given by Martin Davis, in particular, Post's notion of a "production."
+It was this concept that inspired Backus to write the 1959 paper, and Naur
+would go on to extend it. This is part of Backus's specification of arithmetic expressions
+in the paper before Naur's changes\cite{backus_ial_1959}:
+
+\[
+\langle \textit{factor} \rangle :\equiv
+\langle \textit{number} \rangle \;\overline{\text{or}}\;
+\langle \textit{function} \rangle \;\overline{\text{or}}\;
+\langle \textit{variable} \rangle \;\overline{\text{or}}\;
+\dots
+\]
+
+Naur would make the notation more readable by replacing $\overbar{or}$ with $|$
+and $:\equiv$ with $::=$ and by fully spelling out names that backus had abbreviated.
+Naur's edits and extensions would bring interest from more readers than Backus's original paper had.
+This form would come to be known as Backus-Naur Form, or BNF.
+Naur would submit this in a paper to the subsequent ALGOL meeting in 1960,
+titled \citetitle{naur_backus_algol_1960}\cite{naur_backus_algol_1960}.
+Various commitees had established some shortfalls of the original design of the AIL,
+and the 1960 meeting set out to address them with the help of Backus and Naur's
+specification.
+This report "represents the union of the Committee's concepts and the
+intersection of its agreements."
+The IAL had been renamed ALGOL 58 and then finally ALGOL 60 in Naur's report.
+
+The final report specified expressions to have the following syntax:
+
+\[
+\langle \textit{expression} \rangle ::=
+\langle \textit{arithmetic expression} \rangle
+| \langle \textit{Boolean expression} \rangle
+| \langle \textit{designational expression} \rangle
+\]
+
+\section{Adoption of ALGOL}
+
+The \textit{ACM Communications} started publishing an \textit{Algorithms} section;
+ALGOL 58 was initially used, but ALGOL 60 was adopted once the updated report
+was in wide circulation.
+\FTN was not considered acceptable for publication until 1966, and even then
+it did not see widespread use in the journal.
+Because ALGOL had been designed from scratch by committee, there were
+no reference compilers for people to use; the only way to verify the correctness
+of an algorithm described in ALGOL was to rewrite it in another language
+and run test against test cases.
+
+In early 1960, the \textit{ACM ALGOL Maintenance Group} formed: an informal working
+group for the purpose of discussing the implementation of an ALGOL compiler.
+They discussed ambiguities in the specification and potential changes to the ALGOL 60 report.
+They mostly corresponded by mail and reports of their discussions were synthesized in
+the \textit{ALGOL Bulletin}\cite{sammet_programming_languages_history_and_fundamentals_1969}.
+The 14 issue of the bulletin in 1962 contained a questionnaire from Peter Naur
+about some ambiguities in the 1960 report, and the philosophy of some proposed changes and
+enhancements to the language.
+\footnote{The reader may find it interesting that in this edition of the bulletin,
+Jean Sammet submitted a paper on \textit{A Method of Combining ALGOL and COBOL}\todo{follow up on this?}}
+This questionnaire was used as a guide for another committee meeting in Rome in April of 1962
+the primary result of this meeting is detailed in Naur's
+\citetitle{naur_revised_report_algol_1962}.
+
+\section{Peculiarities of ALGOL}
+
+The reader may find it interesting that ALGOL had a number of peculiar features.
+Namely, the distinction between \textit{call by name} and \textit{call by value}.
+Naur's 1962 revised report explains it best, I think\cite[Section 4.7.3]{naur_revised_report_algol_1962}:
+
+\begin{quotation}
+\noindent
+\textbf{4.7.3.1 Value assignment (call by value)}
+
+of the corresponding actual parameters\dots the effect is as though an 
+additional block embracing the procedure body were created in which these 
+assignments were made to variables local to this fictitious block\dots
+
+\noindent
+\textbf{4.7.3.2 Name replacement (call by name)}
+
+Any formal parameter not quoted in the value list is replaced, throughout the 
+procedure body, bu the corresponding actual parameter, after enclosing this 
+latter in parentheses wherever syntactically possible.
+\end{quotation}
+
+While neither Naur's revised report nor Edgar Dijkstra's
+\citetitle{dijkstra_primer_of_algol_programming_1962}
+point out the implications of this distinction, it is important to note
+the subtle implications.
+Call-by-name is not common in modern programming languages, and readers
+may find it more similar to macro expansion.
+The following example illustrates the difference:
+
+\begin{lstlisting}[language=python,frame=single]
+def get_5():
+    print("Hello!")
+    return 5
+
+def double(x):
+    return x + x
+
+# Prints "Hello!" once with call-by-value
+# and twice with call-by-name
+foo(double(get_5()))
+\end{lstlisting}
+
+Call-by-value semantics demand that the argument to \texttt{double} be evaluated
+before entering the function, so \texttt{get\_5} is called once and
+\textit{the result} is passed to \texttt{double}.
+With call-by-name semantics, \texttt{get\_5} is passed the expression itself,
+which is the substituted into the body of the callee \textit{before}
+being evaluated.
+
+Among the peculiar calling conventions, ALGOL also lacked any I/O facilities
+as we have already discussed.
+The language also made string variables available, but provided no means of
+manipulating them.
+ALGOL permitted \textit{own variables}, which are akin to static variables in C
+or SAVE variables in \FTN{}; they retain their values between entrances to the block.
+While the declared intent of defining a language detached from any particular
+manufacturer or machine was laudable (and profitable in the case of portable 
+languages to follow), ALGOL was so far removed from the machine to be useless without
+supplementary libraries (for I/O, string processing, etc).
 
 \pagebreak
 \section{Timeline}
