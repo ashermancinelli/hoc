@@ -1671,21 +1671,22 @@ While neither Naur's revised report nor Edgar Dijkstra's
 point out the implications of this distinction, it is important to note
 the subtle implications.
 Call-by-name is not common in modern programming languages, and readers
-may find it more similar to macro expansion.
+may find it more similar to macro expansion
+(though it is not, in fact, simply textual replacement).
 The following example illustrates the difference:
 
-\begin{lstlisting}[language=python,frame=single]
-def get_5():
-    print("Hello!")
-    return 5
+\lstinputlisting[language=python,frame=single]{chapters/dawn/callbyname1.py}
 
-def double(x):
-    return x + x
+Most implementations of call-by-name use zero-argument thunks to delay
+the evaluation of arguments until they are used in the body.
+The arguments to function calls become a zero-argument closure function
+returning the value of the argument expression.
+Then, each instance of the argument in the callee's body is replaced
+with an invocation of this function such that it is evaluated anew
+each time it appears.
+The prior Python example may be rewritten to emulate call-by-name as follows:
 
-# Prints "Hello!" once with call-by-value
-# and twice with call-by-name
-foo(double(get_5()))
-\end{lstlisting}
+\lstinputlisting[language=python,frame=single]{chapters/dawn/callbyname2.py}
 
 Donald Knuth proposed the \textit{man or boy} test in the \textit{ALGOL Bulletin}
 to distinguish between
