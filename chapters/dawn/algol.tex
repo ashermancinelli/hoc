@@ -258,13 +258,20 @@ manufacturer or machine was laudable (and profitable in the case of portable
 languages to follow), ALGOL was so far removed from the machine to be useless without
 supplementary libraries (for I/O, string processing, etc).
 
-\section{ALGOL R, S, W, X, Y, and W}
+\section{ALGOL 68 (and X, Y, W, \dots)}
 
 For years after the 1962 Rome meeting, there were discussions amongst the ALGOL
 community about potential changes and improvements to the language.
 The 1960 and 1962 meetings restricted themselves to clarifying ambiguities
 and rectifying true errors in the prior reports, but not extensions or
 significant changes.
+In the March of 1964 as follow up to Rome meeting, they finally agreed to
+start on ALGOL X and ALGOL Y, drafts of the language that would consider
+significant changes and additions to the language.
+ALGOL X would be intended to solve the issues of ALGOL 60 in the short-term,
+compared to the "radically reconstructed future ALGOL Y"
+\cite{cleaning_up_algol60_duncan_wijngaarden_1964}.
+
 In the spring of 1968, a draft report of such an extension to the language 
 was released with Adriaan van Wijngaarden as the editor.
 The first programming language designed by international committee received
@@ -288,19 +295,99 @@ satisfy a broad range of users worldwide, the committee produced
 something that satisfied few.
 \end{quotation}
 
-\todo{Honestly the wikipedia is really good for this one.
-March 1964, follow up to Rome meeting. They agreed to start on ALGOL X and ALGOL Y.
-Read \citetitle{a_history_of_algol_68_1993}.}
+Charles Lindsey, British computer scientist and editor of
+\citetitlecite{revised_report_on_the_algorithmic_language_algol_68_1976}
+(and numerous other texts on ALGOL 68) describes popular sentiment about the
+report\cite{a_history_of_algol_68_1993}:
+\begin{quotation}
+The world seems to have a rather negative perception of ALGOL 68. The language has been said to
+be "too big," to be defined by an "unreadable Report" produced by a committee which "broke up in
+disarray," to have no implementations, and to have no users. 
+\end{quotation}
+
+This was not his opinion, however\cite{a_history_of_algol_68_1993}:
+
+\begin{quotation}
+I should point out that my own involvement with the project came after the basic design of the
+language, and of its original Report, were complete\dots
+It is only now, in the course of studying the minutes and other
+documents from that time, that I have come to see what the real fuss was about, and I hope that all
+this has enabled me to take a dispassionate view of the events. The reader of this paper will certainly
+see discord, but I believe he will see also how good design can win through in the end. 
+\end{quotation}
+
+Lindsey was appointed Lecturer in Computer Science at Manchester University
+in 1967. Aside from his standardization efforts, he wrote a research implementations of
+ALGOL 68 for MU5, one of the Manchester computers, and he maintained an
+implementation of a subset of ALGOL 68, \textit{ALGOL 68S}.
+It is difficult to take Lindsey's opinions about ALGOL 68 entirely at face
+value because so much of his career was dedicated to the language.
+If we look at those involved with the design of ALGOL 68 who
+had programming language design and compiler experience elsewhere,
+we find his depiction above to be more accurate than not.
+% We will use Lindsey's portrayal of the language to illustrate the
+% good parts of ALGOL 68 before looking to others' criticisms.
+
+The development of ALGOL 68 was fraught with disagreement and controversy;
+in 1965, Naur and Brian Randall of IBM even suggested that the incremental
+ALGOL X be dropped entirely in favor of the more ambitious ALGOL Y.
+Perhaps the most significant divergence ALGOL 68 took from ALGOL 60
+and all programming language specifications since is its two-level grammar.
+In the October 1965 meeting in St. Pierre de Chartreuse, three draft reports
+were proposed for ALGOL X, one of which was Adriaan van Wijngaarden's
+\citetitlecite{orthogonal_design_and_description_of_a_formal_language_wijngaarden_1965}.
+This report introduced a few interesting concepts that would in large part determine
+the trajectory of ALGOL 68:
+
+\begin{enumerate}
+      \item A two-level grammar now known as a \textit{W Grammar} after Wijngaarden.
+      \item "The combination of a minimal number of language concepts in an orthogonal way"
+            \cite{a_history_of_algol_68_1993}.
+      \item Expression orientation; everything is an expression and has a value.
+\end{enumerate}
+
+The meeting concluded that this report would be the basis for ALGOL 68.
+Wijngaarden was asked to produce a more complete report based on
+\citetitle{orthogonal_design_and_description_of_a_formal_language_wijngaarden_1965}
+and find consensus with the authors of the other two draft reports.
+At nearly every step, the committee ran significantly past their schedules:
+"Throughout the whole project, the WG in general, and Van Wijngaarden in particular, consistently
+underestimated the time it would take by substantial factors. Recall that ALGOL 60 was put together
+in six days"\cite{a_history_of_algol_68_1993}.
+
+Another meeting in May 1967 in Zandvoort, Netherlands was intended to develop a direction for ALGOL Y,
+however nearly all the discussion was about ALGOL X.
+From the outset, the only language aspect the designers knew they wanted from ALGOL Y
+was the ability for an ALGOL Y program to modify itself.
+Lindsey remarks:
+
+\begin{quotation}
+They even spent an afternoon on ALGOL Y, from which it emerged that no one had 
+very concrete ideas of what it was about, and that the only role model was 
+LISP, on account of the fact that that language could construct its own 
+programs and then eval them. 
+\end{quotation}
+
+\todo{look at peck's \citetitlecite{the_algol_68_story_peck_1978}}
+
+His work on ALGOL 68S was not an outlier amongst would-be implementers of the
+language; because the report was so large and complex, most
+implementers ended up restricting themselves to a subset of the language.
+
+
 \todo{Defined in Wijngaarden Grammar by Adriaan van Wijngaarden.
 Contains parsing and things which in other langauges are called semantics.}
 
 \todo{'68 critcized by Hoare and Dijkstra for abandoning simplicity of '60.
-In 1970, ALGOL 68-R became the first working compiler for ALGOL 68.
-ALGOL 68 also had a notable influence in the Soviet Union, details of which can be found in Andrey Terekhov's 2014 paper: "ALGOL 68 and Its Impact on the USSR and Russian Programming."}
+In 1970, ALGOL 68-R became the first working compiler for ALGOL 68.}
 
 \section{ALGOL 68 and ALGOL's Legacy}
 
+\todo{ALGOL 68 also had a notable influence in the Soviet Union, details of which can be found in Andrey Terekhov's 2014 paper: "ALGOL 68 and Its Impact on the USSR and Russian Programming."}
+
 \todo{Pascal, Ada}
+\todo{Lindsey: "So here are my recommendations to people who essay to design programming languages."
+\citetitlecite{a_history_of_algol_68_1993}}
 
 \begin{quotation}
 An interesting observation is the fact that the two-level formalism used
