@@ -408,6 +408,13 @@ meetings, the final report \citetitle{report_on_the_algorithmic_language_algol_6
 was published in \textit{Numerische Mathematik} and \textit{Kybernetika}
 in 1969, thus specifying what we know today to be ALGOL 68.
 
+\section{The W-Grammar}
+
+Before analyzing the technical details of ALGOL 68, we must first understand
+what made it so offensive and uninterpretable to so many people.
+The most obvious culprits were the size of the new language, and its grammar.
+\todo{w grammar}.
+
 \section{Concepts of ALGOL 68}
 
 Setting aside the political machinery that resulted in the final report,
@@ -443,6 +450,9 @@ Call-by-name as it was known in ALGOL 60 was removed in favor of
 call-by-value and call-by-reference; some of the other proposals
 (such as Seegm{\"u}ller's) preserved the two cases of call-by-name
 under different terms, but this was not adopted.
+One may argue that \textit{proceduring} is a form of call-by-name,
+but this feature was removed in the revised report of 1973.
+
 Call-by-name is really two different concepts:
 call-by-reference (where the actual parameter is a named variable to
 be assigned to) \textit{or} call-by-full-name (where the actual parameter
@@ -474,12 +484,49 @@ Although coercions had existed in previous programming languages, it was ALGOL
 Many of these coercion rules were uncontroversial; for example, a \textbfit{real}
 may be assigned to a \textbfit{union(real, int)}.
 \todo{Discuss \textit{rowing}? relates to rank polymorphism a bit...}
+One particularly problematic coercion rule was \textit{proceduring}.
+This allowed users to force call-by-name semantics by coercing an expression
+into a parameterless procedure, like so:
 
-\section{ALGOL 68-R}
+\begin{lstlisting}[language=algol,frame=single]
+      PROC x plus 1 = INT : x + 1;
+\end{lstlisting}
 
+The right hand side of this expression is a \textit{cast}
+(a term originally coined for the specification of ALGOL)
+of an integer expression into a procedure taking no arguments.
+In \citetitle{algol68_with_fewer_tears_1968}\footnote{This paper was, in fact,
+a valid ALGOL 68 program in and of itself}, Lindsey argues that references
+obviate the need for call-by-name semantics, but that call-by-substitution is what
+ALGOL 60's call-by-name effectively was, and this was still possible with ALGOL 68
+via this \textit{proceduring} coercion:
 
+\begin{lstlisting}[language=algol,frame=single]
+begin
+proc series = (int k, ref int i, proc real term) real expr
+    begin
+    real sum(0);
+    for j to k do
+        begin i := j;
+              sum plus term
+        end;
+    sum
+    end
 
-\section{The W-Grammar}
+x := series (100, i, real expr(1/i)); 
+
+# Or, via proceduring: #
+x := series (100, i, 1/i); 
+\end{lstlisting}
+
+This facility was abandoned in the ALGOL 68-R implementation which
+led to its removal in the revised report of 1973,
+as we will see in the next section.
+
+\section{ALGOL 68-R and the Revised Report}
+
+In 1973, the \citetitle{revised_report_on_the_algorithmic_language_algol_68_1976} was published,
+codifying some of the changes and rejected features from the ALGOL 68-R team.
 
 \todo{W Grammar complexity}
 \todo{look at peck's \citetitlecite{the_algol_68_story_peck_1978}}
