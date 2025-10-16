@@ -271,18 +271,55 @@ significant changes and additions to the language.
 ALGOL X would be intended to solve the issues of ALGOL 60 in the short-term,
 compared to the "radically reconstructed future ALGOL Y"
 \cite{cleaning_up_algol60_duncan_wijngaarden_1964}.
+To summarize the following section: three draft reports were proposed,
+Adriaan Van Wijngaarden was asked to revise his draft report until the other
+two authors were satisfied,
+the draft report that all three were satisfied with became canonized as ALGOL 68,
+many people withdrew from the language community (formally or informally)
+in reaction to the new language,
+and the language was never widely adopted.
 
-In the spring of 1968, a draft report of such an extension to the language 
-was released with Adriaan van Wijngaarden as the editor.
-The first programming language designed by international committee received
-significant interest and is still used in academia today, however it never
-gained significant traction.
-Outside of small snippets in academic papers, it was only ever in use by
-the Burroughs Corporation\cite{burroughs1963bac220},
-and their implementation required significant library
-development to provide their programers with an environment capable of doing
-much of anything useful.
+\input{chapters/dawn/algol-68-timeline.tex}
 
+In 1965, the first three drafts for ALGOL X were proposed by
+Niklaus Wirth (who benefitted from numerous comments from Tony Hoare),
+Gerhard Seegmüller, and Adriaan van Wijngaarden.
+Seegmüller's proposal was not too different from Wirth and Hoare's, which
+was called ALGOL W, but
+Wijngaarden's proposal was dramatically different.
+Wijngaarden described his ALGOL X language in an entirely new
+formal grammar which came to be known as a \textit{W-Grammar} (after his own namesake).
+
+The impact of Wijngaarden's proposal on the development of ALGOL cannot be overstated.
+In the spring of 1968, Adriaan van Wijngaarden released a draft report for ALGOL X
+(which was, mind you, supposed to be the \textit{incremental} improvement to ALGOL 60) 
+based on Wirth and Hoare's ALGOL W but using his own W-Grammar.
+% The discussions and meetings over ALGOL X overran such that the subsequent
+% meeting on ALGOL Y was overtaken by discussion of ALGOL X.
+In this time period, Peter Naur and Brian Randall of IBM even suggested that the incremental
+ALGOL X be dropped entirely in favor of the more ambitious ALGOL Y.
+At nearly every step, the committee ran significantly past their schedules:
+"Throughout the whole project, the WG in general, and Van Wijngaarden in particular, consistently
+underestimated the time it would take by substantial factors. Recall that ALGOL 60 was put together
+in six days"\cite{a_history_of_algol_68_1993}.
+
+Wijngaarden's ALGOL W proposal was distinct for at least three reasons:
+
+\begin{enumerate}
+      \item A two-level \textit{W Grammar}.
+      \item "The combination of a minimal number of language concepts in an orthogonal way"
+            \cite{a_history_of_algol_68_1993}.
+      \item Expression orientation; everything is an expression and has a value.
+\end{enumerate}
+
+% The first programming language designed by international committee receive
+% significant interest and is still used in academia today, however it never
+% gained significant traction.
+% Outside of small snippets in academic papers, it was only ever in use by
+% the Burroughs Corporation\cite{burroughs1963bac220},
+% and their implementation required significant library
+% development to provide their programers with an environment capable of doing
+% much of anything useful.
 The computer and aerospace historian Paul Ceruzzi describes the result of
 the ALGOL 68 report as follows:
 
@@ -318,42 +355,13 @@ see discord, but I believe he will see also how good design can win through in t
 
 Lindsey was appointed Lecturer in Computer Science at Manchester University
 in 1967. Aside from his standardization efforts, he wrote a research implementations of
-ALGOL 68 for MU5, one of the Manchester computers, and he maintained an
+ALGOL 68 for the MU5, one of the Manchester computers, and he maintained an
 implementation of a subset of ALGOL 68, \textit{ALGOL 68S}.
 It is difficult to take Lindsey's opinions about ALGOL 68 entirely at face
 value because so much of his career was dedicated to the language.
 If we look at those involved with the design of ALGOL 68 who
 had programming language design and compiler experience elsewhere,
 we find his depiction above to be more accurate than not.
-% We will use Lindsey's portrayal of the language to illustrate the
-% good parts of ALGOL 68 before looking to others' criticisms.
-
-The development of ALGOL 68 was fraught with disagreement and controversy;
-in 1965, Naur and Brian Randall of IBM even suggested that the incremental
-ALGOL X be dropped entirely in favor of the more ambitious ALGOL Y.
-Perhaps the most significant divergence ALGOL 68 took from ALGOL 60
-and all programming language specifications since is its two-level grammar.
-In the October 1965 meeting in St. Pierre de Chartreuse, three draft reports
-were proposed for ALGOL X, one of which was Adriaan van Wijngaarden's
-\citetitlecite{orthogonal_design_and_description_of_a_formal_language_wijngaarden_1965}.
-This report introduced a few interesting concepts that would in large part determine
-the trajectory of ALGOL 68:
-
-\begin{enumerate}
-      \item A two-level grammar now known as a \textit{W Grammar} after Wijngaarden.
-      \item "The combination of a minimal number of language concepts in an orthogonal way"
-            \cite{a_history_of_algol_68_1993}.
-      \item Expression orientation; everything is an expression and has a value.
-\end{enumerate}
-
-The meeting concluded that this report would be the basis for ALGOL 68.
-Wijngaarden was asked to produce a more complete report based on
-\citetitle{orthogonal_design_and_description_of_a_formal_language_wijngaarden_1965}
-and find consensus with the authors of the other two draft reports.
-At nearly every step, the committee ran significantly past their schedules:
-"Throughout the whole project, the WG in general, and Van Wijngaarden in particular, consistently
-underestimated the time it would take by substantial factors. Recall that ALGOL 60 was put together
-in six days"\cite{a_history_of_algol_68_1993}.
 
 Another meeting in May 1967 in Zandvoort, Netherlands was intended to develop a direction for ALGOL Y,
 however nearly all the discussion was about ALGOL X.
@@ -368,8 +376,8 @@ LISP, on account of the fact that that language could construct its own
 programs and then \textit{eval} them. 
 \end{quotation}
 
-The largest single outpouring of criticism of ALGOL 68 came from a report
-\citetitlecite{mr93_draft_report_on_algol_68_1968}, also known as MR93.
+The largest single outpouring of criticism of ALGOL 68 came from
+\citetitlecite{mr93_draft_report_on_algol_68_1968}, also known as [MR93].
 Several members of the committee (including Peter Naur) resigned
 after this report's circulation.
 It was first circulated to the \textit{ALGOL Bulletin} in February 1968,
@@ -431,9 +439,9 @@ array := (1, 2, 3);       # now it has bounds [1:3] #
 array := (4, 5, 6, 7, 8); # now it has bounds [1:5] #
 \end{lstlisting}
 
-Call-by-name as people knew it in ALGOL 60 was removed in favor of
+Call-by-name as it was known in ALGOL 60 was removed in favor of
 call-by-value and call-by-reference; some of the other proposals
-(such as Seegm{\"u}ller's) proposed preserving the two cases of call-by-name
+(such as Seegm{\"u}ller's) preserved the two cases of call-by-name
 under different terms, but this was not adopted.
 Call-by-name is really two different concepts:
 call-by-reference (where the actual parameter is a named variable to
@@ -467,6 +475,12 @@ Many of these coercion rules were uncontroversial; for example, a \textbfit{real
 may be assigned to a \textbfit{union(real, int)}.
 \todo{Discuss \textit{rowing}? relates to rank polymorphism a bit...}
 
+\section{ALGOL 68-R}
+
+
+
+\section{The W-Grammar}
+
 \todo{W Grammar complexity}
 \todo{look at peck's \citetitlecite{the_algol_68_story_peck_1978}}
 
@@ -476,6 +490,12 @@ implementers ended up restricting themselves to a subset of the language.
 
 \section{Criticism of ALGOL 68}
 
+Numerous committee members and readers of the \textit{ALGOL Bulletin} criticized
+the original report for its complexity; Lindsey (our faithful defender of the
+language) conceded that "much of the mud slung at [the original report] is
+probably still sticking"\cite{a_history_of_algol_68_1993}.
+Much of that complexity came from the 
+
 \todo{Defined in Wijngaarden Grammar by Adriaan van Wijngaarden.
 Contains parsing and things which in other langauges are called semantics.}
 
@@ -483,6 +503,16 @@ Contains parsing and things which in other langauges are called semantics.}
 In 1970, ALGOL 68-R became the first working compiler for ALGOL 68.}
 
 \section{Legacy of ALGOL 68}
+
+\begin{quotation}
+The type system of ALGOL 68 has been adopted, more or less faithfully, in many subsequent
+languages. In particular, the structs, the unions, the pointer types, and the parameter passing of C
+were influenced by ALGOL 68 [Ritchie 1993], although the syntactic sugar is bizarre and C is not so
+strongly typed. Another language with a related type system is SML [Milner 1990], particularly with
+regard to its use of ref types as its means of realizing variables, and C++ has also benefitted from the
+reftypes [Stroustrup 1996].
+\citetitle{a_history_of_algol_68_1993}
+\end{quotation}
 
 \todo{ALGOL 68 also had a notable influence in the Soviet Union, details of which can be found in Andrey Terekhov's 2014 paper: "ALGOL 68 and Its Impact on the USSR and Russian Programming."}
 
