@@ -411,9 +411,51 @@ in 1969, thus specifying what we know today to be ALGOL 68.
 \section{The W-Grammar}
 
 Before analyzing the technical details of ALGOL 68, we must first understand
-what made it so offensive and uninterpretable to so many people.
-The most obvious culprits were the size of the new language, and its grammar.
-\todo{w grammar}.
+what made it so offensive and uninterpretable to so many people: its grammar.
+
+The primary reason for this grammar's complexity is that it encompasses
+far more than compiler engineers typically associate with a grammar.
+It is not merely a specification of the syntax of the language;
+it also specifies a great deal of the \textit{semantics} of the language.
+When Wijngaarden first proposed his grammar, nobody had seen anything like it.
+
+Lindsey argues that the grammar is relatively close to Prolog, where
+goals and subgoals are specified and solved for by unification
+\footnote{The term \textit{unification} may be loaded; Milner did not publish
+his work on SML and type inference until later, though his work was inspired by
+ALGOL 68 to some degree.}.
+
+Lindsey uses the following Prolog example to introduce a rule in ALGOL 68's W-grammar,
+which asks whether the input program contains an assignation, and to determine this,
+we must test if we have a destination, followed by some language construct that
+becomes a symbol, followed by a source.
+
+\begin{lstlisting}[language=prolog,frame=single]
+assignation(ref(MODE)) :-
+      destination(ref(MODE)), becomes_symbol, source(MODE). 
+\end{lstlisting}
+
+The corresponding rule in the [MR93] draft report is as follows
+\cite{draft_report_algol_1968}:
+\begin{lstlisting}[frame=single]
+MODE assignation :
+    reference to MODE destination, becomes symbol, MODE source.
+\end{lstlisting}
+
+Substituting \textbfit{int} for our \textbfit{MODE}, we have:
+\begin{lstlisting}[frame=single]
+int assignation : reference to int destination, becomes symbol, int source.
+\end{lstlisting}
+
+If you squint your eyes, maybe you can see how \textit{i := 5} fits the mold for this
+grammar, where the \textbfit{MODE} is \textbfit{int}, the \textbfit{destination} is
+the location of \textbfit{i} of mode \textbfit{ref int}, and the source is
+the integer literal \textbfit{5} of \textbfit{MODE int}.
+This may feel familiar, like a looser version of the Backus-Naur
+syntax used by compiler-compilers.
+The problem is, nearly anything else is also expressible in this grammar,
+making it nearly impossible to write a parser based on an unrestricted W-grammar.
+\todo{Let us look at more difficult examples.}
 
 \section{Concepts of ALGOL 68}
 
