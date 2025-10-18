@@ -414,13 +414,31 @@ Before analyzing the technical details of ALGOL 68, we must first understand
 what made it so offensive and uninterpretable to so many people: its grammar.
 
 The primary reason for this grammar's complexity is that it encompasses
-far more than compiler engineers typically associate with a grammar.
+far more than compiler engineers typically associate with a grammar
+in order to be \textit{formally context-sensitive}.
 It is not merely a specification of the syntax of the language;
-it also specifies a great deal of the \textit{semantics} of the language.
+it also specifies a great deal of the \textit{semantics} of the language,
+because that is required for the language to be context-sensitive.
+When the grammar is described as \textit{two-level}, it communicates that the
+grammar consists of two levels: the meta-grammar and the concrete grammar, and the
+meta-grammar produces the concrete grammar.
+Readers of [MR93] would need to keep track of both levels in order to understand
+the document; meta-rules would need to be kept conceptually distinct in the reader's mind.
+The \textit{format} of the grammar was also problematic and difficult to read,
+but that may not have been so problematic had they not fit so many semantic concepts into the grammar.
+
 When Wijngaarden first proposed his grammar, nobody had seen anything like it.
+The authors attempted to formalize object lifetimes, variable scoping rules,
+and relatively complicated type systems (even by today's standards), all without
+the benefit of decades of research into type theory and formal semantics which
+we have today.
+Let the reader give the authors the benefit of the doubt; keep in mind they
+attempted to formalize concepts for the first time, and subsequent research benefitted
+greatly from their ideas (and mistakes).
+The language specification was, effectively, a compiler front-end specification.
 
 Lindsey argues that the grammar is relatively close to Prolog, where
-goals and subgoals are specified and solved for by unification
+goals and sub-goals are specified and solved for by unification
 \footnote{The term \textit{unification} may be loaded; Milner did not publish
 his work on SML and type inference until later, though his work was inspired by
 ALGOL 68 to some degree.}.
@@ -455,13 +473,75 @@ This may feel familiar, like a looser version of the Backus-Naur
 syntax used by compiler-compilers.
 The problem is, nearly anything else is also expressible in this grammar,
 making it nearly impossible to write a parser based on an unrestricted W-grammar.
-\todo{Let us look at more difficult examples.}
+
+A more nebulous component of the original grammar from [MR93] can be found in
+\textit{Section 4.4 Context Conditions},
+which specified conditions for a program to be \textit{semantically valid}
+based on the surrounding context.
+Modern readers may find this strange; we are discussing the language \textit{syntax},
+why is the report discussing the semantic validity of, for example,
+the use of a particular identifier and its relationship to its declaration?
+As we have already established, this is an example of language \textit{semantics}
+being specified in the grammar.
+
+Most modern compilers are broken into three parts: the front-end, middle-end
+\footnote{Only compiler engineers could produce a term as idiosyncratic as \textit{"middle" "end"}.},
+and back-end.
+The front-end typically consumes the input program,
+produces data structures representing the program,
+and performs \textit{semantic} analysis on those data structures to ensure the program is valid.
+The consumption of the input program is usually determined by the grammar specified by the language,
+and semantic validity is determined by the language's type system and other rules,
+but not typically by the grammar.
+Because Wijngaarden attempted to specify all of this in the grammar itself,
+the grammar needed to specify these semantic conditions as well.
+
+See this excerpt on \textbfit{NEST}s from
+\cite[Section 3.0.2, Semantics]{revised_report_on_the_algorithmic_language_algol_68_1976}:
+\begin{quotation}
+A "nest" is a 'NEST'. The nest "of" a construct is the "NEST" enveloped
+by the original of that construct, but not by any 'defining LAYER'
+contained in that original.
+
+{The nest of a construct carries a record of all the declarations forming
+the environment in which that construct is to be interpreted.
+
+Those constructs which are contained in a range R, but not in any
+smaller range contained within R, may be said to comprise a "reach". All
+constructs in a given reach have the same nest, which is that of the
+immediately surrounding reach with the addition of one extra "LAYER".
+The syntax ensures (3.2.1.b, 3.4.1.i,j,k, 3.5.1.e, 5.4.1.1.b) that each 'PROP'
+(4.8.1.E) or "property" in the extra 'LAYER' is matched by a defining.
+indicator (4.8.1.a) contained in a definition in that reach.}
+\end{quotation}
+
+Today, \textbfit{NEST}s might exist concretely as data structures inside the semantic analysis
+phase of a compiler, but in ALGOL 68, they were specified as part of the grammar itself.
+
+ALGOL 68's type system was also remarkably complex and, again, fully embedded in the grammar.
+Union modes are full commutative and accumalative types, meaning that
+the following types are equivalent:
+\textbfit{union(int, real, bool)},
+\textbfit{union(real, int, bool)}, and
+\textbfit{union(bool, union(real, int))}.
+
+Lindsey pointed out a particularly tricky aspect of the type system in structural equivalence.
+Structure types are equivalent if their members are equivalent, as opposed to name equivalence,
+which would have implied two structures with the same members but different names
+are not equivalent.
+The following two types are equivalent by structural comparison:
+\begin{lstlisting}[language=algol,frame=single]
+mode a = struct (int val, ref a next);
+mode b = struct (int val, ref struct (int val, ref b next) next);
+\end{lstlisting}
+
+
 
 \section{Concepts of ALGOL 68}
 
-Setting aside the political machinery that resulted in the final report,
-we will now look to the technical details of the language, its specification,
-and therefore its compilers.
+Having covered the political machinery that resulted in the final report and
+the grammar that caused the community so much grief,
+we will now look to more technical details of the language.
 
 Firstly, ALGOL 68 is an expression-oriented language;
 there is fundamentally no distinction between statements and expressions,
@@ -564,13 +644,42 @@ x := series (100, i, 1/i);
 This facility was abandoned in the ALGOL 68-R implementation which
 led to its removal in the revised report of 1973,
 as we will see in the next section.
+There were still other mechanisms to achieve similar results,
+as tricks like Jensen's Device had become important to the community.
+One such example is the extensions to procedures.
+
+Naur and Wirth both proposed block-expressions, meaning the final value in a block
+is the value of the entire block in the context of an expression, and Naur's
+1966 proposal (which was accepted) merged the formal parameters into the same line as
+the parameters themselves, meaning one need not restate the types of parameters
+at the beginning of the procedure body.
+These two features allowed for convenient use of anonymous procedures capturing
+parts of their surrounding context and procedures taking other procedures,
+relatively advanced features even for today.
+The revised report contains this example
+\cite[Section 11.2, Innerproduct 1]{revised_report_on_the_algorithmic_language_algol_68_1976}:
+
+\begin{lstlisting}[language=algol,frame=single]
+proc innerproduct 1 = (int n, proc (int) real x, y) real:
+      # the innerproduct of two vectors, each with 'n' 
+      comppnents, x (i), y (i), i = 1, ... , n, where 'x' and 'y' 
+      are arbitrary mappings from integer to real number #
+      begin long real s := long 0;
+            for i to n do s +:= leng x (i) \times leng y 
+(i) od;
+            shorten s
+      end
+
+# Real-calls using innerproduct 1: #
+      innerproduct 1 (m, (int j) real: x1[j], (int j) real: y1[i])
+      innerproduct 1 (n, nsin, ncos) 
+\end{lstlisting}
 
 \section{ALGOL 68-R and the Revised Report}
 
 In 1973, the \citetitle{revised_report_on_the_algorithmic_language_algol_68_1976} was published,
 codifying some of the changes and rejected features from the ALGOL 68-R team.
 
-\todo{W Grammar complexity}
 \todo{look at peck's \citetitlecite{the_algol_68_story_peck_1978}}
 
 His work on ALGOL 68S was not an outlier amongst would-be implementers of the
