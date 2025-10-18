@@ -69,7 +69,7 @@ operating system of his own\cite{kernighan_interviews_thompson_2019}:
 
 \begin{quotation}
 At some point, I realized with out knowing it up until that point, that I was 
-three weeks from operating system, with three programs, one a week I needed an 
+three weeks from operating system, with three programs, one a week. I needed an 
 editor to write code, I needed an assembler to turn the code into language I 
 could run, and I needed a kernel overlay, call it an operating system.  
 Luckily, right at that moment, my wife went on a three-week vacation to take my 
@@ -93,6 +93,84 @@ goal of helping the patent office.
 The patent office loved their software, and they ended up buying the computing group
 a PDP-11 sometime in the early 1970s.
 Unix came up on the PDP-11 almost immediately.
+Thus we have the basis for discussing the subsequent development of compilers
+and programming languages at Bell Labs.
+
+\section{Personal Histories}
+
+The following sections will feature many of the same figures;
+here we will introduce them so their interleaving stories may be told
+uninterrupted in the following sections.
+
+\todo{Oral history of at least Ken Thompson, Dennis Ritchie, Brian Kernighan, Doug McIlroy.}
+
+\subsection{Ken Thompson}
+\subsection{Dennis Ritchie}
+\subsection{Doug McIlroy}
+\subsection{Donald Knuth}
+\subsection{Brian Kernighan}
+\subsection{Alfred Aho}
+\subsection{Jeffrey Ullman}
+
+\section{The First Unix Compilers}
+
+It would not be inaccurate to describe this era of compiler history
+as as cambrian explosion of programming languages and compiler tools, and
+there were several reasons for that.
+\todo{compiler-compilers, add intro.}
+\todo{Ken Thompson, QED editor, first use of regex.}
+
+We must also discuss Doug McIlroy if we are to discuss the early compilers;
+he is described by nearly everyone at Bell Labs (who writes books or gives talks)
+as the most brilliant member of that team that no one has heard of
+\cite{kernighan_interviews_thompson_2019}, describing him as
+"the smartest one of all of us and the least remembered or written down of all of us."
+While Doug was the department head of the Computing Sciences Research Center,
+he would regularly stop into the offices of his employees and drop ideas and requests
+to them. In one case, he mentioned to Ken how convenient it would be to have
+a tool for searching text files for patterns.
+Ken already had a rough version of such a tool in his home directory,
+so the next day he showed Doug his program and thus was born \texttt{grep};
+many such tools came to be like this.
+
+On another similar occasion, Doug walked into Ken's office to discuss the TMG language
+(standing for TransMoGrifier),
+designed by Robert McClure\cite{mcclure_tmg_compiler_compiler_1965}, one of his friends at the lab.
+McClure had gotten defensive about this language, and when he left the lab,
+he claimed it was proprietary and nobody else could use it.
+TMG was a recursive-descent compiler-compiler similar to Yacc, a tool to help write compiler
+front-ends. See this example from Doug's TMG manual\cite{tmg_manual_mcilroy_1972}:
+
+\begin{quotation}
+This simple program defines the translation of fully parenthesized infix 
+expressions to Polish postfix for a stack machine.
+\begin{lstlisting}[frame=single]
+    expr: <(>/exp1 expr operator expr <)> = { 3 1 2 };
+    exp1: ident = { < LOAD > 1 };
+    operator:
+    op0: <+>/op1 = { < ADD > };
+    op1: <->/op2 = { < SUB > };
+    op2: <*>/op3 = { < MPY > };
+    op3: </>     = { < DIV > };
+\end{lstlisting}
+\end{quotation}
+
+Ken recounts\cite{kernighan_interviews_thompson_2019}
+the story of how Doug brought a full TMG compiler \textit{written in TMG,
+on paper} to Ken's office. He then decided to feed the TMG program into his TMG compiler
+\textit{by hand} to produce an assembly listing of the TMG program.
+He then went over to Ken's keyboard and typed in the program that his TMG-TMG compiler
+had produced, and with astonishingly few errors, they had a working TMG compiler on the PDP-7.
+
+Ken's logical next step was to use this new TMG compiler to
+write a \FTN compiler for the PDP-7 because
+"no computer was complete without \FTN."
+Now, the PDP-7 was only 8k of 18-bit words of memory and Ken's Unix system needed
+about half of that just to run, leaving only 4k for user programs.
+Once completed, the new \FTN compiler took far more memory than was available for
+user programs, so he had to cut down the TMG program to get a program small enough to
+fit on the machine but capable enough to facilitate a usable programming language.
+Once he finally cut down his compiler to 4k, he called that programming language \textit{B}.
 
 % \section{}
 
