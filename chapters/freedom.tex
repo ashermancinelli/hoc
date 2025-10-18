@@ -1,59 +1,68 @@
 \chapter{Freedom, 1980-2000}
+
 \todo{gnu linux c llvm python; Facebook php->c++ 
 compiler;}
+
 \todo{lattner tried to get llvm in the gnu project; new licensing, 
 permissive licensing.}
+
 \begin{quotation}
 The discussion of the GNU/Linux 
-operating system and the "open source" softwaremovement, discussed last, 
-likewise has deep roots. Chapter 3 discussed thefounding of SHARE, as well as 
-the controversy over who was allowed to use andmodify the TRAC programming 
-language. GNU/Linux is a variant of UNIX, a systemdeveloped in the late 1960s 
-and discussed at length in several earlier chaptersof this book. UNIX was an 
-open system almost from the start, although not quiteinthe ways that "open" is 
-defined now. As with the antitrust trial againstMicrosoft, the open source 
-software movement has a strong tie to the beginningsof the personal computer's 
-invention. Early actions by Microsoft and itsfounders played an important role 
+operating system and the "open source" software movement, discussed last, 
+likewise has deep roots. Chapter 3 discussed the founding of SHARE, as well as 
+the controversy over who was allowed to use and modify the TRAC programming 
+language. GNU/Linux is a variant of UNIX, a system developed in the late 1960s 
+and discussed at length in several earlier chapters of this book. UNIX was an 
+open system almost from the start, although not quite in the ways that "open" is 
+defined now. As with the antitrust trial against Microsoft, the open source 
+software movement has a strong tie to the beginnings of the personal computer's 
+invention. Early actions by Microsoft and its founders played an important role 
 here as well. We begin with the 
-antitrusttrial.\cite{history_of_modern_computing_2003_ceruzzi}
+antitrust trial.\cite{history_of_modern_computing_2003_ceruzzi}
 \end{quotation}
+
 \section{GNU}
+
 \section{Adoption of Linux}
+
 \section{Low-Level Virtual Machine}
-Key 
-innovation is that LLVM is a collection of compiler \textit{libraries} that 
-havethin programs wrapping them.Other open-source compilers like GCC tend to be 
-monolithic programs, which canbe harder to compose.LLVM contains a collection 
-of sub-projects that can be used independently as tools\textit{or libraries}; 
-key examples being the LLVM subproject of LLVM itself(which contains LLVM IR, 
+
+Key innovation is that LLVM is a collection of compiler \textit{libraries} that 
+have thin programs wrapping them.Other open-source compilers like GCC tend to be 
+monolithic programs, which can be harder to compose.LLVM contains a collection 
+of sub-projects that can be used independently as tools \textit{or libraries}; 
+key examples being the LLVM sub project of LLVM itself (which contains LLVM \GLS{ir}, 
 the intermediate representation, the optimizer, interpreter and code 
-generator)and Clang, a C/C++/Objective-C compiler front-end for LLVM.Any other 
+generator) and Clang, a C/C++/Objective-C compiler front-end for LLVM.Any other 
 compiler project could emit LLVM IR and fully leverage the LLVM project after 
 the front-end.LLVM's intermediate representation has become the lingua-franca 
 of the compiler world.
+
 \begin{quotation}
 From its beginning in December 2000, 
-LLVM was designed as a set of reusablelibraries with well-defined interfaces 
-[LA04]. At the time, open sourceprogramming language implementations were 
-designed as special-purpose toolswhich usually had monolithic executables. For 
-example, it was very difficult toreuse the parser from a static compiler (e.g., 
-GCC) for doing static analysisor refactoring. While scripting languages often 
-provided a way to embed theirruntime and interpreter into larger applications, 
-this runtime was a singlemonolithic lump of code that was included or excluded. 
-There was no way toreuse pieces, and very little sharing across language 
+LLVM was designed as a set of reusable libraries with well-defined interfaces 
+[LA04]. At the time, open source programming language implementations were 
+designed as special-purpose tools which usually had monolithic executables. For 
+example, it was very difficult to reuse the parser from a static compiler (e.g., 
+GCC) for doing static analysis or refactoring. While scripting languages often 
+provided a way to embed the ir, runtime, and interpreter into larger applications, 
+this runtime was a single monolithic lump of code that was included or excluded. 
+There was no way to reuse pieces, and very little sharing across language 
 implementation projects.\cite{aosa_vol1}
 \end{quotation}
+
 \begin{quotation}
-The 
-name "LLVM" was once an acronym, but is now just a brand for the 
-umbrellaproject. While LLVM provides some unique capabilities, and is known for 
-some ofits great tools (e.g., the Clang compiler2, a C/C++/Objective-C compiler 
-whichprovides a number of benefits over the GCC compiler), the main thing that 
+The name "LLVM" was once an acronym, but is now just a brand for the 
+umbrella project. While LLVM provides some unique capabilities, and is known for 
+some of its great tools (e.g., the Clang compiler2, a C/C++/Objective-C compiler 
+which provides a number of benefits over the GCC compiler), the main thing that 
 setsLLVM apart from other compilers is its internal 
 architecture.\cite[LLVM]{aosa_vol1}
 \end{quotation}
+
 Lattner published his thesis 
 on LLVM in 2002, and joined Apple in 
 2005.
+
 \pagebreak\section{Timeline}
 \input{chapters/freedom-timeline.tex}
