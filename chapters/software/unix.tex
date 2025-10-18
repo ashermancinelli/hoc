@@ -223,10 +223,6 @@ the programmer had to manually associate the name with an offset into this buffe
 similar to the \texttt{COMMON} block in \ftn{} programs.
 In more mature B compilers and later in C, the linker handles this automatically.
 
-Neither language has types; only the addressable size of data for the particular machine.
-Since pointers were just integers representing offsets into memory, pointer arithmetic
-was natural in both languages.
-
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{resource/software/unix/bell-threaded-code-figures.png}
@@ -237,9 +233,18 @@ was natural in both languages.
 The B compiler did not emit machine code directly, but instead used
 \textit{threaded code}\cite{bell_threaded_code_1973}, an early form of \gls{bytecode},
 which was then interpreted.
-\citeauthor{bell_threaded_code_1973} claims that this threaded code needed no interpreter,
-but really, it is just a specification for an interpreter with interpretive control-flow.
+James Bell claimed that this threaded code needed no interpreter,
+but really, the execution model for threaded code is just a specification
+for an interpreter without outside the routines responsible for executing a given
+bytecode instruction.
+Today this would be considered a bytecode interpreter, but in the day when interpreters
+were only known to interpret the source language directly, his ideas may have seemed
+distinct from other forms of interpretation.
 See Bell's depiction of the execution of threaded code \ref{fig:bell-threaded-code}.
+
+Neither B nor BCPL had types; only the addressable size of data for the particular machine.
+Since pointers were just integers representing offsets into memory, pointer arithmetic
+was natural in both languages.
 
 \section{Aho Before Bell Labs}
 
