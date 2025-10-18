@@ -12,6 +12,7 @@ biber-clear-cache:
 full:
     {{latex}}
     biber {{job}}
+    makeglossaries {{job}}
     {{latex}}
     {{latex}}
 

@@ -43,7 +43,8 @@ or the Compatible Time Sharing System, with relative success.
 In 1965 MIT set out to make a successor system with all kinds of enhancements; they partnered with
 Bell Labs and General Electric to create the operating system called \textit{Multics}.
 The machine was developed at GE (Multics required a special machine), Multics was designed at MIT,
-and Bell Labs was responsible for large parts of the software development.
+and Bell Labs was responsible for large parts of the software development,
+which was primarily done in IBM's PL/I programming language.
 Ken Thompson described it as "monstrously over-engineered" and "typical second-system syndrome"
 \cite{kernighan_interviews_thompson_2019};
 while they had a wonderful time-sharing system in CTSS, they got too ambitious with thier sophomore project.
@@ -58,7 +59,7 @@ operating systems work, and now they had not operating system to work \textit{on
 These included Ken Thompson, Dennis Ritchie, and Doug McIlroy.
 
 At the time, Ken Thompson was researching file systems on an outdated and underused
-Digital Equipment Company (DEC) PDP-7 machine.
+Digital Equipment Corporation (DEC) PDP-7 machine.
 He originally just used it for writing video games, until finally getting around to
 his research on file systems.
 He developed disc scheduling algorithms to maximize throughput on the PDP-7's disc drive.
@@ -76,6 +77,12 @@ Luckily, right at that moment, my wife went on a three-week vacation to take my
 one-year-old to visit her parents in California. One week, one week, one week, 
 and we had Unix.
 \end{quotation}
+
+Thompson's assembler was not a complete toolchain; there were no libraries, linkers, or loaders.
+The entire assembly program had to be presented to the assembler all at once,
+and the output was directly executable. Thus the \texttt{a.out} naming convention for
+the default executable output of modern compilers was born (\textit{a}ssembly \textit{out}put).
+Even after the system gained more toolchain components, the name remained.
 
 Very early on, Thompson's system picked up very impressive users.
 Two at a time, Dennis Ritchie, Doug McIlroy, Morris McMahon, and Brain Kernighan
@@ -138,8 +145,11 @@ On another similar occasion, Doug walked into Ken's office to discuss the TMG la
 designed by Robert McClure\cite{mcclure_tmg_compiler_compiler_1965}, one of his friends at the lab.
 McClure had gotten defensive about this language, and when he left the lab,
 he claimed it was proprietary and nobody else could use it.
-TMG was a recursive-descent compiler-compiler similar to Yacc, a tool to help write compiler
-front-ends. See this example from Doug's TMG manual\cite{tmg_manual_mcilroy_1972}:
+TMG was a top-down recursive-descent compiler-compiler for context-free grammars
+and procedural elements similar to Yacc, a tool to help write compiler
+front-ends.
+See this example from Doug's TMG manual\cite{tmg_manual_mcilroy_1972}
+and notice the similarities to modern parser generators and Backus-Naur Form:
 
 \begin{quotation}
 This simple program defines the translation of fully parenthesized infix 
@@ -163,23 +173,73 @@ He then went over to Ken's keyboard and typed in the program that his TMG-TMG co
 had produced, and with astonishingly few errors, they had a working TMG compiler on the PDP-7.
 
 Ken's logical next step was to use this new TMG compiler to
-write a \FTN compiler for the PDP-7 because
-"no computer was complete without \FTN."
+write a \ftn{} compiler for the PDP-7 because
+"no computer was complete without \ftn{}."
 Now, the PDP-7 was only 8k of 18-bit words of memory and Ken's Unix system needed
 about half of that just to run, leaving only 4k for user programs.
-Once completed, the new \FTN compiler took far more memory than was available for
+Once completed, the new \ftn{} compiler took far more memory than was available for
 user programs, so he had to cut down the TMG program to get a program small enough to
 fit on the machine but capable enough to facilitate a usable programming language.
 Once he finally cut down his compiler to 4k, he called that programming language \textit{B}.
+His ill-fated attempt at producing a \ftn{} compiler ended up being a very different language,
+based more so on BCPL than on \ftn{}
+\footnote{The origins are really unclear. Ken himself mentions \ftn{} as his only inspiration
+for B in a live interview\cite{kernighan_interviews_thompson_2019},
+however Dennis Ritchie describes it as a "language of his own" and
+"BCPL squeezed into 8K bytes of memory and filtered through Thompson's brain"
+\cite{development_of_c_language_ritchie_1996}.
+He describes the name as either a contraction of BCPL or (less likely) a contraction
+of Bon, a language Thompson developed for Multics.}.
+BCPL had been designed by Martin Richards at MIT in the mid-1960s, and thus had found
+its way onto MIT's CTSS system, which Bell Labs employees were familiar with.
 
-% \section{}
+\section{BCPL, B, and C}
 
-\todo{Doug McIlroy brough Thompson a TMG compiler written in TMG, entirely on paper.
-Then, to port this to the PDP-7, McIlroy ran the compiler through itself, \textit{on paper},
-to produce the instructions needed to run this on the new machine.
-With "very few errors" Thompson recalled, Doug had produced a working compiler
-from scratch, by hand, on paper.
-\cite{kernighan_interviews_thompson_2019}}
+All three languages differ syntactically, but are semantically very similar,
+and operate at a similar level of abstraction.
+The BCPL compiler was allowed to use more memory than Thompson had on the PDP-7,
+so it allowed for more complicated expression-oriented language features.
+Dennis Ritchie points out the following two examples as only being possible
+in BCPL and not in B or C due to memory constraints
+\cite{development_of_c_language_ritchie_1996}:
+
+\begin{lstlisting}[language=c,frame=single]
+let P1 be (*@\textbfit{procedure}@*)
+and P2 be (*@\textbfit{procedure}@*)
+and P3 be (*@\textbfit{procedure}@*)
+
+E1 := valof ( (*@\textbfit{declarations}@*) ;
+              (*@\textbfit{commands}@*) ;
+              resultis E2 ) + 1
+\end{lstlisting}
+
+Because the entire program was held in memory, the BCPL compiler could make
+procedure \textbfit{P3} available to expressions inside procedure \textbfit{P1},
+but the B compiler was limited to a one-pass technique and could not provide such features.
+On the other hand, some BCPL features were purposefully left out of B; for example,
+to share data between separately compiled source files, BCPL programs had to use
+a global buffer. To make a procedure or variable available to other source files,
+the programmer had to manually associate the name with an offset into this buffer,
+similar to the \texttt{COMMON} block in \ftn{} programs.
+In more mature B compilers and later in C, the linker handles this automatically.
+
+Neither language has types; only the addressable size of data for the particular machine.
+Since pointers were just integers representing offsets into memory, pointer arithmetic
+was natural in both languages.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{resource/software/unix/bell-threaded-code-figures.png}
+    \caption{Execution of Threaded Code\cite{bell_threaded_code_1973}}
+    \label{fig:bell-threaded-code}
+\end{figure}
+
+The B compiler did not emit machine code directly, but instead used
+\textit{threaded code}\cite{bell_threaded_code_1973}, an early form of \gls{bytecode},
+which was then interpreted.
+\citeauthor{bell_threaded_code_1973} claims that this threaded code needed no interpreter,
+but really, it is just a specification for an interpreter with interpretive control-flow.
+See Bell's depiction of the execution of threaded code \ref{fig:bell-threaded-code}.
 
 \section{Aho Before Bell Labs}
 
