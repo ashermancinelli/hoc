@@ -1,4 +1,6 @@
-\section{The IAL and the ALGOrithmic Language}
+\section{ALGOL}
+
+\subsection{The IAL and the ALGOrithmic Language}
 
 Before Hopper, Mayes and Phillips pulled together their committees for a common
 business language, design-by-committee was already in the academic milieu,
@@ -21,10 +23,10 @@ They arrived at the following objectives
 \cite{perlis_samelson_1958_preliminary_report_ial}:
 
 \begin{enumerate}
-\item The new language should be as close as possible to standard mathematical 
-      notation and be readable with little further explanation.
-\item It should be possible to use it for the description of computing processes in publications.
-\item The new language should be mechanically translatable into machine programs.
+	\item The new language should be as close as possible to standard mathematical
+	      notation and be readable with little further explanation.
+	\item It should be possible to use it for the description of computing processes in publications.
+	\item The new language should be mechanically translatable into machine programs.
 \end{enumerate}
 
 Shortly thereafter, a large number of dialects and partial implementations sprung up around Europe
@@ -44,21 +46,21 @@ with Peter Naur as the editor.
 Jean Sammet describes the impact of ALGOL 58
 \cite{sammet_programming_languages_history_and_fundamentals_1969}:
 \begin{quotation}
-Among the more intriguing technical features of ALGOL 58 were its essential 
-simplicity; the introduction of the concept of three levels of language, namely 
-a reference language, a publication language, and hardware representations; the 
-\textbfit{begin\dots end} delimiters for creating a single (compound) statement from simpler 
-ones; the flexibility of the procedure declaration and the \textbfit{do} statement for 
-copying procedures with data name replacement allowed; and the provision for 
-empty parameter positions in procedure declarations. While ALGOL 58 is not an 
-exact subset of ALGOL 60, the only items of significance which are in the 
-former but not the latter are the \textbfit{do} which was removed as a concept (although 
-the word was used for something else) and the empty parameter positions. 
-Because of this major carry-over, specific technical description of ALGOL 58 is 
-not necessary. 
+	Among the more intriguing technical features of ALGOL 58 were its essential
+	simplicity; the introduction of the concept of three levels of language, namely
+	a reference language, a publication language, and hardware representations; the
+	\textbfit{begin\dots end} delimiters for creating a single (compound) statement from simpler
+	ones; the flexibility of the procedure declaration and the \textbfit{do} statement for
+	copying procedures with data name replacement allowed; and the provision for
+	empty parameter positions in procedure declarations. While ALGOL 58 is not an
+	exact subset of ALGOL 60, the only items of significance which are in the
+	former but not the latter are the \textbfit{do} which was removed as a concept (although
+	the word was used for something else) and the empty parameter positions.
+	Because of this major carry-over, specific technical description of ALGOL 58 is
+	not necessary.
 \end{quotation}
 
-\section{ALGOL 60}
+\subsection{ALGOL 60}
 
 \todo{backstory of Peter Naur}
 
@@ -81,11 +83,11 @@ would go on to extend it. This is part of Backus's specification of arithmetic e
 in the paper before Naur's changes\cite{backus_ial_1959}:
 
 \[
-\langle \textit{factor} \rangle :\equiv
-\langle \textit{number} \rangle \;\overline{\text{or}}\;
-\langle \textit{function} \rangle \;\overline{\text{or}}\;
-\langle \textit{variable} \rangle \;\overline{\text{or}}\;
-\dots
+	\langle \textit{factor} \rangle :\equiv
+	\langle \textit{number} \rangle \;\overline{\text{or}}\;
+	\langle \textit{function} \rangle \;\overline{\text{or}}\;
+	\langle \textit{variable} \rangle \;\overline{\text{or}}\;
+	\dots
 \]
 
 Naur would make the notation more readable by replacing $\overbar{or}$ with $|$
@@ -104,13 +106,13 @@ The IAL had been renamed ALGOL 58 and then finally ALGOL 60 in Naur's report.
 The final report specified expressions to have the following syntax:
 
 \[
-\langle \textit{expression} \rangle ::=
-\langle \textit{arithmetic expression} \rangle
-| \langle \textit{Boolean expression} \rangle
-| \langle \textit{designational expression} \rangle
+	\langle \textit{expression} \rangle ::=
+	\langle \textit{arithmetic expression} \rangle
+	| \langle \textit{Boolean expression} \rangle
+	| \langle \textit{designational expression} \rangle
 \]
 
-\section{Adoption of ALGOL}
+\subsection{Adoption of ALGOL}
 
 The \textit{ACM Communications} started publishing an \textit{Algorithms} section;
 ALGOL 58 was initially used, but ALGOL 60 was adopted once the updated report
@@ -131,32 +133,32 @@ The 14 issue of the bulletin in 1962 contained a questionnaire from Peter Naur
 about some ambiguities in the 1960 report, and the philosophy of some proposed changes and
 enhancements to the language.
 \footnote{The reader may find it interesting that in this edition of the bulletin,
-Jean Sammet submitted a paper on \textit{A Method of Combining ALGOL and COBOL};
-\todo{follow up on this?}}
+	Jean Sammet submitted a paper on \textit{A Method of Combining ALGOL and COBOL};
+	\todo{follow up on this?}}
 This questionnaire was used as a guide for another committee meeting in Rome in April of 1962
 the primary result of this meeting is detailed in Naur's
 \citetitle{naur_revised_report_algol_1962}.
 
-\section{Peculiarities of ALGOL}
+\subsection{Peculiarities of ALGOL}
 
 The reader may find it interesting that ALGOL had a number of peculiar features.
 Namely, the distinction between \textit{call by name} and \textit{call by value}.
 Naur's 1962 revised report explains it best, I think\cite[Section 4.7.3]{naur_revised_report_algol_1962}:
 
 \begin{quotation}
-\noindent
-\textbf{4.7.3.1 Value assignment (call by value)}
+	\noindent
+	\textbf{4.7.3.1 Value assignment (call by value)}
 
-of the corresponding actual parameters\dots the effect is as though an 
-additional block embracing the procedure body were created in which these 
-assignments were made to variables local to this fictitious block\dots
+	of the corresponding actual parameters\dots the effect is as though an
+	additional block embracing the procedure body were created in which these
+	assignments were made to variables local to this fictitious block\dots
 
-\noindent
-\textbf{4.7.3.2 Name replacement (call by name)}
+	\noindent
+	\textbf{4.7.3.2 Name replacement (call by name)}
 
-Any formal parameter not quoted in the value list is replaced, throughout the 
-procedure body, bu the corresponding actual parameter, after enclosing this 
-latter in parentheses wherever syntactically possible.
+	Any formal parameter not quoted in the value list is replaced, throughout the
+	procedure body, bu the corresponding actual parameter, after enclosing this
+	latter in parentheses wherever syntactically possible.
 \end{quotation}
 
 While neither Naur's revised report nor Edgar Dijkstra's
@@ -195,21 +197,21 @@ conformant ALGOL compilers capable of handling recursion and non-local reference
 using call-by-name semantics\cite{Knuth1964ManOrBoy}.
 
 \begin{quotation}
-There are quite a few ALGOL60 translators in existence which have been designed 
-to handle recursion and non-local references properly, and I thought perhaps a 
-little test-program may be of value. Hence I have written the following simple 
-routine, which may separate the man-compilers from the boy-compilers.
+	There are quite a few ALGOL60 translators in existence which have been designed
+	to handle recursion and non-local references properly, and I thought perhaps a
+	little test-program may be of value. Hence I have written the following simple
+	routine, which may separate the man-compilers from the boy-compilers.
 
-This uses nothing known to be tricky or ambiguous. My question is: What should 
-the answer be? Unfortunately, I don't have access to a "man-compiler" myself, 
-asn do I was forced to try hand calculations. My conjecture (probably wrong) is 
-that the answer will be
+	This uses nothing known to be tricky or ambiguous. My question is: What should
+	the answer be? Unfortunately, I don't have access to a "man-compiler" myself,
+	asn do I was forced to try hand calculations. My conjecture (probably wrong) is
+	that the answer will be
 
-\[
-73 - 119 - 177 + 102 = -121 .
-\]
+	\[
+		73 - 119 - 177 + 102 = -121 .
+	\]
 
-I'd be very glad to know the right answer.
+	I'd be very glad to know the right answer.
 \end{quotation}
 
 The program is as follows:
@@ -245,20 +247,20 @@ cause unintended side effects:
 While calling \texttt{Swap(i, j)} may work correctly, calling
 \texttt{Swap(i+1, j+1)} or \texttt{Swap(A[i], A[j])} would not.
 
-Among the now-unusual argument evaluation semantics, ALGOL also lacked any I/O 
-facilities as we have already discussed.  The language also made string 
-variables available, but provided no means of manipulating them.  ALGOL 
-permitted \textit{own variables}, which are akin to static variables in C or 
-SAVE variables in \FTN{}; they retain their values between entrances to the 
-block.  Dijkstra also points out nowhere is the evaluation order of 
+Among the now-unusual argument evaluation semantics, ALGOL also lacked any I/O
+facilities as we have already discussed.  The language also made string
+variables available, but provided no means of manipulating them.  ALGOL
+permitted \textit{own variables}, which are akin to static variables in C or
+SAVE variables in \FTN{}; they retain their values between entrances to the
+block.  Dijkstra also points out nowhere is the evaluation order of
 subexpressions specified\cite{dijkstra_defense_of_algol_60_1961}.
 
 While the declared intent of defining a language detached from any particular
-manufacturer or machine was laudable (and profitable in the case of portable 
+manufacturer or machine was laudable (and profitable in the case of portable
 languages to follow), ALGOL was so far removed from the machine to be useless without
 supplementary libraries (for I/O, string processing, etc).
 
-\section{ALGOL 68 (and X, Y, W, \dots)}
+\subsection{ALGOL 68 (and X, Y, W, \dots)}
 
 For years after the 1962 Rome meeting, there were discussions amongst the ALGOL
 community about potential changes and improvements to the language.
@@ -292,7 +294,7 @@ formal grammar which came to be known as a \textit{W-Grammar} (after his own nam
 
 The impact of Wijngaarden's proposal on the development of ALGOL cannot be overstated.
 In the spring of 1968, Adriaan van Wijngaarden released a draft report for ALGOL X
-(which was, mind you, supposed to be the \textit{incremental} improvement to ALGOL 60) 
+(which was, mind you, supposed to be the \textit{incremental} improvement to ALGOL 60)
 based on Wirth and Hoare's ALGOL W but using his own W-Grammar.
 % The discussions and meetings over ALGOL X overran such that the subsequent
 % meeting on ALGOL Y was overtaken by discussion of ALGOL X.
@@ -306,10 +308,10 @@ in six days"\cite{a_history_of_algol_68_1993}.
 Wijngaarden's ALGOL W proposal was distinct for at least three reasons:
 
 \begin{enumerate}
-      \item A two-level \textit{W Grammar}.
-      \item "The combination of a minimal number of language concepts in an orthogonal way"
-            \cite{a_history_of_algol_68_1993}.
-      \item Expression orientation; everything is an expression and has a value.
+	\item A two-level \textit{W Grammar}.
+	\item "The combination of a minimal number of language concepts in an orthogonal way"
+	      \cite{a_history_of_algol_68_1993}.
+	\item Expression orientation; everything is an expression and has a value.
 \end{enumerate}
 
 % The first programming language designed by international committee receive
@@ -324,12 +326,12 @@ The computer and aerospace historian Paul Ceruzzi describes the result of
 the ALGOL 68 report as follows:
 
 \begin{quotation}
-Whereas ALGOL-60 was based on a formal structure
-and was very lean, ALGOL-68 was burdened by an attempt to do too
-much, with the effects that some features interfered with the clean
-implementation of others. It was hard to understand. In an attempt to
-satisfy a broad range of users worldwide, the committee produced
-something that satisfied few.
+	Whereas ALGOL-60 was based on a formal structure
+	and was very lean, ALGOL-68 was burdened by an attempt to do too
+	much, with the effects that some features interfered with the clean
+	implementation of others. It was hard to understand. In an attempt to
+	satisfy a broad range of users worldwide, the committee produced
+	something that satisfied few.
 \end{quotation}
 
 Charles Lindsey, British computer scientist and editor of
@@ -337,20 +339,20 @@ Charles Lindsey, British computer scientist and editor of
 (and numerous other texts on ALGOL 68) describes popular sentiment about the
 report\cite{a_history_of_algol_68_1993}:
 \begin{quotation}
-The world seems to have a rather negative perception of ALGOL 68. The language has been said to
-be "too big," to be defined by an "unreadable Report" produced by a committee which "broke up in
-disarray," to have no implementations, and to have no users. 
+	The world seems to have a rather negative perception of ALGOL 68. The language has been said to
+	be "too big," to be defined by an "unreadable Report" produced by a committee which "broke up in
+	disarray," to have no implementations, and to have no users.
 \end{quotation}
 
 This was not his opinion, however\cite{a_history_of_algol_68_1993}:
 
 \begin{quotation}
-I should point out that my own involvement with the project came after the basic design of the
-language, and of its original Report, were complete\dots
-It is only now, in the course of studying the minutes and other
-documents from that time, that I have come to see what the real fuss was about, and I hope that all
-this has enabled me to take a dispassionate view of the events. The reader of this paper will certainly
-see discord, but I believe he will see also how good design can win through in the end. 
+	I should point out that my own involvement with the project came after the basic design of the
+	language, and of its original Report, were complete\dots
+	It is only now, in the course of studying the minutes and other
+	documents from that time, that I have come to see what the real fuss was about, and I hope that all
+	this has enabled me to take a dispassionate view of the events. The reader of this paper will certainly
+	see discord, but I believe he will see also how good design can win through in the end.
 \end{quotation}
 
 Lindsey was appointed Lecturer in Computer Science at Manchester University
@@ -370,10 +372,10 @@ was the ability for an ALGOL Y program to modify itself.
 Lindsey remarks:
 
 \begin{quotation}
-They even spent an afternoon on ALGOL Y, from which it emerged that no one had 
-very concrete ideas of what it was about, and that the only role model was 
-LISP, on account of the fact that that language could construct its own 
-programs and then \textit{eval} them. 
+	They even spent an afternoon on ALGOL Y, from which it emerged that no one had
+	very concrete ideas of what it was about, and that the only role model was
+	LISP, on account of the fact that that language could construct its own
+	programs and then \textit{eval} them.
 \end{quotation}
 
 The largest single outpouring of criticism of ALGOL 68 came from
@@ -398,17 +400,17 @@ For example, what ALGOL calls a \textit{name} is more commonly known as a refere
 numerous differences in nomenclature contributed to the difficulty of reading
 the original reports.
 
-Van Wijngaarden had circulated another 
-report\cite{penultimate_draft_report_on_algol_68_1968} in October of 1968 as he 
-had earlier promised the committee; at the same time, other members who 
-disagreed with the direction but had not resigned were also developing several 
+Van Wijngaarden had circulated another
+report\cite{penultimate_draft_report_on_algol_68_1968} in October of 1968 as he
+had earlier promised the committee; at the same time, other members who
+disagreed with the direction but had not resigned were also developing several
 minority reports, include Dijkstra, Hoare, and Randell.
 Sparing the reader the full details and political history of the ensuing committee
 meetings, the final report \citetitle{report_on_the_algorithmic_language_algol_68_mailloux_1969}
 was published in \textit{Numerische Mathematik} and \textit{Kybernetika}
 in 1969, thus specifying what we know today to be ALGOL 68.
 
-\section{The W-Grammar}
+\subsection{The W-Grammar}
 
 Before analyzing the technical details of ALGOL 68, we must first understand
 what made it so offensive and uninterpretable to so many people: its grammar.
@@ -440,8 +442,8 @@ The language specification was, effectively, a compiler front-end specification.
 Lindsey argues that the grammar is relatively close to Prolog, where
 goals and sub-goals are specified and solved for by unification
 \footnote{The term \textit{unification} may be loaded; Milner did not publish
-his work on SML and type inference until later, though his work was inspired by
-ALGOL 68 to some degree.}.
+	his work on SML and type inference until later, though his work was inspired by
+	ALGOL 68 to some degree.}.
 
 Lindsey uses the following Prolog example to introduce a rule in ALGOL 68's W-grammar,
 which asks whether the input program contains an assignation, and to determine this,
@@ -450,7 +452,7 @@ becomes a symbol, followed by a source.
 
 \begin{lstlisting}[language=prolog,frame=single]
 assignation(ref(MODE)) :-
-      destination(ref(MODE)), becomes_symbol, source(MODE). 
+      destination(ref(MODE)), becomes_symbol, source(MODE).
 \end{lstlisting}
 
 The corresponding rule in the [MR93] draft report is as follows
@@ -499,20 +501,20 @@ the grammar needed to specify these semantic conditions as well.
 See this excerpt on \textbfit{NEST}s from
 \cite[Section 3.0.2, Semantics]{revised_report_on_the_algorithmic_language_algol_68_1976}:
 \begin{quotation}
-A "nest" is a 'NEST'. The nest "of" a construct is the "NEST" enveloped
-by the original of that construct, but not by any 'defining LAYER'
-contained in that original.
+	A "nest" is a 'NEST'. The nest "of" a construct is the "NEST" enveloped
+	by the original of that construct, but not by any 'defining LAYER'
+	contained in that original.
 
-{The nest of a construct carries a record of all the declarations forming
-the environment in which that construct is to be interpreted.
+		{The nest of a construct carries a record of all the declarations forming
+			the environment in which that construct is to be interpreted.
 
-Those constructs which are contained in a range R, but not in any
-smaller range contained within R, may be said to comprise a "reach". All
-constructs in a given reach have the same nest, which is that of the
-immediately surrounding reach with the addition of one extra "LAYER".
-The syntax ensures (3.2.1.b, 3.4.1.i,j,k, 3.5.1.e, 5.4.1.1.b) that each 'PROP'
-(4.8.1.E) or "property" in the extra 'LAYER' is matched by a defining.
-indicator (4.8.1.a) contained in a definition in that reach.}
+			Those constructs which are contained in a range R, but not in any
+			smaller range contained within R, may be said to comprise a "reach". All
+			constructs in a given reach have the same nest, which is that of the
+			immediately surrounding reach with the addition of one extra "LAYER".
+			The syntax ensures (3.2.1.b, 3.4.1.i,j,k, 3.5.1.e, 5.4.1.1.b) that each 'PROP'
+			(4.8.1.E) or "property" in the extra 'LAYER' is matched by a defining.
+			indicator (4.8.1.a) contained in a definition in that reach.}
 \end{quotation}
 
 Today, \textbfit{NEST}s might exist concretely as data structures inside the semantic analysis
@@ -537,7 +539,7 @@ mode b = struct (int val, ref struct (int val, ref b next) next);
 
 
 
-\section{Concepts of ALGOL 68}
+\subsection{Concepts of ALGOL 68}
 
 Having covered the political machinery that resulted in the final report and
 the grammar that caused the community so much grief,
@@ -551,13 +553,13 @@ allowing for constructs like the following:
 x := (real a = p*q;
       real b = p/q;
       if a>b then a else b fi)
-      + (y := 2*z); 
+      + (y := 2*z);
 \end{lstlisting}
 
 There were numerous extensions to arrays, including higher-dimensional arrays,
 complicated slicing mechanisms, and flexible arrays, such as the following:
 \begin{lstlisting}[language=algol,frame=single]
-loc[1:4, 1:5] int a45; 
+loc[1:4, 1:5] int a45;
 a45[2  ,    ] # row 2 #
 a45[   , 3  ] # column 3 #
 a45[2:3, 3  ] # part of column 3 #
@@ -598,9 +600,9 @@ There were at least eight changes to the automatic type conversion rules
 between ALGOL 60 and ALGOL 68;
 Lindsey had this remark about the automatic type conversion features:
 \begin{quotation}
-Although coercions had existed in previous programming languages, it was ALGOL 
-68 that introduced the term and endeavoured to make them a systematic feature 
-(although it is often accused of a huge overkill in this regard).
+	Although coercions had existed in previous programming languages, it was ALGOL
+	68 that introduced the term and endeavoured to make them a systematic feature
+	(although it is often accused of a huge overkill in this regard).
 \end{quotation}
 
 Many of these coercion rules were uncontroversial; for example, a \textbfit{real}
@@ -618,7 +620,7 @@ The right hand side of this expression is a \textit{cast}
 (a term originally coined for the specification of ALGOL)
 of an integer expression into a procedure taking no arguments.
 In \citetitle{algol68_with_fewer_tears_1968}\footnote{This paper was, in fact,
-a valid ALGOL 68 program in and of itself}, Lindsey argues that references
+	a valid ALGOL 68 program in and of itself}, Lindsey argues that references
 obviate the need for call-by-name semantics, but that call-by-substitution is what
 ALGOL 60's call-by-name effectively was, and this was still possible with ALGOL 68
 via this \textit{proceduring} coercion:
@@ -635,10 +637,10 @@ proc series = (int k, ref int i, proc real term) real expr
     sum
     end
 
-x := series (100, i, real expr(1/i)); 
+x := series (100, i, real expr(1/i));
 
 # Or, via proceduring: #
-x := series (100, i, 1/i); 
+x := series (100, i, 1/i);
 \end{lstlisting}
 
 This facility was abandoned in the ALGOL 68-R implementation which
@@ -661,21 +663,21 @@ The revised report contains this example
 
 \begin{lstlisting}[language=algol,frame=single]
 proc innerproduct 1 = (int n, proc (int) real x, y) real:
-      # the innerproduct of two vectors, each with 'n' 
-      comppnents, x (i), y (i), i = 1, ... , n, where 'x' and 'y' 
+      # the innerproduct of two vectors, each with 'n'
+      comppnents, x (i), y (i), i = 1, ... , n, where 'x' and 'y'
       are arbitrary mappings from integer to real number #
       begin long real s := long 0;
-            for i to n do s +:= leng x (i) \times leng y 
+            for i to n do s +:= leng x (i) \times leng y
 (i) od;
             shorten s
       end
 
 # Real-calls using innerproduct 1: #
       innerproduct 1 (m, (int j) real: x1[j], (int j) real: y1[i])
-      innerproduct 1 (n, nsin, ncos) 
+      innerproduct 1 (n, nsin, ncos)
 \end{lstlisting}
 
-\section{ALGOL 68-R and the Revised Report}
+\subsection{ALGOL 68-R and the Revised Report}
 
 In 1973, the \citetitle{revised_report_on_the_algorithmic_language_algol_68_1976} was published,
 codifying some of the changes and rejected features from the ALGOL 68-R team.
@@ -686,21 +688,21 @@ His work on ALGOL 68S was not an outlier amongst would-be implementers of the
 language; because the report was so large and complex, most
 implementers ended up restricting themselves to a subset of the language.
 
-\section{Criticism of ALGOL 68}
+\subsection{Criticism of ALGOL 68}
 
 Numerous committee members and readers of the \textit{ALGOL Bulletin} criticized
 the original report for its complexity; Lindsey (our faithful defender of the
 language) conceded that "much of the mud slung at [the original report] is
 probably still sticking"\cite{a_history_of_algol_68_1993}.
-Much of that complexity came from the 
+Much of that complexity came from the
 
 \todo{Defined in Wijngaarden Grammar by Adriaan van Wijngaarden.
-Contains parsing and things which in other langauges are called semantics.}
+	Contains parsing and things which in other langauges are called semantics.}
 
 \todo{'68 critcized by Hoare and Dijkstra for abandoning simplicity of '60.
-In 1970, ALGOL 68-R became the first working compiler for ALGOL 68.}
+	In 1970, ALGOL 68-R became the first working compiler for ALGOL 68.}
 
-\section{Legacy of ALGOL}
+\subsection{Legacy of ALGOL}
 
 It is difficult to overstate the impact of the design decisions of both ALGOL 60 and 68,
 even though neither saw widespread adoption in the industry outside depictions of
@@ -709,37 +711,37 @@ When Dennis Ritchie extended Ken Thompson's B compiler with a type system, he dr
 inspiration from ALGOL 68:
 
 \begin{quotation}
-The scheme of type composition adopted by C owes considerable debt to Algol 68, 
-although it did not, perhaps, emerge in a form that Algol's adherents would 
-approve of. The central notion I captured from Algol was a type structure based 
-on atomic types (including structures), composed into arrays, pointers 
-(references), and functions (procedures). Algol 68's concept of unions and 
-casts also had an influence that appeared later.
-\cite{development_of_c_language_chist_ritchie_1996}
+	The scheme of type composition adopted by C owes considerable debt to Algol 68,
+	although it did not, perhaps, emerge in a form that Algol's adherents would
+	approve of. The central notion I captured from Algol was a type structure based
+	on atomic types (including structures), composed into arrays, pointers
+	(references), and functions (procedures). Algol 68's concept of unions and
+	casts also had an influence that appeared later.
+	\cite{development_of_c_language_chist_ritchie_1996}
 \end{quotation}
 
 Lindsey points out a few others:
 
 \begin{quotation}
-The type system of ALGOL 68 has been adopted, more or less faithfully, in many subsequent
-languages. In particular, the structs, the unions, the pointer types, and the parameter passing of C
-were influenced by ALGOL 68 [Ritchie 1993], although the syntactic sugar is bizarre and C is not so
-strongly typed. Another language with a related type system is SML [Milner 1990], particularly with
-regard to its use of ref types as its means of realizing variables, and C++ has also benefitted from the
-reftypes [Stroustrup 1996].
-\citetitle{a_history_of_algol_68_1993}
+	The type system of ALGOL 68 has been adopted, more or less faithfully, in many subsequent
+	languages. In particular, the structs, the unions, the pointer types, and the parameter passing of C
+	were influenced by ALGOL 68 [Ritchie 1993], although the syntactic sugar is bizarre and C is not so
+	strongly typed. Another language with a related type system is SML [Milner 1990], particularly with
+	regard to its use of ref types as its means of realizing variables, and C++ has also benefitted from the
+	reftypes [Stroustrup 1996].
+	\citetitle{a_history_of_algol_68_1993}
 \end{quotation}
 
-ALGOL 68 also had a notable influence in the Soviet Union, details of which can 
+ALGOL 68 also had a notable influence in the Soviet Union, details of which can
 be found in Andrey Terekhov's 2014 paper \citetitlecite{algol_68_ussr_2014}.
 
 \todo{Pascal, Ada}
 \todo{Lindsey: "So here are my recommendations to people who essay to design programming languages."
-\citetitlecite{a_history_of_algol_68_1993}}
+	\citetitlecite{a_history_of_algol_68_1993}}
 
 \begin{quotation}
-An interesting observation is the fact that the two-level formalism used
-in the description of ALGOL 68 by itself led to a number of programming
-languages, including PROLOG (Colmerauer)\dots
-\cite{a_shorter_history_of_algol68_1994}
+	An interesting observation is the fact that the two-level formalism used
+	in the description of ALGOL 68 by itself led to a number of programming
+	languages, including PROLOG (Colmerauer)\dots
+	\cite{a_shorter_history_of_algol68_1994}
 \end{quotation}

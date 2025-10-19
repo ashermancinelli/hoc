@@ -61,8 +61,8 @@ These included Ken Thompson, Dennis Ritchie, and Doug McIlroy.
 At the time, Ken Thompson was researching file systems on an outdated and underused
 Digital Equipment Corporation (DEC) PDP-7 machine from the acoustics group.
 \footnote{Because acoustics research was so core to Bell Labs' and AT\&T's mission,
-that department got just about anything they asked for in terms of computing resources,
-hence the outdated PDP-7 sat unused in their offices--they already had more powerful machines.}
+	that department got just about anything they asked for in terms of computing resources,
+	hence the outdated PDP-7 sat unused in their offices--they already had more powerful machines.}
 He originally just used it for writing video games, until finally getting around to
 his research on file systems.
 He developed disc scheduling algorithms to maximize throughput on the PDP-7's disc drive.
@@ -72,13 +72,13 @@ At some point in this process, he realized he was not far off from an
 operating system of his own\cite{kernighan_interviews_thompson_2019}:
 
 \begin{quotation}
-At some point, I realized with out knowing it up until that point, that I was 
-three weeks from operating system, with three programs, one a week. I needed an 
-editor to write code, I needed an assembler to turn the code into language I 
-could run, and I needed a kernel overlay, call it an operating system.  
-Luckily, right at that moment, my wife went on a three-week vacation to take my 
-one-year-old to visit her parents in California. One week, one week, one week, 
-and we had Unix.
+	At some point, I realized with out knowing it up until that point, that I was
+	three weeks from operating system, with three programs, one a week. I needed an
+	editor to write code, I needed an assembler to turn the code into language I
+	could run, and I needed a kernel overlay, call it an operating system.
+	Luckily, right at that moment, my wife went on a three-week vacation to take my
+	one-year-old to visit her parents in California. One week, one week, one week,
+	and we had Unix.
 \end{quotation}
 
 Thompson's assembler was not a complete toolchain; there were no libraries, linkers, or loaders.
@@ -102,8 +102,8 @@ Ossanna developed the Nroff and Troff typesetting programs to fullfil their clai
 goal of helping the patent office.
 The patent office loved their software, and they ended up buying the computing group
 a PDP-11\footnote{While many resources will mention the PDP-11, they usually refer to the
-PDP-11\textit{/22}; very few of original PDP-11s (which the computing center worked on)
-were ever produced, but the refreshed models had many users.} sometime in the early 1970s.
+	PDP-11\textit{/22}; very few of original PDP-11s (which the computing center worked on)
+	were ever produced, but the refreshed models had many users.} sometime in the early 1970s.
 Unix came up on the PDP-11 almost immediately.
 Thus we have the basis for discussing the subsequent development of compilers
 and programming languages at Bell Labs.
@@ -142,9 +142,9 @@ See this example from Doug's TMG manual\cite{tmg_manual_mcilroy_1972}
 and notice the similarities to modern parser generators and Backus-Naur Form:
 
 \begin{quotation}
-This simple program defines the translation of fully parenthesized infix 
-expressions to Polish postfix for a stack machine.
-\begin{lstlisting}[frame=single]
+	This simple program defines the translation of fully parenthesized infix
+	expressions to Polish postfix for a stack machine.
+	\begin{lstlisting}[frame=single]
     expr: <(>/exp1 expr operator expr <)> = { 3 1 2 };
     exp1: ident = { < LOAD > 1 };
     operator:
@@ -157,7 +157,7 @@ expressions to Polish postfix for a stack machine.
 
 Ken recounts\cite{kernighan_interviews_thompson_2019}
 the story of how Doug brought a full TMG compiler \textit{written in TMG,
-on paper} to Ken's office. He then decided to feed the TMG program into his TMG compiler
+	on paper} to Ken's office. He then decided to feed the TMG program into his TMG compiler
 \textit{by hand} to produce an assembly listing of the TMG program.
 He then went over to Ken's keyboard and typed in the program that his TMG-TMG compiler
 had produced, and with astonishingly few errors, they had a working TMG compiler on the PDP-7.
@@ -174,12 +174,12 @@ Once he finally cut down his compiler to 4k, he called that programming language
 His ill-fated attempt at producing a \ftn{} compiler ended up being a very different language,
 based more so on BCPL than on \ftn{}
 \footnote{The origins are really unclear. Ken himself mentions \ftn{} as his only inspiration
-for B in a live interview\cite{kernighan_interviews_thompson_2019},
-however Dennis Ritchie describes it as a "language of his own" and
-"BCPL squeezed into 8K bytes of memory and filtered through Thompson's brain"
-\cite{development_of_c_language_chist_ritchie_1996}.
-He describes the name as either a contraction of BCPL or (less likely) a contraction
-of Bon, a language Thompson developed for Multics.}.
+	for B in a live interview\cite{kernighan_interviews_thompson_2019},
+	however Dennis Ritchie describes it as a "language of his own" and
+	"BCPL squeezed into 8K bytes of memory and filtered through Thompson's brain"
+	\cite{development_of_c_language_chist_ritchie_1996}.
+	He describes the name as either a contraction of BCPL or (less likely) a contraction
+	of Bon, a language Thompson developed for Multics.}.
 BCPL had been designed by Martin Richards at MIT in the mid-1960s, and thus had found
 its way onto MIT's CTSS system, which Bell Labs employees were familiar with.
 
@@ -214,10 +214,10 @@ similar to the \texttt{COMMON} block in \ftn{} programs.
 In more mature B compilers and later in C, the linker handles this automatically.
 
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\textwidth]{resource/software/unix/bell-threaded-code-figures.png}
-    \caption{Execution of Threaded Code\cite{bell_threaded_code_1973}}
-    \label{fig:bell-threaded-code}
+	\centering
+	\includegraphics[width=0.8\textwidth]{resource/software/unix/bell-threaded-code-figures.png}
+	\caption{Execution of Threaded Code\cite{bell_threaded_code_1973}}
+	\label{fig:bell-threaded-code}
 \end{figure}
 
 The B compiler did not emit machine code directly, but instead used
@@ -253,22 +253,22 @@ by implemented it in B.
 Dennis Ritchie recalls\cite{development_of_c_language_chist_ritchie_1996}:
 
 \begin{quotation}
-During development, he continually struggled against memory limitations: each 
-language addition inflated the compiler so it could barely fit, but each 
-rewrite taking advantage of the feature reduced its size. For example, B 
-introduced generalized assignment operators, using x=+y to add y to x. The 
-notation came from Algol 68 via McIlroy, who had incorporated 
-it into his version of TMG.
+	During development, he continually struggled against memory limitations: each
+	language addition inflated the compiler so it could barely fit, but each
+	rewrite taking advantage of the feature reduced its size. For example, B
+	introduced generalized assignment operators, using x=+y to add y to x. The
+	notation came from Algol 68 via McIlroy, who had incorporated
+	it into his version of TMG.
 \end{quotation}
 
 Dennis also recalls this about their language design and implementation decisions:
 
 \begin{quotation}
-Although we entertained occasional thoughts about implementing one of the major 
-languages of the time like Fortran, PL/I, or Algol 68, such a project seemed 
-hopelessly large for our resources: much simpler and smaller tools were called 
-for. All these languages influenced our work, but it was more fun to do things 
-on our own.
+	Although we entertained occasional thoughts about implementing one of the major
+	languages of the time like Fortran, PL/I, or Algol 68, such a project seemed
+	hopelessly large for our resources: much simpler and smaller tools were called
+	for. All these languages influenced our work, but it was more fun to do things
+	on our own.
 \end{quotation}
 
 By 1970, the team had been able to acquire the PDP-11, which they promptly ported Unix to,
@@ -280,22 +280,22 @@ B proved useful--however, the new machine revealed some serious inadequacies.
 The only data type in BCPL and B was the \texttt{cell}, roughly equivalent to the hardware's
 machine word.
 The 18-bit PDP-7\footnote{18-bit might seem like an odd choice to the modern reader;
-most mainframe computers had 36-bit words, and the PDP-7 was marketed as a smaller system.
-Thus at 18-bits, it would be marketed as roughly half a mainframe.}
+	most mainframe computers had 36-bit words, and the PDP-7 was marketed as a smaller system.
+	Thus at 18-bits, it would be marketed as roughly half a mainframe.}
 did not map cleanly to the 16-bit PDP-11.
 BCPL on the PDP-7 had support for floating-point operations through special operators, but this
 only worked because the floats could fit in a single word and this was not possible on the PDP-11.
 
 \begin{quotation}
-For all these reasons, it seemed that a typing scheme was necessary to cope 
-with characters and byte addressing, and to prepare for the coming 
-floating-point hardware. Other issues, particularly type safety and interface 
-checking, did not seem as important then as they became later.
-Aside from the problems with the language itself, the B compiler's 
-threaded-code technique yielded programs so much slower than their 
-assembly-language counterparts that we discounted the possibility of recoding 
-the operating system or its central utilities in B.
-\cite{development_of_c_language_chist_ritchie_1996}
+	For all these reasons, it seemed that a typing scheme was necessary to cope
+	with characters and byte addressing, and to prepare for the coming
+	floating-point hardware. Other issues, particularly type safety and interface
+	checking, did not seem as important then as they became later.
+	Aside from the problems with the language itself, the B compiler's
+	threaded-code technique yielded programs so much slower than their
+	assembly-language counterparts that we discounted the possibility of recoding
+	the operating system or its central utilities in B.
+	\cite{development_of_c_language_chist_ritchie_1996}
 \end{quotation}
 
 In 1971, Dennis Ritchie began extending B by adding a character type and directly generating
@@ -315,14 +315,14 @@ The run-time overhead associated with BCPL and B's vector indexing semantics wer
 addressed in C:
 
 \begin{quotation}
-Values stored in the cells bound to array and pointer names were the machine 
-addresses, measured in bytes, of the corresponding storage area. Therefore, 
-indirection through a pointer implied no run-time overhead to scale the pointer 
-from word to byte offset. On the other hand, the machine code for array 
-subscripting and pointer arithmetic now depended on the type of the array or 
-the pointer: to compute \texttt{iarray[i]} or \texttt{ipointer+i} implied 
-scaling the addend \texttt{i} by the size of the object referred to.
-\cite{development_of_c_language_chist_ritchie_1996}
+	Values stored in the cells bound to array and pointer names were the machine
+	addresses, measured in bytes, of the corresponding storage area. Therefore,
+	indirection through a pointer implied no run-time overhead to scale the pointer
+	from word to byte offset. On the other hand, the machine code for array
+	subscripting and pointer arithmetic now depended on the type of the array or
+	the pointer: to compute \texttt{iarray[i]} or \texttt{ipointer+i} implied
+	scaling the addend \texttt{i} by the size of the object referred to.
+	\cite{development_of_c_language_chist_ritchie_1996}
 \end{quotation}
 
 C gained a type system, overlaying semantics onto the raw bits that BCPL and B users
@@ -331,10 +331,10 @@ The type system was heavily inspired by ALGOL 68, though not necessarily in a wa
 authors of the ALGOL language would have been happy with, as Dennis himself admits
 \cite{development_of_c_language_chist_ritchie_1996}.
 Many features were added to the language in a short time; some of the warts that persist in
-even modern C were because of Dennis's desire to make porting programs from B to C as 
+even modern C were because of Dennis's desire to make porting programs from B to C as
 simple as possible.
 
-For example, the precedence of \texttt{&} and \texttt{==} were made equal in C,
+For example, the precedence of \texttt{\&} and \texttt{==} were made equal in C,
 thereby requiring parentheses in the second expression below:
 
 \begin{lstlisting}[language=c,frame=single]
@@ -345,11 +345,11 @@ if ((c & b) == a) { /* ... */ }
 
 While many features were added to C in 1972-1973, the preprocessor was likely the most
 significant. Dennis implemented it partly at the request of Alan Snyder
-(who had also suggested that Dennis add the \texttt{&&} and \texttt{||} to make
+(who had also suggested that Dennis add the \texttt{\&\&} and \texttt{||} to make
 boolean logic more explicit) at MIT
 in \citetitle{snyder_portable_compiler_for_c_1975}, and
 partly inspired by the textual inclusion mechanisms in PL/I and BCPL.
-The first version could only \texttt{#include} other files and do simple textual
+The first version could only \texttt{\#include} other files and do simple textual
 substitution, though it was soon extended by Mike Lesk and John Reiser to handle macros
 with arguments and support conditional compilation.
 
@@ -366,50 +366,148 @@ Brian wrote most of the exposition and Dennis wrote most of the programs.
 This would come to be common; Brian's gift for technical writing that was easy to understand
 made him a common author of documentation and publications.
 
-\section{Aho and Ullman}
+The subsequent period was filled with language features focusing on type safety
+and portability as Unix and all the tools they had rewritten in C had to be ported to more and
+more systems, and much of the codebase remained untyped, harkening back to its B and assembly
+heritage. In the same vein, pointers and integers were mutually assignable in C,
+absent of any syntactic indication that the programmer's intent had changed.
+This practice fell out of style, and \textit{casts} were introduced to the language,
+inspired by a similar \textit{but distinct} concept in ALGOL 68.
+Similarly, the member-dereference operation did not care much about the type of the pointer
+being dereferenced; \texttt{ptr->field} could be used regardless of the type of \texttt{ptr},
+and \texttt{field} was taken to mean an offset from some pointer into a structure.
+\footnote{
+	Perhaps they should have preserved more of ALGOL 68's type system; these pointer rules
+	plague optimizers working with C programs to this very day.
+	The modern Linux kernel is \textit{not} compiled with a flag usually spelled
+	\texttt{-fstrict-aliasing}, which allows the optimizer to take advantage of the C language's
+	aliasing rules. These aliasing rules specify that a pointer cannot refer to multiple incompatible types,
+	and programs that use such behavior are \gls{ub}.
+	This flag would theoretically allow the compiler to better optimize the Linux kernel,
+	however, strict aliasing rules are broken so often in the kernel's source that the flag
+	results in a buggy kernel, so it cannot be enabled.
+	Programs that make use of casting to and from \texttt{void*} or
+	type-pun through unions are also common in C,
+	and in general the aliasing rules are not very friendly to optimization when compared to
+	Fortran, for example.
+}
 
-\todo{Software (and compilers!) starts to become a real discipline!Ullman was older and further 
-along than Aho, and Hopcraft came to Princeton and became Aho's advisor.}
+In 1978, Steve Johnson started work on a C compiler that was easy to retarget to other machines
+while he, Dennis and Thompson worked on porting Unix to the Interdata 8/32.
+While the language continued to evolve and some older practices fell out of style, Johnson
+came up with the \texttt{lint} program, adapted from his \textit{Portable C Compiler} \texttt{pcc},
+to search a set of source files for coding practices that might need to be updated.
+This is one of the first (if not \textit{the} first) static-analysis tool, its namesake lives on
+in today's tools; one still talks of a \textit{linter} remarking on a dubious construct
+in one's code.
+
+The third version of Unix, System III, was the first one to be primarily written in C.
+As Unix matured and its System III and System V versions were distributed,
+institutions outside AT\&T developed Unix distributions
+(particularly at the University of California at Berkeley, yielding the Berkeley
+Software Distribution of Unix), and C compilers were ported to many new machines,
+C became a mainstay of the software world, as it remains today.
+
+\section{Standardization of C}
+
+\todo{using pcc as a reference compiler became impractical.
+	The X3J11 committee formed in 1983 to standardize C.}
+\todo{includes early criticism of C.}
+
+\section{Regular Expressions}
+
+Regular expressions were a large part in the explosion of new programming languages
+and compiler tools at the labs in the early 1970s.
+
+One such use of regular expressions was Ken Thompson's \texttt{s}
+program ("s" for "search") to do pattern-based searching
+in his home directory sometime after working on Unix on the PDP-11.
+In one of those casual drop-ins, his boss McIlroy asked him to come up with a program for finding
+patterns in files and searching through directories and these things, to which Ken responded
+"ah, let me think about it overnight" knowing he already had the perfect program.
+After a night of cleaning up his program, he gave it to Doug who loved the program
+and moved it from Ken's home directory into the shared binary directory.
+It was at this time renamed \texttt{grep} after the command in the \texttt{ed} editor
+which performed the same function: \texttt{g/re/p}, for global, regular-expression, print.
+Many small programs like this formed over time at the Labs.
+
+On another occasion, Steven Johnson came into Alfred Aho's office to ask about
+parsing algorithms for his Portable C Compiler. He was having trouble getting the C parser
+working properly, so he went to Aho for his theoretical background in parsing algorithms
+and automata theory and asked how he would go about constructing a parser.
+Aho replied that first he would construct a grammar for the language, and then apply
+Knuth's LAR parsing algorithm--Aho got some sheets of cardboard from the stockroom,
+and did the sets-of-items construction for the grammar that Johnson had given him
+over the weekend.
+
+On Monday, he would give Johnson the constructed parsing table, Johnson would implement it,
+and find issues with Aho's cardboard construction. After a few iterations of this, Johnson
+asked Aho to explain the theory, which he implemented. This program went on to become the
+\texttt{yacc} program, standing for \textit{Yet Another Compiler-Compiler}, which is used
+for generating parsers from a context-free grammar.
+Aho and Johnson continued to improve the performance of the program and it vastly decreased the
+effort required to create a parser for a new language.
+Johnson's Yacc program was especially useful because it would inform the user of shift-reduce
+and reduce-reduce conflicts, so they knew if they had any difficult-to-parse constructs in their
+grammar.
+Yacc became one of the most widely used tools for creating parsers, even outside Bell Labs
+in computer science courses.
+
+One of the fast regular expression algorithms that Aho had come up with also saw use in the
+\texttt{lex} program, which is used for generating lexical analyzers from regular expressions.
+Eric Schmidt, summer intern at Bell Labs but perhaps better known today as the
+CEO and co-founder of Google, used one of Aho's algorithms and worked with Mike Lesk of Bell Labs
+to produce the first version of \texttt{lex}.
+Using these tools in tandem allowed for very tight iteration cycles for designing and
+developing new programming languages and compilers. With Lex for the lexer and Yacc for the parser,
+one could quickly develop the front-end of a compiler based only on the grammar for the language.
+
+\todo{Software (and compilers!) starts to become a real discipline!Ullman was older and further
+	along than Aho, and Hopcraft came to Princeton and became Aho's advisor.}
 
 \todo{Ratfor, AMPL, other Kernighan languages.}
 \todo{continue with typesetting...}
+
 \section{The Dragon Book}
+
+The newly created Computing Sciences Research Center at the Labs
+
 \begin{quotation}
-    Jeff had bought into this idea that it's good for your career to write a 
-book about what you're working on. In the '70s, with all this work on Unix and 
-C, there was a lot of interest in creating new programming languages and 
-compilers. As with the algorithms book, what we did was we performed research 
-on efficient algorithms for parsing and for some of the other phases of 
-compilation, wrote papers on those  and presented them at conferences. But we 
-took the important ideas that we developed and the community had developed over 
-several decades and codified them into what are now called the dragon books. The 
-first dragon book was published in 1977.We did have theorems and proofs in the 
-book, and Jeff had this brilliant idea that the book should have a cover with a 
-fierce dragon on it representing the complexity of compiler design,and then a 
-knight in armor with a lance. The armor and the lance were emblazoned with 
-techniques from formal language theory and compiler theory to slay the 
-complexity of compiler design
-\dots
-In the 1980s, more was known about how to construct efficient compilers. We 
-invited Ravi Sethi as a third coauthor, he was at Bell Labs at the time, to join 
-us in creating the second version of the dragon book. In the first version, the 
-dragon was in red. This second version, the dragon was-- sorry. In the first 
-version it was in green. In the second version the dragon was in red. What was 
-interesting about the red dragon book was there was a movie that was created in 
-1995 titled Hackers with a young Angelina Jolie in it, and in the movie, there 
-is the uber hacker that's explaining to the new hackers what you have to read to 
-become an uber hacker. He shows them 10 papers and books that you must read, and 
-one of them was the red dragon book. When my two children saw this movie, and 
-they had seen the red dragon book at home, this is the first time they thought 
-their old man was really something because he had one of his books in a 
-Hollywood movie. It shows what you have to do to impress your kids these days. 
-The red dragon book was 800 pages. In2007, we invited Monica Lam as a fourth 
-coauthor to create a third version of the dragon book that had a purple dragon 
-on the cover and it was close to a thousand pages. None of us had the heart to 
-write a fourth book at this point because it just shows how much new knowledge 
-had been created in the area of programming languages and compilers and their 
-translators, and we continued to do research in this area to keep up with it.
-\cite{aho_oral_history_2022}
+	Jeff had bought into this idea that it's good for your career to write a
+	book about what you're working on. In the '70s, with all this work on Unix and
+	C, there was a lot of interest in creating new programming languages and
+	compilers. As with the algorithms book, what we did was we performed research
+	on efficient algorithms for parsing and for some of the other phases of
+	compilation, wrote papers on those  and presented them at conferences. But we
+	took the important ideas that we developed and the community had developed over
+	several decades and codified them into what are now called the dragon books. The
+	first dragon book was published in 1977.We did have theorems and proofs in the
+	book, and Jeff had this brilliant idea that the book should have a cover with a
+	fierce dragon on it representing the complexity of compiler design,and then a
+	knight in armor with a lance. The armor and the lance were emblazoned with
+	techniques from formal language theory and compiler theory to slay the
+	complexity of compiler design
+	\dots
+	In the 1980s, more was known about how to construct efficient compilers. We
+	invited Ravi Sethi as a third coauthor, he was at Bell Labs at the time, to join
+	us in creating the second version of the dragon book. In the first version, the
+	dragon was in red. This second version, the dragon was-- sorry. In the first
+	version it was in green. In the second version the dragon was in red. What was
+	interesting about the red dragon book was there was a movie that was created in
+	1995 titled Hackers with a young Angelina Jolie in it, and in the movie, there
+	is the uber hacker that's explaining to the new hackers what you have to read to
+	become an uber hacker. He shows them 10 papers and books that you must read, and
+	one of them was the red dragon book. When my two children saw this movie, and
+	they had seen the red dragon book at home, this is the first time they thought
+	their old man was really something because he had one of his books in a
+	Hollywood movie. It shows what you have to do to impress your kids these days.
+	The red dragon book was 800 pages. In2007, we invited Monica Lam as a fourth
+	coauthor to create a third version of the dragon book that had a purple dragon
+	on the cover and it was close to a thousand pages. None of us had the heart to
+	write a fourth book at this point because it just shows how much new knowledge
+	had been created in the area of programming languages and compilers and their
+	translators, and we continued to do research in this area to keep up with it.
+	\cite{aho_oral_history_2022}
 \end{quotation}
-\todo{Bjarne Stroustrup, C++ (1979); Dennis Ritchie, C (1972); Ken Thompson, B (1969); Brian 
-Kernighan, AWK (1977), AMPL (1976), co-author of The C Programming Language (1978)}
+\todo{Bjarne Stroustrup, C++ (1979); Dennis Ritchie, C (1972); Ken Thompson, B (1969); Brian
+	Kernighan, AWK (1977), AMPL (1976), co-author of The C Programming Language (1978)}
