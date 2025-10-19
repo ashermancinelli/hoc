@@ -452,6 +452,7 @@ and reduce-reduce conflicts, so they knew if they had any difficult-to-parse con
 grammar.
 Yacc became one of the most widely used tools for creating parsers, even outside Bell Labs
 in computer science courses.
+\todo{Aho's egrep program that constructed the regexes lazily.}
 
 One of the fast regular expression algorithms that Aho had come up with also saw use in the
 \texttt{lex} program, which is used for generating lexical analyzers from regular expressions.
@@ -461,6 +462,9 @@ to produce the first version of \texttt{lex}.
 Using these tools in tandem allowed for very tight iteration cycles for designing and
 developing new programming languages and compilers. With Lex for the lexer and Yacc for the parser,
 one could quickly develop the front-end of a compiler based only on the grammar for the language.
+
+In 1974, Brian Kernighan and Linda Cherry developed one such program called \texttt{eqn}
+for typesetting mathematical expressions.
 
 \todo{Software (and compilers!) starts to become a real discipline!Ullman was older and further
 	along than Aho, and Hopcraft came to Princeton and became Aho's advisor.}
