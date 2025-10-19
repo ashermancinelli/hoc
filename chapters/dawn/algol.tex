@@ -700,7 +700,25 @@ Contains parsing and things which in other langauges are called semantics.}
 \todo{'68 critcized by Hoare and Dijkstra for abandoning simplicity of '60.
 In 1970, ALGOL 68-R became the first working compiler for ALGOL 68.}
 
-\section{Legacy of ALGOL 68}
+\section{Legacy of ALGOL}
+
+It is difficult to overstate the impact of the design decisions of both ALGOL 60 and 68,
+even though neither saw widespread adoption in the industry outside depictions of
+algorithms in academic papers.
+When Dennis Ritchie extended Ken Thompson's B compiler with a type system, he drew heavy
+inspiration from ALGOL 68:
+
+\begin{quotation}
+The scheme of type composition adopted by C owes considerable debt to Algol 68, 
+although it did not, perhaps, emerge in a form that Algol's adherents would 
+approve of. The central notion I captured from Algol was a type structure based 
+on atomic types (including structures), composed into arrays, pointers 
+(references), and functions (procedures). Algol 68's concept of unions and 
+casts also had an influence that appeared later.
+\cite{development_of_c_language_chist_ritchie_1996}
+\end{quotation}
+
+Lindsey points out a few others:
 
 \begin{quotation}
 The type system of ALGOL 68 has been adopted, more or less faithfully, in many subsequent
@@ -712,7 +730,8 @@ reftypes [Stroustrup 1996].
 \citetitle{a_history_of_algol_68_1993}
 \end{quotation}
 
-\todo{ALGOL 68 also had a notable influence in the Soviet Union, details of which can be found in Andrey Terekhov's 2014 paper: "ALGOL 68 and Its Impact on the USSR and Russian Programming."}
+ALGOL 68 also had a notable influence in the Soviet Union, details of which can 
+be found in Andrey Terekhov's 2014 paper \citetitlecite{algol_68_ussr_2014}.
 
 \todo{Pascal, Ada}
 \todo{Lindsey: "So here are my recommendations to people who essay to design programming languages."
@@ -721,7 +740,6 @@ reftypes [Stroustrup 1996].
 \begin{quotation}
 An interesting observation is the fact that the two-level formalism used
 in the description of ALGOL 68 by itself led to a number of programming
-languages, including PROLOG (Colmerauer) and my own CDL family (Compiler
-Description Language).
-\citetitle{a_shorter_history_of_algol68_1994}
+languages, including PROLOG (Colmerauer)\dots
+\cite{a_shorter_history_of_algol68_1994}
 \end{quotation}

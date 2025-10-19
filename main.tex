@@ -1,6 +1,8 @@
 \input{prelude.tex}
 \input{glossaries.tex}
-\begin{document}\directlua{
+\begin{document}
+\glsaddall % so we get the full glossary even when the terms are not all used
+\directlua{
       timeline = require("lua/timeline")  
       shell = require("lua/shell")
 }

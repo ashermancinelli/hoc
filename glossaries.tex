@@ -1,10 +1,18 @@
 \makeglossaries
+
 \newglossaryentry{bytecode}{
     name={bytecode},
-    description={A compiler intermediate representation for the purpose of interpretation or execution instead of optimization.}
+    description={A compiler intermediate representation for the purpose of 
+interpretation or execution instead of optimization}
 }
 
-\newacronym{ir}{IR}{Intermediate representation, usually a file format or data structure used inside a compiler to represent the program being compiled.}
+\newglossaryentry{bootstrap}{
+    name={bootstrap},
+    description={The process of writing a compiler in the language that it compiles,
+    such that an older version of the compiler can be used to compile a newer version of itself}
+}
+
+\newacronym{ir}{IR}{Intermediate representation, usually a file format or data structure used inside a compiler to represent the program being compiled}
 
 % Use
 % The \Gls{latex} typesetting markup language is specially suitable 

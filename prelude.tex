@@ -16,7 +16,12 @@
 \fontfamily{libertinus}
 \titleformat{\chapter}[frame]{\normalfont\huge\bfseries}{\thechapter}{0.5em}{\Huge\centering}
 \titlespacing{\chapter}{0pt}{0pt}{40pt}
-\title{DRAFT: A Brief History of Compilers}
+\begin{luacode}
+    local shell = require("lua/shell")
+    local rev = shell.git_revision()
+    local title = string.format("\\title{A Brief History of Compilers \\\\ \\large Revision: %s}", rev)
+    tex.print(title)
+\end{luacode}
 \author{Asher Mancinelli}
 \date{\today}
 \raggedbottom

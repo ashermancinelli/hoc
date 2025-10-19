@@ -101,7 +101,9 @@ systems).
 Ossanna developed the Nroff and Troff typesetting programs to fullfil their claimed
 goal of helping the patent office.
 The patent office loved their software, and they ended up buying the computing group
-a PDP-11 sometime in the early 1970s.
+a PDP-11\footnote{While many resources will mention the PDP-11, they usually refer to the
+PDP-11\textit{/22}; very few of original PDP-11s (which the computing center worked on)
+were ever produced, but the refreshed models had many users.} sometime in the early 1970s.
 Unix came up on the PDP-11 almost immediately.
 Thus we have the basis for discussing the subsequent development of compilers
 and programming languages at Bell Labs.
@@ -114,8 +116,11 @@ Alfred Aho described this era of compiler history
 as as cambrian explosion of programming languages and compiler tools
 \cite{aho_bell_labs_role_in_programming_languages_2025},
 and there were several reasons for that.
-\todo{compiler-compilers, add intro.}
-\todo{Ken Thompson, QED editor, first use of regex.}
+Tools were developed that made the description of compiler front-end
+tools extremely simple, the computing center got access to machines with
+more memory, and the theory of parsing context-free grammars advanced.
+The Labs employees worked all of these together to produce many compiler
+tools.
 
 While Doug was the department head of the Computing Sciences Research Center,
 he would regularly stop into the offices of his employees and drop ideas and requests
@@ -172,7 +177,7 @@ based more so on BCPL than on \ftn{}
 for B in a live interview\cite{kernighan_interviews_thompson_2019},
 however Dennis Ritchie describes it as a "language of his own" and
 "BCPL squeezed into 8K bytes of memory and filtered through Thompson's brain"
-\cite{development_of_c_language_ritchie_1996}.
+\cite{development_of_c_language_chist_ritchie_1996}.
 He describes the name as either a contraction of BCPL or (less likely) a contraction
 of Bon, a language Thompson developed for Multics.}.
 BCPL had been designed by Martin Richards at MIT in the mid-1960s, and thus had found
@@ -186,7 +191,7 @@ The BCPL compiler was allowed to use more memory than Thompson had on the PDP-7,
 so it allowed for more complicated expression-oriented language features.
 Dennis Ritchie points out the following two examples as only being possible
 in BCPL and not in B or C due to memory constraints
-\cite{development_of_c_language_ritchie_1996}:
+\cite{development_of_c_language_chist_ritchie_1996}:
 
 \begin{lstlisting}[language=c,frame=single]
 let P1 be (*@\textbfit{procedure}@*)
@@ -216,8 +221,8 @@ In more mature B compilers and later in C, the linker handles this automatically
 \end{figure}
 
 The B compiler did not emit machine code directly, but instead used
-\textit{threaded code}\cite{bell_threaded_code_1973}, an early form of \gls{bytecode},
-which was then interpreted.
+\textit{threaded code}\cite{bell_threaded_code_1973}, an early form of \gls{bytecode}
+operating on a simple stack machine, which was then interpreted.
 James Bell claimed that this threaded code needed no interpreter,
 but really, the execution model for threaded code is just a specification
 for an interpreter without outside the routines responsible for executing a given
@@ -229,7 +234,137 @@ See Bell's depiction of the execution of threaded code \ref{fig:bell-threaded-co
 
 Neither B nor BCPL had types; only the addressable size of data for the particular machine.
 Since pointers were just integers representing offsets into memory, pointer arithmetic
-was natural in both languages.
+was natural in both languages, and both had syntax sugar to facilitate pointer arithmetic
+and dereferencing of offsets into arrays.
+
+\begin{lstlisting}[language=c,frame=singl]
+/* Declaring an array of 10 integers */
+let V = vec 10 /* BCPL */
+auto V[10];    /* B    */
+
+/* Accessing element i of array V */
+V!i            /* BCPL */
+*(V+i)         /* B    */
+V[i]           /* B    */
+\end{lstlisting}
+
+After Ken had the TMG version of B working, he \gls{bootstrap}ped the compiler
+by implemented it in B.
+Dennis Ritchie recalls\cite{development_of_c_language_chist_ritchie_1996}:
+
+\begin{quotation}
+During development, he continually struggled against memory limitations: each 
+language addition inflated the compiler so it could barely fit, but each 
+rewrite taking advantage of the feature reduced its size. For example, B 
+introduced generalized assignment operators, using x=+y to add y to x. The 
+notation came from Algol 68 via McIlroy, who had incorporated 
+it into his version of TMG.
+\end{quotation}
+
+Dennis also recalls this about their language design and implementation decisions:
+
+\begin{quotation}
+Although we entertained occasional thoughts about implementing one of the major 
+languages of the time like Fortran, PL/I, or Algol 68, such a project seemed 
+hopelessly large for our resources: much simpler and smaller tools were called 
+for. All these languages influenced our work, but it was more fun to do things 
+on our own.
+\end{quotation}
+
+By 1970, the team had been able to acquire the PDP-11, which they promptly ported Unix to,
+along with the B \gls{bytecode} interpreter and a small assembler written in B.
+As the number of PDP-11 users grew, so too did their B codebase, which now included
+quite a few programs and subroutines, as a result of the tedium of writing assembly,
+which was the only alternative.
+B proved useful--however, the new machine revealed some serious inadequacies.
+The only data type in BCPL and B was the \texttt{cell}, roughly equivalent to the hardware's
+machine word.
+The 18-bit PDP-7\footnote{18-bit might seem like an odd choice to the modern reader;
+most mainframe computers had 36-bit words, and the PDP-7 was marketed as a smaller system.
+Thus at 18-bits, it would be marketed as roughly half a mainframe.}
+did not map cleanly to the 16-bit PDP-11.
+BCPL on the PDP-7 had support for floating-point operations through special operators, but this
+only worked because the floats could fit in a single word and this was not possible on the PDP-11.
+
+\begin{quotation}
+For all these reasons, it seemed that a typing scheme was necessary to cope 
+with characters and byte addressing, and to prepare for the coming 
+floating-point hardware. Other issues, particularly type safety and interface 
+checking, did not seem as important then as they became later.
+Aside from the problems with the language itself, the B compiler's 
+threaded-code technique yielded programs so much slower than their 
+assembly-language counterparts that we discounted the possibility of recoding 
+the operating system or its central utilities in B.
+\cite{development_of_c_language_chist_ritchie_1996}
+\end{quotation}
+
+In 1971, Dennis Ritchie began extending B by adding a character type and directly generating
+PDP-11 machine code.
+Thus the creation of a compiler capable of generating efficient machine code on a system with
+very little memory and the transition from B to C were simultaneous.
+Dennis renamed the B compiler to \texttt{NB}, or \textit{New-B}, and then \textit{C}
+shortly thereafter.
+
+\section{C}
+
+Dennis's new language now had types and new addressing schemes, and it evolved quickly.
+\textit{New-B} existed so briefly that no full description of its syntax or semantics was
+ever written.
+
+The run-time overhead associated with BCPL and B's vector indexing semantics were
+addressed in C:
+
+\begin{quotation}
+Values stored in the cells bound to array and pointer names were the machine 
+addresses, measured in bytes, of the corresponding storage area. Therefore, 
+indirection through a pointer implied no run-time overhead to scale the pointer 
+from word to byte offset. On the other hand, the machine code for array 
+subscripting and pointer arithmetic now depended on the type of the array or 
+the pointer: to compute \texttt{iarray[i]} or \texttt{ipointer+i} implied 
+scaling the addend \texttt{i} by the size of the object referred to.
+\cite{development_of_c_language_chist_ritchie_1996}
+\end{quotation}
+
+C gained a type system, overlaying semantics onto the raw bits that BCPL and B users
+were working with.
+The type system was heavily inspired by ALGOL 68, though not necessarily in a way the
+authors of the ALGOL language would have been happy with, as Dennis himself admits
+\cite{development_of_c_language_chist_ritchie_1996}.
+Many features were added to the language in a short time; some of the warts that persist in
+even modern C were because of Dennis's desire to make porting programs from B to C as 
+simple as possible.
+
+For example, the precedence of \texttt{&} and \texttt{==} were made equal in C,
+thereby requiring parentheses in the second expression below:
+
+\begin{lstlisting}[language=c,frame=single]
+if (a == b & c) { /* ... */ }
+if ((c & b) == a) { /* ... */ }
+/*  ^ Parentheses required here */
+\end{lstlisting}
+
+While many features were added to C in 1972-1973, the preprocessor was likely the most
+significant. Dennis implemented it partly at the request of Alan Snyder
+(who had also suggested that Dennis add the \texttt{&&} and \texttt{||} to make
+boolean logic more explicit) at MIT
+in \citetitle{snyder_portable_compiler_for_c_1975}, and
+partly inspired by the textual inclusion mechanisms in PL/I and BCPL.
+The first version could only \texttt{#include} other files and do simple textual
+substitution, though it was soon extended by Mike Lesk and John Reiser to handle macros
+with arguments and support conditional compilation.
+
+In the summer of 1973, the language and compiler were mature enough that the team was able
+to rewrite the Unix kernel in C.
+Ken Thompson had tried once before to port Unix to C, but the language did not support
+structures at the time, making the task too onerous to continue.
+The compiler was also ported to the Honeywell 635 and IBM 360 and 370, and commonly used
+procedures coalesced into what eventually became the standard library.
+The first of these major library components was Mike Lesk's input/output library, which
+became the basis of the C \textit{standard I/O}.
+Dennis and Brian Kernighan wrote the seminal \citetitlecite{the_c_programming_language_1ed_ritchie_kernighan_1989}.
+Brian wrote most of the exposition and Dennis wrote most of the programs.
+This would come to be common; Brian's gift for technical writing that was easy to understand
+made him a common author of documentation and publications.
 
 \section{Aho and Ullman}
 
