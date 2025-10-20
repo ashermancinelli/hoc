@@ -1,0 +1,80 @@
+
+\section{The Software Crisis}
+% \todo{DEC PDP-8 and PDP-11; IBM System/360 and OS/360; Multics; Unix; C}As the 1960s progressed,
+% the notion of
+% \textit{software} became more established,and the programs being written served the authors to a
+% much greater extent.
+% Prior to the 1960s, programs were often tailor-made for a specific
+% machine. There was no hope of re-using the program on another machine. For most of the users, their
+% organization had spent a considerable portion of their budget on their system, and they were
+% expected to use it for a long time. Retargetable compilers did not exist.
+
+Note that we will discuss some giants of computing history in this chapter who cast long
+shadows over the field; however, we will primarily focus on those involved in the
+development of compilers and programming languages.
+In particular, we will not do justice to key figures from Bell Labs, such as
+Brian Kernighan, Ken Thompson, Dennis Ritchie, Claude Shannon, and Doug McIlroy.
+I can recommend \textit{The Idea Factory} for a more comprehensive account.
+
+As Hopper and Backus had put it numerous times, programming was still exceedingly
+painful at this point in time, and the relative cost of programming kept increasing.
+As machines became cheaper and more powerful, the share of the cost of building and
+running a program devoted to programming increased, and thus the importance of
+ease of programming increased as well.
+
+Michael Mahoney, doctor history and history of science, goes so far as to describe programming
+and computer design in this way as early as 1945
+\cite[The Structures of Computation]{the-first-computers-2002}:
+\begin{quotation}
+	The kinds of computers we have designed since 1945 and the kinds of programs we have written for
+	them reflect not the nature of the computer but the purposes and aspirations of the groups of people
+	who made those designs and wrote those programs, and the product of their work reflects not the
+	history of the computer but the histories of those groups, even as the computer in many
+	cases fundamentally redirected the course of those histories.
+\end{quotation}
+
+While this description was correct about the \textit{direction} compiler engineering
+and programming language design were going, the statement was far too strong to make
+about the year 1945.
+Automatic programming was still scarcely more than synthetic machine code so the programmer
+did not have to concern themselves with the details of the particular machine's instruction set
+to the same extent, but they were still very much writing programs by writing specific instructions
+instead of concerning themselves with the problem they were trying to solve and allowing the
+compiler to turn that into proper machine code.
+
+American historian of computing and aerospace Paul Ceruzzi describes the situation in 1968:
+
+\begin{quotation}
+	Despite great strides in software, programming always seemed to be in a state of crisis and
+	always seemed to play catch-up to the advances in hardware. This crisis came to a head in 1968, just
+	as the integrated circuit and disk storage were making their impact on hardware systems. That year,
+	the crisis was explicitly acknowledged in the academic and trade literature and was the subject of a
+	NATO-sponsored conference that called further attention to it. Some of the solutions proposed were a
+	new discipline of software engineering, more formal techniques of structured programming, and new
+	programming languages that would replace the venerable but obsolete COBOL and FORTRAN
+	\footnote{Readers may find it entertaining that Ceruzzi describes COBOL and FORTRAN
+		as obsolete \textit{by 1968}; both are still heavily used in some industries,
+		and one of the very first compilers to adopt MLIR (to be discussed in a later chapter)
+		is a Fortran compiler\cite{spickett_flang_levels_up_2025}.}. Although
+	not made in response to this crisis, the decision by IBM to sell its software and services separately
+	from its hardware probably did even more to address the problem. It led to a commercial software
+	industry that needed to produce reliable software in order to survive. The crisis remained, however,
+	and became a permanent aspect of computing. Software came of age in 1968; the following decades would
+	see further changes and further adaptations to hardware advances.
+	\cite{history_of_modern_computing_2003_ceruzzi}
+\end{quotation}
+
+Backus describes this as part of the motivation for beginning work on \ftn{}
+\cite[\textit{The Economics of Programming}]{hopl_backus_history_of_fortran}:
+\begin{quotation}
+	Another factor that influenced the development of Fortran was the economics
+	of programming in 1954. The cost of programmers associated with a computer
+	center was usually at least as great as the cost of the computer itself\dots
+	Thus, programming an debugging accounted for as much as three quarters of the
+	cost of operating a computer; and obviously, as computers got cheaper, this
+	situation would get worse.
+\end{quotation}
+
+Thus this chapter is about the efforts to make programming easier and more productive
+to address this crisis. Software rose in importance in industry, it became a field of
+study in academia, and true research on compilers and programming languages began.

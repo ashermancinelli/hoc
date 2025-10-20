@@ -12,64 +12,77 @@ slightly different from the machine's actual code, but not providing any real ab
 writing the pseudocode still tedious and unproductive.
 Laning and Zierler's work was different.
 
-\todo{Backus was a huge fan of thier work. Look at \citetitle{hopl_backus_history_of_fortran}.}
-\todo{ Laning and Zierler, 1954. Early 1950s. Inspiration for Backus/\FTN{}.
-Worked more like a modern compiler than Hopper's A-0 and A-1.  }
-
-Backus on the Whirlwind\cite{Backus_1980_Programming_in_America_in_1950s}:
-\begin{quotation}
-  \textbf{5. The Priesthood versus the Laning and Zierler Algebraic Compiler}
-  Very early in the 1950s, J. Halcombe Laning, Jr., recognized that
-  programming using algebraic expressions would be an important improvement.
-  As a result of that insight he and Neal Zierler had the first
-  algebraic compiler
-  running on WHIRLWIND at MIT in January 1954 [3]. (A private
-    communication from the Charles Stark Draper Laboratory indicates
-    that they had
-  demonstrated algebraic compiling sometime in 1952!) The priesthood
-  ignored Laning's insight for a long time. A 1954 article by Charles W. Adams
-  and Laning (presented by Adams at the ONR symposium) devotes less than
-  3 out of 28 pages to Laning's algebraic system; the rest are devoted to other
-  MIT systems. The complete description of the system's method of operation
-  as given there is the following
-\end{quotation}
+John Backus was hugely supportive of their work, though he was not directly invluenced by it
+prior to starting work on \GLS{ftn}.
+In Backus's 1980 paper on the programming landscape of the 1950s
+\citetitlecite{Backus_1980_Programming_in_America_in_1950s}, he recalls:
 
 \begin{quotation}
-  In retrospect, the biggest event of the 1954 symposium on automatic
-  programming
-  was the announcement of a system that J. Halcombe Laning, Jr. and Niel Zierler
-  had recently implemented for the Whirlwind computer at M.I.T.  However, the
-  significance of that announcement is not especially evident from the published
-  proceedings [NA 524-], 97\% of which are devoted to enthusiastic description s
-  of assemblers, interpreters, and 1954-style "compilers".
-  \cite{Knuth_TrabbPardo_1976_Early_Development}
+	Very early in the 1950s, J. Halcombe Laning, Jr., recognized that
+	programming using algebraic expressions would be an important improvement.
+	As a result of that insight he and Neal Zierler had the first
+	algebraic compiler running on WHIRLWIND at MIT in January 1954.
+	(A private communication from the Charles Stark Draper Laboratory indicates
+	that they had demonstrated algebraic compiling sometime in 1952!) The priesthood
+	ignored Laning's insight for a long time. A 1954 article by Charles W. Adams
+	and Laning (presented by Adams at the ONR symposium) devotes less than
+	3 out of 28 pages to Laning's algebraic system; the rest are devoted to other
+	MIT systems. The complete description of the system's method of operation
+	as given there is the following
 \end{quotation}
+
+In this quote, the \textit{priesthood} Backus is referring to is the group of programmers
+who rejected the idea that programming should or could be done in a higher level language,
+and that programming in machine code is an art that would need to be preserved.
+On his own side of the argument, Backus found Laning and Zierler's work on compiling
+algebraic expressions into programs to be more accessible and efficient.
+Grace Hopper was on this side of the argument as well.
+
+Donald Knuth and Trabb Pardo also recall the importance of their work in
+the development of programming languages and compilers
+in \citetitlecite{Knuth_TrabbPardo_1976_Early_Development}:
+
+\begin{quotation}
+	In retrospect, the biggest event of the 1954 symposium on automatic
+	programming was the announcement of a system that J. Halcombe Laning, Jr. and Niel Zierler
+	had recently implemented for the Whirlwind computer at M.I.T.  However, the
+	significance of that announcement is not especially evident from the published
+	proceedings [NA 524-], 97\% of which are devoted to enthusiastic description s
+	of assemblers, interpreters, and 1954-style "compilers".
+\end{quotation}
+
+Clearly, their work was highly influential.
 
 \begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.5\linewidth]{resource/knuth_pardo_on_laning_zierlers_algebraic_compiler.png}
-  \caption{Knuth and Trabb Pardo on Laning and Zierler's Algebraic Compiler}
-  \label{fig:knuth-pardo-on-laning-zierler}
+	\centering
+	\includegraphics[width=0.5\linewidth]{resource/knuth_pardo_on_laning_zierlers_algebraic_compiler.png}
+	\caption{Knuth and Trabb Pardo on Laning and Zierler's Algebraic Compiler}
+	\label{fig:knuth-pardo-on-laning-zierler}
 \end{figure}
 
 \begin{quotation}
-  The first programming system to operate in the sense of a modern compiler was
-  developed by J. H. Laning and N. Zierler for the Whirlwind computer at the
-  Massachusetts Institute of Technology in the early 1950s. They described their
-  system, which never had a name, in an elegant and terse manual entitled "A
-  Program for Translation of Mathematical Equations for Whirlwind I,"
-  distributed
-  by MIT to about one-hundred locations in January 1954.26 It was, in John
-  Backus's words, "an elegant concept elegantly realized." Unlike the UNIVAC
-  compilers, this system worked much as modern compilers work; that is, it took
-  as its input commands entered by a user, and generated as output fresh and
-  novel machine code, which not only executed those commands but also kept track
-  of storage locations, handled repetitive loops, and did other housekeeping
-  chores. Laning and Zierler's "Algebraic System" took commands typed
-  in familiar
-  algebraic form and translated them into machine codes that Whirlwind could
-  execute.27 (There was still some ambiguity as to the terminology: while Laning
-    and Zierler used the word "translate" in the title of their manual, in the
-  Abstract they call it an "interpretive program.")28
-  \cite{new-history-of-modern-computing}
+	The first programming system to operate in the sense of a modern compiler was
+	developed by J. H. Laning and N. Zierler for the Whirlwind computer at the
+	Massachusetts Institute of Technology in the early 1950s. They described their
+	system, which never had a name, in an elegant and terse manual entitled "A
+	Program for Translation of Mathematical Equations for Whirlwind I,"
+	distributed
+	by MIT to about one-hundred locations in January 1954.26 It was, in John
+	Backus's words, "an elegant concept elegantly realized." Unlike the UNIVAC
+	compilers, this system worked much as modern compilers work; that is, it took
+	as its input commands entered by a user, and generated as output fresh and
+	novel machine code, which not only executed those commands but also kept track
+	of storage locations, handled repetitive loops, and did other housekeeping
+	chores. Laning and Zierler's "Algebraic System" took commands typed
+	in familiar
+	algebraic form and translated them into machine codes that Whirlwind could
+	execute.27 (There was still some ambiguity as to the terminology: while Laning
+	and Zierler used the word "translate" in the title of their manual, in the
+	Abstract they call it an "interpretive program.")28
+	\cite{new-history-of-modern-computing}
 \end{quotation}
+
+
+\todo{Backus was a huge fan of thier work. Look at \citetitle{hopl_backus_history_of_fortran}.}
+\todo{ Laning and Zierler, 1954. Early 1950s. Inspiration for Backus/\FTN{}.
+	Worked more like a modern compiler than Hopper's A-0 and A-1.  }

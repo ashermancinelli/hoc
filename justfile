@@ -35,6 +35,9 @@ publish: cleanfirst
 pub: publish
 
 open:
+    killall Preview||:
     open "{{job}}.pdf"
 
 o: open
+
+qo: q o
