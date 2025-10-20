@@ -1,12 +1,6 @@
+\section{Bell Lab's Computing Science Research Center}
 
-
-
-
-
-
-
-
-\section{Multics and Unix at Bell Labs}
+\subsection{Multics and Unix at Bell Labs}
 
 There is no avoiding Multics and UNIX if we are to discuss the development of compilers at Bell Labs.
 We will cover the history of the American Telephone and Telegraph Company (AT\&T)
@@ -110,7 +104,7 @@ and programming languages at Bell Labs.
 
 \input{chapters/software/unix-personal-histories.tex}
 
-\section{The First Unix Compilers}
+\subsection{The First Unix Compilers}
 
 Alfred Aho described this era of compiler history
 as as cambrian explosion of programming languages and compiler tools
@@ -183,7 +177,7 @@ based more so on BCPL than on \ftn{}
 BCPL had been designed by Martin Richards at MIT in the mid-1960s, and thus had found
 its way onto MIT's CTSS system, which Bell Labs employees were familiar with.
 
-\section{BCPL and B}
+\subsection{BCPL and B}
 
 BCPL, B and C may differ syntactically, but semantically they are very similar
 and operate at a similar level of abstraction.
@@ -237,7 +231,7 @@ Since pointers were just integers representing offsets into memory, pointer arit
 was natural in both languages, and both had syntax sugar to facilitate pointer arithmetic
 and dereferencing of offsets into arrays.
 
-\begin{lstlisting}[language=c,frame=singl]
+\begin{lstlisting}[language=c,frame=single]
 /* Declaring an array of 10 integers */
 let V = vec 10 /* BCPL */
 auto V[10];    /* B    */
@@ -305,7 +299,7 @@ very little memory and the transition from B to C were simultaneous.
 Dennis renamed the B compiler to \texttt{NB}, or \textit{New-B}, and then \textit{C}
 shortly thereafter.
 
-\section{C}
+\subsection{C}
 
 Dennis's new language now had types and new addressing schemes, and it evolved quickly.
 \textit{New-B} existed so briefly that no full description of its syntax or semantics was
@@ -408,13 +402,13 @@ institutions outside AT\&T developed Unix distributions
 Software Distribution of Unix), and C compilers were ported to many new machines,
 C became a mainstay of the software world, as it remains today.
 
-\section{Standardization of C}
+\subsection{Standardization of C}
 
 \todo{using pcc as a reference compiler became impractical.
 	The X3J11 committee formed in 1983 to standardize C.}
 \todo{includes early criticism of C.}
 
-\section{Regular Expressions}
+\subsection{Regular Expressions: Grep, Yacc, Lex}
 
 Regular expressions were a large part in the explosion of new programming languages
 and compiler tools at the labs in the early 1970s.
@@ -454,6 +448,23 @@ Yacc became one of the most widely used tools for creating parsers, even outside
 in computer science courses.
 \todo{Aho's egrep program that constructed the regexes lazily.}
 
+In a mailing list, Johnson recalled that:
+\begin{quotation}
+	The name cames as a result of a comment by Jeff Ullman -- Al was
+	telling him about the program,
+	and he said "What? Yet Another Parser Generator?"
+	So I started calling it Yacc.
+
+	The first implementation was really slow.  We were all sharing a
+	single PDP 11 with Unix on it, and
+	Yacc could take 20 minutes to generate a 50-rule grammar table.
+	Everyone would groan when  i
+	started the program: "Ohhhh.  Johnson's running Yacc again".
+\end{quotation}
+
+After Al and Johnson's optimization efforts, the group was eventually able to
+parse \Gls{F77}.
+
 One of the fast regular expression algorithms that Aho had come up with also saw use in the
 \texttt{lex} program, which is used for generating lexical analyzers from regular expressions.
 Eric Schmidt, summer intern at Bell Labs but perhaps better known today as the
@@ -463,26 +474,91 @@ Using these tools in tandem allowed for very tight iteration cycles for designin
 developing new programming languages and compilers. With Lex for the lexer and Yacc for the parser,
 one could quickly develop the front-end of a compiler based only on the grammar for the language.
 
-In 1974, Brian Kernighan and Linda Cherry developed one such program called \texttt{eqn}
-for typesetting mathematical expressions.
+\subsection{Applications of Yacc and Lex: Eqn and AWK}
 
-\todo{Software (and compilers!) starts to become a real discipline!Ullman was older and further
-	along than Aho, and Hopcraft came to Princeton and became Aho's advisor.}
+In 1974, Brian Kernighan and Linda Cherry developed one of the first programs
+using Lex and Yacc to develop compilers.
+It was called \texttt{eqn} and was used for typesetting mathematical expressions,
+usually as a part of \textit{troff} documents.
+At the time, troff was the state-of-the-art typesetting tool,
+and it got lots of use at Bell Labs (recall that the Lab's primary output was publications).
+
+Troff documents were marked by beginning and ending characters with a leading perdiod.
+An Eqn equation in a troff document would start with \texttt{.EQ} and end with \texttt{.EN}\cite{kernighan_cherry_eqn_1975}:
+
+\begin{lstlisting}[frame=single]
+.EQ
+left [ x + y over 2a right ]~=~1
+.EN
+\end{lstlisting}
+
+The grammar for Eqn was defined by Yacc rules like so:
+
+\begin{lstlisting}[frame=single]
+eqn : box | eqn box
+box : text
+    | { eqn }
+    | box SUB box | box SUP box
+    | [ROMAN | BOLD | ITALIC] box
+\end{lstlisting}
+
+This would embed the equation $ [ \frac{x + y}{2a} ] \approx 1 $ in the document.
+This was incredibly useful! Prior to typesetting programs, an author would need to deliver their
+hand-written notes to a typesetter to produce a draft before sending the typeset drafts to
+publishers and editors. Placing the typesetting programs in the hands of the authors themselves
+allowed them to see more or less the final product as they wrote.
+
+Usually, papers would not be typeset until they were already accepted and published.
+When the Bell Labs employees started writing papers with Eqn and Troff, their papers
+would be rejected by converences and editors because they "didn't want to publish anything that
+had already been published elsewhere."
+Of course these papers had not already been published, but they were so refined
+that the reviewers assumed they had been.
+
+Kernighan and Cherry wanted to be able to typeset equations in publications by typing
+something similar to plain-English descriptions, similar to how one mathematician would
+describe an equation to another over the phone.
+Al and Steve helped Brian and Linda develop Eqn, and were their first users,
+along with Richard Hamming and Doug McIlroy.
+Many of Eqn's features were eventually incorporated into Donald Knuth's \tex typesetting program.
+
+Al recalls that the first Fortran compiler took 18 staff-years to create at IBM,
+while the folks at Bell Labs were able to produce programming languages and compilers left and right
+thanks to his new tools and the developments in parsing theory they built upon.
+
+Another significant use of Lex and Yacc that perhaps sees more use today than Eqn is the AWK language,
+named after its creators Alfred Aho, Brian Kernighan, and Peter Weinberger.
+At the time, they considered it a throwaway tool and nobody else would be interested in it.
+It was designed to be a pattern-action language; programs describe a pattern and a corresponding
+action to be performed on every instance of that pattern in the input.
 
 \todo{Ratfor, AMPL, other Kernighan languages.}
 \todo{continue with typesetting...}
 
-\section{The Dragon Book}
+\subsection{The Dragon Book}
 
-The newly created Computing Sciences Research Center at the Labs
+\begin{figure}[h]
+	\centering
+	\includegraphics[height=0.3\textheight]{resource/software/unix/dragon-book-1ed.png}
+	\caption{Cover of the first edition of the Dragon Book}
+	\label{fig:dragon-book}
+\end{figure}
+
+Jeffrey Ullman and Alfred Aho continued working together on
+developing compiler theory and parsing algorithms.
+Other folks at the Labs would impress on Al that it was important to write
+about what you were working on to build your reputation in the
+scientific community, an idea that Jeff also bought into.
+They decided they ought to write a book together about their parsing
+techniques in light of how much interest the development of Unix and C
+had generated. Lots of people were newly interested in developing new
+programming languages and compilers, and they were well-positioned to
+write about it; thus was \textit{The Dragon Book} born.
 
 \begin{quotation}
-	Jeff had bought into this idea that it's good for your career to write a
-	book about what you're working on. In the '70s, with all this work on Unix and
-	C, there was a lot of interest in creating new programming languages and
-	compilers. As with the algorithms book, what we did was we performed research
+	As with the algorithms book, what we did was we performed research
 	on efficient algorithms for parsing and for some of the other phases of
-	compilation, wrote papers on those  and presented them at conferences. But we
+	compilation, wrote papers on those and presented them at conferences. But we
 	took the important ideas that we developed and the community had developed over
 	several decades and codified them into what are now called the dragon books. The
 	first dragon book was published in 1977.We did have theorems and proofs in the
@@ -490,28 +566,26 @@ The newly created Computing Sciences Research Center at the Labs
 	fierce dragon on it representing the complexity of compiler design,and then a
 	knight in armor with a lance. The armor and the lance were emblazoned with
 	techniques from formal language theory and compiler theory to slay the
-	complexity of compiler design
-	\dots
-	In the 1980s, more was known about how to construct efficient compilers. We
-	invited Ravi Sethi as a third coauthor, he was at Bell Labs at the time, to join
-	us in creating the second version of the dragon book. In the first version, the
-	dragon was in red. This second version, the dragon was-- sorry. In the first
-	version it was in green. In the second version the dragon was in red. What was
-	interesting about the red dragon book was there was a movie that was created in
-	1995 titled Hackers with a young Angelina Jolie in it, and in the movie, there
-	is the uber hacker that's explaining to the new hackers what you have to read to
-	become an uber hacker. He shows them 10 papers and books that you must read, and
-	one of them was the red dragon book. When my two children saw this movie, and
-	they had seen the red dragon book at home, this is the first time they thought
-	their old man was really something because he had one of his books in a
-	Hollywood movie. It shows what you have to do to impress your kids these days.
-	The red dragon book was 800 pages. In2007, we invited Monica Lam as a fourth
-	coauthor to create a third version of the dragon book that had a purple dragon
-	on the cover and it was close to a thousand pages. None of us had the heart to
-	write a fourth book at this point because it just shows how much new knowledge
-	had been created in the area of programming languages and compilers and their
-	translators, and we continued to do research in this area to keep up with it.
+	complexity of compiler design.
 	\cite{aho_oral_history_2022}
 \end{quotation}
+
+They published updates to the dragon book over time as well;
+they co-authored the second edition with Ravi Sethi, another Bell Labs researcher,
+in the 1980s. The second edition had grown to over 800 pages, and the third edition
+was published in 2007 at close to a thousand pages.
+At this point none of the original authors wanted to work on a fourth edition
+because of how much the field of compiler design had grown since then.
+
+The first edition (with the iconic green dragon in Figure \ref{fig:dragon-book})
+had a very heavy focus
+on lexing, parsing, and semantic analysis, all but omitting optimization
+techniques. This makes sense because parsing algorithms were Al and Jeff's specialties,
+but as this book went on to be the seminal compiler textbook for a generation,
+many student's primary exposure to compiler design was almost entirely focused on
+front-end design.
+Of the 600 or so pages in the first edition, only about 100 were dedicated to
+optimization and data-flow analysis\cite[Chapters 12, 13, and 14]{the_dragon_book_aho_ullman_1977}.
+
 \todo{Bjarne Stroustrup, C++ (1979); Dennis Ritchie, C (1972); Ken Thompson, B (1969); Brian
 	Kernighan, AWK (1977), AMPL (1976), co-author of The C Programming Language (1978)}

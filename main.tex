@@ -1,10 +1,10 @@
 \input{prelude.tex}
 \input{glossaries.tex}
 \begin{document}
-\glsaddall % so we get the full glossary even when the terms are not all used
+% \glsaddall % so we get the full glossary even when the terms are not all used
 \directlua{
-      timeline = require("lua/timeline")  
-      shell = require("lua/shell")
+	timeline = require("lua/timeline")
+	shell = require("lua/shell")
 }
 \maketitle
 \tableofcontents

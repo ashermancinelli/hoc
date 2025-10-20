@@ -1,5 +1,7 @@
 \chapter{Introduction}
-While the modern programmer may consider the term \emph{compiler} to be a specific one, it is still often misunderstood. Moreover, in the beginning, the term was more ambiguous than it is today.
+While the modern programmer may consider the term \emph{compiler} to be a specific one,
+it is still often misunderstood. Moreover, in the beginning, the term was more ambiguous than it is today.
+
 % it is specific only in the% sense that users of the word tend to mean the same thing when they say it.
 % The details of what a compiler does are often obscure to even professional software engineers.
 % This is especially evident when they feel the need to use a term like \emph{transpiler} to distinguish between a
@@ -10,70 +12,71 @@ Brian Kernighan described compilers in this seemingly general way
 \cite{new-history-of-modern-computing}:
 
 \begin{quotation}
-    A compiler is a program that translates something written in one language 
-into something semantically equivalent in another language. For example, 
-compilers for high-level languages like C and Fortran might translate into 
-assembly language for a particular kind of computer; some compilers translate 
-from other languages such as Ratfor into Fortran.
+	A compiler is a program that translates something written in one language
+	into something semantically equivalent in another language. For example,
+	compilers for high-level languages like C and Fortran might translate into
+	assembly language for a particular kind of computer; some compilers translate
+	from other languages such as Ratfor into Fortran.
 \end{quotation}
-However, this is not sufficiently general. Two counter examples are \tex and 
-\metafont, which are compilers that transform text into PDF documents and 
-renderable fonts, respectively. Transforming text into an executable program is 
-not the same operation as transforming text into a document or font, yet both 
-are considered compilation. When students are first introduced to compilers, the 
-first sort of program they are contrasted with is interpreters. This distinction 
-is not necessarily meaningful. The conventional notion of an interpreter is a 
-program that performs the actions specified by the source code as chunks of the 
-code are consumed;perhaps this was the case with early \texttt{BASIC} 
-interpreters and it may be a useful mental model when introducing interpreters 
-to new programmers, but one is hard-pressed to find a modern interpreter that 
-does not perform a compilation step. The most popular interpreters for today's 
-most popular interpreted languages, Python and Javascript, both use relatively 
-sophisticated compilation techniques. There are even Python \textit{libraries} 
-that perform just-in-time (JIT) compilation, targeting CPUs, GPUs, and other 
-specialized 
+
+However, this is not sufficiently general. Two counter examples are \tex and
+\metafont, which are compilers that transform text into PDF documents and
+renderable fonts, respectively. Transforming text into an executable program is
+not the same operation as transforming text into a document or font, yet both
+are considered compilation. When students are first introduced to compilers, the
+first sort of program they are contrasted with is interpreters. This distinction
+is not necessarily meaningful. The conventional notion of an interpreter is a
+program that performs the actions specified by the source code as chunks of the
+code are consumed;perhaps this was the case with early \texttt{BASIC}
+interpreters and it may be a useful mental model when introducing interpreters
+to new programmers, but one is hard-pressed to find a modern interpreter that
+does not perform a compilation step. The most popular interpreters for today's
+most popular interpreted languages, Python and Javascript, both use relatively
+sophisticated compilation techniques. There are even Python \textit{libraries}
+that perform just-in-time (JIT) compilation, targeting CPUs, GPUs, and other
+specialized
 hardware\cite{jax-compiler}\cite{lam-numba}\cite{numba_cuda}\cite{triton-tillet}.
 
 \vspace{0.5em}
 
-To capture the full spectrum of compiler technologies, the 
+To capture the full spectrum of compiler technologies, the
 definition we will use in this book is intentionally broad:
 \begin{quotation}
-\textit{A compiler analyzes, transforms, and produces code, based on source code.}
-% \caption{Definition of \textit{compiler}.}
-\label{def:compiler}
+	\textit{A compiler analyzes, transforms, and produces code, based on source code.}
+	% \caption{Definition of \textit{compiler}.}
+	\label{def:compiler}
 \end{quotation}
 
-In the case of \tex and \metafont, the source code may not entail a 
-\textit{program} in the conventional sense; \tex source code describes a 
-document rather than a sequence of instructions to be performed. The code being 
-produced by the compiler may be the encoded PDF format, for instance. So too are 
-interpreters which produce code in some form during the interpretation 
-process. The CPython interpreter produces \gls{bytecode} before executing the 
-program, meaning it is a compiler by our definition. Perhaps CPython it is a 
-compiler the consumes Python code and produces CPython bytecode, which also 
-happens to ship a CPython bytecode virtual machine which typically executes the 
-bytecode as soon as it is produced. 
+In the case of \tex and \metafont, the source code may not entail a
+\textit{program} in the conventional sense; \tex source code describes a
+document rather than a sequence of instructions to be performed. The code being
+produced by the compiler may be the encoded PDF format, for instance. So too are
+interpreters which produce code in some form during the interpretation
+process. The CPython interpreter produces \gls{bytecode} before executing the
+program, meaning it is a compiler by our definition. Perhaps CPython is a
+compiler that consumes Python source code and produces CPython bytecode, which also
+happens to ship a CPython bytecode virtual machine which typically executes the
+bytecode as soon as it is produced.
 
-While teaching a course on compilers at 
-Columbia University, one of Alfred Aho's students wrote a compiler called 
-Up$\flat$eat which produces music based on input data; given input data in some 
-format, Up$\flat$eat produces output code in the form of 
-music\cite{aho_oral_history_2022}. The student's final presentation was to set 
-the input data to the ticker for some symbol from the New York Stock Exchange, 
-playing happy and upbeat music whenever the ticker went up, and sad depressed 
-music when it went down. Another Bell Labs creation was the connection of two 
-programs: a program that translated numbers into words (e.g. 123 to "one 
-hundred twenty three"), and a program that turned text into data representing 
-sound waves. Connecting these two compilers (on that compiled text with numbers 
-into text with words sounding out the numbers, and one that compiled text into 
-sound waves) allowedBell Labs employees to send messages that would be turned 
-into sound waves and broadcast on a speaker in the computer room. The point of 
-this section is not pedantry, but to establish a broad definition of compiler 
-technology before embarking on the details of its development. We will primarily 
-focus on compilers that have run on a machine. We largely exclude theoretical 
-works like Ada King Lovelace's notes on calculating Bournoulli numbers and the 
-development of automata theory, for instance. Each step in the development of 
-compiler technology builds on the previous steps, and while the prior steps are 
-important, our focus is on compiler programs and not the theoretical works that 
+While teaching a course on compilers at
+Columbia University, one of Alfred Aho's students wrote a compiler called
+Up$\flat$eat which produces music based on input data; given input data in some
+format, Up$\flat$eat produces output code in the form of
+music\cite{aho_oral_history_2022}. The student's final presentation was to set
+the input data to the ticker for some symbol from the New York Stock Exchange,
+playing happy and upbeat music whenever the ticker went up, and sad depressed
+music when it went down. Another Bell Labs creation was the connection of two
+programs: a program that translated numbers into words (e.g. 123 to "one
+hundred twenty three"), and a program that turned text into data representing
+sound waves. Connecting these two compilers (on that compiled text with numbers
+into text with words sounding out the numbers, and one that compiled text into
+sound waves) allowedBell Labs employees to send messages that would be turned
+into sound waves and broadcast on a speaker in the computer room. The point of
+this section is not pedantry, but to establish a broad definition of compiler
+technology before embarking on the details of its development. We will primarily
+focus on compilers that have run on a machine. We largely exclude theoretical
+works like Ada King Lovelace's notes on calculating Bournoulli numbers and the
+development of automata theory, for instance. Each step in the development of
+compiler technology builds on the previous steps, and while the prior steps are
+important, our focus is on compiler programs and not the theoretical works that
 preceded them, except where especially relevant.

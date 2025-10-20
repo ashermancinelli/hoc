@@ -19,6 +19,8 @@ full:
 quick:
     {{latex}}
 
+q: quick
+
 clean:
     latexmk -C
     rm *.bbl *.upa *.upb *-SAVE-ERROR || true
@@ -31,3 +33,8 @@ publish: cleanfirst
     git commit -m publish
 
 pub: publish
+
+open:
+    open "{{job}}.pdf"
+
+o: open
