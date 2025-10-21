@@ -34,7 +34,7 @@ him to enroll in the math program at Columbia University. The SSEC that would
 intrigue him at the IBM computing center was designed at the Watson Scientific
 Computing Laboratory at Columbia.
 
-\subsection{IBM Mathematical FORmula TRANslating System}
+\subsection{FORTRAN I}
 
 At IBM, Backus worked on the SSEC and later the IBM 701 and 704. The main use
 of the SSEC was aerospace calculations; programming calculations to predict the
@@ -145,12 +145,14 @@ In 1953, based on his experience with Speedcoding on the 701, Backus proposed
 yet another language to elevate the programming experience on the 704. IBM
 management supported the proposal. He formed a ten-person team of his own
 choosing based out of IBM's Manhattan headquarters, including Irving Ziller,
-\todo{list other members}. They released \textit{Preliminary Report,
-	Specifications for the IBM Mathematical FORmula TRANslating System,
-	FORTRAN}\cite{IBM_1954_FORTRAN_Specifications} after about one year of working
-together. Roughly two years after its first conception, \FTN{} was released for
+\todo{list other members}. They released \citetitlecite{IBM_1954_FORTRAN_Specifications}
+after about one year of working
+together.
+Roughly two years after its first conception, \FTN{} was released for
 the first time. It would go on to ship with every IBM 704 and become the
-primary means of programming in the scientific community. Backus could not
+primary means of programming in the scientific community.
+
+Backus could not
 stand how slow programming was without a higher-level language, and machines
 were expensive; leasing a machine and spending time programming in machine code
 wasted money compared to a compiler capable of generating reasonable machine
@@ -222,6 +224,31 @@ With the support of his new boss Cuthbert Hurd, his family, friends, and his
 team, the first report of \FTN{} was released externally to 704 users. This
 brought interest from a variety of users, many of whom offered up members of
 their teams to help.
+
+The original FORTRAN report had some peculiarities and made some large claims,
+some of which came true and some of which \textit{very much} did not.
+Variables had one or two characters, function names of three or more characters,
+and array variables with up to three subscripts.
+The document used the term \textit{arithmetic formulas} to describe what
+we would today call \textit{assignment statements}.
+
+DO formulas were particularly interesting, and not necessarily the construct that we
+today call \textit{loops}.
+Any \textit{formula} could have an associated number with it, allowing that formula to be
+invoked from elsewhere in the program.
+For example, in the following snippet taken from the original report,
+the formulas starting with 10 and ending with 14 would be executed
+9 times in total, starting with i taking the value of 4 and incrementing by 2
+until reaching 20; once completed, control resumes at formula 30:
+
+\begin{lstlisting}[language=fortran,frame=single]
+      do 10 14 30 i=4,20,2
+\end{lstlisting}
+
+Whew! For such a fundamental concept, the \gls{cfg} is potentially very complex.
+
+\subsection{FORTRAN II}
+\subsection{FORTRAN III}
 
 \subsection{\FTN{} Optimization and the First Users}
 
