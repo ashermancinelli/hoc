@@ -246,6 +246,38 @@ until reaching 20; once completed, control resumes at formula 30:
 \end{lstlisting}
 
 Whew! For such a fundamental concept, the \gls{cfg} is potentially very complex.
+I suspect that in most cases, only one or two formulas were specified.
+When the third formula number is omitted, execution resumes at the instruction
+immediately following the final formula of the DO construct, and
+if only one formula is specified, then that is the last formula to execute,
+and the first is the one immediately following the DO statement.
+
+Another peculiar feature was the RELABEL formula, which was intended to make
+matrix rotation operations simpler. For example, for a 4x4 matrix \texttt{b}, the
+formula \texttt{RELABEL(3,1)} would result in \texttt{b(1,i)} taking the same meaning as \texttt{b(i,1)}
+had prior to the relabel.
+There soon came better ways to express the same idea, and I am unable to find any example
+programs using this construct, even in the original report.
+
+The final section of the report notes that "no special provisions have been included
+in the FORTRAN system for locating errors in formulas\dots
+Since FORTRAN formulas are fairly readable, it should be possible to
+check their correctness by independently recreating the specifications for
+the problem from its FORTRAN formulation." \cite[C. DEBUGGING]{IBM_1954_FORTRAN_Specifications}
+It is remarkable that they \textit{did} consider how to debug FORTRAN programs,
+and then \textit{thought better} of providing error messages.
+
+Again, they were tragically optimistic: in the second page of the report,
+they claimed that "FORTRAN should virtually eliminate coding and debugging."
+
+
+\subsection{FORTRAN Reference Manual}
+
+In 1956, they released the reference manual \citetitlecite{10.1145/155360.155365} with a FORTRAN
+that looked very similar to the original, with a few deletions and minor changes.
+The ill-fated \texttt{RELABEL} formula was removed and the \texttt{DO} statement was simplified.
+Instead of taking potentially three formulas (the first, last, and continuation formulas),
+one now only specified the final formula of the loop, or the \gls{backedge}.
 
 \subsection{FORTRAN II}
 \subsection{FORTRAN III}

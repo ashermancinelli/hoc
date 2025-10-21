@@ -36,13 +36,23 @@
 }
 
 \newglossaryentry{cfg}{
-	name={Control-flow graph},
+	name={control-flow graph},
 	description={In compiler theory, the control-flow graph is a directed graph representing the possible paths of control flow through a program. Nodes of the graph are usually \gls{basicblock}s}
 }
 
 \newglossaryentry{basicblock}{
 	name={Basic block},
 	description={In compiler theory, a basic block is typically a sequence of instructions that are executed in order and containing a single entry point and exit point}
+}
+
+\newglossaryentry{backedge}{
+	name={back-edge},
+	description={A back-edge is an edge in the \gls{cfg} that returns execution from the end of a loop body back to the beginning of the loop, or the loop's \gls{header}}
+}
+
+\newglossaryentry{header-cfg}{
+	name={header},
+	description={A header is the first node in a control-flow graph of a loop. Loops begin execution at the entry node, then to the header node, then through the loop body node(s), and finally they either take the \gls{backedge} back to the start of the loop, or they exit the loop}
 }
 
 \newacronym{ir}{IR}{Intermediate representation, usually a file format or data structure used inside a compiler to represent the program being compiled}
