@@ -1,8 +1,19 @@
-\documentclass[12pt,openany]{book}
+\documentclass[12pt,openany]{extbook}
+\usepackage{etoolbox}
+
+\newtoggle{BOOK}
+\togglefalse{BOOK}
+
 \usepackage{verbatim}
 \usepackage{libertinus}
 \usepackage{hyperref}
-\usepackage[margin=1.0in]{geometry}
+
+\iftoggle{BOOK}{
+	\usepackage[a5paper,margin=0.7in]{geometry}
+}{
+	\usepackage[margin=0.9in]{geometry}
+}
+% \usepackage[margin=0.9in]{geometry}
 \usepackage{titlesec}
 \usepackage{chronology}
 \usepackage{quotchap}
@@ -11,6 +22,7 @@
 \usepackage{luacode}
 \usepackage{listings}
 \usepackage[toc,acronym]{glossaries}
+\usepackage{setspace}
 
 \addbibresource{refs.bib}
 \fontfamily{libertinus}

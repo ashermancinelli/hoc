@@ -41,3 +41,4 @@ open:
 o: open
 
 qo: q o
+fo: full open

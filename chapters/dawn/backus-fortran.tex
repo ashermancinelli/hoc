@@ -34,7 +34,7 @@ him to enroll in the math program at Columbia University. The SSEC that would
 intrigue him at the IBM computing center was designed at the Watson Scientific
 Computing Laboratory at Columbia.
 
-\subsection{FORTRAN I}
+\subsection{Speedcoding to FORTRAN}
 
 At IBM, Backus worked on the SSEC and later the IBM 701 and 704. The main use
 of the SSEC was aerospace calculations; programming calculations to predict the
@@ -129,6 +129,7 @@ Backus's assessment of his own code is accurate or if it's born of humility.
 	they would run on. Thus, an elegant system for a one-of-a-kind machine might
 	remain obscure while a less-than-elegant one for a production
 	computer achieved popularity.
+
 	This point is illustrated by two papers at the 1954 ONR symposium
 	One, by David E. Muller, describes a floating point interpretive system for
 	the ILLIAC designed by D. J. Wheeler. The other, by Harlan Herrick and myself,
@@ -208,16 +209,19 @@ himself. In Backus's words\cite{Backus_1980_Programming_in_America_in_1950s}:
 	assumption over the years that we had gotten our basic ideas from them
 \end{quotation}
 
-Indeed, even Grace Hopper at a 1956 symposium made the same assertion:
+Indeed, even Grace Hopper made the same assertion at a 1956 symposium:
 
 \begin{quotation}
 	A description of Laming and Zierler' s system of algebraic pseudocoding for
 	the Whirlwind computer led to the development of Boeing 's BACAIC for the 701,
-	FORTRAN for the 704, AT-3 for the Univac, and the Purdue System for the Datotron and. indicated the need for far more effort in the area of algebraic
+	FORTRAN for the 704, AT-3 for the Univac, and the Purdue System for the Datotron and
+	indicated the need for far more effort in the area of algebraic
 	translators.
 	\cite{Knuth_TrabbPardo_1976_Early_Development}
 \end{quotation}
 
+Donald Knuth and Trabb Pardo quote her in \citetitle{Knuth_TrabbPardo_1976_Early_Development}
+as well.
 I am not sure who to believe either!
 
 With the support of his new boss Cuthbert Hurd, his family, friends, and his
@@ -270,8 +274,7 @@ and then \textit{thought better} of providing error messages.
 Again, they were tragically optimistic: in the second page of the report,
 they claimed that "FORTRAN should virtually eliminate coding and debugging."
 
-
-\subsection{FORTRAN Reference Manual}
+\subsection{FORTRAN I}
 
 In 1956, they released the reference manual \citetitlecite{10.1145/155360.155365} with a FORTRAN
 that looked very similar to the original, with a few deletions and minor changes.
@@ -279,7 +282,75 @@ The ill-fated \texttt{RELABEL} formula was removed and the \texttt{DO} statement
 Instead of taking potentially three formulas (the first, last, and continuation formulas),
 one now only specified the final formula of the loop, or the \gls{backedge}.
 
+In the following loop, \texttt{I} begins at 1 and increments by 1 until it reaches 5, and for
+each iteration, \texttt{N(I)} is accessed, multiplied with \texttt{I} and stored in \texttt{A(I)}:
+
+\begin{lstlisting}[language=Fortran,frame=single]
+10    DO 20 I=1,5
+20    A(I) = I*N(I)
+30
+\end{lstlisting}
+
+IF-statements were still quite unweildy; they took three formulas, the first if the
+condition yielded a negative value, the second if it was zero, and the third if it was positive:
+
+\begin{lstlisting}[language=Fortran,frame=single]
+10    IF(A(I)) 20,30,40
+20    ! ... Jump to here if A(I) < 0
+30    ! ... Jump to here if A(I) = 0
+40    ! ... Jump to here if A(I) > 0
+\end{lstlisting}
+
+To be fair to John Backus, he is quite self-deprecating when recalling these details about the
+language design process.
+
+\begin{quotation}
+	Since our entire attitude about language design had always been a
+	very casual one, the changes we felt to be desirable during the course
+	of writing the compiler were made equally casually\dots
+
+	In our naive unawareness of language design problems--of course,
+	we knew nothing of many issues that were later thought to be important,
+	e.g., block structure, conditional expressions, and type declarations.
+\end{quotation}
+
+At this time, Backus, Herrick, Ziller, and their team at IBM were shopping around
+their compiler and programming language to potential customers of the IBM 704.
+Their primary purpose was to collect aspects of the system that their customers found
+confusing or objectionable, or aspects they felt were missing.
+In late 1954 and early 1955, they gave talks to these customers and recieved next to
+no helpful feedback.
+It seemed that too frequently, customers had been systems with lots of promise, only to
+finally recieve an unweildy or peculiar system with restrictions that were not mentioned
+during the sales process.
+
+The first significant payoff from these talks came in January 1955 when they visited the
+United Aircraft Corporation. Roy Nutt was leased out to IBM to work on the input/output
+libraries for FORTRAN, and he would visit New York several times a week to collaborate with
+the team until 1957.
+Backus remarks that while his team could have been better salespeople and that
+Laning and Zierler's compiler was more influential at the time, the early FORTRAN efforts
+likely influenced at least the development of Hopper's Math-Matic compiler at
+Sperry Rand.
+
+\subsection{Their First Compiler}
+
+In early 1955 when development on their compiler began, it was only referred to as their \textit{translator}.
+Herrick wrote lots of test programs to feel out the language, and the team had an ad-hoc understanding of the
+sort of code they expected to get from various source programs, though their language lacked a
+rigorous specification.
+The team broke into smaller teams of one to three people, each responsible for a section of the compiler.
+Each group agreed on the input and output formats to be used on the boundaries of their component and what came before and after.
+
+Their \textit{translator} was a single-pass compiler.
+The first section of the compiler (which we would today call the parser)
+consumed the entire program, produced machine code for what it could,
+and left the rest of the information about the source program in lookup tables
+for the other sections of the compiler.
+
 \subsection{FORTRAN II}
+
+
 \subsection{FORTRAN III}
 
 \subsection{\FTN{} Optimization and the First Users}

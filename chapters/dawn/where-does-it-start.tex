@@ -58,54 +58,101 @@ contains references to the others;if you find yourself confused by names
 introduced out of context, please finish the chapter or search for the content
 within this chapter before giving up.
 
-\section{Development of the Z4}
+\section{Konrad Zuse and the Z4}
 
-Konrad Zuse, a German civil engineer, began work on the Z4 during World War
-II. Funded partially by his family and partially by the Nazi government, his
+The historians Paul Ceruzzi and Raul Rojas have written extensively about
+Zuse and his work on the Z3, Z4, and the special-purpose S1 and S2 machines--
+the reader is encouraged to consult their works for a more exhaustive account
+\cite{ceruzzi_early_computers_of_zuse_1981}
+\cite{rojas_arch_of_zuses_machines_2000},
+as well as Konrad's son's account of his father's life\cite{zuse2009life}.
+
+We will meet Konrad Zuse, a German civil engineer, during World War II when
+he began work on the Z4.
+Funded partially by his family and partially by the Nazi government, his
 prior works demonstrated significant creativity and ingenuity, and they were
 leveraged to build precursors to modern cruise missiles and guided bombs. Most of
-Zuse's machines prior to the Z4 were destroyed during the war. \todo{Zuse's Z4
-	was a strange machine with bespoke memory and instruction set. This
-	affected how
-	the compilers for it were designed.}
+Zuse's machines prior to the Z4 were destroyed during the war;
+he rescued his Z4 by moving it himself to a remote alpine village
+called Hinterstein\cite{Knuth_TrabbPardo_1976_Early_Development}.
+While he was funded by the Third Reich at some point, he was primarily \textit{denied}
+funding by the government. In a lecture in New Mexico in 1976, he claimed
+that his computers were never used to carry out their \textit{final solution}.
 
-In a turn of events Konrad Zuse was made
-aware of Aiken's Mark I through his daughter
-\cite{howard_aiken_and_the_dawn_of_the_computer_age_2000}:
+At this time, computers were transitioning from \textit{sequenced calculators}
+(capable only of executing straight-line arithmetic calculations)
+to "true" computers capable of control flow.
+The Z3 was unique in its ability to perform conditional jumps, qualifying it
+as a "true" computer, more advanced than the sequenced calculators.
+It also had floating-point arithmetic units, which were missing from other
+early computers like Commander Howard Aiken's Mark I at Harvard and IBM's 703.
 
-\begin{quotation}
-	Konrad Zuse told me an amusing anecdote about how he first
-	encountered the work of Aiken. The occasion of our conversation was
-	a luncheon in Zuse's honor, hosted by Ralph Gomory at the Watson
-	Research Laboratory of IBM before a lecture given by Zuse to the
-	staff of the lab. When Zuse learned that I was gathering materials
-	for a book on Aiken, he told me that he had come across Aiken and
-	Mark I in an indirect manner, through the daughter of his
-	bookkeeper. She was working for the German Secret
-	Service (Geheimdienst) and knew through her father of Zuse's work on
-	a large scale calculator. According to Zuse,the young woman never
-	learned any details about his machine, which was shrouded in
-	war-time secrecy. But she knew enough about Zuse's machine to
-	recognize that the material filed in a certain drawer related to
-	advice that seemed somewhat like Zuse's. She reported this event
-	to her father, giving the file number of the drawer, and the father
-	at once informed Zuse of her discovery. Zuse, of course, could not
-	go to the Secret Service and ask for the document since that would
-	give away the illegal source of his information. Zuse was well
-	connected, however, and was able to send two of his assistants to
-	the Secret Service, armed with an official demand for information
-	from the Air Ministry, requesting any information that might be in
-	the files concerning a device or machine in any way similar
-	to Zuse's. Zuse's assistants were at first informed that no such
-	material existed in the files, but they persisted and eventually got
-	to the right drawer. There they found a newspaper clipping (most
-	likely from a Swiss newspaper), containing a picture of Mark I and a
-	brief description about Aiken and the new machine. But there was not
-	enough technical information to enable Zuse to learn the machine's
-	architecture.
-\end{quotation}
+After the war, he began looking for a market for some of his wartime inventions.
+His machines were unique, containing floating-point arithmetic units and a
+bespoke memory system.
+From 1943 to 1945, he worked on the \textit{Plankalkül} (for \textit{Plan Calculus}),
+an algebraic programming language and possibly the first high-level programming language,
+though it was not implemented until 1975 in Joachim Hohmann's PhD dissertation
+\citetitlecite{hohmann1979plankalkul}.
 
-\section{The ETH's Acquisition of the Z4}
+Towards the end of the war, Zuse and his pregnant wife fled Berlin.
+Thanks to some confusion about the purpose of Zuse's machine, he was able to leverage
+transport vehicles from the German army.
+At the time, the German military was working on a new generation of rocket, which
+went by the name \textit{V2}. At the time, Konrad named his machines V1, V2, and so on,
+where V stood for \textit{Versuchsmodell}, or \textit{trial models}.
+Thus the German army believed his machine was somehow related to the rocket program,
+and he was able to commandeer transport vehicles from the army.
+
+He was originally to take his machine to the underground factories in Nordhausen
+where the V2 rocket was under production. After being shocked by \textit{twenty thousand}
+concentration camp workers toiling in miles of underground tunnels, he
+decided to take his wife and computer as far away as possible.
+Thus they fled to Hinterstein, Germany and then Hopferau, Bavaria, to
+hopefully restore the machine.
+
+It is unclear how Professor Stiefel learned of Zuse's Z4, but it was in Hopferau
+where he met Konrad Zuse and first saw the Z4 in action.
+
+\iffalse
+	In a turn of events Konrad Zuse was made
+	aware of Aiken's Mark I through his daughter
+	\cite{howard_aiken_and_the_dawn_of_the_computer_age_2000}:
+
+	\begin{quotation}
+		Konrad Zuse told me an amusing anecdote about how he first
+		encountered the work of Aiken. The occasion of our conversation was
+		a luncheon in Zuse's honor, hosted by Ralph Gomory at the Watson
+		Research Laboratory of IBM before a lecture given by Zuse to the
+		staff of the lab. When Zuse learned that I was gathering materials
+		for a book on Aiken, he told me that he had come across Aiken and
+		Mark I in an indirect manner, through the daughter of his
+		bookkeeper. She was working for the German Secret
+		Service (Geheimdienst) and knew through her father of Zuse's work on
+		a large scale calculator. According to Zuse,the young woman never
+		learned any details about his machine, which was shrouded in
+		war-time secrecy. But she knew enough about Zuse's machine to
+		recognize that the material filed in a certain drawer related to
+		advice that seemed somewhat like Zuse's. She reported this event
+		to her father, giving the file number of the drawer, and the father
+		at once informed Zuse of her discovery. Zuse, of course, could not
+		go to the Secret Service and ask for the document since that would
+		give away the illegal source of his information. Zuse was well
+		connected, however, and was able to send two of his assistants to
+		the Secret Service, armed with an official demand for information
+		from the Air Ministry, requesting any information that might be in
+		the files concerning a device or machine in any way similar
+		to Zuse's. Zuse's assistants were at first informed that no such
+		material existed in the files, but they persisted and eventually got
+		to the right drawer. There they found a newspaper clipping (most
+		likely from a Swiss newspaper), containing a picture of Mark I and a
+		brief description about Aiken and the new machine. But there was not
+		enough technical information to enable Zuse to learn the machine's
+		architecture.
+	\end{quotation}
+\fi
+
+\subsection{The ETH's Acquisition of the Z4}
 
 There were several early efforts to create programs that produced punch
 cards which contained machine code instructions, which could then be fed back
