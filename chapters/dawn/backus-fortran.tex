@@ -342,11 +342,47 @@ rigorous specification.
 The team broke into smaller teams of one to three people, each responsible for a section of the compiler.
 Each group agreed on the input and output formats to be used on the boundaries of their component and what came before and after.
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{resource/dawn/backus-fortran-sec-1.png}
+	\caption{Section 1 of the Original FORTRAN compiler\cite{backus_etal_fortran_automatic_coding_system_1957}}
+	\label{fig:backus_fortran_compiler}
+\end{figure}
+
 Their \textit{translator} was a single-pass compiler.
-The first section of the compiler (which we would today call the parser)
+The first section\ref{fig:backus_fortran_compiler} of the compiler
 consumed the entire program, produced machine code for what it could,
 and left the rest of the information about the source program in lookup tables
 for the other sections of the compiler.
+We would likely call this the front-end of the compiler as it composed
+parsing and a bit of semantic analysis.
+
+In section 2, some parts of the user's program (particularly I/O statements)
+would be transformed into DO-statements, which would then still need to be compiled.
+This section also performed some optimization steps, including \gls{licm} and
+register allocation.
+The optimizations in section 2 were primarily invented by Robert Nelson and Irving Ziller.
+These optimizations originally included register allocation \textit{for the entire program},
+until Backus proposed that the earlier phases of the compiler should assume the
+target machine (at this point only the IBM 704) has unlimited index registers,
+and later phases of the compiler would finish the job of register allocation.
+
+This proposal neccesitated sections 4 and 5, and section 3 to translate the
+output of the first two sections into the format section 4 expected.
+Lois Mitchell Haibt joined the group to design and program section 4,
+which was responsible for some significant analyses.
+Section 2 would be responsible for constructing and analyzing the \gls{cfg}
+of the user's program, breaking the program into \gls{basicblock}s,
+and \textit{performing a Monte-Carlo simulation} of the user's program
+based on DO-statements and optimization hints in the form of FREQUENCY statements
+to track how often each basic block was used, and to collect utilization
+statistics on the program's index registers.
+
+Wow! That must have been a massive undertaking.
+Aside from inventing new compiler optimization techniques, this is the first
+instance I can find a \gls{pgo} being used in a compiler.
+
+
 
 \subsection{FORTRAN II}
 

@@ -40,6 +40,26 @@
 	description={In compiler theory, the control-flow graph is a directed graph representing the possible paths of control flow through a program. Nodes of the graph are usually \gls{basicblock}s}
 }
 
+\newglossaryentry{inducvar}{
+	name={induction variable},
+	description={A variable changes by some constant in each iteration of a loop. In \texttt{for (int i=0; i < n; i++)}, the variable \texttt{i} is an induction variable}
+}
+
+\newglossaryentry{licm}{
+	name={loop-invariant code motion},
+	description={Loop-invariant code motion is an optimization that moves code outside of a loop if it does not depend in any way on the loop's \gls{inducvar}s.}
+}
+
+\newglossaryentry{tripcount}{
+	name={trip count},
+	description={The number of times a loop will execute.}
+}
+
+\newglossaryentry{pgo}{
+	name={profile-guided optimization},
+	description={Compiler optimizations that take advantage of statistics from the execution of a program to improve the compiler's heuristics. A user might compile and run a very program with special compiler flags such that loop hotness and \gls{tripcount}s are recorded, and then re-compile their program such that the compiler can use those statistics to drive its optimization decisions}
+}
+
 \newglossaryentry{basicblock}{
 	name={basic block},
 	description={In compiler theory, a basic block is typically a sequence of instructions that are executed in order and containing a single entry point and exit point}
