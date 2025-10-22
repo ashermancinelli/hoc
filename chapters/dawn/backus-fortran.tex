@@ -399,6 +399,49 @@ For such an I/O-heavy portion of the compiler, he was the natural choice.
 Thanks to the efficient I/O features Nutt added to the language, this section
 was many times faster than competing assemblers and linkers.
 
+From mid 1956 to early 1957, the focus was on bringing the compiler to market.
+They would rent out a hotel near the headquarters to sleep during the day
+so they could debug their new compiler all night long while it sat unused by other
+teams.
+The team started surprising themselves with the transformations their compiler
+was capable of; the optimization gurus Nelson and Ziller would always be able to figure
+out how the compiler determined the transformation was correct and beneficial, but
+it was still a surprise to see all the pieces come together.
+
+In the fall of 1956, they released the \textit{Programmer's Reference Manual}
+\cite{backus_fortran_ref_manual_1956}.
+They published a small addendum in 1957, documenting \textit{functions statements},
+which have persisted through to modern Fortran.
+They allow users to define functions in a single statement, like so:
+
+\begin{lstlisting}
+FIRSTF(X) = A*X+B
+SECONDF(X, B) = A*X+B
+THIRDF(D) = FIRSTF(E)/ D
+FOURTHF(F,G) = SECONDF(F, THIRDF(G))
+\end{lstlisting}
+
+There were numerous language features specific to the 704 as well,
+such as the SENSE LIGHT statement, which toggled specific sensor lights:
+
+\begin{quotation}
+	\begin{tabular}{|c|c|}
+		\hline
+		GENERAL FORM                                 & EXAMPLES      \\
+		\hline
+		"SENSE LIGHT i" where i is 0, 1, 2, 3, or 4. & SENSE LIGHT 3 \\
+		\hline
+	\end{tabular}
+\end{quotation}
+
+The PUNCH statement was also present in the handbook, which allowed users to
+directly use the card-punching attachment on the 704.
+
+In the spring of 1957, they published \citetitle{backus_etal_fortran_automatic_coding_system_1957}
+and they distributed it to every IBM 704 customer.
+After lots of debugging in the field and difficulties punching out copies
+of the compiler, it was not long before most of the installations were using it.
+
 \subsection{FORTRAN II}
 
 
