@@ -350,7 +350,7 @@ Each group agreed on the input and output formats to be used on the boundaries o
 \end{figure}
 
 Their \textit{translator} was a single-pass compiler.
-The first section\ref{fig:backus_fortran_compiler} of the compiler
+The first section (see Figure \ref{fig:backus_fortran_compiler}) of the compiler
 consumed the entire program, produced machine code for what it could,
 and left the rest of the information about the source program in lookup tables
 for the other sections of the compiler.
@@ -380,9 +380,24 @@ statistics on the program's index registers.
 
 Wow! That must have been a massive undertaking.
 Aside from inventing new compiler optimization techniques, this is the first
-instance I can find a \gls{pgo} being used in a compiler.
+instance I can find of \gls{pgo}.
 
+Section 5 was then responsible for leveraging the analyses from section 4
+to perform register allocation for the 704's three index registers.
+This section was designed and implemented by Sheldon Best from MIT,
+who was on loan as a temporary IBM employee.
+Best's methods would become the basis for register allocation research for many years to come.
 
+It was not obvious to the team until later in 1955 that a section in
+between 2 and 4 would be needed; Richard Goldberg joined in November of 1955,
+and he designed and implemented this section,
+and took over section 5 from Best after he returned to MIT.
+
+Section 6 was naturally designed by Nutt, as he wrote the I/O runtime libraries
+for the original compiler, and section 6 assembled, linked, and loaded the final program.
+For such an I/O-heavy portion of the compiler, he was the natural choice.
+Thanks to the efficient I/O features Nutt added to the language, this section
+was many times faster than competing assemblers and linkers.
 
 \subsection{FORTRAN II}
 
