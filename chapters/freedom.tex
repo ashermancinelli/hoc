@@ -1,58 +1,6 @@
 \chapter{Freedom, 1980-2000}
 
-\section{Short History of Open Source}
-
-The most significant feature of this time period is the collaboration brought about by
-the advent of the free software movement.
-In the beginning of software development, much of it \textit{was already} given
-away to customers of hardware companies like IBM.
-When the software was already in machine code, there was not
-much of an alternative to giving your source code away to your customers.
-You had a deck of punchcards with your software, and to get that to your customers,
-you had to punch out a new copy and mail it to them; other than the accompanying documentation,
-you \textit{had} to ship the code for your programs, and there was nothing in between your
-programs and the runnable program.
-
-Hardware companies would give the software away for free with the hardware because
-the cost of the software was negligible relative to the cost of the hardware.
-The turning point in this model of software distribution came in 1969 when IBM
-broke some of their software off to be sold separately.
-Prior to this, perhaps the first instance of free software was in Grace Hopper's development of
-the A-2 compiler (see Section \ref{sec:a1-a2-compilers}), for which the Remington Rand company
-accepted changes and suggestions their customers sent them.
-When software demanded a market of its own, businesses were able to support themselves
-solely by selling software, and it became the core business value of the company.
-This worked against the free distribution of software to a large extent.
-
-Shortly after Unix was developed at Bell Labs in the early 1970s, its source code
-was distributed under a license that would today be considered similar to \GLS{foss}.
-While the source code of Unix was only given to universities for academic use and
-only users covered by the license were technically allowed to see the source,
-large communities began to form around it, namely USENIX.
-Some entirely new distributions and rewrites of Unix formed, most notably the
-Berkeley Software Distribution (BSD), which was developed at the University of California,
-Berkeley.
-
-\todo{gnu linux c llvm python; Facebook php->c++
-	compiler;}
-
-\todo{lattner tried to get llvm in the gnu project; new licensing,
-	permissive licensing.}
-
-\begin{quotation}
-	The discussion of the GNU/Linux
-	operating system and the "open source" software movement, discussed last,
-	likewise has deep roots. Chapter 3 discussed the founding of SHARE, as well as
-	the controversy over who was allowed to use and modify the TRAC programming
-	language. GNU/Linux is a variant of UNIX, a system developed in the late 1960s
-	and discussed at length in several earlier chapters of this book. UNIX was an
-	open system almost from the start, although not quite in the ways that "open" is
-	defined now. As with the antitrust trial against Microsoft, the open source
-	software movement has a strong tie to the beginnings of the personal computer's
-	invention. Early actions by Microsoft and its founders played an important role
-	here as well. We begin with the
-	antitrust trial.\cite{history_of_modern_computing_2003_ceruzzi}
-\end{quotation}
+\input{chapters/freedom/history-of-oss.tex}
 
 \section{GNU}
 
@@ -60,5 +8,7 @@ Berkeley.
 
 \input{chapters/freedom/llvm.tex}
 
-\pagebreak\section{Timeline}
-\input{chapters/freedom-timeline.tex}
+\input{chapters/freedom/typelessness.tex}
+
+% \pagebreak\section{Timeline}
+% \input{chapters/freedom-timeline.tex}
