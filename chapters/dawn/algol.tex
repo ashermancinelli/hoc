@@ -464,7 +464,8 @@ MODE assignation :
 
 Substituting \textbfit{int} for our \textbfit{MODE}, we have:
 \begin{lstlisting}[frame=single]
-int assignation : reference to int destination, becomes symbol, int source.
+int assignation :
+    reference to int destination, becomes symbol, int source.
 \end{lstlisting}
 
 If you squint your eyes, maybe you can see how \textit{i := 5} fits the mold for this
@@ -533,10 +534,11 @@ which would have implied two structures with the same members but different name
 are not equivalent.
 The following two types are equivalent by structural comparison:
 \begin{lstlisting}[language=algol,frame=single]
-mode a = struct (int val, ref a next);
-mode b = struct (int val, ref struct (int val, ref b next) next);
+mode a = struct (int val,
+                 ref a next);
+mode b = struct (int val,
+                 ref struct (int val, ref b next) next);
 \end{lstlisting}
-
 
 
 \subsection{Concepts of ALGOL 68}
@@ -555,6 +557,21 @@ x := (real a = p*q;
       if a>b then a else b fi)
       + (y := 2*z);
 \end{lstlisting}
+
+One of the key goals of the committee was to design language features that
+would be \textit{orthogonal}--\citeauthor{programming_language_pragmatics_2009}
+put it well in \cite{programming_language_pragmatics_2009}:
+
+\begin{quotation}
+	One of the principal design goals of Algol 68 was to make the various features
+	of the language as orthogonal as possible. Orthogonality means that features can
+	be used in any combination, the combinations all make sense, and the meaning
+	of a given feature is consistent, regardless of the other features with which it is
+	combined. The name is meant to draw an explicit analogy to orthogonal vectors
+	in linear algebra: none of the vectors in an orthogonal set depends on (or can
+	be expressed in terms of) the others, and all are needed in order to describe the
+	vector space as a whole.
+\end{quotation}
 
 There were numerous extensions to arrays, including higher-dimensional arrays,
 complicated slicing mechanisms, and flexible arrays, such as the following:
@@ -619,14 +636,14 @@ into a parameterless procedure, like so:
 The right hand side of this expression is a \textit{cast}
 (a term originally coined for the specification of ALGOL)
 of an integer expression into a procedure taking no arguments.
-In \citetitle{algol68_with_fewer_tears_1968}\footnote{This paper was, in fact,
-	a valid ALGOL 68 program in and of itself}, Lindsey argues that references
+In \citetitle{algol68_with_fewer_tears_1968}
+\footnote{This paper was, in fact, a valid ALGOL 68 program in and of itself},
+Lindsey argues that references
 obviate the need for call-by-name semantics, but that call-by-substitution is what
 ALGOL 60's call-by-name effectively was, and this was still possible with ALGOL 68
 via this \textit{proceduring} coercion:
 
 \begin{lstlisting}[language=algol,frame=single]
-begin
 proc series = (int k, ref int i, proc real term) real expr
     begin
     real sum(0);
@@ -663,19 +680,32 @@ The revised report contains this example
 
 \begin{lstlisting}[language=algol,frame=single]
 proc innerproduct 1 = (int n, proc (int) real x, y) real:
-      # the innerproduct of two vectors, each with 'n'
-      comppnents, x (i), y (i), i = 1, ... , n, where 'x' and 'y'
-      are arbitrary mappings from integer to real number #
-      begin long real s := long 0;
-            for i to n do s +:= leng x (i) \times leng y
-(i) od;
-            shorten s
-      end
+# the innerproduct of two vectors, each with 'n'
+components, x (i), y (i), i = 1, ... , n, where 'x' and 'y'
+are arbitrary mappings from integer to real number #
+begin long real s := long 0;
+    for i to n do
+        s +:= leng x (i) \times leng y (i)
+    od;
+    shorten s
+end
 
 # Real-calls using innerproduct 1: #
-      innerproduct 1 (m, (int j) real: x1[j], (int j) real: y1[i])
-      innerproduct 1 (n, nsin, ncos)
+innerproduct 1 (m, (int j) real: x1[j], (int j) real: y1[i])
+innerproduct 1 (n, nsin, ncos)
 \end{lstlisting}
+
+ALGOL 60 was the first programming language to permit
+nested functions, a feature ALGOL 68 retained.
+This meant that nested procedures had to be capable of capturing
+their environments, dramatically complicating the work of the compiler
+engineer (as did many of the language's features).
+The compiler had to somehow pass the captured environment along with the
+procedure so it had access to the state of the outer scope.
+In C++ for example, lambda functions are really classes
+which capture the enclosing scope as a member variable - no such facility
+was specified in the language standard, so compiler authors were left to
+sort it out themselves.
 
 \subsection{ALGOL 68-R and the Revised Report}
 
@@ -688,13 +718,12 @@ His work on ALGOL 68S was not an outlier amongst would-be implementers of the
 language; because the report was so large and complex, most
 implementers ended up restricting themselves to a subset of the language.
 
-\subsection{Criticism of ALGOL 68}
+% \subsection{Criticism of ALGOL 68}
 
-Numerous committee members and readers of the \textit{ALGOL Bulletin} criticized
-the original report for its complexity; Lindsey (our faithful defender of the
-language) conceded that "much of the mud slung at [the original report] is
-probably still sticking"\cite{a_history_of_algol_68_1993}.
-Much of that complexity came from the
+% Numerous committee members and readers of the \textit{ALGOL Bulletin} criticized
+% the original report for its complexity; Lindsey (our faithful defender of the
+% language) conceded that "much of the mud slung at [the original report] is
+% probably still sticking" \cite{a_history_of_algol_68_1993}.
 
 \todo{Defined in Wijngaarden Grammar by Adriaan van Wijngaarden.
 	Contains parsing and things which in other langauges are called semantics.}

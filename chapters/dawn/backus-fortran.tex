@@ -441,13 +441,66 @@ In the spring of 1957, they published \citetitle{backus_etal_fortran_automatic_c
 and they distributed it to every IBM 704 customer.
 After lots of debugging in the field and difficulties punching out copies
 of the compiler, it was not long before most of the installations were using it.
-
-
+By fall of 1958, more than half of the machine code produced at the roughly 70 installations
+with an IBM 703 or 704 were being produced by their FORTRAN compiler.
 
 \subsection{FORTRAN II}
 
+The development of FORTRAN II and III partially overlapped.
+After much debugging in the field, the team agreed on some aspects of the language
+and their compiler that they ought to fix.
+In particular, they noted the need for diagnostics (didn't they claim FORTRAN
+users could just verify their programs against their FORmula TRANslations?)
+and subroutines.
+The first report to contain these additions was \citetitle{fortran_ii_proposal_1957} in
+\citeyear{fortran_ii_proposal_1957}.
+FORTRAN II was mostly designed by Irv Ziller, John Backus and Robert Nelson,
+and it was implemented by Lois Mitchell.
+
+Some statements in this report did not make it to the final language, but it
+nonetheless set out the design for more structured programming.
+Subroutines were defined with \texttt{SUBROUTINE DEFINITION, NAME(ARGUMENT1,ARGUMENT2)}
+which is not \textit{too} far off of the language as it would come to be.
+The \textit{END} and \textit{RETURN} statements were also introduced.
+
+\Gls{separable-compilation} features were introduced as well.
+Information from the symbol table of the original program could be kept
+in the object code so that a loader could combine references between subroutines
+compiled in different source files into one program.
+The loader program, the \textit{Binary Symbolic Subroutine (BSS) Loader},
+would load the separately compiled subroutines together into one program using
+the symbolic information kept in the \textit{transfer vectors} in object code.
+\footnote{The symbolic information kept in object programs that the BSS loader
+	used is not the same as the BSS section in ELF programs on modern computers--
+	the latter is used for program-scoped uninitialized or zero-initialized data.}
+The transfer vectors were placed at the start of the compiled subroutine and
+contained the symbolic information about the subroutine to follow.
+
+This allowed the final deck of punchcards to be placed in the card reader
+with each independently compiled subroutine in any order, and the symbol information
+allowed the BSS loader to build a table of the available subroutines and replace
+symbolic references to external subroutines with actual addresses.
+The BSS loader was a two-pass program: the first pass traversed all the compiled
+subroutines and scanned their transfer vectors, storing the actual addresses of
+the referenced subroutines in a symbol table.
+The second pass replaces occurrences of symbolic references to subroutines
+with their actual respective addresses.
+The proposal suggests that programs of mixed FORTRAN and machine code could
+also be loaded in this way, but did this was merely a suggestion.
 
 \subsection{FORTRAN III}
+
+While Lois was carrying out Ziller, Backus and Nelson's design for FORTRAN III,
+Ziller was already working on a more advanced version of FORTRAN, FORTRAN III.
+Ziller's design incorporated a form of \gls{inline-assembly} that allowed
+704 instructions to take the addresses of FORTRAN variables as arguments.
+Modern forms of inline assembly allow the user to write assembly inside \textit{text}
+in the host program--Ziller made the unfortunate decision of making IBM 704
+instructions available \textit{at the language level}, which, as Backus remarked
+\cite{hopl_backus_history_of_fortran}, doomed FORTRAN III to die whenever the IBM 704
+was replaced.
+
+Ziller also introduced
 
 \subsection{\FTN{} Optimization and the First Users}
 
