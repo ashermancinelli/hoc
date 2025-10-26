@@ -32,7 +32,7 @@
 
 \newglossaryentry{ftn}{
 	name={Fortran},
-	description={The Fortran programming language, standing for \textit{FORmula TRANslator}. Most renditions of the name of the programming language have only the first letter capitalized (\textit{Fortran}), however early versions were rendered as \textit{FORTRAN}. We attempt to use the proper name for each time period. \textit{Fortran} came to be used after the 1990 edition of the standard, while the 1977 standard and all prior versions were rendered as \textit{FORTRAN}.}
+	description={The Fortran programming language, standing for \textit{FORmula TRANslator}. Most renditions of the name of the programming language have only the first letter capitalized (\textit{Fortran}), however early versions were rendered as \textit{FORTRAN}. We attempt to use the proper name for each time period. \textit{Fortran} came to be used after the 1990 edition of the standard, while the 1977 standard and all prior versions were rendered as \textit{FORTRAN}}
 }
 
 \newglossaryentry{cfg}{
@@ -45,9 +45,14 @@
 	description={A variable changes by some constant in each iteration of a loop. In \texttt{for (int i=0; i < n; i++)}, the variable \texttt{i} is an induction variable}
 }
 
+\newglossaryentry{constant-folding}{
+	name={constant folding},
+	description={Optimization that replaces an expression with a constant value if the expression's value can be determined at compile time. For example, the expression \texttt{2 + 3} can be replaced with \texttt{5} by the compiler so it need not be calculated by the final program}
+}
+
 \newglossaryentry{licm}{
 	name={loop-invariant code motion},
-	description={Loop-invariant code motion is an optimization that moves code outside of a loop if it does not depend in any way on the loop's \gls{inducvar}s.}
+	description={Loop-invariant code motion is an optimization that moves code outside of a loop if it does not depend in any way on the loop's \gls{inducvar}s}
 }
 
 \newglossaryentry{tripcount}{
