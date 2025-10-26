@@ -697,16 +697,15 @@ exceed six characters.
 
 \subsection{FORTRAN II}
 
-The development of FORTRAN II and III partially overlapped.
-After much debugging in the field, the team agreed on some aspects of the language
-and their compiler that they ought to fix.
-In particular, they noted the need for diagnostics (didn't they claim FORTRAN
-users could just verify their programs against their FORmula TRANslations?)
-and subroutines.
-The first report to contain these additions was \citetitle{fortran_ii_proposal_1957} in
-\citeyear{fortran_ii_proposal_1957}.
+FORTRAN II was developed primarily to address the restrictions required for the
+optimization of FORTRAN programs discussed in the last section and quality of
+life enhancements to address common issues programmers reported.
+After debugging in the field, the team noted the need for improved compile time,
+proper diagnostics, and subroutines.
 FORTRAN II was mostly designed by Irv Ziller, John Backus and Robert Nelson,
-and it was implemented by Lois Mitchell.
+and it was implemented by Lois Mitchell, and
+the first report to contain these additions was \citetitle{fortran_ii_proposal_1957} in
+\citeyear{fortran_ii_proposal_1957}.
 
 Some statements in this report did not make it to the final language, but it
 nonetheless set out the design for more structured programming.
@@ -715,7 +714,14 @@ which is not \textit{too} far off of the language as it would come to be.
 The \textit{END} and \textit{RETURN} statements were also introduced.
 
 \Gls{separable-compilation} features were introduced as well.
-Information from the symbol table of the original program could be kept
+In the original FORTRAN, the entire program was a single FORTRAN program
+that had to be compiled as one \gls{translation-unit}, thus any changes to any
+part of the program required recompilation of everything.
+This became quite expensive as the team continued to add optimizations
+and analyses.
+
+In the new separable compilation model,
+information from the symbol table of the original program could be kept
 in the object code so that a loader could combine references between subroutines
 compiled in different source files into one program.
 The loader program, the \textit{Binary Symbolic Subroutine (BSS) Loader},
@@ -739,13 +745,16 @@ with their actual respective addresses.
 The proposal suggests that programs of mixed FORTRAN and machine code could
 also be loaded in this way, but did this was merely a suggestion.
 
-Perhaps the biggest gripe users had with this version of FORTRAN was
-compilation time.
-While edition allowed for separable compilation and users did not need to recompile
+The biggest gripe users had with this version of FORTRAN was
+likely still compilation time.
+While this edition of the language allowed for separable compilation and users did not need to recompile
 the entire program after every single change, the compiler still spent significant time
 during optimization.
 When writing and debugging new programs, this optimization effort was wasted, and
 there were no tuning options to allow users to opt-out, as modern compilers do.
+
+Users adopted FORTRAN II widely and immediately, and the use of the language
+accellerated greatly in this period.
 
 \subsection{FORTRAN III}
 
@@ -770,9 +779,12 @@ than the 704 itself.
 
 \subsection{FORTRAN IV}
 
-By 1958, most of the original FORTRAN team had moved on to other work.
-Some members of the original team, especially John Backus, were unhappy with
+By 1958, most of the original FORTRAN team had moved on to other work and
+some members of the original team, especially John Backus, were unhappy with
 the direction they took.
+The following edition, FORTRAN IV, was more of a successor to FORTRAN II than
+it was to FORTRAN III given the latter's machine-specific features and
+lack of adoption.
 
 To address the long compilation times that users of FORTRAN II dealt with,
 the team Programming Research Department responsible for FORTRAN IV

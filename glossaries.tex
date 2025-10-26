@@ -60,6 +60,11 @@
 	description={TODO}
 }
 
+\newglossaryentry{translation-unit}{
+	name={translation unit},
+	description={A component of a program being compiled such that the compiler has access to all the information contained in the component during compilation. For C, C++ and Fortran code, a translation unit typically corresponds to a single source file which is compiled to an object file before being linked into a program or library. Some compilers always treat the entire program as a single translation unit, like the original FORTRAN compiler or the Zig compiler}
+}
+
 \newglossaryentry{licm}{
 	name={loop-invariant code motion},
 	description={Loop-invariant code motion is an optimization that moves code outside of a loop if it does not depend in any way on the loop's \gls{inducvar}s}
@@ -98,6 +103,11 @@
 \newglossaryentry{header-cfg}{
 	name={header},
 	description={A header is the first node in a control-flow graph of a loop. Loops begin execution at the entry node, then to the header node, then through the loop body node(s), and finally they either take the \gls{backedge} back to the start of the loop, or they exit the loop}
+}
+
+\newglossaryentry{ast}{
+	name={abstract syntax tree},
+	description={A tree representation of the structure of a program}
 }
 
 \newacronym{ir}{IR}{Intermediate representation, usually a file format or data structure used inside a compiler to represent the program being compiled}

@@ -1,0 +1,62 @@
+\section{MLIR}
+
+In modern compilers, the \gls{ir} must be extremely flexible and generic
+because every component of the compiler needs something different from it.
+
+For example, the compiler's frontend typically cares very much about the
+grammar of the source language, the semantic correctness of the \gls{ast},
+and perhaps some early optimizations that might be performed at a very high level.
+However, after that, the frontend really only cares about communicating the information
+it has to the optimizer. It does not necessarily care about the details of the
+optimizer, and simply wants a textual representation of the program.
+The frontend would ideally emit an \gls{ir} that is simple with a level of abstraction
+roughly matching that of the source language, minimizing the amount of work required to generate it.
+The frontend may record that the user requested a particular region of code to
+be inlined, unrolled, or offloaded, but writ large, the frontend does not want to deal with
+the details of actually performing those transformations.
+
+The optimizer, on the other hand, cares very much about the semantics the IR
+because it is searching for patterns in the program that can be optimized.
+The optimizer will want \textit{normal forms} of programs that make pattern matching
+more straightforward, and it needs to be able to represent the artifacts of
+optimization.
+For example, after vectorization, the IR produced by the optimizer may look dramatically
+different from the user's source code, with loops versioned for different vector lengths
+based on aliasing information, inlined function calls, dead code eliminated, and operations
+with operands known at compile time folded away.
+For this phase of the compiler (and for certain optimizations more than others),
+an IR capable of representing \textit{optimized} code is necessary, including
+operations that may not be representable in the source language.
+The optimizer does not care about how many registers the target machine has
+nearly as much as the backend does, and it does not mind making drastic changes
+to the representation of the program.
+
+The backend has another set of desires; it must have information about the
+machine being targeted, and it needs to map the semantics represented by the IR
+to the machine's capabilities. It cares about the number of registers available,
+the legality of operations on a particular machine, and how to perform those operations efficiently.
+The optimizer may have produced an IR using very wide vectors, but the
+backend will have to decide how to perform those operations on a specific machine
+that may or may not have hardware that corresponds to vector operations of that length.
+
+For these reasons, the different components of a compiler are constantly pulling
+the IR in different directions, because all of their needs and wants must be
+representable in their common format.
+Now, imagine we have an IR that allows each component of the compiler to express
+the semantics in a format and with semantics that \textit{they dictate}.
+The frontend can define very high-level operations that are roughly equivalent
+to the source language so the work it needs to do when converting the \gls{ast}
+into the IR is minimal.
+The vectorizer may define new operations on vectors, the semantics they
+describe, and the process for converting them into another format.
+The backend may define different operations for each machine it targets,
+and it can progressively convert constructs from the frontend and optimizer
+into operations suitable for the target machine, that it can convert into
+machine code.
+This is one of the key benefits of MLIR; each component can define its own
+operations and semantics, the IR can be \textit{progressively} lowered from
+one phase to the next, and each phase of the compiler can coexist with the others.
+
+% Taking LLVM IR as an example, the Clang frontend will parse and analyze the source code
+% and perform some optimizations, after which it would like to simple generate a valid
+% representation of the program to let the optimizer do its job.
