@@ -319,6 +319,17 @@ Backus recalled that this sentiment disuaded efforts towards accessibility:
 "[t]he priesthood wanted and got simple mechanical aids for the clerical
 drudgery which burdened them, but they regarded with hostility and derision
 more ambitious plans to make programming accessible to a larger population."
+He and Bill Heising would later recall (emphasis added):
+
+\begin{quotation}
+	At that time, most programmers wrote symbolic machine instructions exclusively
+	(some even used absolute octal or decimal machine instructions).
+	Almost to a man, they firmly believed that any mechanical coding method
+	would fail to apply that versatile ingenuity which each programmer felt he
+	possessed and constantly needed in his work.
+	Therefore, it was agreed, \textbf{compilers could only turn out code which would be
+		intolerably less efficient than human coding}\dots
+\end{quotation}
 
 Setting aside the emotional arguments against programming languages and making
 computing more accessible, Backus had very practical and economic reasons as well.
@@ -335,6 +346,23 @@ This will be the focus of Chapter \ref{chap:software}.
 The key players on the side of the debate that favored accessibility and
 programming languages were John Backus, Grace Hopper, J. Halcombe Laning,
 and Neil Zierler, along with their respective teams.
+
+The sentiment of the priesthood may seem antiquated, but it seems to be
+present in one form or another in every chapter of this history of programming languages
+and compilers, and it had a notably positive influence on the development of FORTRAN:
+because FORTRAN would face significant resistance if it could not produce
+efficient machine code, Backus, Ziller, and their team devoted a huge amount of
+effort towards optimization.
+Their primary fear was that after spending much effort building a FORTRAN
+compiler, an important application would be written in FORTRAN and turn
+out to run at half the speed of the machine-coded version, and the
+sceptics would be right\cite{backus_heising_fortran_1964}.
+
+Their work would be foundational for modern optimization techniques, and
+FORTRAN compilers continue to produce extremely efficient machine code to
+this day, in part because the language's design allows for a high degree of
+optimization, and in part because compiler engineers have been optimizing
+FORTRAN programs for longer than any other programming language.
 
 \subsection{FORTRAN I}
 
@@ -516,6 +544,82 @@ of the compiler, it was not long before most of the installations were using it.
 By fall of 1958, more than half of the machine code produced at the roughly 70 installations
 with an IBM 703 or 704 were being produced by their FORTRAN compiler.
 
+\subsection{Optimizing FORTRAN I}
+
+Driven by the fear of the sceptics' fears coming true and delivering a FORTRAN compiler
+that produced programs significantly slower than their hand-coded equivalents,
+they tried to evaluate which parts of a program would be most subject to inefficiencies.
+One of the first considerations was the calculation of \textit{addressing expressions}
+\cite{backus_heising_fortran_1964}
+(which continues to be a challenging optimization problem).
+This will be explained further below.
+
+When a program iterates over the elements of a matrix $A_{m, n}$ with $m$ rows and $n$ columns in a loop,
+the element of $A_{i, j}$ is accessed by calculating $m + i + n \times j$ (note the column-major index order).
+If the loop accesses the elements of $A$ such that each element resides immediately next to the previous
+element in the innermost loop, then the compiler can re-use the address calculation from the previous
+iteration of the innermost loop.
+
+More concretely, here we see the elements of our matrix $A$:
+\[
+	A =
+	\begin{bmatrix}
+		a_{1,1} & a_{1,2} & \cdots & a_{1,N} \\
+		a_{2,1} & a_{2,2} & \cdots & a_{2,N} \\
+		\vdots  & \vdots  & \ddots & \vdots  \\
+		a_{M,1} & a_{M,2} & \cdots & a_{M,N}
+	\end{bmatrix}
+\]
+
+Thus the elements are laid out in memory as a contiguous block of memory:
+
+\[
+	\big(
+	a_{1,1},\; a_{2,1},\; \dots,\; a_{M,1},\;
+	a_{1,2},\; a_{2,2},\; \dots,\; a_{M,2},\;
+	\ldots,\;
+	a_{1,N},\; \dots,\; a_{M,N}
+	\big)
+\]
+
+So, a FORTRAN program accessing elements of $A$ linearly as they
+are stored in memory (also known as \gls{stride1})
+\href{https://godbolt.org/z/T6M4dvMP4}{would look like this:}
+
+\begin{lstlisting}[language=Fortran,frame=single]
+      real A(3,3)
+      integer i,j
+c     Innermost loop is the fastest-moving index
+      do 10 j = 1, 3
+         do 10 i = 1, 3
+            A(i,j) = real(i)/real(j)
+            print *, i, j
+   10 continue
+      end
+
+c     Program prints:
+c     1           1
+c     2           1
+c     3           1
+c     1           2
+c     2           2
+c     3           2
+c     1           3
+c     2           3
+c     3           3
+\end{lstlisting}
+
+Now, the FORTRAN team's concern was that their compiler would not be able to recognize
+that a program like the one above was accessing memory in a way consistent with the
+way arrays are stored in memory, and would miss the fact that in calculating
+the address of an array element $A_{i,j}$ for $i > 1$, parts of the address calculation
+for index $A_{i-1, j}$ could be re-used and $A_{i-1, j}$ and $A_{i, j}$ reside
+next to each other in memory.
+
+Because programmers writing machine code would naturally do this and FORTRAN
+programs would spend much of their time in loops iterating over matrices,
+it was critical that their compiler be able to recognize this idiom.
+
 \subsection{FORTRAN II}
 
 The development of FORTRAN II and III partially overlapped.
@@ -612,30 +716,3 @@ and in general it did not produce machine code as fast as IBM's FORTRAN II compi
 
 \todo{See 1964 backus and heising paper}.
 \cite{backus_heising_fortran_1964}.
-
-
-\subsection{(TODO: remove section) Optimization and the First Users}
-
-Setting aside the members of the "priesthood" of computing who were hostile to
-the idea of compilers and making programming more accessible, the external
-report on \FTN{} brought these contributors into the fold...
-
-Most of the skepticism about \FTN{} came from the "priesthood," Backus's
-facetious term for the "elite" programmers who thought programming needn't be
-made accessible and compilers would never achieve the performance their of
-hand-written code.
-
-\todo{Backus moved into functional programming. Was never fruitful.
-	He became a lab fellow at IBM after Watson Jr started the
-	fellowship program,
-	so he could kinda play with functional programming and not really
-	get much done.}
-\todo{He didn't like Hopper's ideas for COBOL, thought they were
-	crazy and too complex.
-	Didn't like algol either. Really just wanted to make things
-	simpler and higher level
-	and easier to use. Pushed back against the priesthood.}
-\todo{the priesthood didn't like fortran because it made things easy.
-	Backus resisted this urge at every point in his career.
-	Like GH, he wanted programming to be easy and accessible
-	(tho he didn't like her direction)}
