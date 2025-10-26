@@ -477,6 +477,14 @@ statistics on the program's index registers.
 Wow! That must have been a massive undertaking.
 Aside from inventing new compiler optimization techniques, this is the first
 instance I can find of \gls{pgo}.
+They quickly ran into tradeoffs between compile-time spent in analyses and optimizations
+and the actual differences in performance these analyses brought to the user's
+program.
+In once instance, a sub-component of the register allocation analysis took ten minutes
+of the twenty total minutes in compile time,
+even though the program used no index registers--thus half the compile time
+went towards analyses that made no difference in the final program
+\cite{backus_heising_fortran_1964}.
 
 Section 5 was then responsible for leveraging the analyses from section 4
 to perform register allocation for the 704's three index registers.
@@ -555,7 +563,27 @@ One of the first considerations was the calculation of \textit{addressing expres
 This will be explained further below.
 
 When a program iterates over the elements of a matrix $A_{m, n}$ with $m$ rows and $n$ columns in a loop,
-the element of $A_{i, j}$ is accessed by calculating $m + i + n \times j$ (note the column-major index order).
+the element of $A_{i, j}$ is accessed in column-major order with the following calculation:
+
+\[
+	A_{i, j} = base-address(A) + ((i - lbound(A, 1)) + m \times (j - lbound(A, 2))) \times s
+\]
+
+where $s$ is the number of bytes in an element of $A$, and $lbound$ gives the lower bound of the array
+for a given dimension.
+In many cases, the lower bound of all dimensions is $1$, which gives a more straightforward calculation:
+
+\[
+	A_{i, j} = base-address(A) + ((i - 1) + n \times (j - 1)) \times s
+\]
+
+And even more simply, the offset of an index from the base address of a matrix
+with all-one lower bounds measured in units of the size of an element is simply:
+
+\[
+	A_{i, j} = (i - 1) + n \times (j - 1)
+\]
+
 If the loop accesses the elements of $A$ such that each element resides immediately next to the previous
 element in the innermost loop, then the compiler can re-use the address calculation from the previous
 iteration of the innermost loop.
@@ -619,6 +647,53 @@ next to each other in memory.
 Because programmers writing machine code would naturally do this and FORTRAN
 programs would spend much of their time in loops iterating over matrices,
 it was critical that their compiler be able to recognize this idiom.
+After scoping out the problem, they found the space of possible address calculation
+expressions to be very large indeed.
+
+For example, in the loops above, it is obvious that the matrix $A$ is accessed
+with \gls{stride1} because the innermost loop iterates over the columns of the
+matrix, and the \gls{inducvar} $i$ is incremented by one via the DO loop,
+and is not modified in the loop body.
+Consider the following program, where it is not \textit{quite} so clear:
+
+\begin{lstlisting}[language=fortran,frame=single]
+      real A(3,3)
+      integer i,j
+c     Innermost loop is the fastest-moving index
+      do 10 j = 0, 2
+         do 10 i = 1, 3
+            i = i + 1
+            A(i,j) = real(i)/real(j)
+            print *, i, j
+   10 continue
+      end
+\end{lstlisting}
+
+Does this loop access $A$ with \gls{stride1}?
+Yes, it does, but I hope the potential problems are becoming clear.
+What if $i$ is not simply a constant offset of the innermost dimension of $A$?
+What if the first index of $A$ is the result of a function call which takes $i$
+as a parameter and performs some calculation based on it?
+This sort of analysis would go on to be a rich subset of compiler optimization research,
+and the answers are not always straightforward.
+Their work on FORTRAN would become the basis for loop analyses attempting to prove
+that address expressions are linear functions of \gls{inducvar}s,
+permitting impactful compiler optimizations.
+
+To match or exceed the efficiency of hand-coded loops, the group settled on a few
+language restrictions that would need to be adhered to
+\cite{backus_heising_fortran_1964}:
+
+\begin{itemize}
+	\item DO-loop \gls{inducvar}s must be incremented by a positive, constant integer.
+	\item Array subscripts must be linear (or \textit{affine}) functions of \gls{inducvar}s.
+	\item The number of subscripts must not exceed three.
+	\item Control should not jump into a loop body from elsewhere in the program.
+\end{itemize}
+
+Outside of these restrictions, other were imposed for the performance of the \textit{compiler}
+and not necessarily for the user's program. For example, identifiers could not
+exceed six characters.
 
 \subsection{FORTRAN II}
 
@@ -713,6 +788,6 @@ like the \textit{WATFOR} and \textit{WATFIV} compilers developed at the Universi
 (the \textbf{WAT}erloo \textbf{FOR}tran compiler\cite{cress_dirksen_graham_watfor_fortran_iv_1970}),
 and in general it did not produce machine code as fast as IBM's FORTRAN II compiler.
 
-
+\todo{fortran iv was revamped ii compiler, introduced common blocks.}
 \todo{See 1964 backus and heising paper}.
 \cite{backus_heising_fortran_1964}.
