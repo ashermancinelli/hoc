@@ -1,0 +1,44 @@
+\section{Functional Programming}
+
+One framework for understanding trends in programming language design
+goes like this:
+
+\begin{enumerate}
+	\item Something happens in the world that results in lots of money being spent on
+	      programming languages and software.
+	\item Lots of academics use this money to think about how to design programming languages.
+	\item They converge on mathematical (in particular, algebraic)
+	      approaches to programming languages design,
+	      and these ideas gain traction.
+	\item That money dries up, and software developers generally move
+	      away from algebraic approaches to programming languages design,
+	      and sometimes go in the \textit{opposite} direction towards
+	      practicality at all costs.
+\end{enumerate}
+
+I don't necessarily believe this and macro trends are hard to prove one
+way or another, but sometimes it's a useful lens.
+
+Perhaps the first instance of this trend was Laning and Zierler's algebraic compiler
+which formed during and immediately after the Second World War, when computing was
+in its infancy and there was lots of government funding for research into programming languages.
+This culminated in the development of ALGOL with it's principle of orthogonality of language
+features.
+This line of thinking eventually gave way to more practical and less principled approaches to
+language design found in Fortran and C.
+
+Another example might be the development of ML\dots \todo{...}
+
+\section{The Next 700 Programming Languages}
+
+Published in \citeyear{landin_next_700_prog_langs_1966},
+Peter Landin's seminal paper \citetitlecite{landin_next_700_prog_langs_1966} lays out his vision for
+the future of programming language design, emphasizing the importance of the programmer's intent
+uncluttered by details of the hardware.
+He argued that the programmer ought to only consider their intent, and the compiler ought to
+consider the operations that would be needed to carry out their intent.
+
+The paper describes a new programming language called IYSWIM, for \textit{If You See What I Mean}.
+\todo{dig into ML languages \citetitlecite{hopl_history_of_ml_2020}}.
+\todo{type systems, type inference, Hindley Milner, SML.}
+\todo{similar vein to Laning and Zierler's algebraic compiler.}

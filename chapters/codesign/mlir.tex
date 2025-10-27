@@ -103,7 +103,27 @@ leverage it, but they also had to maintain a level of abstraction higher than th
 of LLVM IR to represent constructs specific to their languages.
 MLIR seeks to fill this gap as well.
 
-One of the programming languages we mentioned was Fortran.
+One of the primary goals of MLIR as listed in \citetitle{lattner_amini_mlir_og_paper_2021}
+was that of \textit{progressivity}:
+\begin{quotation}
+	Premature lowering is the root of all evil.
+	Beyond representation layers, allow multiple transformation
+	paths that lower individual regions on demand. Together with
+	abstraction-independent principles and interfaces, this enables
+	reuse across multiple domains.
+\end{quotation}
+
+MLIR allows each phase of the compiler to build an IR on its own terms,
+and the transition from one phase to the next is \textit{continuous}
+instead of \textit{discrete}.
+The compiler may perform optimizations that are suitable for \textit{just} after
+code generation, when the frontend has passed the program to the optimizer,
+or it may perform low level optimizations towards the end of the compilation
+pipeline using dialects with machine-specific operations.
+The progressive nature of the transition between phases of an MLIR-based compiler
+allows all the phases of the compiler to coexist and interact seamlessly.
+
+One of the programming languages we mentioned above was Fortran.
 While Fortran was one of the first programming languages we discussed in this book,
 we will come to find that the Flang Fortran compiler, also part of the LLVM project,
 was one of the first projects to adopt MLIR, and one of the only compilers for a

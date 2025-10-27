@@ -19,23 +19,40 @@ Brian Kernighan described compilers in this seemingly general way
 	from other languages such as Ratfor into Fortran.
 \end{quotation}
 
-However, this is not sufficiently general. Two counter examples are \tex and
+And Jean Sammet used a similar description:
+
+\begin{quotation}
+	A compiler is a program, not a piece of hardware. A compiler is simply
+	a program which translates a source program written in a particular programming
+	language to an object program which is capable of being run on
+	a particular computer. A compiler is therefore both language and machine
+	dependent. The most important characteristic of a compiler is that its output
+	iS a program in some form or another and not an answer of any kind. This
+	contrasts with the interpreter\dots
+	The first completed
+	compiler seems to be the A-0 system developed by Dr. Grace Hopper and
+	her staff at Remington Rand in 1952\dots
+	\cite{sammet_programming_languages_history_and_fundamentals_1969}
+\end{quotation}
+
+However, neither definition is sufficiently general.
+Two counter examples are \tex and
 \metafont, which are compilers that transform text into PDF documents and
 renderable fonts, respectively. Transforming text into an executable program is
 not the same operation as transforming text into a document or font, yet both
 are considered compilation. When students are first introduced to compilers, the
-first sort of program they are contrasted with is interpreters. This distinction
-is not necessarily meaningful. The conventional notion of an interpreter is a
+first kind of program they are contrasted with is interpreters, but distinction
+is not always meaningful. The conventional notion of an interpreter is a
 program that performs the actions specified by the source code as chunks of the
-code are consumed;perhaps this was the case with early \texttt{BASIC}
+code are consumed; perhaps this was the case with early \texttt{BASIC}
 interpreters and it may be a useful mental model when introducing interpreters
 to new programmers, but one is hard-pressed to find a modern interpreter that
 does not perform a compilation step. The most popular interpreters for today's
 most popular interpreted languages, Python and Javascript, both use relatively
 sophisticated compilation techniques. There are even Python \textit{libraries}
 that perform just-in-time (JIT) compilation, targeting CPUs, GPUs, and other
-specialized
-hardware\cite{jax-compiler}\cite{lam-numba}\cite{numba_cuda}\cite{triton-tillet}.
+specialized hardware
+\cite{jax-compiler}\cite{lam-numba}\cite{numba_cuda}\cite{triton-tillet}.
 
 \vspace{0.5em}
 
@@ -43,7 +60,6 @@ To capture the full spectrum of compiler technologies, the
 definition we will use in this book is intentionally broad:
 \begin{quotation}
 	\textit{A compiler analyzes, transforms, and produces code, based on source code.}
-	% \caption{Definition of \textit{compiler}.}
 	\label{def:compiler}
 \end{quotation}
 
@@ -65,16 +81,20 @@ format, Up$\flat$eat produces output code in the form of
 music\cite{aho_oral_history_2022}. The student's final presentation was to set
 the input data to the ticker for some symbol from the New York Stock Exchange,
 playing happy and upbeat music whenever the ticker went up, and sad depressed
-music when it went down. Another Bell Labs creation was the connection of two
+music when it went down.
+
+Another Bell Labs creation was the connection of two
 programs: a program that translated numbers into words (e.g. 123 to "one
 hundred twenty three"), and a program that turned text into data representing
 sound waves. Connecting these two compilers (on that compiled text with numbers
 into text with words sounding out the numbers, and one that compiled text into
-sound waves) allowedBell Labs employees to send messages that would be turned
-into sound waves and broadcast on a speaker in the computer room. The point of
-this section is not pedantry, but to establish a broad definition of compiler
-technology before embarking on the details of its development. We will primarily
-focus on compilers that have run on a machine. We largely exclude theoretical
+sound waves) allowed Bell Labs employees to send messages that would be turned
+into sound waves and broadcast on a speaker in the computer room.
+
+The point of
+this section is not pedantry, but the establishment of a broad definition of compiler
+technology before embarking on the details of its development.
+We largely exclude theoretical
 works like Ada King Lovelace's notes on calculating Bournoulli numbers and the
 development of automata theory, for instance. Each step in the development of
 compiler technology builds on the previous steps, and while the prior steps are
