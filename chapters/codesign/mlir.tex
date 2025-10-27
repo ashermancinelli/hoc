@@ -1,5 +1,7 @@
 \section{MLIR}
 
+\subsection{An IR In Tension}
+
 In modern compilers, the \gls{ir} must be extremely flexible and generic
 because every component of the compiler needs something different from it.
 
@@ -57,6 +59,56 @@ This is one of the key benefits of MLIR; each component can define its own
 operations and semantics, the IR can be \textit{progressively} lowered from
 one phase to the next, and each phase of the compiler can coexist with the others.
 
-% Taking LLVM IR as an example, the Clang frontend will parse and analyze the source code
-% and perform some optimizations, after which it would like to simple generate a valid
-% representation of the program to let the optimizer do its job.
+Prior to MLIR, most IRs primarily took a \textit{one size fits all} approach,
+which, as we have just outlined, puts different parts of the compiler in tension with each other.
+There have been numerous benefits though; LLVM's IR is roughly "C with vectors,"
+which, for obvious reasons, is very easy for C and C++ compilers to target,
+but other compilers have been able to adopt it as well.
+Rust, Swift, Julia, Zig, some Fortran compilers, and many other complete programming languages
+emit LLVM IR. Their respective projects focus on the language's
+frontend and on high-level optimizations, and once the IR has been sufficient
+optimized, those language's compilers simply convert \textit{their} IRs into
+LLVM IR and let the LLVM toolchain handle lower-level optimizations and code generation.
+
+LLVM IR does impose some serious constraints, however.
+High-level and domain-specific analyses and optimizations remain difficult.
+
+\subsection{Explaining MLIR}
+
+MLIR\cite{lattner_amini_mlir_og_paper_2021} is a \textit{multi-level} IR;
+similar to the \textit{nanopass} architecture\cite{keep_dybvig_nanopass_2013},
+it allows for very flexible construction of \textit{dialects}, which is the MLIR
+project's notion of an IR. The key feature of these dialects is that they can be
+composed together--in the representation of a program, many dialects can be used
+together to represent different aspects of the program at different points in
+the compilation process.
+This orthogonality reminds me of the ALGOL committee's orthogonality design principle.
+They aimed to design programming language features that all composed with each other
+on different axes.
+Similarly, MLIR dialects can be composed together without knowledge of each other.
+
+The original MLIR paper, \citetitle{lattner_amini_mlir_og_paper_2021},
+points out the difficulty of higher-level analysis of C++ programs on LLVM IR;
+the IR simply cannot represent all the complicated semantics of C++ programs,
+and thus optimizations that take advantage of them must either occur in the
+frontend, try to recover the high-level information from the IR itself,
+or find a way to stuff that information into the IR in the form of metadata,
+and perform the optimizations and analyses early enough in the compiler that
+the information is not obfuscated by other optimizations first.
+
+In the previous section, I pointed out a few compilers and interpreters that
+target LLVM IR, such as Rust and Swift.
+It is a testament to LLVM IR's flexibility that all those projects were able to
+leverage it, but they also had to maintain a level of abstraction higher than that
+of LLVM IR to represent constructs specific to their languages.
+MLIR seeks to fill this gap as well.
+
+One of the programming languages we mentioned was Fortran.
+While Fortran was one of the first programming languages we discussed in this book,
+we will come to find that the Flang Fortran compiler, also part of the LLVM project,
+was one of the first projects to adopt MLIR, and one of the only compilers for a
+general-purpose programming language to do so.
+
+\subsection{Flang}
+
+\citetitle{spickett_flang_levels_up_2025}.

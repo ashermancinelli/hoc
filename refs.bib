@@ -105,11 +105,12 @@
   location     = {Palo Alto, California},
   series       = {CGO '04}
 }
-@inproceedings{mlir,
+@inproceedings{lattner_amini_mlir_og_paper_2021,
   author       = {Lattner, Chris and Amini, Mehdi and Bondhugula, Uday and Cohen, Albert and Davis, Andy and Pienaar, Jacques and Riddle, River and Shpeisman, Tatiana and Vasilache, Nicolas and Zinenko, Oleksandr},
   booktitle    = {2021 IEEE/ACM International Symposium on Code Generation and Optimization (CGO)},
   title        = {MLIR: Scaling Compiler Infrastructure for Domain Specific Computation},
   year         = {2021},
+  url          = {https://ieeexplore.ieee.org/document/9370308},
   volume       = {},
   number       = {},
   pages        = {2--14},
@@ -1714,4 +1715,41 @@ address = {USA}
 	author = {Brown, J. H. and Carr {III}, John W.},
 	year = {1954},
 	pages = {84--97}
+}
+@inproceedings{10.1145/2500365.2500618,
+author = {Keep, Andrew W. and Dybvig, R. Kent},
+title = {A nanopass framework for commercial compiler development},
+year = {2013},
+isbn = {9781450323260},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/2500365.2500618},
+doi = {10.1145/2500365.2500618},
+abstract = {Contemporary compilers must typically handle sophisticated high-level source languages, generate efficient code for multiple hardware architectures and operating systems, and support source-level debugging, profiling, and other program development tools. As a result, compilers tend to be among the most complex of software systems. Nanopass frameworks are designed to help manage this complexity. A nanopass compiler is comprised of many single-task passes with formally defined intermediate languages. The perceived downside of a nanopass compiler is that the extra passes will lead to substantially longer compilation times. To determine whether this is the case, we have created a plug replacement for the commercial Chez Scheme compiler, implemented using an updated nanopass framework, and we have compared the speed of the new compiler and the code it generates against the original compiler for a large set of benchmark programs. This paper describes the updated nanopass framework, the new compiler, and the results of our experiments. The compiler produces faster code than the original, averaging 15-27\% depending on architecture and optimization level, due to a more sophisticated but slower register allocator and improvements to several optimizations. Compilation times average well within a factor of two of the original compiler, despite the slower register allocator and the replacement of five passes of the original 10 with over 50 nanopasses.},
+booktitle = {Proceedings of the 18th ACM SIGPLAN International Conference on Functional Programming},
+pages = {343–350},
+numpages = {8},
+keywords = {scheme, nanopass, compiler},
+location = {Boston, Massachusetts, USA},
+series = {ICFP '13}
+}
+
+@article{keep_dybvig_nanopass_2013,
+author = {Keep, Andrew W. and Dybvig, R. Kent},
+title = {A nanopass framework for commercial compiler development},
+year = {2013},
+issue_date = {September 2013},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {48},
+number = {9},
+issn = {0362-1340},
+url = {https://doi.org/10.1145/2544174.2500618},
+doi = {10.1145/2544174.2500618},
+abstract = {Contemporary compilers must typically handle sophisticated high-level source languages, generate efficient code for multiple hardware architectures and operating systems, and support source-level debugging, profiling, and other program development tools. As a result, compilers tend to be among the most complex of software systems. Nanopass frameworks are designed to help manage this complexity. A nanopass compiler is comprised of many single-task passes with formally defined intermediate languages. The perceived downside of a nanopass compiler is that the extra passes will lead to substantially longer compilation times. To determine whether this is the case, we have created a plug replacement for the commercial Chez Scheme compiler, implemented using an updated nanopass framework, and we have compared the speed of the new compiler and the code it generates against the original compiler for a large set of benchmark programs. This paper describes the updated nanopass framework, the new compiler, and the results of our experiments. The compiler produces faster code than the original, averaging 15-27\% depending on architecture and optimization level, due to a more sophisticated but slower register allocator and improvements to several optimizations. Compilation times average well within a factor of two of the original compiler, despite the slower register allocator and the replacement of five passes of the original 10 with over 50 nanopasses.},
+journal = {SIGPLAN Not.},
+month = sep,
+pages = {343–350},
+numpages = {8},
+keywords = {scheme, nanopass, compiler}
 }

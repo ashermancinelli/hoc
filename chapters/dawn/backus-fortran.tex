@@ -566,7 +566,7 @@ When a program iterates over the elements of a matrix $A_{m, n}$ with $m$ rows a
 the element of $A_{i, j}$ is accessed in column-major order with the following calculation:
 
 \[
-	A_{i, j} = base-address(A) + ((i - lbound(A, 1)) + m \times (j - lbound(A, 2))) \times s
+	A_{i, j} = \text{base-address}(A) + ((i - lbound(A, 1)) + m \times (j - lbound(A, 2))) \times s
 \]
 
 where $s$ is the number of bytes in an element of $A$, and $lbound$ gives the lower bound of the array
@@ -574,7 +574,7 @@ for a given dimension.
 In many cases, the lower bound of all dimensions is $1$, which gives a more straightforward calculation:
 
 \[
-	A_{i, j} = base-address(A) + ((i - 1) + n \times (j - 1)) \times s
+	A_{i, j} = \text{base-address}(A) + ((i - 1) + n \times (j - 1)) \times s
 \]
 
 And even more simply, the offset of an index from the base address of a matrix
