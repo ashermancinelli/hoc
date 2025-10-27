@@ -1,44 +1,108 @@
-\section{Functional Programming}
+\section{Early Functional Programming}
 
-One framework for understanding trends in programming language design
-goes like this:
+\subsection{Lisp}
 
-\begin{enumerate}
-	\item Something happens in the world that results in lots of money being spent on
-	      programming languages and software.
-	\item Lots of academics use this money to think about how to design programming languages.
-	\item They converge on mathematical (in particular, algebraic)
-	      approaches to programming languages design,
-	      and these ideas gain traction.
-	\item That money dries up, and software developers generally move
-	      away from algebraic approaches to programming languages design,
-	      and sometimes go in the \textit{opposite} direction towards
-	      practicality at all costs.
-\end{enumerate}
+\todo{Lisp: practical, symbolic, early use of functions-as-data; lambda keyword present.}
 
-I don't necessarily believe this and macro trends are hard to prove one
-way or another, but sometimes it's a useful lens.
+\subsection{Economic Model of Developments in Functional Programming}
+\iffalse
+	One framework for understanding trends in programming language design
+	goes like this:
 
-Perhaps the first instance of this trend was Laning and Zierler's algebraic compiler
-which formed during and immediately after the Second World War, when computing was
-in its infancy and there was lots of government funding for research into programming languages.
-This culminated in the development of ALGOL with it's principle of orthogonality of language
-features.
-This line of thinking eventually gave way to more practical and less principled approaches to
-language design found in Fortran and C.
+	\begin{enumerate}
+		\item Something happens in the world that results in lots of money being spent on
+		      programming languages and software.
+		\item Lots of academics use this money to think about how to design programming languages.
+		\item They converge on mathematical (in particular, algebraic)
+		      approaches to programming languages design,
+		      and these ideas gain traction.
+		\item That money dries up, and software developers generally move
+		      away from algebraic approaches to programming languages design,
+		      and sometimes go in the \textit{opposite} direction towards
+		      practicality at all costs.
+	\end{enumerate}
 
-Another example might be the development of ML\dots \todo{...}
+	I don't necessarily believe this and macro trends are hard to prove one
+	way or another, but sometimes it's a useful lens.
 
-\section{The Next 700 Programming Languages}
+	Perhaps the first instance of this trend was Laning and Zierler's algebraic compiler
+	which formed during and immediately after the Second World War, when computing was
+	in its infancy and there was lots of government funding for research into programming languages.
+	This culminated in the development of ALGOL with it's principle of orthogonality of language
+	features.
+	This line of thinking eventually gave way to more practical and less principled approaches to
+	language design found in Fortran and C.
+
+	Another example might be the development of ML\dots \todo{...}
+\fi
+
+\subsection{Alonzo Church and the \Lambdacalc}
+
+We will not given an exhaustive look at Church's life and work outside of the
+\lambdacalc--I encourage readers to consult \citetitle{stanford_encyclopedia_church_2025}
+for this.
+He is renowned for more than just the \lambdacalc though we will not cover much more
+than that here.
+
+All throughout the 1930s, Church developed the \textit{\lambdacalc},
+a formal definition of a \textit{higher-order, functional} programming language
+built on only three concepts: functions, variables, and application.
+The language was \textit{higher-order} in that functions could be passed
+as arguments to other functions, and functions could return other functions as results.
+It was \textit{functional} in that function definition and application was the
+primary abstraction in the language.
+
+In the \lambdacalc, functions are given by $\lambda x. E$ where $x$ is the function's argument
+and $E$ is the resulting expression. The result of the function is given by substituting the
+argument for all occurances of $x$ in $E$. Function application is given by juxtaposition,
+so $F x$ applies the function $F$ to the argument $x$.
+
+Function definitions and applications are all assumed to take exactly one argument,
+though there are syntaxes given for more:
+
+\begin{align}
+	\lambda x . (\lambda y . (\lambda z . E)) & \equiv \lambda x y z . E
+	\tag{function definition}
+	\\
+	M N P x                                   & \equiv M (N (P x))
+	\tag{function application}
+\end{align}
+
+In 1940, he published \citetitle{church_simple_theory_of_types_1940}
+which would become the foundation for type theory.
+
+The \lambdacalc
+
+\subsection{Haskell Curry}
+
+\todo{not sure how much we want to cover here}...
+\citetitle{curry_functionality_in_combinatory_logic_1934}.
+
+\subsection{The Next 700 Programming Languages}
 
 Published in \citeyear{landin_next_700_prog_langs_1966},
 Peter Landin's seminal paper \citetitlecite{landin_next_700_prog_langs_1966} lays out his vision for
 the future of programming language design, emphasizing the importance of the programmer's intent
 uncluttered by details of the hardware.
+This language, IYSWIM, or \textit{If You See What I Mean}, was semantically
+equivalent to the \lambdacalc but introduced programming language design features
+that were novel and innovative above that of the \lambdacalc.
 He argued that the programmer ought to only consider their intent, and the compiler ought to
 consider the operations that would be needed to carry out their intent.
 
-The paper describes a new programming language called IYSWIM, for \textit{If You See What I Mean}.
+\citeauthor{hopl_history_of_ml_2020} described the origins of the Meta Language in Landin's paper
+like so\cite{hopl_history_of_ml_2020}:
+
+\begin{quotation}
+	The basic framework of the language design was inspired by Peter Landin’s ISWIM language
+	from the mid 1960s [1966b], which was, in turn, a sugared syntax for Church’s lambda calculus. The
+	ISWIM framework provided higher-order functions, which were used to express proof tactics and
+	their composition. To ISWIM were added a static type system that could guarantee that programs
+	that purport to produce theorems in the object language actually produce logically valid theorems
+	and an exception mechanism for working with proof tactics that could fail. ML followed ISWIM in
+	using strict evaluation and allowing impure features, such as assignment and exceptions.
+\end{quotation}
+
 \todo{dig into ML languages \citetitlecite{hopl_history_of_ml_2020}}.
 \todo{type systems, type inference, Hindley Milner, SML.}
 \todo{similar vein to Laning and Zierler's algebraic compiler.}
