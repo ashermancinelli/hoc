@@ -16,4 +16,47 @@ called \textit{array programming languages} or \textit{Iversonian languages}.
 
 \subsection{Lisp}
 
-Started in 1958:  \citetitle{mccarthy_history_of_lisp_1978}.
+Lisp was developed primarily by John McCarthy in two bouts:
+most of the key ideas were developed in 1956-1958,
+and in 1958-1962 the language was actually implemented and applied to artificial
+intelligence.
+
+In terms of programming language design, Lisp's fundamental data structure is the \textit{list}--
+hence the name (\textit{\textbf{LIS}t \textbf{P}rocessing}).
+Symbolic computing (which was still novel at the time) was implemented using lists and basic
+operations on them.
+Lisp \textit{programs} were also represented as data; one of the key innovations of the language
+the ability manipulate Lisp programs as any other data structure, with the \texttt{eval}
+function serving as the bridge between the code as data and code as actions to be performed
+by a Lisp program.
+This concept of self-modifying programs was to serve as the basis for ALGOL Y,
+the more ambitious successor to ALGOL 60,
+which was abandoned due to the eventual scope and controversy of the ALGOL X project,
+or ALGOL 68 as it came to be known.
+
+\subsubsection{1956-1958}
+
+Lisp was born out of John McCarthy's desire for a list-oriented language
+for work on an IBM 704 at Dartmouth College during a summer research project
+in 1956, which was the first organized study of artificial intelligence
+\cite{mccarthy_history_of_lisp_1978}.
+
+McCarthy was presented the list-processing programming language \textit{IPL 2},
+written for the RAND Corporation's JOHNNIAC computer.
+\footnote{The RAND Corporation was not the same company as Remington Rand/Sperry Rand, where Grace Hopper worked around this time.}
+Dartmouth was soon to get access to an IBM 704 thanks to the New England Computation Center
+at MIT, which IBM was in the midst of establishing.
+McCarthy was to consult with a team at IBM developing a theorem-proving program for plane geometry,
+and it was not clear at the time whether IBM's FORTRAN would be suitable for list-processing.
+
+McCarthy was also independently working on artificial intelligence,
+publishing his first paper in the field in 1958,
+\citetitle{mccarthy_programs_with_common_sense_1958}.
+This paper, also called the \textit{Advice Taker} proposal,
+involved representing information in the form of sentances in a formal language,
+and an accompanying program that would make inferences based on that information.
+
+\todo{
+	Started in 1958: \citetitle{mccarthy_history_of_lisp_1978}.
+	MIT, doug mcqueen's collaboration, SMLNJ.
+}
