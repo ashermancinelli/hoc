@@ -55,6 +55,47 @@ publishing his first paper in the field in 1958,
 This paper, also called the \textit{Advice Taker} proposal,
 involved representing information in the form of sentances in a formal language,
 and an accompanying program that would make inferences based on that information.
+These sentences were to be structured as lists, so he naturally
+needed a list-processing language to process these sentences.
+
+McCarthy started by considering how list structures would be represented in
+memory. The IBM 704 had an addressable word size of 36 bits with
+a 15-bit address space, so the pointers would need to be 15 bits,
+which allowed for two pointers in each word, plus 6 extra bits.
+A list in Lisp was to be represented in a word like so:
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		               & \textbf{Tag} & \textbf{Decrement} & \textbf{Prefix} & \textbf{Address} \\
+		\hline
+		Width          & 3 Bits       & 15 Bits            & 3 Bits          & 15 Bits          \\
+		\hline
+		Purpose        & Type/Opcode  & Address of Tail    & Type            & Pointer to data  \\
+		\hline
+		Lisp primitive & \texttt{ctr} & \texttt{cdr}       & \texttt{cpr}    & \texttt{car}     \\
+		\hline
+	\end{tabular}
+	\caption{Layout of a 36-bit word on the IBM 704 as used for Lisp list structures.}
+\end{table}
+
+Nathaniel Rochester, Herbert Gelernter and Carl Gerberich at IBM
+took on the task of writing implementing this list-processing language
+in FORTRAN, called FLPL for \textit{FORTRAN List Processing Language}.
+This primitive version of the language lacked conditional expressions, recursion, and other
+fundamental features.
+McCarthy developed the conditional expressions in 1957-1958 while developing a chess program
+in FORTRAN, though it was not the conventional notion of an if-statement since both arms
+of the conditional expression were always evaluated; \texttt{XIF(C, E1, E2)} would return
+\texttt{E1} if \texttt{C} was equal to 1 and \texttt{E2} otherwise, which is typically called
+a \textit{merge} operation today.
+This was motivated by the clumsy syntax and semantics of the \texttt{IF} statement in FORTRAN I and II.
+
+Nathaniel Rochester invited McCarthy to join the IBM Information Research Department for the
+summer of 1958 to implement differentiation of algebraic expressions in FLPL,
+where he would go on to develop many more foundational concepts in Lisp programming
+language design.
 
 \todo{
 	Started in 1958: \citetitle{mccarthy_history_of_lisp_1978}.
