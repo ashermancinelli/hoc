@@ -24,10 +24,8 @@ Lisp was born out of John McCarthy's desire for a list-oriented language
 for work on an IBM 704 at Dartmouth College during a summer research project
 in 1956, which was the first organized study of artificial intelligence
 \cite{mccarthy_history_of_lisp_1978}.
-
-McCarthy was presented the list-processing programming language \textit{IPL 2}
-(\textit{Information Processing Language}),
-written for the RAND Corporation's JOHNNIAC computer.
+Around this time, McCarthy was presented the list-processing programming language \textit{IPL 2}
+(\textit{Information Processing Language}), written for the RAND Corporation's JOHNNIAC computer.
 \footnote{The RAND Corporation was not the same company as Remington Rand/Sperry Rand, where Grace Hopper worked around this time.}
 Dartmouth was soon to get access to an IBM 704 thanks to the New England Computation Center
 at MIT, which IBM was in the midst of establishing.
@@ -74,6 +72,7 @@ They considered using the IPL, but decided against it, persuaded by McCarthy's s
 to instead adapt a FORTRAN compiler.
 This primitive version of the language lacked conditional expressions, recursion, and other
 fundamental features.
+
 They note in \citetitle{gelernter_flpl_1960} that while IPL's interpretation was prohibatively
 costly, their adaptation of FORTRAN was able to run the same programs in a fraction of the time.
 They also pointed out the utility of FORTRAN III's introduction of separable compilation and linking of
@@ -112,17 +111,21 @@ and Lisp would come to be famous for.
 	quite feasible to manipulate FLPL expressions within FLPL.
 \end{quotation}
 
-McCarthy developed the conditional expressions in 1957-1958 while developing a chess program
-in FORTRAN, though it was not the conventional notion of an if-statement since both arms
-of the conditional expression were always evaluated; \texttt{XIF(C, E1, E2)} would return
-\texttt{E1} if \texttt{C} was equal to 1 and \texttt{E2} otherwise, which is typically called
-a \textit{merge} operation today.
-This was motivated by the clumsy syntax and semantics of the \texttt{IF} statement in FORTRAN I and II.
+\subsection{McCarthy's Contributions}
 
 Nathaniel Rochester invited McCarthy to join the IBM Information Research Department for the
 summer of 1958 to implement differentiation of algebraic expressions in FLPL,
-where he would go on to develop many more foundational concepts in Lisp programming
-language design.
+where he would go on to develop many more foundational concepts.
+
+McCarthy developed the conditional expressions in 1957-1958 while developing a chess program
+in FORTRAN, though it was not the conventional notion of an if-statement since both arms
+of the conditional expression were always evaluated; \texttt{XIF(C, E1, E2)} would return
+\texttt{E1} if \texttt{C} was equal to 1 and \texttt{E2} otherwise, which we would now call
+a \textit{merge} or \textit{select} operation.
+This was motivated by the clumsy syntax and semantics of the \texttt{IF} statement in FORTRAN I and II,
+and something similar to McCarthy's version would soon be added to the language.
+
+
 
 \todo{
 	Started in 1958: \citetitle{mccarthy_history_of_lisp_1978}.

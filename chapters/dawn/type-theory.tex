@@ -1,0 +1,49 @@
+\section{Early Type Theory}
+
+A surprising number of the foundations for type theory were laid before
+many familiar programming concepts were developed.
+Namely, Alonzo Church's \lambdacalc and Haskell Curry's combinatory logic
+would set the foundation for type theory long before they would be implemented in
+a proper compiler.
+
+\subsection{Alonzo Church and the \Lambdacalc}
+
+We will not given an exhaustive look at Church's life and work outside of the
+\lambdacalc--I encourage readers to consult \citetitle{stanford_encyclopedia_church_2025}
+for this.
+He is renowned for more than just the \lambdacalc though we will not cover much more
+than that here.
+
+All throughout the 1930s, Church developed the \textit{\lambdacalc},
+a formal definition of a \textit{higher-order, functional} programming language
+built on only three concepts: functions, variables, and application.
+The language was \textit{higher-order} in that functions could be passed
+as arguments to other functions, and functions could return other functions as results.
+It was \textit{functional} in that function definition and application was the
+primary abstraction in the language.
+
+In the \lambdacalc, functions are given by $\lambda x. E$ where $x$ is the function's argument
+and $E$ is the resulting expression. The result of the function is given by substituting the
+argument for all occurances of $x$ in $E$. Function application is given by juxtaposition,
+so $F x$ applies the function $F$ to the argument $x$.
+
+Function definitions and applications are all assumed to take exactly one argument,
+though there are syntaxes given for more:
+
+\begin{align}
+	\lambda x . (\lambda y . (\lambda z . E)) & \equiv \lambda x y z . E
+	\tag{function definition}
+	\\
+	M N P x                                   & \equiv M (N (P x))
+	\tag{function application}
+\end{align}
+
+In 1940, he published \citetitle{church_simple_theory_of_types_1940}
+which would become the foundation for type theory.
+
+The \lambdacalc
+
+\subsection{Haskell Curry}
+
+\todo{not sure how much we want to cover here}...
+\citetitle{curry_functionality_in_combinatory_logic_1934}.

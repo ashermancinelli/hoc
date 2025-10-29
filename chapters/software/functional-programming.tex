@@ -1,11 +1,7 @@
 \section{Early Functional Programming}
 
-\subsection{Lisp}
-
-\todo{Lisp: practical, symbolic, early use of functions-as-data; lambda keyword present.}
-
-\subsection{Economic Model of Developments in Functional Programming}
 \iffalse
+	\subsection{Economic Model of Developments in Functional Programming}
 	One framework for understanding trends in programming language design
 	goes like this:
 
@@ -36,47 +32,16 @@
 	Another example might be the development of ML\dots \todo{...}
 \fi
 
-\subsection{Alonzo Church and the \Lambdacalc}
-
-We will not given an exhaustive look at Church's life and work outside of the
-\lambdacalc--I encourage readers to consult \citetitle{stanford_encyclopedia_church_2025}
-for this.
-He is renowned for more than just the \lambdacalc though we will not cover much more
-than that here.
-
-All throughout the 1930s, Church developed the \textit{\lambdacalc},
-a formal definition of a \textit{higher-order, functional} programming language
-built on only three concepts: functions, variables, and application.
-The language was \textit{higher-order} in that functions could be passed
-as arguments to other functions, and functions could return other functions as results.
-It was \textit{functional} in that function definition and application was the
-primary abstraction in the language.
-
-In the \lambdacalc, functions are given by $\lambda x. E$ where $x$ is the function's argument
-and $E$ is the resulting expression. The result of the function is given by substituting the
-argument for all occurances of $x$ in $E$. Function application is given by juxtaposition,
-so $F x$ applies the function $F$ to the argument $x$.
-
-Function definitions and applications are all assumed to take exactly one argument,
-though there are syntaxes given for more:
-
-\begin{align}
-	\lambda x . (\lambda y . (\lambda z . E)) & \equiv \lambda x y z . E
-	\tag{function definition}
-	\\
-	M N P x                                   & \equiv M (N (P x))
-	\tag{function application}
-\end{align}
-
-In 1940, he published \citetitle{church_simple_theory_of_types_1940}
-which would become the foundation for type theory.
-
-The \lambdacalc
-
-\subsection{Haskell Curry}
-
-\todo{not sure how much we want to cover here}...
-\citetitle{curry_functionality_in_combinatory_logic_1934}.
+Building on the foundations laid by John McCarthy, Alonzo Church and Haskell Curry, functional programming
+came into its own with the development of Meta Langauge.
+In \cref{chap:dawn}, we covered John Backus's work on Fortran extensively; what we didn't cover was his
+famous 1977 ACM Turing Award lecture, \citetitle{backus_can_liberated_from_vn_style_1978}, in which
+he tears down his own language's contributions to the field of programming languages, favouring
+instead a functional and expression-oriented approach to writing programs.
+He contrasts the way one must reason about programs written in procedural languages
+like ALGOL and Fortran with those written in functional languages like APL, which we will explore in this section.
+This paper contributed to the eventual zeitgeist of functional programming which would dominate
+some areas of the field for many years to come, especially in academia.
 
 \subsection{The Next 700 Programming Languages}
 
@@ -102,6 +67,15 @@ like so\cite{hopl_history_of_ml_2020}:
 	and an exception mechanism for working with proof tactics that could fail. ML followed ISWIM in
 	using strict evaluation and allowing impure features, such as assignment and exceptions.
 \end{quotation}
+
+\section{APL}
+
+APL, standing for \textit{A Programming Language}, was developed by Kenneth E. Iverson in 1962
+and partially implemented on the IBM System/360 as APL/360.
+While this partial implementation was only an interpreter for a subset of the language Iverson
+designed, it would spur on the development of a family of programming languages
+called \textit{array programming languages} or \textit{Iversonian languages}.
+\citetitle[Section X.4]{sammet_programming_languages_history_and_fundamentals_1969}.
 
 \todo{dig into ML languages \citetitlecite{hopl_history_of_ml_2020}}.
 \todo{type systems, type inference, Hindley Milner, SML.}

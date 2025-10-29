@@ -9,6 +9,8 @@ default: quick
 biber-clear-cache:
     rm -rf `biber --cache`
 
+fix: biber-clear-cache
+
 full:
     {{latex}}
     biber {{job}}
