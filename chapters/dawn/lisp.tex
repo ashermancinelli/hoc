@@ -195,7 +195,7 @@ turing machines by formally describing a \textit{universal Lisp function},
 and showing that it was more elegant than the Turing machine.
 
 This universal function would be a Lisp program capable of evaluating
-any other possible Lisp program. McCarthy described it formally as $eval \[  e, a \]$
+any other possible Lisp program. McCarthy described it formally as $eval[e, a]$
 where the function $eval$ takes a Lisp expression $e$ and evaluates it in the context
 of a list of assignments to variable names $a$.
 Steve Russel noticed that an implementation of this function could
@@ -209,6 +209,7 @@ the code people had written in the language would continue to work.
 The number 0 representing both the empty list \texttt{NIL} and the boolean value
 \texttt{FALSE} is one such case.
 
+\subsection{Lisp 1.5}
 
 \todo{
 	Started in 1958: \citetitle{mccarthy_history_of_lisp_1978}.

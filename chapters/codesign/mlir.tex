@@ -131,4 +131,20 @@ general-purpose programming language to do so.
 
 \subsection{Flang}
 
+\begin{luacode*}
+	shell = require("lua/shell")
+	png = shell.dot_to_png("chapters/codesign/flang.dot")
+	tex.sprint("\\begin{figure}[h!]")
+		tex.sprint("\\centering")
+		tex.sprint("\\includegraphics[width=.7\\textwidth]{" .. png .. "}")
+		tex.sprint("\\caption{MLIR Lowering in Flang}")
+		tex.sprint("\\label{fig:flang-mlir-lowering}")
+		tex.sprint("\\end{figure}")
+\end{luacode*}
+
+The figure given in \ref{fig:flang-mlir-lowering} depicts a simplified version of
+Flang's process lowering the AST to MLIR.
+There are numerous optimizations better suited to different stages of this
+process, and each is able to perform at the optimal level of abstraction.
+
 \citetitle{spickett_flang_levels_up_2025}.

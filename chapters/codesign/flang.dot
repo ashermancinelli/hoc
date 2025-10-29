@@ -1,0 +1,96 @@
+digraph G {
+  bgcolor="white";
+  graph [fontname="Helvetica", fontsize=10];
+
+  node [
+    fontcolor="#000000", color="#000000",
+    fontname="Helvetica", fontsize=10,
+    style=filled, fillcolor="white", shape=box
+  ];
+  edge [
+    fontcolor="#000000", color="#000000",
+    penwidth=1.0, arrowsize=1.0, fontname="Helvetica", fontsize=9
+  ];
+
+  SRC [label="Source Code"];
+  Parser [shape=box];
+  AST [label="AST", shape=box];
+
+  SRC -> Parser;
+  Parser -> AST;
+
+  subgraph cluster_lowering {
+    label="MLIR Lowering";
+    labeljust=l;
+    fontcolor="#000000";
+    color = "#000000";
+    style = filled;
+    fillcolor = "#f7f7f7";   /* very light gray background for cluster */
+    penwidth=0.6;
+
+    AST -> Math;
+    AST -> LLVM;
+    AST -> Complex;
+    AST -> HLFIR;
+    AST -> FIR;
+    AST -> Arith;
+  }
+
+  subgraph cluster_earlyopt {
+    label="Early Optimization";
+    labeljust=l;
+    fontcolor="#000000";
+    color = "#000000";
+    style = filled;
+    fillcolor = "#fbfbfb";
+    penwidth=0.6;
+
+    Math -> Math2;
+    Math -> Arith2;
+    LLVM -> LLVM2;
+    Complex -> Complex2;
+    HLFIR -> HLFIR2;
+    HLFIR -> FIR2;
+    HLFIR -> Arith2;
+    HLFIR -> Math2;
+    FIR -> FIR2;
+    Arith -> Arith2;
+
+    LLVM2 [label="LLVM", shape=box, style=filled, fillcolor="white"];
+    Math2  [label="Math",  shape=box, style=filled, fillcolor="white"];
+    Complex2[label="Complex",shape=box, style=filled, fillcolor="white"];
+    HLFIR2 [label="HLFIR", shape=box, style=filled, fillcolor="white"];
+    FIR2  [label="FIR",   shape=box, style=filled, fillcolor="white"];
+    Arith2[label="Arith", shape=box, style=filled, fillcolor="white"];
+  }
+
+  subgraph cluster_codegen {
+    label="Code Generation";
+    labeljust=l;
+    color = "#000000";
+    fontcolor = "#000000";
+    style = filled;
+    fillcolor = "#f7f7f7";
+    penwidth=0.6;
+
+    LLVM2 -> LLVM3;
+    Math2 -> LLVM3;
+    Complex2 -> LLVM3;
+    Complex2 -> Func;
+    HLFIR2 -> FIR3;
+    FIR2 -> FIR3;
+    Func -> LLVM3;
+    HLFIR2 -> FIRCG;
+    FIR2 -> FIRCG;
+    FIRCG -> Func;
+    FIR3 -> LLVM3;
+    FIR3 -> Func;
+    Arith2 -> LLVM3;
+
+    LLVM3 [label="LLVM", shape=box, style=filled, fillcolor="white"];
+    FIR3  [label="FIR",  shape=box, style=filled, fillcolor="white"];
+  }
+
+  LLVM3 -> LLVMIR;
+  LLVMIR [label="LLVM IR", shape=box, style=filled, fillcolor="white"];
+}
