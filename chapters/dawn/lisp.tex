@@ -1,0 +1,130 @@
+\section{Lisp}
+
+Lisp was developed primarily by John McCarthy in two bouts:
+most of the key ideas were developed in 1956-1958,
+and in 1958-1962 the language was actually implemented and applied to artificial
+intelligence.
+
+In terms of programming language design, Lisp's fundamental data structure is the \textit{list}--
+hence the name (\textit{\textbf{LIS}t \textbf{P}rocessing}).
+Symbolic computing (which was still novel at the time) was implemented using lists and basic
+operations on them.
+Lisp \textit{programs} were also represented as data; one of the key innovations of the language
+the ability manipulate Lisp programs as any other data structure, with the \texttt{eval}
+function serving as the bridge between the code as data and code as actions to be performed
+by a Lisp program.
+This concept of self-modifying programs was to serve as the basis for ALGOL Y,
+the more ambitious successor to ALGOL 60,
+which was abandoned due to the eventual scope and controversy of the ALGOL X project,
+or ALGOL 68 as it came to be known.
+
+\subsection{FORTRAN Lisp Processing Language}
+
+Lisp was born out of John McCarthy's desire for a list-oriented language
+for work on an IBM 704 at Dartmouth College during a summer research project
+in 1956, which was the first organized study of artificial intelligence
+\cite{mccarthy_history_of_lisp_1978}.
+
+McCarthy was presented the list-processing programming language \textit{IPL 2}
+(\textit{Information Processing Language}),
+written for the RAND Corporation's JOHNNIAC computer.
+\footnote{The RAND Corporation was not the same company as Remington Rand/Sperry Rand, where Grace Hopper worked around this time.}
+Dartmouth was soon to get access to an IBM 704 thanks to the New England Computation Center
+at MIT, which IBM was in the midst of establishing.
+McCarthy was to consult with a team at IBM developing a theorem-proving program for plane geometry,
+and it was not clear at the time whether IBM's FORTRAN would be suitable for list-processing.
+
+McCarthy was also independently working on artificial intelligence,
+publishing his first paper in the field in 1958,
+\citetitle{mccarthy_programs_with_common_sense_1958}.
+This paper, also called the \textit{Advice Taker} proposal,
+involved representing information in the form of sentances in a formal language,
+and an accompanying program that would make inferences based on that information.
+These sentences were to be structured as lists, so he naturally
+needed a list-processing language to process these sentences.
+
+McCarthy started by considering how list structures would be represented in
+memory. The IBM 704 had an addressable word size of 36 bits with
+a 15-bit address space, so the pointers would need to be 15 bits,
+which allowed for two pointers in each word, plus 6 extra bits.
+A list in Lisp was to be represented in a word like so
+\footnote{This is the layout as McCarthy describes in \citetitle{mccarthy_history_of_lisp_1978},
+	but \citeauthor{gelernter_flpl_1960} include a sign bit as the uppermost bit of the tag.}:
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		               & \textbf{Tag} & \textbf{Decrement}      & \textbf{Prefix} & \textbf{Address}     \\
+		\hline
+		Width          & 3 Bits       & 15 Bits                 & 3 Bits          & 15 Bits              \\
+		\hline
+		Purpose        & Type Code    & Address of Rest of List & Type            & Data/Pointer to Data \\
+		\hline
+		Lisp primitive & \texttt{ctr} & \texttt{cdr}            & \texttt{cpr}    & \texttt{car}         \\
+		\hline
+	\end{tabular}
+	\caption{Layout of a 36-bit word on the IBM 704 as used for Lisp list structures.}
+\end{table}
+
+Nathaniel Rochester, Herbert Gelernter and Carl Gerberich at IBM
+took on the task of writing implementing this list-processing language
+in FORTRAN, called FLPL for \textit{FORTRAN-Compiled List Processing Language}.
+They considered using the IPL, but decided against it, persuaded by McCarthy's suggestion
+to instead adapt a FORTRAN compiler.
+This primitive version of the language lacked conditional expressions, recursion, and other
+fundamental features.
+They note in \citetitle{gelernter_flpl_1960} that while IPL's interpretation was prohibatively
+costly, their adaptation of FORTRAN was able to run the same programs in a fraction of the time.
+They also pointed out the utility of FORTRAN III's introduction of separable compilation and linking of
+hand-written machine code and regular FORTRAN code, which allowed them to hand-write certain
+performance-critical sections of their list-processing programming environment\cite{gelernter_flpl_1960}:
+
+\begin{quotation}
+	It must be emphasized that
+	FORTRAN is in itself an information processing language of great versatility and
+	sophistication. Our list-processing functions merely serve to increase the "vocabulary"
+	of the language so that list manipulation processes may be described within
+	the FORTRAN framework as are ordinary computer processes. We are thus able
+	to enjoy the same ease of programming, ease of modification, and estensive debugging
+	aids available to the programmers of standard numerical problems.
+\end{quotation}
+
+Thus FLPL was not necessarily a compiler or interpreter, but a set of libraries and tools
+that made list-processing within FORTRAN programming environment easier.
+The numerical features of FORTRAN and the runtime libraries for I/O and formatting
+were available in FLPL, but the programming environment also made available operations
+to evaluate symbolic expressions and manipulate lists.
+Notably, FLPL lacked the ability to treat machine code as data, a feature that IPL had
+and Lisp would come to be famous for.
+\citeauthor{gelernter_flpl_1960} conclude their paper by pointing this out:
+
+\begin{quotation}
+	One feature of IPL V is excluded from FLPL by the nature of a compiler.
+	Sequences of IPL instructions to be interpreted are stored in the computer as
+	NSS lists, just as are the data. Although this property has been largely irrelevant
+	to all programs written to date, it is conceivable that one might want to write
+	a program in which the symbolic entities that are processed are IPL instructions
+	themselves, and in which transfers of control take place between the metaprogram and
+	the machine-generated one. The fact that the transformation of
+	FLPL expressions into computer activity is a two-stage, irreversible process
+	places this kind of behavior beyond the range of our language, even though it is
+	quite feasible to manipulate FLPL expressions within FLPL.
+\end{quotation}
+
+McCarthy developed the conditional expressions in 1957-1958 while developing a chess program
+in FORTRAN, though it was not the conventional notion of an if-statement since both arms
+of the conditional expression were always evaluated; \texttt{XIF(C, E1, E2)} would return
+\texttt{E1} if \texttt{C} was equal to 1 and \texttt{E2} otherwise, which is typically called
+a \textit{merge} operation today.
+This was motivated by the clumsy syntax and semantics of the \texttt{IF} statement in FORTRAN I and II.
+
+Nathaniel Rochester invited McCarthy to join the IBM Information Research Department for the
+summer of 1958 to implement differentiation of algebraic expressions in FLPL,
+where he would go on to develop many more foundational concepts in Lisp programming
+language design.
+
+\todo{
+	Started in 1958: \citetitle{mccarthy_history_of_lisp_1978}.
+	MIT, doug mcqueen's collaboration, SMLNJ.
+}
