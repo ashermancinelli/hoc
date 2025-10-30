@@ -33,6 +33,7 @@ publish: cleanfirst
     cp "{{job}}.pdf" "publish/{{publish-pdf}}"
     git add "publish/{{publish-pdf}}"
     git commit -m publish
+    git push
 
 pub: publish
 

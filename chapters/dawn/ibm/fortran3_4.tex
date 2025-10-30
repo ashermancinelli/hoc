@@ -1,3 +1,23 @@
+\subsection{SHARE}
+
+At this point in FORTRAN's history, there was such significant adoption of
+many of IBM's innovations that a volunteer user's group, SHARE, had grown to
+significant membership.
+SHARE was founded in 1955 and gained traction shortly after \cite{akera_voluntarism_ibm_share_2001},
+made up of IBM customers managing installations of the 704,
+and collectively aimed to deduplicate the effort of managing the system
+\cite{armer_share_eulogy_1980}.
+
+This group was an early precursor to the open-source movement.
+Prior to this period, most machines were used for accounting and were for
+highly specialized machines that constituted hardly more than a calculator.
+Once more advanced machines were introduced, the task of writing software
+and maintaining the hardware became increasingly difficult.
+
+Out of this difficulty, organized user groups like SHARE emerged alongside
+ad-hoc collaboration, like Grace Hopper's collaboration with
+\todo{some air force group I think? where they would send her fixes and enhancements
+	to the compilers.}
 
 \subsection{FORTRAN III}
 
@@ -26,8 +46,13 @@ By 1958, most of the original FORTRAN team had moved on to other work and
 some members of the original team, especially John Backus, were unhappy with
 the direction they took.
 The following edition, FORTRAN IV, was more of a successor to FORTRAN II than
-it was to FORTRAN III given the latter's machine-specific features and
+it was FORTRAN III given the latter's machine-specific features and
 lack of adoption.
+FORTRAN's adoption had grown so large and the set of features so restrictive
+that in 1961 the team at IBM decided to create a new compiler conceptually
+based on the FORTRAN II compiler, but completely rewritten.
+They used the opportunity not only to introduce new features but also to
+correct some design decisions made in the FORTRAN II compiler.
 
 To address the long compilation times that users of FORTRAN II dealt with,
 the team Programming Research Department responsible for FORTRAN IV
@@ -42,6 +67,42 @@ As a result, IBM's FORTRAN IV compiler was slower than other fast FORTRAN compil
 like the \textit{WATFOR} and \textit{WATFIV} compilers developed at the University of Waterloo
 (the \textbf{WAT}erloo \textbf{FOR}tran compiler\cite{cress_dirksen_graham_watfor_fortran_iv_1970}),
 and in general it did not produce machine code as fast as IBM's FORTRAN II compiler.
+
+The team introduced the labeled COMMON block in FORTRAN IV, which allowed
+seperably compiled modules to share data with each other,
+and required that each module agree on the size and layout of the data.
+Programmers found this useful because they could share data between modules
+without needing to recompile the entire program after every change
+(unless the layout of the common block changed!),
+but there are lots of mistakes that are hard to avoid with COMMON blocks.
+
+For example, take the following subroutines, and assume they are
+defined in different files (and thus different \gls{translation-unit}s):
+
+\begin{lstlisting}[language=fortran,frame=single]
+! f.F
+subroutine f()
+  real n
+  real A(10)
+  common /lab/ A, n
+  ! uses of A and n...
+end subroutine
+
+! g.F
+subroutine g()
+  real n
+  real A(5)
+  common /lab/ n, A
+  ! uses of A and n...
+end subroutine
+\end{lstlisting}
+
+Notice how the declarations of \texttt{A} and \texttt{n} differ between the two
+subroutines. The array \texttt{A} is declared with a different size in each subroutine,
+and the order of the variables is different!
+If the programmer of the subroutine \texttt{g} assigns to \texttt{n}, they
+will be assigning to the same memory referred to by the first element of \texttt{A}
+in the subroutine \texttt{f}.
 
 \todo{fortran iv was revamped ii compiler, introduced common blocks.}
 \todo{See 1964 backus and heising paper}.
