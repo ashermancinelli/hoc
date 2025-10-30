@@ -289,10 +289,55 @@ a few years later in 1968 and 1970, respectively.
 
 Along with the problem of lexical and dynamic scoping, the team also provided a means for
 \gls{call-by-name}, very similar to the concept in ALGOL.
+The "functions" \texttt{FEXPRS} and \texttt{FSUBRS} are not given regular arguments, but are given expressions
+that will evaluate to their arguments.
+The function bodies can use Lisp's \texttt{eval} function to actually evaluate their arguments in the body of the
+function as they see fit.
+While this is similar to ALGOL's \gls{call-by-name} which treated all unquoted arguments this way,
+the Lisp versions allowed users to decided exactly when and how their arguments were evaluated.
+Users could pass the code that comprised their arguments to further calls to
+\texttt{FEXPRS} and \texttt{FSUBRS}, or they could evaluate some of them at the start
+and some of them later, and so on.
+
+\subsection{The First Lisp Compilers}
+
+\citeauthor{allen_anatomy_of_lisp_1978} collected the early histories of Lisp compilers
+in \cite{allen_anatomy_of_lisp_1978}
+from a few primary sources that are difficult to find, namely
+the paper \citetitle{blair_structure_lisp_compiler_1971} by \citeauthor{blair_structure_lisp_compiler_1971},
+which was apparently never published.
+Essentially, a few different teams set out to develop compilers for Lisp
+to varying degrees of success and completion.
+
+The first was Robert Brayton at MIT \cite{blair_structure_lisp_compiler_1971},
+who started working on the first Lisp compiler in 1957 on an IBM 704,
+though he was not successful until 1960, after which he left MIT.
+He wrote this compiler in assembly, and so it was thought that his compiler
+would be more performant than the competing Lisp compilers, as they were
+all written in Lisp themselves.
+Evidently, nobody was able (or willing, perhaps) to maintain this compiler
+after Brayton left MIT.
+
+Klim Maling started work on a Lisp compiler written in Lisp
+in the time after Brayton began work on his compiler, but before the compiler
+was functional, though the project was dropped before it was functional itself.
+
+Timothy Hart and Michael Levin developed the first complete Lisp compiler,
+also written in Lisp, which
+they claimed was the first \gls{bootstrapp}ed compiler,
+or the first compiler to be written in the language being compiled.
+This compiler was distributed with the Lisp 1.5 system for the IBM 704,
+and was the basis for much of the future work on Lisp compilers.
+
+As \citeauthor{blair_structure_lisp_compiler_1971} recalls in \citetitle{blair_structure_lisp_compiler_1971},
+the first Lisp compilers were quite straightforward compared to the contemporary compilation efforts
+with ALGOL and Fortran.
+Blair points out that because Lisp is comprised only of untyped data objects,
+the compiler's primary concern is that of variable binding and variable evaluation.
+Blair cites Peter Landin as influential in his understanding of expression
+evaluation semantics, and prefers the model he describes in \citetitle{landin_eval_of_expressions_1964}
+over the typical understanding of a Lisp interpreter $eval[e, a]$, which we discussed above.
+
+
 
 \todo{See also \citetitle{steele_evolution_lisp_96} and \citetitle{graham_roots_of_lisp_2002}}.
-
-\todo{
-	Started in 1958: \citetitle{mccarthy_history_of_lisp_1978}.
-	MIT, doug mcqueen's collaboration, SMLNJ.
-}
