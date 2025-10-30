@@ -1,4 +1,5 @@
 \subsection{SHARE}
+\label{subsec:share}
 
 At this point in FORTRAN's history, there was such significant adoption of
 many of IBM's innovations that a volunteer user's group, SHARE, had grown to
@@ -103,6 +104,26 @@ and the order of the variables is different!
 If the programmer of the subroutine \texttt{g} assigns to \texttt{n}, they
 will be assigning to the same memory referred to by the first element of \texttt{A}
 in the subroutine \texttt{f}.
+
+The team went to great lengths to make FORTRAN IV a superset of FORTRAN II
+so all the existing users could keep compiling their code with the newest
+compilers, but there were some features they just couldn't support.
+The IBM user's group \textit{SHARE}\cref{subsec:share} came up with a
+translation program \textit{SIFT}, or
+\textit{S}HARE \textit{I}nternal \textit{F}ORTRAN \textit{T}ranslator,
+to help users upgrade their FORTRAN II code to FORTRAN IV.
+\footnote{
+	Jean Sammet discusses this in \citetitle{sammet_programming_languages_history_and_fundamentals_1969}
+	and cites the article \textit{SHARE Internal FORTRAN Translator} in
+	Volume 9 of \textit{Datamation} in 1963, but I'm unable to track this
+	edition down myself, so we take Sammet's word for it.}
+The term \gls{sift} grew to become a more general term for this sort of
+translation--there were many efforts in this direction in the Python 2 to
+3 upgrading process.
+
+The first instance of this process was before the term \gls{sift}
+existed or was used to mean translation more generally, with
+the ALTAC to FORTRAN II translator \cite{olsen_altac_fortranii_translator_1965}.
 
 \todo{fortran iv was revamped ii compiler, introduced common blocks.}
 \todo{See 1964 backus and heising paper}.
