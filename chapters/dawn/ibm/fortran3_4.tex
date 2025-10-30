@@ -49,11 +49,16 @@ the direction they took.
 The following edition, FORTRAN IV, was more of a successor to FORTRAN II than
 it was FORTRAN III given the latter's machine-specific features and
 lack of adoption.
+
 FORTRAN's adoption had grown so large and the set of features so restrictive
 that in 1961 the team at IBM decided to create a new compiler conceptually
 based on the FORTRAN II compiler, but completely rewritten.
 They used the opportunity not only to introduce new features but also to
 correct some design decisions made in the FORTRAN II compiler.
+Among the larger features they introduced, there were many small changes that
+cleaned up the language and made it suitable for future machines,
+such as the deprecation of the \texttt{PUNCH} and \texttt{TAPE}
+instructions in favor of a proper I/O library and runtime system.
 
 To address the long compilation times that users of FORTRAN II dealt with,
 the team Programming Research Department responsible for FORTRAN IV
@@ -124,6 +129,25 @@ translation--there were many efforts in this direction in the Python 2 to
 The first instance of this process was before the term \gls{sift}
 existed or was used to mean translation more generally, with
 the ALTAC to FORTRAN II translator \cite{olsen_altac_fortranii_translator_1965}.
+
+FORTRAN IV was unique among the early versions of the language in that
+several teams outside IBM developed compilers for it.
+\citeauthor{backus_heising_fortran_1964} noted that while a large number
+of computer manufacturers distributed compilers for FORTRAN IV with
+their hardware by 1963, a majority of the FORTRAN code in existence
+was probably still written in FORTRAN II\cite{backus_heising_fortran_1964}.
+
+The gamut of new compilers for the language prompted its standardization.
+If the language is handled by several different compilers with potentially
+divergent interests and customers, who is to determine the proper behavior
+of FORTRAN programs where the language's specification is ambiguous?
+Much of the value of the language is derived from its user's ability
+to take their programs and run them on another device rather than
+rewriting them--and rewriting them for a vendor's bespoke FORTRAN
+compiler is hardly better than rewriting them in a new instruction set.
+Thus FORTRAN IV served as the basis of the first FORTRAN standards,
+which the American Standards Association (ASA) began developing in 1962
+in the first FORTRAN standards committee.
 
 \todo{fortran iv was revamped ii compiler, introduced common blocks.}
 \todo{See 1964 backus and heising paper}.
