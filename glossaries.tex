@@ -110,9 +110,14 @@
 	description={A header is the first node in a control-flow graph of a loop. Loops begin execution at the entry node, then to the header node, then through the loop body node(s), and finally they either take the \gls{backedge} back to the start of the loop, or they exit the loop}
 }
 
-\newglossaryentry{ast}{
-	name={abstract syntax tree},
-	description={A tree representation of the structure of a program}
+\newglossaryentry{r-value}{
+	name={r-value},
+	description={An value that can be stored to an address. Read as "a value that may occur on the right-hand side of an assignment." In most programming languages, l-values may act as r-values, but not all r-values may act as l-values. The variable \texttt{foo} may occur on either side of an assignment, but there is little sense in the number \texttt{5} being assigned a value}
+}
+
+\newglossaryentry{l-value}{
+	name={l-value},
+	description={An addressable value that another value can be stored to. Read as "a value that may occur on the left-hand side of an assignment"}
 }
 
 \newglossaryentry{call-by-name}{
@@ -125,7 +130,25 @@
 	description={Function calling semantics where the argument's expression is evaluated \textit{once, before it is passed} to the body of the function. Contrast this with \gls{call-by-value}. This is how most programming languages work}
 }
 
-\newacronym{ir}{IR}{Intermediate representation, usually a file format or data structure used inside a compiler to represent the program being compiled}
+\newglossaryentry{call-by-reference}{
+	name={call-by-reference},
+	description={Function calling semantics where the argument's address is passed in place of its value such that expressions and statements where the parameter occurs as an \gls{l-value} result in assignements to the variable's storage in the caller's scope}
+}
+
+% not sure how to deal with glossary entries that could easily be
+% an acronym or regular glossary entry...
+% \newglossaryentry{ast}{
+% 	name={abstract syntax tree},
+% 	description={A tree representation of the structure of a program}
+% }
+
+% \newglossaryentry{ir}{
+% 	name={intermediate representation},
+% 	description={Intermediate representation, usually a file format or data structure used inside a compiler to represent the program being compiled}
+% }
+
+\newacronym{ir}{IR}{intermediate representation}
+\newacronym{ast}{AST}{abstract syntax tree}
 
 % Use
 % The \Gls{latex} typesetting markup language is specially suitable

@@ -2,16 +2,16 @@
 
 \subsection{An IR In Tension}
 
-In modern compilers, the \gls{ir} must be extremely flexible and generic
+In modern compilers, the \acrshort{ir} must be extremely flexible and generic
 because every component of the compiler needs something different from it.
 
 For example, the compiler's frontend typically cares very much about the
-grammar of the source language, the semantic correctness of the \gls{ast},
+grammar of the source language, the semantic correctness of the \acrshort{ast},
 and perhaps some early optimizations that might be performed at a very high level.
 However, after that, the frontend really only cares about communicating the information
 it has to the optimizer. It does not necessarily care about the details of the
 optimizer, and simply wants a textual representation of the program.
-The frontend would ideally emit an \gls{ir} that is simple with a level of abstraction
+The frontend would ideally emit an \acrshort{ir} that is simple with a level of abstraction
 roughly matching that of the source language, minimizing the amount of work required to generate it.
 The frontend may record that the user requested a particular region of code to
 be inlined, unrolled, or offloaded, but writ large, the frontend does not want to deal with
@@ -47,7 +47,7 @@ representable in their common format.
 Now, imagine we have an IR that allows each component of the compiler to express
 the semantics in a format and with semantics that \textit{they dictate}.
 The frontend can define very high-level operations that are roughly equivalent
-to the source language so the work it needs to do when converting the \gls{ast}
+to the source language so the work it needs to do when converting the \acrshort{ast}
 into the IR is minimal.
 The vectorizer may define new operations on vectors, the semantics they
 describe, and the process for converting them into another format.

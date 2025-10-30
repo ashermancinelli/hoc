@@ -165,7 +165,7 @@ While neither Naur's revised report nor Edgar Dijkstra's
 \citetitle{dijkstra_primer_of_algol_programming_1962}
 point out the implications of this distinction, it is important to note
 the subtle implications.
-Call-by-name is not common in modern programming languages, and readers
+\Gls{call-by-name} is not common in modern programming languages, and readers
 may find it more similar to macro expansion
 (though it is not, in fact, simply textual replacement).
 The following example illustrates the difference:
@@ -176,7 +176,7 @@ Most implementations of call-by-name use zero-argument thunks to delay
 the evaluation of arguments until they are used in the body.
 The arguments to function calls become zero-argument closure functions
 returning the value of the argument expression and capable of being
-\textit{l-values}, or values in the left-hand side of an assignment expression.
+\textit{\gls{l-value}s}, or values in the left-hand side of an assignment expression.
 Then, each instance of the argument in the callee's body is replaced
 with an invocation of this function such that it is evaluated anew
 each time it appears.
@@ -184,7 +184,7 @@ The prior Python example may be rewritten to emulate call-by-name as follows:
 
 \lstinputlisting[language=python,frame=single]{chapters/dawn/callbyname2.py}
 
-Call-by-value semantics demand that the argument to \texttt{double} be evaluated
+\Gls{call-by-value} semantics demand that the argument to \texttt{double} be evaluated
 before entering the function, so \texttt{get\_5} is called once and
 \textit{the result} is passed to \texttt{double}.
 With call-by-name semantics, \texttt{get\_5} is passed the expression itself,
@@ -587,8 +587,8 @@ array := (1, 2, 3);       # now it has bounds [1:3] #
 array := (4, 5, 6, 7, 8); # now it has bounds [1:5] #
 \end{lstlisting}
 
-Call-by-name as it was known in ALGOL 60 was removed in favor of
-call-by-value and call-by-reference; some of the other proposals
+\Gls{call-by-name} as it was known in ALGOL 60 was removed in favor of
+\gls{call-by-value} and \gls{call-by-reference}; some of the other proposals
 (such as Seegm{\"u}ller's) preserved the two cases of call-by-name
 under different terms, but this was not adopted.
 One may argue that \textit{proceduring} is a form of call-by-name,
@@ -611,7 +611,7 @@ Lindsey uses an inner-product algorithm to illustrate this:
 
 He notes that the first and second parameters are effectively both called by-name.
 As far as I can tell, the only difference is that call-by-name parameters can
-be l-values or r-values while parameterless procedures are always r-values.
+be \gls{l-value}s or \gls{r-value}s while parameterless procedures are always r-values.
 
 There were at least eight changes to the automatic type conversion rules
 between ALGOL 60 and ALGOL 68;

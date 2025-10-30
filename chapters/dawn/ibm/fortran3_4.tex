@@ -54,11 +54,18 @@ The following edition, FORTRAN IV, was more of a successor to FORTRAN II than
 it was FORTRAN III given the latter's machine-specific features and
 lack of adoption.
 
+The IBM user's group SHARE in 1961 declared their desire for a new FORTRAN with
+new features and lacking all the bagage of FORTRAN II.
+This appeard in the \citedate{allen_share_translator_datamation_1963}
+edition of \textit{Datamation} where the SHARE group discussed their automatic
+translator, discussed above in \cref{subsec:share}.
+
 FORTRAN's adoption had grown so large and the set of features so restrictive
 that in 1961 the team at IBM decided to create a new compiler conceptually
-based on the FORTRAN II compiler, but completely rewritten.
+based on the FORTRAN II compiler, but completely rewritten, as SHARE had requested.
 They used the opportunity not only to introduce new features but also to
 correct some design decisions made in the FORTRAN II compiler.
+This compiler would go on to run on the IBM 7090/94.
 Among the larger features they introduced, there were many small changes that
 cleaned up the language and made it suitable for future machines,
 such as the deprecation of the \texttt{PUNCH} and \texttt{TAPE}
@@ -153,6 +160,19 @@ In 1960, \todo{who?} developed a compiler for
 an altered version of FORTRAN II called the ALTAC system
 for the Philco 2000 machine\cite{sammet_programming_languages_history_and_fundamentals_1969}--
 this was the first FORTRAN compiler outside IBM.
+
+In 1961, as detailed by \citeauthor{rosen_altac_fortran_1961},
+the team responsible for Philco 2000 successfully automatically
+ported an existing FORTRAN program from the IBM 704 to their Philco 2000
+machine, and claimed the performance improvements were entirely consistent with
+the differences between the two machines: "there is an improvement in speed which is consistent
+with the extent to which the 2000 is faster than the 704"\cite{rosen_altac_fortran_1961}.
+Now, roughly a year earlier, a single COBOL program ran on two different
+machines as well, as discussed in \cref{subsec:cobol-comes-into-focus},
+but the purpose in that case was to demonstrate the portability of the COBOL
+language and not necessarily to facilitate the needs of a programmer with
+a real existing program--the work with ALTAC as described by Rosen
+appears to be the first such case.
 
 The first one
 \textit{to call itself a FORTRAN compiler} was for FORTRAN I
