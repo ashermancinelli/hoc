@@ -1,0 +1,48 @@
+
+\subsection{FORTRAN III}
+
+While Lois was carrying out Ziller, Backus and Nelson's design for FORTRAN III,
+Ziller was already working on a more advanced version of FORTRAN, FORTRAN III.
+Ziller's design incorporated a form of \gls{inline-assembly} that allowed
+704 instructions to take the addresses of FORTRAN variables as arguments.
+Modern forms of inline assembly allow the user to write assembly inside \textit{text}
+in the host program--Ziller made the unfortunate decision of making IBM 704
+instructions available \textit{at the language level}, which, as Backus remarked
+\cite{hopl_backus_history_of_fortran}, doomed FORTRAN III to die whenever the IBM 704
+was replaced.
+
+Ziller and the team also introduced boolean expressions and the capability to
+pass functions and subroutines as arguments and FORMAT codes for printing
+alphanumeric strings.
+This version of FORTRAN was never widely used and was only distributed to
+20 or so installations in the winter of 1958.
+It was in operation until the 1960s using the IBM 709's compatibility mode,
+which kept FORTRAN III's machine-specific IBM 704 features alive for a bit longer
+than the 704 itself.
+
+\subsection{FORTRAN IV}
+
+By 1958, most of the original FORTRAN team had moved on to other work and
+some members of the original team, especially John Backus, were unhappy with
+the direction they took.
+The following edition, FORTRAN IV, was more of a successor to FORTRAN II than
+it was to FORTRAN III given the latter's machine-specific features and
+lack of adoption.
+
+To address the long compilation times that users of FORTRAN II dealt with,
+the team Programming Research Department responsible for FORTRAN IV
+tried to deliver the best of both worlds by introducing a new compiler
+that was both faster and generated more efficient code, instead of adding
+different compilation modes. Modern compilers let the user choose to enable
+optimizations via command-line flags. For example, most C, C++ and FORTRAN compilers
+provide the \texttt{-ON} flag, where \texttt{N} is a number
+between 0 and 3 specifying how aggressive the compiler ought to be.
+
+As a result, IBM's FORTRAN IV compiler was slower than other fast FORTRAN compilers
+like the \textit{WATFOR} and \textit{WATFIV} compilers developed at the University of Waterloo
+(the \textbf{WAT}erloo \textbf{FOR}tran compiler\cite{cress_dirksen_graham_watfor_fortran_iv_1970}),
+and in general it did not produce machine code as fast as IBM's FORTRAN II compiler.
+
+\todo{fortran iv was revamped ii compiler, introduced common blocks.}
+\todo{See 1964 backus and heising paper}.
+\cite{backus_heising_fortran_1964}.

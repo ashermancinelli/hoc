@@ -1,0 +1,90 @@
+
+\subsection{The Priesthood}
+\label{sec:backus_priesthood}
+
+At this time, it was not obvious to everyone in the industry that
+programming languages were needed at all--a large consortium of programmers
+thought that machine code was all anyone would ever need.
+Backus would later describe this group in \citetitle{Backus_1980_Programming_in_America_in_1950s}:
+
+\begin{quotation}
+	Just as freewheeling westerners developed a chauvinistic pride in their frontiersmanship
+	and a corresponding conservatism, so many programmers of the freewheeling 1950s
+	began to regard themselves as members of a priesthood guarding skills and
+	mysteries far too complex for ordinary mortals.
+	\cite{Backus_1980_Programming_in_America_in_1950s}
+\end{quotation}
+
+In the Office of Naval Research's 1954 symposium,
+\citeauthor{brown_carr_automatic_onr_symposium_1954} summarize the recent developments
+of \textit{automatic programming} techniques like \textit{pre-translation} and \textit{running-translation},
+or compilers and interpreters.
+Their depiction also described the opposition to the development of more friendly
+input formats for computers, not yet even discussing programming languages:
+
+\begin{quotation}
+	Many "professional" machine users strongly opposed the use of decimal
+	numbers for computer inputs or outputs as being unnecessary. Often they felt
+	that direct binary (or associated octal or hexadecimal) coding of instructions
+	was the only possible method. To this group, the process of machine instruction
+	was one that could not be turned over to the uninitiated.
+	\cite{brown_carr_automatic_onr_symposium_1954}
+\end{quotation}
+
+At each step in the development of compilers and programming languages,
+a non-negligible subset of the programming community has resisted the move
+towards user-friendliness, and the sentiment \citeauthor{brown_carr_automatic_onr_symposium_1954}
+described above is perhaps the first.
+\footnote{
+	Perhaps engineers working on the ENIAC resisted accessibility as well:
+	"real engineers plug the phone lines of the computer! Punch-card programs are for sissies!"
+}
+
+Backus recalled that this sentiment disuaded efforts towards accessibility:
+"[t]he priesthood wanted and got simple mechanical aids for the clerical
+drudgery which burdened them, but they regarded with hostility and derision
+more ambitious plans to make programming accessible to a larger population."
+He and Bill Heising would later recall (emphasis added):
+
+\begin{quotation}
+	At that time, most programmers wrote symbolic machine instructions exclusively
+	(some even used absolute octal or decimal machine instructions).
+	Almost to a man, they firmly believed that any mechanical coding method
+	would fail to apply that versatile ingenuity which each programmer felt he
+	possessed and constantly needed in his work.
+	Therefore, it was agreed, \textbf{compilers could only turn out code which would be
+		intolerably less efficient than human coding}\dots
+\end{quotation}
+
+Setting aside the emotional arguments against programming languages and making
+computing more accessible, Backus had very practical and economic reasons as well.
+He noted that the most costly part of computing was becoming the development of
+software. In the early days of computing, the cost of the hardware was so
+astronomically high and the standard for software was so low that the development of software
+was an afterthought--the organization leasing the computer could easily find
+programmers to write whatever programs they cared about, and the cost would be
+a tiny fraction of the cost of the hardware.
+
+As the machines themselves became cheaper and more powerful and the scale of software
+increased, the cost of software development became more and more important.
+This will be the focus of Chapter \ref{chap:software}.
+The key players on the side of the debate that favored accessibility and
+programming languages were John Backus, Grace Hopper, J. Halcombe Laning,
+and Neil Zierler, along with their respective teams.
+
+The sentiment of the priesthood may seem antiquated, but it seems to be
+present in one form or another in every chapter of this history of programming languages
+and compilers, and it had a notably positive influence on the development of FORTRAN:
+because FORTRAN would face significant resistance if it could not produce
+efficient machine code, Backus, Ziller, and their team devoted a huge amount of
+effort towards optimization.
+Their primary fear was that after spending much effort building a FORTRAN
+compiler, an important application would be written in FORTRAN and turn
+out to run at half the speed of the machine-coded version, and the
+sceptics would be right\cite{backus_heising_fortran_1964}.
+
+Their work would be foundational for modern optimization techniques, and
+FORTRAN compilers continue to produce extremely efficient machine code to
+this day, in part because the language's design allows for a high degree of
+optimization, and in part because compiler engineers have been optimizing
+FORTRAN programs for longer than any other programming language.

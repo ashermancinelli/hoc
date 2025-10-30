@@ -1,0 +1,61 @@
+
+\subsection{FORTRAN II}
+
+FORTRAN II was developed primarily to address the restrictions required for the
+optimization of FORTRAN programs discussed in the last section and quality of
+life enhancements to address common issues programmers reported.
+After debugging in the field, the team noted the need for improved compile time,
+proper diagnostics, and subroutines.
+FORTRAN II was mostly designed by Irv Ziller, John Backus and Robert Nelson,
+and it was implemented by Lois Mitchell, and
+the first report to contain these additions was \citetitle{fortran_ii_proposal_1957} in
+\citeyear{fortran_ii_proposal_1957}.
+
+Some statements in this report did not make it to the final language, but it
+nonetheless set out the design for more structured programming.
+Subroutines were defined with \texttt{SUBROUTINE DEFINITION, NAME(ARGUMENT1,ARGUMENT2)}
+which is not \textit{too} far off of the language as it would come to be.
+The \textit{END} and \textit{RETURN} statements were also introduced.
+
+\Gls{separable-compilation} features were introduced as well.
+In the original FORTRAN, the entire program was a single FORTRAN program
+that had to be compiled as one \gls{translation-unit}, thus any changes to any
+part of the program required recompilation of everything.
+This became quite expensive as the team continued to add optimizations
+and analyses.
+
+In the new separable compilation model,
+information from the symbol table of the original program could be kept
+in the object code so that a loader could combine references between subroutines
+compiled in different source files into one program.
+The loader program, the \textit{Binary Symbolic Subroutine (BSS) Loader},
+would load the separately compiled subroutines together into one program using
+the symbolic information kept in the \textit{transfer vectors} in object code.
+\footnote{The symbolic information kept in object programs that the BSS loader
+	used is not the same as the BSS section in ELF programs on modern computers--
+	the latter is used for program-scoped uninitialized or zero-initialized data.}
+The transfer vectors were placed at the start of the compiled subroutine and
+contained the symbolic information about the subroutine to follow.
+
+This allowed the final deck of punchcards to be placed in the card reader
+with each independently compiled subroutine in any order, and the symbol information
+allowed the BSS loader to build a table of the available subroutines and replace
+symbolic references to external subroutines with actual addresses.
+The BSS loader was a two-pass program: the first pass traversed all the compiled
+subroutines and scanned their transfer vectors, storing the actual addresses of
+the referenced subroutines in a symbol table.
+The second pass replaces occurrences of symbolic references to subroutines
+with their actual respective addresses.
+The proposal suggests that programs of mixed FORTRAN and machine code could
+also be loaded in this way, but did this was merely a suggestion.
+
+The biggest gripe users had with this version of FORTRAN was
+likely still compilation time.
+While this edition of the language allowed for separable compilation and users did not need to recompile
+the entire program after every single change, the compiler still spent significant time
+during optimization.
+When writing and debugging new programs, this optimization effort was wasted, and
+there were no tuning options to allow users to opt-out, as modern compilers do.
+
+Users adopted FORTRAN II widely and immediately, and the use of the language
+accellerated greatly in this period.
