@@ -22,15 +22,19 @@ ad-hoc collaboration, like Grace Hopper's collaboration with
 
 \subsection{FORTRAN III}
 
-While Lois was carrying out Ziller, Backus and Nelson's design for FORTRAN III,
+While Lois was carrying out Ziller, Backus and Nelson's design for FORTRAN II,
 Ziller was already working on a more advanced version of FORTRAN, FORTRAN III.
 Ziller's design incorporated a form of \gls{inline-assembly} that allowed
 704 instructions to take the addresses of FORTRAN variables as arguments.
-Modern forms of inline assembly allow the user to write assembly inside \textit{text}
-in the host program--Ziller made the unfortunate decision of making IBM 704
+Modern forms of inline assembly allow the user to write assembly as \textit{text}
+in the host program, which the compiler then embeds in the corresponding
+part of the surrounding program--Ziller made the unfortunate decision of making IBM 704
 instructions available \textit{at the language level}, which, as Backus remarked
-\cite{hopl_backus_history_of_fortran}, doomed FORTRAN III to die whenever the IBM 704
-was replaced.
+\cite{hopl_backus_history_of_fortran}, doomed FORTRAN III to die roughly as soon
+as the IBM 704 was replaced. Some subsequent versions of IBM's scientific
+computing machines (like the 709) were partially backwards-compatible
+and capable of running 704 instructions,
+but Backus's evaluation of the situation was more true than it was not.
 
 Ziller and the team also introduced boolean expressions and the capability to
 pass functions and subroutines as arguments and FORMAT codes for printing
@@ -75,8 +79,12 @@ like the \textit{WATFOR} and \textit{WATFIV} compilers developed at the Universi
 and in general it did not produce machine code as fast as IBM's FORTRAN II compiler.
 
 The team introduced the labeled COMMON block in FORTRAN IV, which allowed
-seperably compiled modules to share data with each other,
+separably compiled modules to share data with each other,
 and required that each module agree on the size and layout of the data.
+\footnote{Sammet notes that COMMON blocks were introduced in FORTRAN II
+	\cite[Section IV.3.1.]{sammet_programming_languages_history_and_fundamentals_1969},
+	so this might need a fact-check. Or was it only \textit{labeled} COMMON blocks?
+	I specify \textit{labeled} COMMON blocks here since I'm not sure.}
 Programmers found this useful because they could share data between modules
 without needing to recompile the entire program after every change
 (unless the layout of the common block changed!),
@@ -130,12 +138,69 @@ The first instance of this process was before the term \gls{sift}
 existed or was used to mean translation more generally, with
 the ALTAC to FORTRAN II translator \cite{olsen_altac_fortranii_translator_1965}.
 
+\subsection{Standardization of FORTRAN IV}
+
 FORTRAN IV was unique among the early versions of the language in that
 several teams outside IBM developed compilers for it.
 \citeauthor{backus_heising_fortran_1964} noted that while a large number
 of computer manufacturers distributed compilers for FORTRAN IV with
 their hardware by 1963, a majority of the FORTRAN code in existence
 was probably still written in FORTRAN II\cite{backus_heising_fortran_1964}.
+
+A few companies wrote FORTRAN compilers in the early 1960s,
+thought not always under the name \textit{FORTRAN}.
+In 1960, \todo{who?} developed a compiler for
+an altered version of FORTRAN II called the ALTAC system
+for the Philco 2000 machine\cite{sammet_programming_languages_history_and_fundamentals_1969}--
+this was the first FORTRAN compiler outside IBM.
+
+The first one
+\textit{to call itself a FORTRAN compiler} was for FORTRAN I
+on the UNIVAC Solid State 80, which was running by January 1961
+\cite{sammet_programming_languages_history_and_fundamentals_1969},
+and later that year Remington Rand developed a compiler
+for a slightly altered FORTRAN II.
+
+In the \citedate{oswald_various_fortrans_datamation_1964} edition of \textit{Datamation},
+\citeauthor{oswald_various_fortrans_datamation_1964}
+constructed a nearly-exhaustive table comparing the features and (mis)behaviors of
+16 different FORTRAN compilers of the 43 he was aware of at the time.
+He also provided readers with some of the potential reasons for the
+differences between the compilers
+\cite{oswald_various_fortrans_datamation_1964}:
+
+\begin{quotation}
+	One is tempted to ask: Why these differences? There
+	is no single cause. Certainly the basic hardware differences make
+	their contribution. Some compilers differ from
+	others because of misinterpretation or a desire to improve upon what exists.
+
+	Noncompatibility is also a potential sales tool. Given a class
+	of machines, one competitor can write language specifications
+	that would permit the proper compilation of
+	programs from the competing machines but effectively
+	prevent reverse compatibility.
+	This can be done by adding
+	one or more features that the competitors do not have\dots
+
+	The "universal" programming language, FORTRAN,
+	is indeed universal but not all dialects are the same. We
+	have presented some of the differences in the language
+	and their effect on compatibility of FORTRAN programs.
+	To those engaged in writing codes intended to be
+	compatible with another machine now or in the future,
+	caution is suggested. Such "compatible" programming
+	requires great care and foresight.
+\end{quotation}
+
+As Oswald pointed out, the value of a new FORTRAN compiler was that
+the different compiler would allow organizations to buy that company's
+computers if they were used to using IBM equipment (and most were).
+So, if the competing company provided a compiler capable of handling
+all their customers' existing code, they could take IBM's customers.
+Once they had already taken IBM's customers however, the temptation would
+be to introduce new \textit{features} that their customers would like and
+adopt, thereby locking them into their platforms.
 
 The gamut of new compilers for the language prompted its standardization.
 If the language is handled by several different compilers with potentially
@@ -144,11 +209,17 @@ of FORTRAN programs where the language's specification is ambiguous?
 Much of the value of the language is derived from its user's ability
 to take their programs and run them on another device rather than
 rewriting them--and rewriting them for a vendor's bespoke FORTRAN
-compiler is hardly better than rewriting them in a new instruction set.
+compiler is hardly better than rewriting them in a new instruction set
+for a new machine.
 Thus FORTRAN IV served as the basis of the first FORTRAN standards,
 which the American Standards Association (ASA) began developing in 1962
-in the first FORTRAN standards committee.
+in the first FORTRAN standards committee, entitled the ASA X3.4.3.
 
-\todo{fortran iv was revamped ii compiler, introduced common blocks.}
-\todo{See 1964 backus and heising paper}.
-\cite{backus_heising_fortran_1964}.
+The ASA's development of the first FORTRAN standard constituted the
+first standardization of a programming language by the ASA,
+and in the end \textit{two} FORTRAN standards were produced:
+standard FORTRAN and standard Basic FORTRAN.
+These roughly corresponded to FORTRAN IV and FORTRAN II, though
+Basic FORTRAN \textit{actually was} a perfect subset of FORTRAN,
+while IBM's actual FORTRAN IV compiler did not support a proper
+superset of their FORTRAN II compiler's notion of FORTRAN.
