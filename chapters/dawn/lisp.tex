@@ -209,7 +209,88 @@ the code people had written in the language would continue to work.
 The number 0 representing both the empty list \texttt{NIL} and the boolean value
 \texttt{FALSE} is one such case.
 
+The prefix-notation and use of parentheses (also known as \textit{S-expressions})
+are another case; they had initially set out
+to write Lisp programs in their M-expressions and the prefix notation syntax was simply
+the internal representation of the list structures in the language.
+The tasks of formally defining M-expressions and translating them into S-expressions
+was never completed, and the first users of Lisp did not mind writing programs
+in the compiler's internal representation, so it stuck.
+The team dubbed this version of Lisp, with all its warts, Lisp 1.
+
+With this version, the team showed that with a few primitive functions,
+\texttt{quote}, \texttt{atom}, \texttt{eq}, \texttt{car}, \texttt{cdr}, \texttt{cons}, and \texttt{cond},
+they could implement a \textit{total language}, or a language capable of expressing
+any Lisp function.
+By providing those primitives in assembly, they had bootstrapped a programming language,
+at this time just an interpreter.
+It had very few features (truly, only the primitives above were available),
+but they would soon extend it to produce a far more usable programming language.
+
 \subsection{Lisp 1.5}
+
+Many of the obvious missing features of Lisp 1 were added in Lisp 1.5 (including numbers(!)).
+We will not cover them exhaustively here, but McCarthy's reccolection in \cite{mccarthy_history_of_lisp_1978}
+seems to be the authoratative source and the list is short.
+The one we will cover is \textit{lexical scoping}.
+McCarthy points to example below as the onus for introducing lexical scoping.
+James Slagle of the Lisp team wrote the following function
+to find a subexpression in \texttt{x} such that the predicate \texttt{p(x)} is true,
+and to return \texttt{f(x)} if so.
+If the search did not find such an \texttt{x}, then the function containing
+the remainder of the computation taking no arguments \texttt{u} should be called and its value
+returned.
+
+\begin{lstlisting}[language=lisp,frame=single]
+(define (testr x p f u)
+  (cond
+    [(p x) (f x)]
+    [(not (pair? x)) (u)]
+    [else (testr (car x) p f (lambda () (testr (car x) p f u)))]))
+    ;                         Which x is this?  ^^^^^
+\end{lstlisting}
+
+The issue, pointed out in a comment in the code block, is that the \texttt{(car x)}
+component of the continuation function actually used the value from the scope
+\textit{where it was called} and not the scope \textit{where it was defined}.
+James had expected the latter, but got the former.
+McCarthy simply thought this to be a bug and assumed that Steve Russel would fix it.
+
+Today, these two semantics for variable scoping are called \textit{lexical scoping}
+and \textit{dynamic scoping}.
+Lexical scoping is the semantic James wanted, and dynamic scoping is the one he got
+in the original Lisp implementation.
+They are so-called because in lexical scoping, the value of a variable is determined
+by the literal code surrounding the variable's use--in this case, the function body
+of \texttt{testr}.
+Dynamic scoping is so-called because the variable is looked up from the environment
+\textit{where the variable is used}. In this case, \texttt{(car x)} is looked up in the
+environment where the continuation function is called, instead of where the continuation
+function is defined.
+
+This distinction was important in the evolution of ALGOL as well--
+the final ALGOL 60 report does not mention these terms for scoping by name,
+but their concepts are seen in the revised report, particularly
+\cite[Section 4.7.3.3. Body replacement and execution]{revised_report_on_the_algorithmic_language_algol_68_1976}.
+All of the early compilers were faced similar challenges--languages like ALGOL
+that were designed from the top-down by a committee and languages like Lisp
+that were designed from the bottom-up for a particular purpose still had to
+grapple with the same issues eventually.
+
+Russell eventually did implement a solution for James through the \texttt{FUNARG}
+construct, which allowed a function definition to take with it a pointer to the
+environment where it was defined, thereby permitting lexical scoping in a language
+with dynamic scoping.
+Members of the team at MIT discussed solutions to this problem in
+\citetitlecite{weizenbaum_funarg_explained_1968}
+and
+\citetitlecite{moses_function_of_function_1970}
+a few years later in 1968 and 1970, respectively.
+
+Along with the problem of lexical and dynamic scoping, the team also provided a means for
+\gls{call-by-name}, very similar to the concept in ALGOL.
+
+\todo{See also \citetitle{steele_evolution_lisp_96} and \citetitle{graham_roots_of_lisp_2002}}.
 
 \todo{
 	Started in 1958: \citetitle{mccarthy_history_of_lisp_1978}.
