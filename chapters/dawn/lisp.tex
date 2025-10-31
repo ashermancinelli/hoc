@@ -328,6 +328,9 @@ they claimed was the first \gls{bootstrap}ped compiler,
 or the first compiler to be written in the language being compiled.
 This compiler was distributed with the Lisp 1.5 system for the IBM 704,
 and was the basis for much of the future work on Lisp compilers.
+While future versions of Lisp were being worked on, most users in this period
+were stuck with this Lisp 1.5 developed at MIT, which fixed only
+the most glaring of the issues with the original language.
 
 As \citeauthor{blair_structure_lisp_compiler_1971} recalls in \citetitle{blair_structure_lisp_compiler_1971},
 the first Lisp compilers were quite straightforward compared to the contemporary compilation efforts
@@ -338,5 +341,30 @@ Blair cites Peter Landin as influential in his understanding of expression
 evaluation semantics, and prefers the model he describes in \citetitle{landin_eval_of_expressions_1964}
 over the typical understanding of a Lisp interpreter $eval[e, a]$, which we discussed above.
 
+\subsection{After Lisp 1.5}
 
-\todo{See also \citetitle{steele_evolution_lisp_96} and \citetitle{graham_roots_of_lisp_2002}}.
+In the early 1960s, prior to Lisp 2, the language and all its implementations were still
+extremely limited.
+Numerical programs were painfully slow compared to other compiled languages at
+the time (\textit{numbers} were only just added in the first version), the I/O
+facilities were limited, and the memory model was not yet robust.
+The garbage collector was implemented, but slow and limited.
+Lisp objects could not be represented in registers and garbage-collected.
+
+Two companies, Systems Development Corporation and Information International Inc.,
+collaborated on the second version of Lisp with a new compiler
+built for the military version of IBM's 7090 called the Q32, but system's the memory constraints
+proved too restrictive.
+The breakdown of the collaboration between SDC and III and MIT and Stanford along
+with practical, political, and economic decisions that went into deciding which machine
+the new compiler should be developed for, all added up to the abandonment of the project.
+There were few subsequent efforts to radically change Lisp in the decades to follow
+after the failure of this more ambitious effort.
+Suffice it to say that the dominant system for AI work would become the DEC PDP-10, the
+successor to the PDP-6, and the language would not look radically different from
+version 1.5.
+
+Outside of MIT, the adoption of Lisp was greatest at DEC.
+Their implementations of Lisp on the PDP-6 and PDP-10 were widely used and their
+instruction set was defined with Lisp in mind\cite{mccarthy_history_of_lisp_1978}.
+The IBM 704 Lisp was extended to the 7090, 360, and 370.
