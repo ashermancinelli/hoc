@@ -36,10 +36,10 @@ work is often bewildering to programmers without a formal background
 in these fields--even very experienced ones.
 
 This section may therefore feel foreign--it still feels that way to me--
-but the reader is encouraged to glean what they can from it, and not be too
-troubled by what they cannot.
+so I encourage you to glean what you can from it, and to not be too
+troubled by what you cannot.
 
-\subsection{Alonzo Church and the \Lambdacalc{}}
+\subsection{Alonzo Church's \Lambdacalc{}}
 
 We will not given an exhaustive look at Church's life and work outside of the
 \lambdacalc{}--I encourage readers to consult \citetitlecite{stanford_encyclopedia_church_2025}
@@ -47,9 +47,34 @@ for this.
 He is renowned for more than just the \lambdacalc{} though we will not cover much more
 than that here.
 
-All throughout the 1930s, Church developed the \textit{\lambdacalc{}},
+Recall that the foundation of software is in information theory and
+mathematics.
+Alonzo Church was a mathematician who researched the foundations of mathematics
+in the 1930s and 1940s,
+\todo{history of lambda calc:
+	\citetitle{cardone_hindley_history_of_lambda_calcl_2006},
+	\citetitle{hindley_lambda_calc_intro_2008}
+
+	history of lambda calc:
+	Both lambdacalc and combinatory logic were invented in the 1920s.
+	Describe most basic properties of functions. logical foundation of math was
+	real fluid in early 19thc. Russell's paradox was recent G{\"o}del's theorems
+	not known yet, still developing the foundations of math.
+	Some were based on sets, some based on functions, all up in the air.
+	lambda and CL were developed here, build higher concepts of functions
+	based only on these two foundations.
+	\citeauthor{cardone_hindley_history_of_lambda_calcl_2006} describe as chassis of bus in prog langs.
+	lambda/cl gain purpose in these systems, like chassis; underpins things
+	and isnt seen, doesn't have much value on its own.
+	function-based higher-order logic is the real context, but we're already so far off
+	topic and I'd like to get back to compilers soon as I can.
+	Lots was developed in the 20s and 30s, then not much till the 60s
+	largely cuz of connections with prog langs.
+}
+
+Throughout the 1930s, Church developed the \textit{\lambdacalc{}},
 a formal definition of a \textit{higher-order, functional} programming language
-built on only three concepts: functions, variables, and application.
+built on only three concepts: functions, variables, and applications.
 The language was \textit{higher-order} in that functions could be passed
 as arguments to other functions, and functions could return other functions as results.
 It was \textit{functional} in that function definition and application was the
