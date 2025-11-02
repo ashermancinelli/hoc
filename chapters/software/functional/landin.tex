@@ -1,0 +1,30 @@
+\subsection{Peter Landin}
+
+\subsubsection{Landin and ALGOL}
+
+\parencite{landin_algol_lambda_1965}
+
+\subsubsection{The Next 700 Programming Languages}
+
+Published in \citeyear{landin_next_700_prog_langs_1966},
+Peter Landin's seminal paper \citep{landin_next_700_prog_langs_1966} lays out his vision for
+the future of programming language design, emphasizing the importance of the programmer's intent
+uncluttered by details of the hardware.
+This language, IYSWIM, or \textit{If You See What I Mean}, was semantically
+equivalent to the \lambdacalc but introduced programming language design features
+that were novel and innovative above that of the \lambdacalc.
+He argued that the programmer ought to only consider their intent, and the compiler ought to
+consider the operations that would be needed to carry out their intent.
+
+\parencite{hopl_history_of_ml_2020} described the origins of the Meta Language in Landin's paper
+like so:
+
+\begin{quotation}
+	The basic framework of the language design was inspired by Peter Landin’s ISWIM language
+	from the mid 1960s [1966b], which was, in turn, a sugared syntax for Church’s lambda calculus. The
+	ISWIM framework provided higher-order functions, which were used to express proof tactics and
+	their composition. To ISWIM were added a static type system that could guarantee that programs
+	that purport to produce theorems in the object language actually produce logically valid theorems
+	and an exception mechanism for working with proof tactics that could fail. ML followed ISWIM in
+	using strict evaluation and allowing impure features, such as assignment and exceptions.
+\end{quotation}
