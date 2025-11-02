@@ -8,56 +8,42 @@ Higher-order logic, combinatory logic, and \lambdacalc{} were
 all being developed prior to their uses in programming languages
 with the aim of providing a firm foundation for \textit{mathematics},
 and would only cross-polinate with programming languages later on.
-% Namely, Alonzo Church's \lambdacalc{} and Haskell Curry's combinatory logic
-% would set the foundation for type theory long before they would be implemented in
-% a proper compiler.
 
 Let me digress for a moment before we begin.
-We will also discuss the topics that I hold responsible for the general
-bewilderment that most computer science students feel when they are first
-introduced to programming concepts: the degree to which programming concepts
-are arbitrary.
-Computer science and software engineering are often taught like materials science,
-where we have concrete methods for discovering and constructing new materials,
-when in reality, programming is fundamentally built on \textit{information science},
-not engineering.
+Students of computer science often feel a sense of bewilderment
+when they are first introduced to many foundational concepts
+in a way that is unique to the field
+\footnote{You will have to take my word on this. I provide no evidence,
+	but I believe readers will come to agree.}.
+I believe the reason for this is that the field is directly built
+upon information theory and higher-order logic, fields which were
+only recently developed in the history of mathematics, and contain
+some unsettling and bewildering concepts.
 
-When we superimpose meaning on the state of computers and the blueprints
-we provide the computer in the form of code, we are not discovering new materials
-but (often rather arbitrarily) assigning meaning based on analogies to the physical
-world which may or may not be reflected in the machines themselves.
-This is most obviously seen in object-oriented programming, where the state of
-the machine is represented by objects and their platonic ideals so the programmer
-can develop a more natural mental model of the machine.
-The process of discovering which analogies work well for human comprehension
-(and therefore which ones work well in compilers and programming language design)
-is rather unscientific, and is often produced by programmers coming up with
-ideas based on what works well in the field.
+In the early 20\textsuperscript{th}, Russell's paradox was recently developed
+and Gödel's incompleteness theorems were not.
+For those unfamiliar, they call into question the validity of the foundations
+of mathematics and point out the limits of provability.
+These led to several efforts to establish a firm foundation for the entire
+field of mathematics, some of which were based on sets and other functions
+and the two that we concern ourselves with here are \textit{combinatory logic}
+(abbreviated \textit{\acrshort{cl}} from here) and \lambdacalc{} (occasionally abbreviated \lam{}),
+which were attempts to use functions.
+They are closely related and share many concepts.
+These efforts directly led to functional programming and type theory,
+and underpin many other concepts in programming languages and compilers.
 
-Type theory, category theory, information theory and the like all underpin
-these decisions because they are also built entirely on top of information.
-This is the reason information theoriests and category theorists are so
-influential in the history of programming language design, and why their
-work is often bewildering to programmers without a formal background
-in these fields--even very experienced ones.
+I am no expert in this field and it does not entirely concern the history
+of compilers, but we will digress insofar as it informs our focus.
 
-The full history of
-% This section may therefore feel foreign--it still feels that way to me--
-% so I encourage you to glean what you can from it, and to not be too
-% troubled by what you cannot.
+\subsection{\acrlong{cl} and \Lambdacalc{}}
 
-\subsection{Alonzo Church's \Lambdacalc{}}
-
-We will not given an exhaustive look at Church's life and work outside of the
-\lambdacalc{}--I encourage readers to consult \citetitlecite{stanford_encyclopedia_church_2025}
-for this.
-He is renowned for more than just the \lambdacalc{} though we will not cover much more
-than that here.
-
-Recall that the foundation of software is in information theory and
-mathematics.
-Alonzo Church was a mathematician who researched the foundations of mathematics
-in the 1930s and 1940s,
+Both \lam and \acrshort{cl} were invented in the 1920s--
+\acrshort{cl} first by the Ukrainian mathematician Moses Schönfinkel
+at the University of Göttingen
+(likely the most advanced mathematics institution at the time).
+He introduced the concepts informally in a talk in 1920, and the ideas
+were first published in \citep{schonfinkel_invented_cl_building_blocks_math_1967}.
 
 \subsection{todo: history of \Lambdacalc{}}
 \citetitle{cardone_hindley_history_of_lambda_calcl_2006}
