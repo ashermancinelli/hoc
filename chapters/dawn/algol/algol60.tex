@@ -1,4 +1,5 @@
 \subsection{ALGOL 60}
+\label{sec:algol60}
 
 \todo{backstory of Peter Naur}
 
@@ -12,6 +13,7 @@ attention in the IAL proceedings, Backus would recount that his paper
 description was an idea whose time had not yet come.
 As far as I know that paper had only one reader, Peter Naur"
 \cite{Backus_1980_Programming_in_America_in_1950s}.
+
 Backus was involved in two programming languages at the time, \FTN{} and IAL,
 having already moved on from Speedcoding.
 Backus had been made aware of the logician Emil Post and her work on computability
@@ -49,6 +51,20 @@ The final report specified expressions to have the following syntax:
 	| \langle \textit{Boolean expression} \rangle
 	| \langle \textit{designational expression} \rangle
 \]
+
+Exemplary of the varied approaches to formalize the design of ALGOL 60,
+Peter Landin sought to express the language's semantics in the
+\lamc in \parencite{landin_algol_lambda_1965}.
+A few years earlier, McCarthy adopted some components of the \lamc in
+Lisp, however McCarthy's language broke with \lam in a few key areas,
+namely \gls{dynamic-binding}
+\footnote{ For a more complete treatment of Lisp, see \cref{sec:lisp}. }.
+ALGOL's semantics provided a much cleaner relationship to \lam, thanks to
+its block structure and lexical scoping rules, thus Landin
+made it possible to look at \lam as a programming language in and of itself
+in a more complete way than McCarthy had done with Lisp.
+
+% \parencite[6.2]{cardone_hindley_history_of_lambda_calcl_2006}
 
 \subsection{Adoption of ALGOL}
 

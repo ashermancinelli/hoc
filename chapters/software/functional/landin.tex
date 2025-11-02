@@ -1,18 +1,18 @@
-\subsection{Peter Landin}
+\subsection{Peter Landin's ISWIM}
 
-\subsubsection{Landin and ALGOL}
+In \cref{sec:intro-lambda-calc} we established the \lamc and its early
+applications to compilers in Lisp, and in \cref{sec:algol60} we discussed Landin's
+use of \lam to formalize the semantics of ALGOL 60.
+Landin's work continued to be highly influential, in particular his
+\parencite{landin_next_700_prog_langs_1966}.
 
-\parencite{landin_algol_lambda_1965}
-
-\subsubsection{The Next 700 Programming Languages}
-
-Published in \citeyear{landin_next_700_prog_langs_1966},
-Peter Landin's seminal paper \citep{landin_next_700_prog_langs_1966} lays out his vision for
-the future of programming language design, emphasizing the importance of the programmer's intent
-uncluttered by details of the hardware.
-This language, IYSWIM, or \textit{If You See What I Mean}, was semantically
-equivalent to the \lambdacalc but introduced programming language design features
-that were novel and innovative above that of the \lambdacalc.
+In this paper, he describes a programming language \textit{ISWIM}, standing for
+\textit{If You See What I Mean}, which conveyed the semantics of \lam with
+a particularly elegant syntax.
+This language represented his vision for the future of programming languages
+with an emphasis on expressing the programmer's intent uncluttered by
+the details of the machine running the program.
+\todo{was dynamically typed, much like lisp but with semantics closer to \lam.}
 He argued that the programmer ought to only consider their intent, and the compiler ought to
 consider the operations that would be needed to carry out their intent.
 
@@ -21,7 +21,7 @@ like so:
 
 \begin{quotation}
 	The basic framework of the language design was inspired by Peter Landin’s ISWIM language
-	from the mid 1960s [1966b], which was, in turn, a sugared syntax for Church’s lambda calculus. The
+	from the mid 1960s, which was, in turn, a sugared syntax for Church’s lambda calculus. The
 	ISWIM framework provided higher-order functions, which were used to express proof tactics and
 	their composition. To ISWIM were added a static type system that could guarantee that programs
 	that purport to produce theorems in the object language actually produce logically valid theorems
