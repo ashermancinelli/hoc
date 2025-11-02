@@ -1,0 +1,114 @@
+\section{The \Lambdacalc{}}
+\label{sec:intro-lambda-calc}
+
+\input{chapters/dawn/lambda-calculus/intro.tex}
+\input{chapters/dawn/lambda-calculus/background.tex}
+\input{chapters/dawn/lambda-calculus/lisp.tex}
+\input{chapters/dawn/lambda-calculus/landin.tex}
+
+\subsection{todo: notes on history of \Lambdacalc{}}
+\citetitle{cardone_hindley_history_of_lambda_calcl_2006}
+\citetitle{hindley_lambda_calc_intro_2008}
+\citeauthor{cardone_hindley_history_of_lambda_calcl_2006}
+
+history of lambda calc:
+Both lambdacalc and combinatory logic were invented in the 1920s.
+Describe most basic properties of functions. logical foundation of math was
+real fluid in early 19thc. Russell's paradox was recent G{\"o}del's theorems
+not known yet, still developing the foundations of math.
+Some were based on sets, some based on functions, all up in the air.
+lambda and CL were developed here, build higher concepts of functions
+based only on these two foundations.
+<cardone> describe as chassis of bus in prog langs.
+lambda/cl gain purpose in these systems, like chassis; underpins things
+and isnt seen, doesn't have much value on its own.
+function-based higher-order logic is the real context, but we're already so far off
+topic and I'd like to get back to compilers soon as I can.
+Lots was developed in the 20s and 30s, then not much till the 60s
+largely cuz of connections with prog langs.
+notations for higher-order thinking about functions dates earlier,
+at least 1889 Giuseppe Peano on axioms for arithmetic.
+was not until Moses Sch{\"o}nfinkel developed basic combinators
+for functions (1924 sec 1) that we start to get combinatory logic.
+at gottingen germany, prob top math research group of the period.
+Pointed out f(x,y) could be (f(x))(y) where f returns func,
+now known as "currying." curry attributed to Scho.. many times but the name
+stuck.
+that was the last thing scho published on combinators, and by 1927 he was said
+to be mentally ill and institutionalized.
+
+his ideas cropped up again in jv neumann doctoral thesis
+on foundations of set theory (neumann 1025) but it was really function-based
+not set-based, and his axioms contained combinator-like operators (p225).
+not sure if JVN got this from scho or not, he didn't mention him
+and his ideas looked really different.
+next step in CL: haskell curry re-invented combinators.
+
+6.1 lisp
+1956-60 mccarthy lisp w function-abstraction.
+didn't have numbers, but just like lambda calc.
+substitution was not like lambdacalc bc dynamic binding, which helped
+interpreters but made programming really complicated.
+mccarthy contributed some back, including cond-exprs in functional formalism.
+
+6.2 peter landin
+early 60s PL proposed lambda terms to make constructs of a programming language
+algol 60 (landin 1965).
+algol block structure/identifier semantics matched lambdacalc, allowed
+ppl to look at lambda as a programming langauge.
+in parallel with this algol stuff, landin 1963 abstract machine
+for reducing lambda terms SECD-machine (1964, 1966a) of 4 components:
+stack for intermediate results, environment, control (code) driving the process
+and dump for showing the state of the program.
+the rules of his machine used call-by-value.
+would be followed up by further considerations of lambdacalc as a prog lang
+(Plotkin 1975).
+For the most part, other than McCarthy's papers,
+CL/lambda contributed to proglangs but not the other way around,
+until Corrado Bohm from 1960s on.
+bohm phd thesis w first description of complete compiler written in its own language
+	[bohm 1954].
+
+encoding of operations of iversons APL marisa venturini zilli 1962-64.
+gotta summarize bohm.
+james morris MIT 1968 thesis, untyped and simply typed lambda calculus.
+substitution had to be reconsidered in lambda calculus and CL cuz Lisp
+necessitated the efficient implementation of these algorithms, not just
+theoretical.
+
+8 types: russel whitehead's principia mathematica.
+Types were there before they came up in programming languages bigtime,
+but they werent fully deployed until later. so we start with lambdaclac and CL
+and then we'll do type theory in Software section.
+1967 los angeles set theory symposium [Lawvere, 1969a].
+
+% -----
+
+\iffalse
+	Throughout the 1930s, Church developed the \textit{\lambdacalc{}},
+	a formal definition of a \textit{higher-order, functional} programming language
+	built on only three concepts: functions, variables, and applications.
+	The language was \textit{higher-order} in that functions could be passed
+	as arguments to other functions, and functions could return other functions as results.
+	It was \textit{functional} in that function definition and application was the
+	primary abstraction in the language.
+
+	In the \lambdacalc{}, functions are given by $\lambda x. E$ where $x$ is the function's argument
+	and $E$ is the resulting expression. The result of the function is given by substituting the
+	argument for all occurances of $x$ in $E$. Function application is given by juxtaposition,
+	so $F x$ applies the function $F$ to the argument $x$.
+
+	Function definitions and applications are all assumed to take exactly one argument,
+	though there are syntaxes given for more:
+
+	\begin{align}
+		\lambda x . (\lambda y . (\lambda z . E)) & \equiv \lambda x y z . E
+		\tag{function definition}
+		\\
+		M N P x                                   & \equiv M (N (P x))
+		\tag{function application}
+	\end{align}
+
+	In 1940, he published \citetitle{church_simple_theory_of_types_1940}
+	which would become the foundation for type theory.
+\fi

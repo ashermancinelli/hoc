@@ -1,0 +1,46 @@
+\subsection{\acrlong{cl} and \Lambdacalc{}}
+
+\parencite{cardone_hindley_history_of_lambda_calcl_2006} summarizes the timeline of
+the development of \lamc and \acrshort{cl} as follows:
+
+\begin{quotation}
+	the history of λ and CL splits into three main periods: first,
+	several years of intensive and very fruitful study in the 1920s and ’30s;
+	next, a middle period of nearly 30 years of relative quiet; then in the late 1960s an upsurge of
+	activity stimulated by developments in higher-order function theory, by connections
+	with programming languages, and by new technical discoveries.
+\end{quotation}
+
+In this section, we discuss primarily the first and second periods,
+and pick up with the \textit{applications} to programming languages and compilers
+in \cref{sec:type-theory}.
+
+Both \lam{} and \acrshort{cl} were invented in the 1920s--
+\acrshort{cl} first by the Ukrainian mathematician Moses Schönfinkel
+at the University of Göttingen
+(likely the most advanced mathematics institution at the time).
+He introduced the concepts informally in a talk in 1920, and the ideas
+were first published in \citep{schonfinkel_invented_cl_building_blocks_math_1967}.
+These ideas would later be discovered by John von Neumann in \parencite{neumann_axiom_set_theory_1925}
+and then re-invented by Haskell Curry in 1926-1927.
+After Curry found Schönfinkel's work, he set out to get a PhD at the University of Göttingen
+researching combinators, and his doctoral thesis was published in \parencite{curry_phd_thesis_1930}.
+Just prior to Curry's thesis, Alonzo Church invented the \lambdacalc{} in roughly 1928,
+and first published this work in \parencite{church_invent_lambda_calc_1932}.
+
+In broad strokes, all these efforts were attempts to use functions to
+build a foundation for mathematics.
+In the \lamc, Church sought to build such a foundation out of functions,
+with $\lambda x.E$ meaning \textit{the function that takes argument $x$ and yields the expression $E$},
+and $Fx$ meaning \textit{the function $F$ applied to argument $x$}.
+From functions, Church built up the concept of numbers, similar to the way numbers
+are formed by nesting sets in set-theoretical foundations for math.
+In his second paper on the subject \parencite{church_second_paper_1933},
+Church formulates the natural numbers as functions with $N$ levels of nesting.
+
+Various components of the \lamc were developed independently,
+including Alan Turing in \parencite{turing_computable_1936}.
+Turing would go on to take a doctorate under Church, completing in 1938.
+The applications to compilers were not fully developed; John McCarthy
+would adopt a small number of concepts from the \lamc in the 1950s,
+the discusssion of which is continued in \cref{sec:lisp}.
