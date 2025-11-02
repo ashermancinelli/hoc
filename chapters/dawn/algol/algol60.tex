@@ -1,0 +1,199 @@
+\subsection{ALGOL 60}
+
+\todo{backstory of Peter Naur}
+
+The International Conference on Information Processing was held in Paris
+in June, 1959, where there were several key developments in ALGOL.
+Firstly, John Backus presented the now-famous paper on Backus-Naur Form
+for formal specification of programming languages\cite{backus_ial_1959}.
+Although other accounts describe this paper as having garnered significant
+attention in the IAL proceedings, Backus would recount that his paper
+"was received with a silence that made it seem that precise syntax
+description was an idea whose time had not yet come.
+As far as I know that paper had only one reader, Peter Naur"
+\cite{Backus_1980_Programming_in_America_in_1950s}.
+Backus was involved in two programming languages at the time, \FTN{} and IAL,
+having already moved on from Speedcoding.
+Backus had been made aware of the logician Emil Post and her work on computability
+in a course given by Martin Davis, in particular, Post's notion of a "production."
+It was this concept that inspired Backus to write the 1959 paper, and Naur
+would go on to extend it. This is part of Backus's specification of arithmetic expressions
+in the paper before Naur's changes\cite{backus_ial_1959}:
+
+\[
+	\langle \textit{factor} \rangle :\equiv
+	\langle \textit{number} \rangle \;\overline{\text{or}}\;
+	\langle \textit{function} \rangle \;\overline{\text{or}}\;
+	\langle \textit{variable} \rangle \;\overline{\text{or}}\;
+	\dots
+\]
+
+Naur would make the notation more readable by replacing $\overbar{or}$ with $|$
+and $:\equiv$ with $::=$ and by fully spelling out names that backus had abbreviated.
+Naur's edits and extensions would bring interest from more readers than Backus's original paper had.
+This form would come to be known as Backus-Naur Form, or BNF.
+Naur would submit this in a paper to the subsequent ALGOL meeting in 1960,
+titled \citetitle{naur_backus_algol_1960}\cite{naur_backus_algol_1960}.
+Various commitees had established some shortfalls of the original design of the AIL,
+and the 1960 meeting set out to address them with the help of Backus and Naur's
+specification.
+This report "represents the union of the Committee's concepts and the
+intersection of its agreements."
+The IAL had been renamed ALGOL 58 and then finally ALGOL 60 in Naur's report.
+
+The final report specified expressions to have the following syntax:
+
+\[
+	\langle \textit{expression} \rangle ::=
+	\langle \textit{arithmetic expression} \rangle
+	| \langle \textit{Boolean expression} \rangle
+	| \langle \textit{designational expression} \rangle
+\]
+
+\subsection{Adoption of ALGOL}
+
+The \textit{ACM Communications} started publishing an \textit{Algorithms} section;
+ALGOL 58 was initially used, but ALGOL 60 was adopted once the updated report
+was in wide circulation.
+\FTN was not considered acceptable for publication until 1966, and even then
+it did not see widespread use in the journal.
+Because ALGOL had been designed from scratch by committee, there were
+no reference compilers for people to use; the only way to verify the correctness
+of an algorithm described in ALGOL was to rewrite it in another language
+and run test against test cases.
+
+In early 1960, the \textit{ACM ALGOL Maintenance Group} formed: an informal working
+group for the purpose of discussing the implementation of an ALGOL compiler.
+They discussed ambiguities in the specification and potential changes to the ALGOL 60 report.
+They mostly corresponded by mail and reports of their discussions were synthesized in
+the \textit{ALGOL Bulletin}\cite{sammet_programming_languages_history_and_fundamentals_1969}.
+The 14 issue of the bulletin in 1962 contained a questionnaire from Peter Naur
+about some ambiguities in the 1960 report, and the philosophy of some proposed changes and
+enhancements to the language.
+\footnote{The reader may find it interesting that in this edition of the bulletin,
+	Jean Sammet submitted a paper on \textit{A Method of Combining ALGOL and COBOL};
+	\todo{follow up on this?}}
+This questionnaire was used as a guide for another committee meeting in Rome in April of 1962
+the primary result of this meeting is detailed in Naur's
+\citetitle{naur_revised_report_algol_1962}.
+
+\subsection{Peculiarities of ALGOL}
+
+The reader may find it interesting that ALGOL had a number of peculiar features.
+Namely, the distinction between \textit{call by name} and \textit{call by value}.
+Naur's 1962 revised report explains it best, I think\cite[Section 4.7.3]{naur_revised_report_algol_1962}:
+
+\begin{quotation}
+	\noindent
+	\textbf{4.7.3.1 Value assignment (call by value)}
+
+	of the corresponding actual parameters\dots the effect is as though an
+	additional block embracing the procedure body were created in which these
+	assignments were made to variables local to this fictitious block\dots
+
+	\noindent
+	\textbf{4.7.3.2 Name replacement (call by name)}
+
+	Any formal parameter not quoted in the value list is replaced, throughout the
+	procedure body, bu the corresponding actual parameter, after enclosing this
+	latter in parentheses wherever syntactically possible.
+\end{quotation}
+
+While neither Naur's revised report nor Edgar Dijkstra's
+\citetitle{dijkstra_primer_of_algol_programming_1962}
+point out the implications of this distinction, it is important to note
+the subtle implications.
+\Gls{call-by-name} is not common in modern programming languages, and readers
+may find it more similar to macro expansion
+(though it is not, in fact, simply textual replacement).
+The following example illustrates the difference:
+
+\lstinputlisting[language=python,frame=single]{chapters/dawn/callbyname1.py}
+
+Most implementations of call-by-name use zero-argument thunks to delay
+the evaluation of arguments until they are used in the body.
+The arguments to function calls become zero-argument closure functions
+returning the value of the argument expression and capable of being
+\textit{\gls{l-value}s}, or values in the left-hand side of an assignment expression.
+Then, each instance of the argument in the callee's body is replaced
+with an invocation of this function such that it is evaluated anew
+each time it appears.
+The prior Python example may be rewritten to emulate call-by-name as follows:
+
+\lstinputlisting[language=python,frame=single]{chapters/dawn/callbyname2.py}
+
+\Gls{call-by-value} semantics demand that the argument to \texttt{double} be evaluated
+before entering the function, so \texttt{get\_5} is called once and
+\textit{the result} is passed to \texttt{double}.
+With call-by-name semantics, \texttt{get\_5} is passed the expression itself,
+which is the substituted into the body of the callee \textit{before}
+being evaluated.
+
+Donald Knuth proposed the \textit{man or boy} test in the \textit{ALGOL Bulletin}
+to distinguish between
+conformant ALGOL compilers capable of handling recursion and non-local references
+using call-by-name semantics\cite{Knuth1964ManOrBoy}.
+
+\begin{quotation}
+	There are quite a few ALGOL60 translators in existence which have been designed
+	to handle recursion and non-local references properly, and I thought perhaps a
+	little test-program may be of value. Hence I have written the following simple
+	routine, which may separate the man-compilers from the boy-compilers.
+
+	This uses nothing known to be tricky or ambiguous. My question is: What should
+	the answer be? Unfortunately, I don't have access to a "man-compiler" myself,
+	asn do I was forced to try hand calculations. My conjecture (probably wrong) is
+	that the answer will be
+
+	\[
+		73 - 119 - 177 + 102 = -121 .
+	\]
+
+	I'd be very glad to know the right answer.
+\end{quotation}
+
+The program is as follows:
+
+\lstinputlisting[language=algol,frame=single]{chapters/dawn/knuth-man-boy-test.a68}
+
+There are some useful applications of call-by-name semantics as well;
+it is not \textit{solely} an avenue for confusion.
+Jensen's Device, named in honor of Mr. J. Jensen of Regnecentralen, Copenhagen,
+is a well-known application of call-by-name semantics.
+This allows the user of a function to describe an expression to be evaluated
+in a loop body inside the function, permitting a very general summation function.
+There is not an especially elegant way to do this in a call-by-value language,
+but as Dijkstra points out\cite{dijkstra_defense_of_algol_60_1961},
+it can be implemented with this ALGOL program:
+
+\lstinputlisting[language=algol,frame=single]{chapters/dawn/jensens-device.a68}
+
+To simply sum the values of the array \texttt{V} from 1 to 100, one would call:
+\texttt{Sum(i, 1, 100, V[i])}.
+The real power of this device is its generality;
+if a user were to need to compute $\sum_{i=1}^{100} V_{i}\times i$,
+they could call \texttt{Sum(i, 1, 100, V[i]*i)}.
+The first and final arguments to this function are not evaluated
+until they are used in the body of the loop in \texttt{Sum}.
+Others have also pointed out numerous easy-to-make mistakes
+that arise because of this feature.
+For example, a naive implementation of a swap function may easily
+cause unintended side effects:
+
+\lstinputlisting[language=algol,frame=single]{chapters/dawn/swap-error.a68}
+
+While calling \texttt{Swap(i, j)} may work correctly, calling
+\texttt{Swap(i+1, j+1)} or \texttt{Swap(A[i], A[j])} would not.
+
+Among the now-unusual argument evaluation semantics, ALGOL also lacked any I/O
+facilities as we have already discussed.  The language also made string
+variables available, but provided no means of manipulating them.  ALGOL
+permitted \textit{own variables}, which are akin to static variables in C or
+SAVE variables in \FTN{}; they retain their values between entrances to the
+block.  Dijkstra also points out nowhere is the evaluation order of
+subexpressions specified\cite{dijkstra_defense_of_algol_60_1961}.
+
+While the declared intent of defining a language detached from any particular
+manufacturer or machine was laudable (and profitable in the case of portable
+languages to follow), ALGOL was so far removed from the machine to be useless without
+supplementary libraries (for I/O, string processing, etc).

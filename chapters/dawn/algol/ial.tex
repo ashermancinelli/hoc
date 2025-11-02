@@ -1,0 +1,60 @@
+
+\subsection{The IAL and the ALGOrithmic Language}
+
+Before Hopper, Mayes and Phillips pulled together their committees for a common
+business language, design-by-committee was already in the academic milieu,
+especially in Europe.
+While not commercially successful, ALGOL introduced a number of important concepts
+like block scopes and the declaration of the types of variables, and it would
+go on to be the standard language for describing algorithms in academia.
+Originally called IAL (International Algebraic Language), it came to be called
+ALGOL, or ALGOrithmic Language, and was designed by an international committee
+with representatives from different organizations with the goal of a truly
+machine-independent language.
+
+After deliberation in numerous committees, representatives from the German
+Association for Applied Mathematics and Machinery (GAMM) and the ACM met in
+Zurich, Switzerland in the summer of 1958. They had both produced similar
+reports and wanted to meet and agree on a unified language.
+John Backus, Charles Katz, Alan Perlis and Joseph Wegstein from the ACM attended this meeting.
+\todo{who were these people? Add some narrative. Maybe of Naur, then tie in with Backus.}
+They arrived at the following objectives
+\cite{perlis_samelson_1958_preliminary_report_ial}:
+
+\begin{enumerate}
+	\item The new language should be as close as possible to standard mathematical
+	      notation and be readable with little further explanation.
+	\item It should be possible to use it for the description of computing processes in publications.
+	\item The new language should be mechanically translatable into machine programs.
+\end{enumerate}
+
+Shortly thereafter, a large number of dialects and partial implementations sprung up around Europe
+and the US such as BALGOL from Burroughs Corporation in Detroit, Michigan for the Burroughs 220.
+Manufacturers such as Burroughs found the standard to be insufficient for their users:
+"BAC-220 provides additions for the ALGOL reference language which are essential to
+the operation of data-processing systems: input-output
+facilities, conventions for inclusion of segments of machine-language coding,
+and diagnostic features" \cite{burroughs1963bac220}.
+This was intentional; the specifications of ALGOL (both the 1958 and the 1960 versions)
+was solely for the purposes of
+describing computation; no I/O or system libraries were specified.
+Other dialects included CLIP, JOVIAL, MAD, and NELIAC.
+The first issue of the \textit{ALGOL Bulletin} was issued in March of 1959 out of Copenhagen
+with Peter Naur as the editor.
+
+Jean Sammet describes the impact of ALGOL 58
+\cite{sammet_programming_languages_history_and_fundamentals_1969}:
+\begin{quotation}
+	Among the more intriguing technical features of ALGOL 58 were its essential
+	simplicity; the introduction of the concept of three levels of language, namely
+	a reference language, a publication language, and hardware representations; the
+	\textbfit{begin\dots end} delimiters for creating a single (compound) statement from simpler
+	ones; the flexibility of the procedure declaration and the \textbfit{do} statement for
+	copying procedures with data name replacement allowed; and the provision for
+	empty parameter positions in procedure declarations. While ALGOL 58 is not an
+	exact subset of ALGOL 60, the only items of significance which are in the
+	former but not the latter are the \textbfit{do} which was removed as a concept (although
+	the word was used for something else) and the empty parameter positions.
+	Because of this major carry-over, specific technical description of ALGOL 58 is
+	not necessary.
+\end{quotation}
