@@ -1,4 +1,4 @@
-\section{The Introduction of \Lambdacalc{}}
+\section{The \Lambdacalc{}}
 \label{sec:intro-lambda-calc}
 
 A surprising number of the foundations for programming language
@@ -20,8 +20,12 @@ upon information theory and higher-order logic, fields which were
 only recently developed in the history of mathematics, and contain
 some unsettling and bewildering concepts.
 
-In the early 20\textsuperscript{th}, Russell's paradox was recently developed
-and Gödel's incompleteness theorems were not.
+In the early 20\textsuperscript{th}, Russell's paradox
+\footnote{Essentially, set-theory constructions of mathematics lead to contradictions.}
+was recently developed
+and Gödel's incompleteness theorems
+\footnote{Essentially, every formal logical system contains true statements that it is unable to prove.}
+were not.
 For those unfamiliar, they call into question the validity of the foundations
 of mathematics and point out the limits of provability.
 These led to several efforts to establish a firm foundation for the entire
@@ -34,7 +38,7 @@ These efforts directly led to functional programming and type theory,
 and underpin many other concepts in programming languages and compilers.
 
 I am no expert in this field and it does not entirely concern the history
-of compilers, but we will digress insofar as it informs our focus.
+of compilers, so we will digress only insofar as it informs our topics of focus.
 
 \subsection{\acrlong{cl} and \Lambdacalc{}}
 
@@ -44,8 +48,31 @@ at the University of Göttingen
 (likely the most advanced mathematics institution at the time).
 He introduced the concepts informally in a talk in 1920, and the ideas
 were first published in \citep{schonfinkel_invented_cl_building_blocks_math_1967}.
+These ideas would later be discovered by John von Neumann in \parencite{neumann_axiom_set_theory_1925}
+and then re-invented by Haskell Curry in 1926-1927.
+After Curry found Schönfinkel's work, he set out to get a PhD at the University of Göttingen
+researching combinators, and his doctoral thesis was published in \parencite{curry_phd_thesis_1930}.
+Just prior to Curry's thesis, Alonzo Church invented the \lambdacalc{} in roughly 1928,
+and first published this work in \parencite{church_invent_lambda_calc_1932}.
 
-\subsection{todo: history of \Lambdacalc{}}
+In broad strokes, all these efforts were attempts to use functions to
+build a foundation for mathematics.
+In the \lamc, Church sought to build such a foundation out of functions,
+with $\lambda x.E$ meaning \textit{the function that takes argument $x$ and yields the expression $E$},
+and $Fx$ meaning \textit{the function $F$ applied to argument $x$}.
+From functions, Church built up the concept of numbers, similar to the way numbers
+are formed by nesting sets in set-theoretical foundations for math.
+In his second paper on the subject \parencite{church_second_paper_1933},
+Church formulates the natural numbers as functions with $N$ levels of nesting.
+
+Various components of the \lamc were developed independently,
+including Alan Turing in \parencite{turing_computable_1936}.
+Turing would go on to take a doctorate under Church, completing in 1938.
+The applications to compilers were not fully developed; John McCarthy
+would adopt a small number of concepts from the \lamc in the 1950s,
+the discusssion of which is continued in \cref{sec:lisp}.
+
+\subsection{todo: notes on history of \Lambdacalc{}}
 \citetitle{cardone_hindley_history_of_lambda_calcl_2006}
 \citetitle{hindley_lambda_calc_intro_2008}
 \citeauthor{cardone_hindley_history_of_lambda_calcl_2006}
