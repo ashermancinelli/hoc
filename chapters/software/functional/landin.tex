@@ -6,25 +6,56 @@ use of \lam to formalize the semantics of ALGOL 60.
 Landin's work continued to be highly influential, in particular his
 \parencite{landin_next_700_prog_langs_1966}.
 
-In this paper, he describes a programming language \textit{ISWIM}, standing for
-\textit{If You See What I Mean}, which conveyed the semantics of \lam with
-a particularly elegant syntax.
+In this paper, he describes a general framework for programming languages
+called \textit{ISWIM}, standing for
+\textit{If You See What I Mean}
+\footnote{ISWIM is sometimes pronounced \textit{eye-swim}.},
+which conveyed the semantics of \lam with
+a particularly elegant syntax over \lam constructs.
 This language represented his vision for the future of programming languages
 with an emphasis on expressing the programmer's intent uncluttered by
 the details of the machine running the program.
+
+\begin{quotation}
+	Most programming languages are partly a way of
+	expressing things in terms of other things and partly a
+	basic set of given things. The ISWIM (If you See What I
+	Mean) system is a byproduct of an attempt to disentangle
+	these two aspects in some current languages.
+
+	ISWIM is an attempt at a general purpose system for
+	describing things in terms of other things, that can be
+	problem-oriented by appropriate choice of "primitives."
+	So it is not a language so much as a family of languages,
+	of which each member is the result of choosing a set of
+	primitives.
+\end{quotation}
+
+Landin described the grammar of ISWIM in informal English, which was perhaps
+a step backwards from John Backus and Peter Naur's formal grammars (see \parencite{naur_backus_algol_1960})
+which were also being developed for the specification of ALGOL.
+
+\subsection{Landin and Strachey}
+
+\parencite{landin_my_years_w_strachey_2000}.
+\parencite{scott_strachey_math_semantics_for_computer_languages_1971}.
+
+\parencite{hopl_history_of_ml_2020} notes how most of the characters in this story
+were in part brought together by a shared interest and an interested amateur
+who noticed them all reading similar materials in the library.
+In this way, many of the early meetings formalizing the language were
+informal and poorly recorded.
+
+\begin{quotation}
+	It is interesting to note that most of the central personalities first met through an unofficial reading group formed by an
+	enthusiastic amateur named Mervin Pragnell, who recruited people he found reading about topics like logic at bookstores or
+	libraries. The group included Strachey, Landin, Rod Burstall, and Milner, and they would read about topics like combinatory
+	logic, category theory, and Markov algorithms at a borrowed seminar room at Birkbeck College, London. All were self-taught
+	amateurs, although Burstall would later get a PhD in operations research at Birmingham University. Rod Burstall was
+	introduced to the lambda calculus by Landin and would work for Strachey briefly before moving to Edinburgh in 1965.
+	Milner had a position at Swansea University before spending time at Stanford and taking a position in Edinburgh in 1973.
+\end{quotation}
+
 \todo{was dynamically typed, much like lisp but with semantics closer to \lam.}
 He argued that the programmer ought to only consider their intent, and the compiler ought to
 consider the operations that would be needed to carry out their intent.
-
-\parencite{hopl_history_of_ml_2020} described the origins of the Meta Language in Landin's paper
-like so:
-
-\begin{quotation}
-	The basic framework of the language design was inspired by Peter Landin’s ISWIM language
-	from the mid 1960s, which was, in turn, a sugared syntax for Church’s lambda calculus. The
-	ISWIM framework provided higher-order functions, which were used to express proof tactics and
-	their composition. To ISWIM were added a static type system that could guarantee that programs
-	that purport to produce theorems in the object language actually produce logically valid theorems
-	and an exception mechanism for working with proof tactics that could fail. ML followed ISWIM in
-	using strict evaluation and allowing impure features, such as assignment and exceptions.
-\end{quotation}

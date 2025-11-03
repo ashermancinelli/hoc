@@ -6,7 +6,7 @@
 The International Conference on Information Processing was held in Paris
 in June, 1959, where there were several key developments in ALGOL.
 Firstly, John Backus presented the now-famous paper on Backus-Naur Form
-for formal specification of programming languages\cite{backus_ial_1959}.
+for formal specification of programming languages, \parencite{backus_ial_1959}.
 Although other accounts describe this paper as having garnered significant
 attention in the IAL proceedings, Backus would recount that his paper
 "was received with a silence that made it seem that precise syntax
@@ -52,17 +52,15 @@ The final report specified expressions to have the following syntax:
 	| \langle \textit{designational expression} \rangle
 \]
 
-Exemplary of the varied approaches to formalize the design of ALGOL 60,
-Peter Landin sought to express the language's semantics in the
-\lamc in \parencite{landin_algol_lambda_1965}.
-A few years earlier, McCarthy adopted some components of the \lamc in
-Lisp, however McCarthy's language broke with \lam in a few key areas,
-namely \gls{dynamic-binding}
-\footnote{ For a more complete treatment of Lisp, see \cref{sec:lisp}. }.
-ALGOL's semantics provided a much cleaner relationship to \lam, thanks to
-its block structure and lexical scoping rules, thus Landin
-made it possible to look at \lam as a programming language in and of itself
-in a more complete way than McCarthy had done with Lisp.
+The attempts to formalize ALGOL 60 were varied;
+in \parencite{landin_algol_lambda_1965}, \citeauthor{landin_algol_lambda_1965}
+attempted to formalize the semantics of ALGOL 60 by translating them into
+the \lamc
+\footnote{This is more thoroughly discussed in \cref{sec:landin-lambda-calculus}}
+.
+The inclination to formalize the semantics of a programming language before
+working on a compiler or interpreter was emblematic of the British
+(and more broadly European) approach to programming language design.
 
 % \parencite[6.2]{cardone_hindley_history_of_lambda_calcl_2006}
 

@@ -1,0 +1,19 @@
+\subsection{Peter Landin on the Lambda Calculus}
+\label{sec:landin-lambda-calculus}
+
+Exemplary of the varied approaches to formalizing the design of ALGOL 60,
+Peter Landin sought to express the language's semantics in the
+\lamc in \parencite{landin_algol_lambda_1965}
+\footnote{See \cref{sec:algol60} for more details on the development of ALGOL 60.}.
+A few years earlier, McCarthy adopted some components of the \lamc in
+Lisp, however McCarthy's language broke with \lam in a few key areas,
+namely \gls{dynamic-binding}
+\footnote{ For a more complete treatment of Lisp, see \cref{sec:lisp}. }.
+ALGOL's semantics provided a much cleaner relationship to \lam, thanks to
+its block structure and lexical scoping rules, thus Landin
+made it possible to look at \lam as a programming language in and of itself
+in a more complete way than McCarthy had done with Lisp.
+
+In parallel with his translation of ALGOL, Landin developed in
+\parencite{landin_eval_of_expressions_1964} an abstract machine for
+\lam called the \textit{SECD-machine}.
