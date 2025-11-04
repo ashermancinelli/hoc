@@ -3,13 +3,16 @@
 In \cref{sec:intro-lambda-calc} we established the \lamc and its early
 applications to compilers in Lisp, and in \cref{sec:algol60} we discussed Landin's
 use of \lam to formalize the semantics of ALGOL 60.
+Like many of the prominent British computer scientists of the time,
+he was heavily involved in the development of ALGOL, and then
+took that experience to further programming language design efforts.
 Landin's work continued to be highly influential, in particular his
 \parencite{landin_next_700_prog_langs_1966}.
 
 In this paper, he describes a general framework for programming languages
 called \textit{ISWIM}, standing for
 \textit{If You See What I Mean}
-\footnote{ISWIM is sometimes pronounced \textit{eye-swim}.},
+\footnote{ISWIM is sometimes pronounced \textit{eye-swim} \parencite{macqueen_history_lcf_ml_2025}.},
 which conveyed the semantics of \lam with
 a particularly elegant syntax over \lam constructs.
 This language represented his vision for the future of programming languages
@@ -32,10 +35,23 @@ the details of the machine running the program.
 \end{quotation}
 
 Landin described the grammar of ISWIM in informal English, which was perhaps
-a step backwards from John Backus and Peter Naur's formal grammars (see \parencite{naur_backus_algol_1960})
-which were also being developed for the specification of ALGOL.
+a step backwards from John Backus and Peter Naur's formal grammars \parencite{naur_backus_algol_1960}
+which were also being developed for the specification of ALGOL, though
+the strict evaluation semantics and emphasis on expressivity
+made the conception of \lam as a programming language more concrete.
+
+While ISWIM was not statically typed, Landin did describe an informal way to
+describe data types in ISWIM, which he used for describing the data structures
+used to represent the syntax of the language.
+The only true implementation of ISWIM as it was in the paper
+(aside from the prototype Landin \textit{mentioned} in \parencite{landin_next_700_prog_langs_1966}) was
+\parencite{evans_pal_language_designed_for_teaching_programming_linguistics_1968}
+developed by \citeauthor{evans_pal_language_designed_for_teaching_programming_linguistics_1968}
+at MIT.
 
 \subsection{Landin and Strachey}
+
+
 
 \parencite{landin_my_years_w_strachey_2000}.
 \parencite{scott_strachey_math_semantics_for_computer_languages_1971}.
