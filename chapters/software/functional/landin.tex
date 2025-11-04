@@ -49,10 +49,43 @@ The only true implementation of ISWIM as it was in the paper
 developed by \citeauthor{evans_pal_language_designed_for_teaching_programming_linguistics_1968}
 at MIT.
 
-\subsection{Landin and Strachey}
+\subsection{Christopher Strachey}
 
+Christopher Strachey, another British computer scientist, played a significant
+role in the development of compiler and programming language theory.
+In a series of lectures in 1967 \parencite{strachey_fundamental_concepts_2000},
+he introduced the concepts of \gls{l-value}s and \gls{r-value}s.
 
+When one reads of the history of ALGOL, the temptation is the anachronistically
+assume the concepts modern students of compilers are familiar with
+were also clear to the developers of the ALGOL standard.
+Strachey points out how ill-defined many of these concepts were, and
+attempts to define many of them more precisely in the aforementioned lectures.
 
+\begin{quotation}
+	The difficulty is that although we all use words such as ‘name’, ‘value’, ‘program’,
+	‘expression’ or ‘command’ which we think we understand, it often turns out on closer
+	investigation that in point of fact we all mean different things by these words,
+	so that communication is at best precarious.
+\end{quotation}
+
+CPL, standing for \textit{Combined Programming Language}, was like many of the programming
+languages developed in the wake of ALGOL:
+it was heavily based on the concepts therein, but sought to extend those concepts
+and make the language more practical, in light of ALGOL's lack of adoption
+and lack of a useful compiler or programming environment.
+
+\begin{quotation}
+	CPL is based on, and contains the concepts of, ALGOL 60\dots
+	However, CPL is not just another proposal for the
+	extension of ALGOL 60, but has been designed from first principles and has a logically coherent
+	structure.
+	\parencite{barron_strachey_main_features_of_cpl_1963}
+\end{quotation}
+
+\parencite{barron_strachey_main_features_of_cpl_1963}.
+\parencite{richards_strachey_and_cpl_compiler_2000}.
+\parencite{strachey_fundamental_concepts_2000}.
 \parencite{landin_my_years_w_strachey_2000}.
 \parencite{scott_strachey_math_semantics_for_computer_languages_1971}.
 
@@ -75,3 +108,5 @@ informal and poorly recorded.
 \todo{was dynamically typed, much like lisp but with semantics closer to \lam.}
 He argued that the programmer ought to only consider their intent, and the compiler ought to
 consider the operations that would be needed to carry out their intent.
+
+\subsection{Strachey and Landin}
