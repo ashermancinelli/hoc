@@ -53,23 +53,67 @@ terminology, and interfaces have become the lingua-franca of the compiler world.
 
 \input{chapters/codesign/llvm-timeline-table.tex}
 
-\subsubsection{Architecture of the IR}
+\subsection{Architecture of the IR, Optimizer, and Code Generator}
+
 
 \todo{examples of the IR and the C++ interfaces for building it, and how
 	this is usable from other programming languages like OCaml.}
 
-\subsubsection{The LLVM Optimizer}
+The first (and maybe only) interaction most non-compiler-engineers have with LLVM
+is through the frontends, like Clang for C, C++, Objective-C, or Swift.
+This betrays the complexity and elegance with which the pieces of LLVM fit together.
+These frontends are typically wrappers around the LLVM command-line parsing library,
+a library to \textit{do} the lexing, parsing, semantic analysis and whatever else the frontend
+for that specific language is expected to do (like module dependency analysis in Swift, for example),
+and then various other LLVM subprojects.
 
-\subsubsection{Tablegen}
+Most of the time, these other subprojects include the pieces from the LLVM subproject,
+which does optimization and code generation.
 
-Perhaps the part of LLVM that is least-known among \textit{users} of LLVM is
-its \textit{Tablegen} system. Tablegen is a program for declarative metaprogramming
-inside LLVM.
-
-\subsection{LLVM at Apple}
+\subsection{Chris and LLVM at Apple}
 \label{sec:llvm-at-apple}
 
 \subsubsection{Clang}
 \label{sec:llvm-at-apple-clang}
 
+\subsubsection{Swift}
+
+\parencite{lattner_minsky_why_ml_needs_new_programming_language_2025}:
+\begin{quotation}
+	\textbf{Chris}
+	And so Clang has some really cool stuff that allowed it to scale and
+	things like that, but I was also burned out. We had just shipped it. It was
+	amazing. I’m like, there has to be something better. And so, Swift really came
+	starting in 2010. It was a nights and weekends project.
+	Turns out, programming languages are a mature space. It’s not like you
+	need to invent pattern matching at this point. It’s embarrassing that C++
+	doesn’t have good pattern matching.
+
+	\textbf{Ron}
+	We should just pause for a second, because I think this is like a small
+	but really essential thing. I think the single best feature coming out of
+	language like ML in the mid-seventies\dots
+	having this pattern matching facility that lets you basically in a
+	reliable way do the case analysis so you can break down what the possibilities
+	are—is just incredibly useful. And very few mainstream languages have picked it
+	up. I mean Swift again is an example, but languages like ML, SML, and Haskell,
+	and OCaml.
+
+	\textbf{Chris}
+	I mean pattern matching, it is not an exotic feature. Here we’re
+	talking about 2010.
+	And so pattern matching, when I learned OCaml, it’s so beautiful. It
+	makes it so easy and expressive to build very simple things.
+\end{quotation}
+
 \input{chapters/codesign/lattner-career-timeline-table.tex}
+
+\subsection{Tablegen}
+
+Perhaps the part of LLVM that is least-known among \textit{users} of LLVM is
+its \textit{Tablegen} system. Tablegen is a program for declarative metaprogramming
+inside LLVM.
+
+\subsection{Chris and MLIR at Google}
+
+\subsection{Mojo}
