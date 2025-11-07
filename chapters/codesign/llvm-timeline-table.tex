@@ -1,23 +1,24 @@
 
 \begin{table}[h!]
 	\centering
-	\begin{tabular}{l l l}
+	\begin{tabularx}{\linewidth}{llX}
 		\toprule
-		Subproject     & Approximate Date Added & Notes                                                               \\
+		Subproject      & Date Added       & Notes                                                               \\
 		\midrule
-		LLVM Core      & 2000                   & Project inception at UIUC \cref{sec:lattner-llvm}                   \\
-		Clang          & 2006                   & \todo{cite lattner at apple}                                        \\
-		LLDB           & 2007--2008             &                                                                     \\
-		libc++         & 2010                   & LLVM C++ standard library implementation                            \\
-		compiler-rt    & $\sim$2010             & Compiler runtime libraries, drop-in replacement for \texttt{libgcc} \\
-		lld            & $\sim$2011--2015       & LLVM linker                                                         \\
-		libclc         & $\sim$2012             & OpenCL standard library                                             \\
-		OpenMP runtime & $\sim$2013--2014       & Added as LLVM's OpenMP runtime                                      \\
-		MLIR           & 2019                   & see section on MLIR                                                 \\
-		Flang          & 2020                   & see section on Flang                                                \\
-		llvm-libc      & 2020s                  &                                                                     \\
+		LLVM Core       & 2000             & Project inception at UIUC, see \Cref{sec:lattner-llvm}.             \\
+		Clang           & 2006             & Chris starts work on Clang, see \Cref{sec:llvm-at-apple-clang}.     \\
+		compiler-rt     & $\sim$2009       & Compiler runtime libraries, drop-in replacement for \texttt{libgcc} \\
+		Clang           & $\sim$2009       & Clang supports C and Objective-C.                                   \\
+		LLDB            & $\sim$2010       & LLDB shipped as part of Xcode 4.                                    \\
+		Clang++, libc++ & $\sim$2010       & Clang now supports C++; C++ standard library added as LLVM project. \\
+		lld             & $\sim$2011--2015 & LLVM linker                                                         \\
+		libclc          & $\sim$2012       & OpenCL standard library                                             \\
+		OpenMP runtime  & $\sim$2013--2014 & Added as LLVM's OpenMP runtime                                      \\
+		MLIR            & 2019             & \todo{see section on MLIR}                                          \\
+		Flang           & 2020             & \todo{see section on Flang}                                         \\
+		llvm-libc       & 2020s            &                                                                     \\
 		\bottomrule
-	\end{tabular}
+	\end{tabularx}
 	\label{tab:lattner-llvm-project-timeline}
 	\caption{Approximate dates major LLVM subprojects joined the umbrella project.}
 \end{table}
