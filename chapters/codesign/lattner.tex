@@ -1,0 +1,66 @@
+\section{Chris Lattner}
+
+Chris Lattner's impact on the landscape of compiler technology in the 21\textsuperscript{st}
+century can't be overstated. His work on LLVM has more or less beat out every other
+compiler technology.
+We will now discuss the stories of the technologies that Chris developed contiguously,
+with soliloquies for uses of those technologies that Chris was not involved in.
+
+\subsection{Low-Level Virtual Machine}
+\label{sec:lattner-llvm}
+
+In December of 2000, Chris began work on LLVM with his advisor Vikram Adve
+as part of his PhD research at the University of Illinois at Urbana-Champaign.
+LLVM stood for Low-Level Virtual Machine
+at the time but is no longer an acronym and is simply the name of the project.
+At the time of the publication of his thesis \parencite{lattner_phd_thesis_pointer_intensive_programs_2005},
+the umbrella project initially contained only an \acrlong{ir}, an optimizer for that \acrshort{ir},
+\acrshort{ir}-level linking, and both \gls{offline-compilation} and \gls{online-compilation} for code
+generation.
+Today, these components are all part of the LLVM \textit{subproject} within the
+LLVM \textit{umbrella project}, which contains other compiler libraries and tools.
+
+\begin{quotation}
+	This chapter describes LLVM — Low-Level Virtual Machine — a compiler framework that
+	aims to make lifelong program analysis and transformation available for arbitrary software, and
+	in a manner that is transparent to programmers. LLVM achieves this through two parts: (a) a
+	code representation with several novel features that serves as a common representation for analysis,
+	transformation, and code distribution; and (b) a compiler design that exploits this representation
+	to provide a combination of capabilities that is not available in any previous compilation approach
+	we know of. \parencite{lattner_phd_thesis_pointer_intensive_programs_2005}
+\end{quotation}
+
+While LLVM is perhaps best-known for some of the specific technologies contained
+in the umbrella project, its most novel features lie in the compiler architecture.
+The \acrshort{ir} was more flexible and language-agnostic than the other contemporary
+\acrshort{ir}s, but the nature of LLVM as a set of \textit{libraries} that can
+roughly be used independently of each other.
+The tools developers know LLVM for (like Clang, LLD, and LLDB) are really thin main
+programs that simply call into the libraries for parsing C code, optimizing a chunk of
+LLVM IR, or generating machine code for that LLVM IR.
+No prior art provided this level of flexibility, and LLVM's IR,
+terminology, and interfaces have become the lingua-franca of the compiler world.
+
+\begin{quotation}
+	While LLVM provides some unique capabilities, and is known for
+	some of its great tools (e.g., the Clang compiler, a C/C++/Objective-C compiler
+	which provides a number of benefits over the GCC compiler), the main thing that
+	sets LLVM apart from other compilers is its internal
+	architecture.
+	\parencite[Section 11. LLVM]{brown_wilson_lattner_aosa_vol1_2011}
+\end{quotation}
+
+\input{chapters/codesign/llvm-timeline-table.tex}
+
+\subsubsection{Architecture of the IR}
+
+\todo{examples of the IR and the C++ interfaces for building it, and how
+	this is usable from other programming languages like OCaml.}
+
+\subsubsection{The LLVM Optimizer}
+
+\subsubsection{Tablegen}
+
+Perhaps the part of LLVM that is least-known among \textit{users} of LLVM is
+its \textit{Tablegen} system. Tablegen is a program for declarative metaprogramming
+inside LLVM.

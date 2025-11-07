@@ -7,3 +7,16 @@ that just adding a backend for the GNU compiler would be significantly easier
 than writing a new compiler from scratch, many of the hundreds of small compiler
 companies went out of business, and the compiler teams inside large companies
 began using and contributing to the GNU compilers.
+
+In \cref{chap:software}, we discussed how the C programming language permeated
+the software industry via Unix.
+Hardware vendors would then develop their own C compilers so their users
+could use the programming language they were familiar with, similar to how
+hardware vendors were expected to provide Fortran compilers.
+This led to a diverse ecosystem of C compilers from different vendors targeting
+their respective hardware with an unfortunately diverse set of supported language features.
+This meant users could not rely on a consistent experience with C compilers when
+developing software for different hardware platforms.
+
+The \textit{automake} and \textit{autoconf} tools were developed to address this
+issue with macros, but buy-and-large, this experience was unpleasant for users.

@@ -140,21 +140,26 @@
 	description={Function calling semantics where the argument's address is passed in place of its value such that expressions and statements where the parameter occurs as an \gls{l-value} result in assignements to the variable's storage in the caller's scope}
 }
 
-% not sure how to deal with glossary entries that could easily be
-% an acronym or regular glossary entry...
-% \newglossaryentry{ast}{
-% 	name={abstract syntax tree},
-% 	description={A tree representation of the structure of a program}
-% }
+\newglossaryentry{offline-compilation}{
+	name={offline compilation},
+	description={}
+}
 
-% \newglossaryentry{ir}{
-% 	name={intermediate representation},
-% 	description={Intermediate representation, usually a file format or data structure used inside a compiler to represent the program being compiled}
-% }
+\newglossaryentry{online-compilation}{
+	name={online compilation},
+	description={}
+}
 
-\newacronym{ir}{IR}{intermediate representation}
-\newacronym{cl}{CL}{combinatory logic}
-\newacronym{ast}{AST}{abstract syntax tree}
+\newacronym[
+	description={The internal format of a program as it exists inside the compiler}
+]{ir}{IR}{intermediate representation}
+\newacronym[description={}]{cl}{CL}{combinatory logic}
+\newacronym[
+	description={A tree representation of the program after being parsed}
+]{ast}{AST}{abstract syntax tree}
+\newacronym[
+	description={A compilation methodology where the program is compiled as it is needed by the program instead of ahead of time. See also \gls{online-compilation}}
+]{jit}{JIT}{just-in-time}
 
 % Use
 % The \Gls{latex} typesetting markup language is specially suitable
