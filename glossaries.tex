@@ -150,6 +150,11 @@
 	description={}
 }
 
+\newglossaryentry{autovec}{
+	name={automatic vectoriz},
+	description={A process for leveraging \acrshort{simd} instructions where the compiler \textit{infers} the opportunities to exploit parallelism in the user's program. The user does not \textit{necessarily} have to change their program, but they can often benefit from it or provide compiler flags or preprocessor directives to explicitly request it}
+}
+
 \newacronym[
 	description={The internal format of a program as it exists inside the compiler}
 ]{ir}{IR}{intermediate representation}
@@ -160,6 +165,15 @@
 \newacronym[
 	description={A compilation methodology where the program is compiled as it is needed by the program instead of ahead of time. See also \gls{online-compilation}}
 ]{jit}{JIT}{just-in-time}
+\newacronym[
+	description={A methodology for performing the same operation on multiple pieces of data at the same time. With SIMD operations on a CPU data is usually stored in \textit{vectors} and entire vectors are processed at the same time via vector instructions. Often achieved with \gls{autovec}ation or explicit use of SIMD instructions with compiler intrinsics or inline assembly}
+]{simd}{SIMD}{single instruction, multiple data}
+\newacronym[
+	description={A methodology for parallel computing where a set of identical instructions are dispatched to multiple threads to process the same data. This is how most GPUs are programmed at the lowest level (with CUDA for example). SIMT is akin to an advanced, predicated form of \acrshort{simd}}
+]{simt}{SIMT}{single instruction, multiple thread}
+\newacronym[
+	description={todo}
+]{spmd}{SPMD}{single program, multiple data}
 
 % Use
 % The \Gls{latex} typesetting markup language is specially suitable

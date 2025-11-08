@@ -1,15 +1,11 @@
 \chapter{Codesign, \textit{2000-2025}}
 
 In each age, contemporaries have attempted to place their work in the
-overarching history of computing, and some have attempted to look forward and
+greater history of computing, and some have attempted to look forward and
 guess at the field's future; in either case, they are often wrong. Computing is a
-young, volatile industry, and it is often much easier to place a time
-period in history retrospectively than it is to do so in the
-moment. Nonetheless, this is what I will attempt to do in this chapter.I am
-writing about compilers here in the 2020s, the time period in which I work on
-compilers. Out of hubris I will attempt to contextualize today's compiler work
-in the context of history. Please let my future readers be
-forgiving.
+young, volatile industry, and this task will be much easier at a future time
+looking back on the past.
+Nonetheless, this is what I will attempt to do in this chapter.
 
 \begin{quotation}
 	But there are still lots of interesting open problems left and one of the most
@@ -26,6 +22,29 @@ forgiving.
 
 \section{What Does Codesign Mean?}
 
+I primarily focus on two issues in this period, and how compiler design
+aims to address them:
+
+\begin{enumerate}
+	\item More so than in previous periods, software and
+	      hardware must be designed together to give users the best performance.
+	\item There is a diverse ecosystem of compiler tools and
+	      programming languages that do not interoperate.
+\end{enumerate}
+
+Prior to multicore CPUs, software did not have to change much to get the best performance
+from newer CPUs--programmers could rely almost entirely on hardware manufacturers to deliver
+them the best performance simply by making the chips faster.
+With the advent of multicore CPUs and \acrshort{simd} instructions in the early 2000s,
+this stopped being the case.
+For a programmer to get the best possible performance from a CPU that supports \acrshort{simd}
+instructions, they must either rewrite and possibly restructure their application to explicitly use SIMD
+instructions, or they must rely on \gls{autovec}, where the compiler infers parallelism
+by analyzing the user's program and generating SIMD instructions automatically.
+
+The latter approach was (and often still is) unreliable
+
+\parencite{lattner_golden_age_compiler_design_2021}.
 \parencite{lattner_minsky_why_ml_needs_new_programming_language_2025}.
 
 \input{chapters/codesign/lattner.tex}
