@@ -166,6 +166,24 @@ compiler projects; other developers \textit{outside of LLVM} depend on those int
 The users of LLVM's interfaces far outnumber the developers contributing to LLVM
 directly on a regular basis.
 
+\inputminted[linenos,frame=single]{cpp}{chapters/codesign/llvm-example.cpp}
+
+The above snippet of C++ constructs the function in LLVM IR below:
+
+\begin{minted}[linenos,frame=single]{llvm}
+define i32 @add_ints(i32 %0, i32 %1) {
+entry:
+  %2 = add i32 %0, %1
+  ret i32 %2
+}
+\end{minted}
+
+The modular interfaces for working with IR do not stop with the \textit{construction}
+of IR.
+The examples below demonstrate the pattern-matching interfaces:
+
+
+As a slight asside: in \parencite{appel_modern_compiler_impl_in_ml_1997},
 \cref{quote:ml-lattner-pattern-matching}
 
 \todo{all compilers are sorta written in ML bc pattern matching}.
