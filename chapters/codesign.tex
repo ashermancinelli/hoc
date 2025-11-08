@@ -37,12 +37,49 @@ from newer CPUs--programmers could rely almost entirely on hardware manufacturer
 them the best performance simply by making the chips faster.
 With the advent of multicore CPUs and \acrshort{simd} instructions in the early 2000s,
 this stopped being the case.
+
 For a programmer to get the best possible performance from a CPU that supports \acrshort{simd}
 instructions, they must either rewrite and possibly restructure their application to explicitly use SIMD
-instructions, or they must rely on \gls{autovec}, where the compiler infers parallelism
+instructions, or they must rely on \gls{autovec}ation, where the compiler infers parallelism
 by analyzing the user's program and generating SIMD instructions automatically.
 
-The latter approach was (and often still is) unreliable
+There are two issues with SIMD, both stemming from the lack of cooperation between the design
+of software and hardware.
+Explicit use of SIMD instructions is difficult for the programmer, and generally
+represents a step \textit{backwards} in the evolution of compilers and programming languages.
+Programming languages were developed \textit{so that} users no longer needed to write (and rewrite)
+their applications for each new machine they wanted to target.
+John Backus through users should not need to worry about index registers and floating-point
+units (or the lack thereof), but should instead program in a language with a compiler
+that took care of it for them--and here we are in the 21\textsuperscript{st} century
+asking users to \textit{go back} to writing assembly to get the best performance from their CPUs.
+
+\Gls{autovec}ation was (and sometimes still is) unreliable, though lots and lots of programs
+benefit greatly from it.
+When auto-vectorization works, it can seem almost magical--the user simply recompiles thier
+code with a better compiler, and suddenly they can take advantage of all the performance
+of the hardware without changing their code at all.
+The problems come when it fails.
+
+Compilers tend to be opaque black-boxes to users, making it difficult for users to
+understand why their code was not vectorized, or even whether or not it was vectorized.
+Compilers do often have debugging tools or ways for users to inspect the compiler's
+analysis of their program, but even for compiler engineers, this investigation
+can be difficult and time-consuming.
+
+Users have to grapple with not only the \textit{feasability analyses} in the compiler
+(which the compiler uses to determine \textit{if} the program has implicit parallelism
+that can be exploited with \acrshort{simd} instructions), but also \textit{profitability analyses},
+which the compiler uses to determine if the SIMD version of the user's program is likely
+to run any faster than the non-SIMD version.
+If a user wants to debug the failure modes of auto-vectorization, they have to
+understand the intricacies of the compiler's analyses, know how to get those analysis
+results from the compiler, and how to change their code to better take advantage
+of \gls{autovec}ation.
+This is a leaky abstraction, because the users suddenly need to understand the compiler
+at a deep level, instead of relying on the compiler to do its job.
+\todo{compilers are not debuggable, macros, special flags, leaky abstractions. sometimes
+	its good for certain users though.}
 
 \parencite{lattner_golden_age_compiler_design_2021}.
 \parencite{lattner_minsky_why_ml_needs_new_programming_language_2025}.
