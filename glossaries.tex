@@ -45,11 +45,6 @@
 	description={The Fortran programming language, standing for \textit{FORmula TRANslator}. Most renditions of the name of the programming language have only the first letter capitalized (\textit{Fortran}), however early versions were rendered as \textit{FORTRAN}. We attempt to use the proper name for each time period. \textit{Fortran} came to be used after the 1990 edition of the standard, while the 1977 standard and all prior versions were rendered as \textit{FORTRAN}}
 }
 
-\newglossaryentry{cfg}{
-	name={control-flow graph},
-	description={In compiler theory, the control-flow graph is a directed graph representing the possible paths of control flow through a program. Nodes of the graph are usually \gls{basicblock}s}
-}
-
 \newglossaryentry{inducvar}{
 	name={induction variable},
 	description={A variable changes by some constant in each iteration of a loop. In \texttt{for (int i=0; i < n; i++)}, the variable \texttt{i} is an induction variable}
@@ -70,11 +65,6 @@
 	description={A component of a program being compiled such that the compiler has access to all the information contained in the component during compilation. For C, C++ and Fortran code, a translation unit typically corresponds to a single source file which is compiled to an object file before being linked into a program or library. Some compilers always treat the entire program as a single translation unit, like the original FORTRAN compiler or the Zig compiler}
 }
 
-\newglossaryentry{licm}{
-	name={loop-invariant code motion},
-	description={Loop-invariant code motion is an optimization that moves code outside of a loop if it does not depend in any way on the loop's \gls{inducvar}s}
-}
-
 \newglossaryentry{tripcount}{
 	name={trip count},
 	description={The number of times a loop will execute}
@@ -90,11 +80,6 @@
 	description={A programming paradigm where a program is divided into multiple modules that can be compiled independently. For example, C source files can be compiled independently, and then linked together to form an executable.}
 }
 
-\newglossaryentry{pgo}{
-	name={profile-guided optimization},
-	description={Compiler optimizations that take advantage of statistics from the execution of a program to improve the compiler's heuristics. A user might compile and run a very program with special compiler flags such that loop hotness and \gls{tripcount}s are recorded, and then re-compile their program such that the compiler can use those statistics to drive its optimization decisions}
-}
-
 \newglossaryentry{basicblock}{
 	name={basic block},
 	description={In compiler theory, a basic block is typically a sequence of instructions that are executed in order and containing a single entry point and exit point}
@@ -102,7 +87,7 @@
 
 \newglossaryentry{backedge}{
 	name={back-edge},
-	description={A back-edge is an edge in the \gls{cfg} that returns execution from the end of a loop body back to the beginning of the loop, or the loop's \gls{header-cfg}}
+	description={A back-edge is an edge in the \acrshort{cfg} that returns execution from the end of a loop body back to the beginning of the loop, or the loop's \gls{header-cfg}}
 }
 
 \newglossaryentry{header-cfg}{
@@ -174,11 +159,21 @@
 \newacronym[
 	description={todo}
 ]{spmd}{SPMD}{single program, multiple data}
+\newacronym[
+	description={A format for \acrshort{ir}s where there are infinite registers, and each can be assigned to only once}
+]{ssa}{SSA}{static single assignment}
+\newacronym[
+	description={todo}
+]{risc}{RISC}{reduced instruction set computer}
+\newacronym[
+	description={In compiler theory, the control-flow graph is a directed graph representing the possible paths of control flow through a program. Nodes of the graph are usually \gls{basicblock}s}
+]{cfg}{CFG}{control-flow graph}
 
-% Use
-% The \Gls{latex} typesetting markup language is specially suitable
-% for documents that include \gls{maths}. \Glspl{formula} are
-% rendered properly an easily once one gets used to the commands.
-% Given a set of numbers, there are elementary methods to compute
-% its \acrlong{gcd}, which is abbreviated \acrshort{gcd}. This
-% process is similar to that used for the \acrfull{lcm}.
+\newglossaryentry{pgo}{
+	name={profile-guided optimization},
+	description={Compiler optimizations that take advantage of statistics from the execution of a program to improve the compiler's heuristics. A user might compile and run a very program with special compiler flags such that loop hotness and \gls{tripcount}s are recorded, and then re-compile their program such that the compiler can use those statistics to drive its optimization decisions}
+}
+\newglossaryentry{licm}{
+	name={loop-invariant code motion},
+	description={Loop-invariant code motion is an optimization that moves code outside of a loop if it does not depend in any way on the loop's \gls{inducvar}s}
+}

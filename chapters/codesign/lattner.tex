@@ -63,12 +63,112 @@ The first (and maybe only) interaction most non-compiler-engineers have with LLV
 is through the frontends, like Clang for C, C++, Objective-C, or Swift.
 This betrays the complexity and elegance with which the pieces of LLVM fit together.
 These frontends are typically wrappers around the LLVM command-line parsing library,
-a library to \textit{do} the lexing, parsing, semantic analysis and whatever else the frontend
+a library to perform the lexing, parsing, semantic analysis and whatever else the frontend
 for that specific language is expected to do (like module dependency analysis in Swift, for example),
 and then various other LLVM subprojects.
 
 Most of the time, these other subprojects include the pieces from the LLVM subproject,
 which does optimization and code generation.
+
+\subsubsection{The IR}
+
+Lattner et al refer to LLVM's \acrshort{ir} as \textit{C with vectors} in \parencite{lattner_amini_mlir_og_paper_2021}.
+Type annotations are needed in more places than with C and many constructs are lower-level than C
+(like control flow), but the approximations is accurate.
+The IR was designed to preserve high-level information from diverse programming languages,
+but it is apparent that it is designed especially for C and C++.
+
+There are no physical registers in LLVM IR. It is an \acrfull{ssa} ir,
+meaning there are infinite "registers" and each can be assigned to only once.
+Typically, \acrshort{ssa} IRs use a \textit{phi} or \textphi instruction to merge
+values from different paths, like the value \texttt{x} in the C expression \texttt{if (cond) x = 1; else x = 2;}.
+The \acrfull{cfg} is also explicit; functions are made up of \gls{basicblock}s,
+basic blocks are made up of instructions and terminated by branches or terminators,
+and functions end in exactly one terminator (like a \texttt{return}):
+
+\begin{minted}[linenos,frame=single]{llvm}
+; Perhaps not the most efficient way to add two numbers.
+; unsigned add2(unsigned a, unsigned b) {
+;   if (a == 0) return b;
+;   return add2(a-1, b+1);
+; }
+
+define i32 @add2(i32 %a, i32 %b) {
+entry:
+  %tmp1 = icmp eq i32 %a, 0
+  br i1 %tmp1, label %done, label %recurse
+
+recurse:
+  %tmp2 = sub i32 %a, 1
+  %tmp3 = add i32 %b, 1
+  %tmp4 = call i32 @add2(i32 %tmp2, i32 %tmp3)
+  ret i32 %tmp4
+
+done:
+  ret i32 %b
+}
+\end{minted}
+
+There are few instructions and some of them are overloaded, making the IR
+look very similar to \acrshort{risc} assembly languages.
+The IR as it was when Lattner published his PhD thesis had only 31 opcodes
+\parencite{lattner_phd_thesis_pointer_intensive_programs_2005}.
+
+His thesis used this example for a simple addressing expression in LLVM IR:
+
+% https://godbolt.org/z/aaea4vcaf
+%
+% \begin{lstlisting}[frame=single]
+\begin{minted}[linenos,frame=single]{llvm}
+; X[i].a = 1;
+%p = getelementptr %xty* %X, int %i, ubyte 3;
+store int 1 , int* %p;
+\end{minted}
+
+Structs are represented in an unsurprising way:
+% \begin{lstlisting}[language=llvm,frame=single]
+\begin{minted}[linenos,frame=single]{llvm}
+; struct RT {char A; int B[10][20]; char C;};
+; struct ST {int X; double Y; struct RT Z;};
+; int *foo(struct ST *s) {
+;     return &s[1].Z.B[5][13];
+; }
+%struct.ST = type { i32, double, %struct.RT }
+%struct.RT = type { i8, [10 x [20 x i32]], i8 }
+\end{minted}
+
+LLVM IR was initially more strongly typed than it is today:
+
+\begin{quotation}
+	One of the fundamental design features of LLVM is the inclusion of a language-independent type
+	system. Every SSA register and explicit memory object has an associated type, and all operations
+	obey strict type rules.
+	\parencite{lattner_phd_thesis_pointer_intensive_programs_2005}
+\end{quotation}
+
+This strictness has been eased over time.
+The \texttt{getelementptr} instruction was used to compute address offsets on
+base pointers, and explicit types were required. Pointer types were specified with
+\texttt{i8*}, just as one would write in C. Now, with the shift to
+\textit{opaque pointers} (or \textit{untyped pointers}), there is a simple \texttt{ptr} type
+that does not specify the pointee type, and \texttt{ptradd} is used instead of \texttt{getelementptr}
+with no required type annotation.
+
+\subsubsection{The Interface}
+
+As already discussed, a huge part of LLVM's value proposition is its ability
+to be consumed by other applications by virtue of its modular design.
+Another project can link against LLVM's libraries and use its interfaces
+to procedurally build IR, or they can just write LLVM IR to a file and
+pass it to the LLVM tools.
+This means LLVM's interfaces for constructing IR are more important than in other
+compiler projects; other developers \textit{outside of LLVM} depend on those interfaces.
+The users of LLVM's interfaces far outnumber the developers contributing to LLVM
+directly on a regular basis.
+
+\cref{quote:ml-lattner-pattern-matching}
+
+\todo{all compilers are sorta written in ML bc pattern matching}.
 
 \subsection{Chris and LLVM at Apple}
 \label{sec:llvm-at-apple}
@@ -79,7 +179,9 @@ which does optimization and code generation.
 \subsubsection{Swift}
 
 \parencite{lattner_minsky_why_ml_needs_new_programming_language_2025}:
+
 \begin{quotation}
+	\label{quote:ml-lattner-pattern-matching}
 	\textbf{Chris}
 	And so Clang has some really cool stuff that allowed it to scale and
 	things like that, but I was also burned out. We had just shipped it. It was
