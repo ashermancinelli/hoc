@@ -85,10 +85,45 @@ actually predates the wider GNU project:
 
 GCC originally stood for the GNU C Compiler, but as the GNU project grew,
 new frontends were added for other languages, thus GCC now stands for the GNU Compiler Collection.
-Stallman recals in \parencite{stallman_the_gnu_project} that he thereafter obtained
-the code for a cross-platform compiler from Lawrence Livermore National Laboratory
+There were two primary software projects that Stallman based the original GCC on:
+the Pastel compiler, and the Portable Optimizer.
+
+\subsubsection{The Pastel Compiler}
+
+Stallman recalls in \parencite{stallman_the_gnu_project} that he thereafter obtained
+the code for a cross-platform compiler from Lawrence Livermore National Laboratory (LLNL)
 called \textit{Pastel}, because it compiled (and was written in) an "off-color Pascal,"
 as the authors described it to Stallman \parencite{stallman_kth_transcript_1986}.
+
+Pastel was the compiler and programming language of choice for the Amber
+operating system (a competitor to Multics)
+being developed at LLNL for the S-1 computer (a competitor to the Cray-1).
+This OS was originally written in PL/1, but the language was found to be
+inadequate; the Amber developers originally extended PL/1 with macros
+to improve the type definition system, but after struggling for about 6 months
+with the limitations
+of PL/1's type system and module system, and the high financial cost
+of the G PL/1 compiler, LLNL decided to use another language
+\parencite{frankston_amber_os_bach_thesis_pastel_compiler_mit_1984}.
+
+Jeff Broughton, the leader of the Amber project, wrote two compilers
+for Pascal, extending the language as he saw fit. The first of these
+compilers was completed in a few months, and targetted PL/1 instead of
+S-1 machine code so the compiler could be used while the native backend
+was still being developed.
+The existing PL/1 codebase was ported to Pastel over the course of a few months.
+It was around this time that Stallman visited LLNL and learned of the Pastel compiler.
+A historical note from 1998 in \citeauthor{frankston_amber_os_bach_thesis_pastel_compiler_mit_1984}'s
+Bachelor's thesis makes note of this interaction
+\parencite{frankston_amber_os_bach_thesis_pastel_compiler_mit_1984}:
+
+\begin{quotation}
+	[A]t one point in the project Richard Stallman visited, and
+	had the Pastel compiler explained to him.
+	He left with a copy of the source, and used it to produce the Gnu C compiler.
+	Most of the techniques that gave the Gnu C compiler its reputation
+	for good code generation came from the Amber Pastel compiler.
+\end{quotation}
 
 Pastel was an interesting language and compiler in its own right.
 The compiler supported parameterized types and complicated features
@@ -114,14 +149,16 @@ When he attempted to perform liveness analysis of temporary values
 he needed a quadratic matrix of bits, which took up to several hundred kilobytes
 for large functions.
 
+\subsubsection{The Portable Optimizer}
+
 Stallman also took inspiration from the University of Arizona
 Portable Optimizer
-\footnote{This optimizer was also called PO,
-	which stands for \textit{peephole optimizer} and not \textit{portable optimizer}},
 especially in store-to-load \gls{forward}ing and \gls{strength-reduction}.
+This optimizer was also called PO, which stands for \textit{peephole optimizer}
+and not \textit{portable optimizer}.
 In this USENET discussion, \citeauthor{fraser_register_transfer_language_gcc_usenet_1990}
 responds to a question about why GCC uses \acrfull{rtl} for an intermediate representation
-instead of simple Lisp tuples:
+instead of simple Lisp tuples, connecting GCC to its history with PO:
 
 \begin{quotation}
 	GCC is based in part on PO, a retargetable peephole optimizer that Jack
@@ -140,6 +177,10 @@ instead of simple Lisp tuples:
 \end{quotation}
 
 \acrshort{rtl} is discussed at length in \parencite{davidson_regalloc_peephole_ops_rtl_1984}.
+GCC continues to use \acrshort{rtl} in its backend, as well as machine-specific
+peephole optimizations initially developed by Jack Davidson and Chris Fraser.
+
+\todo{review content in \parencite{smotherman_s1_supercomputer_1975_1988}.}
 
 \subsection{GDB}
 
@@ -150,11 +191,26 @@ Based on DBX debugger.
 Linux was started by Linus Torvalds after Stallman began work on GNU,
 so as far as Stallman knew, he still needed to come up with a kernel
 to provide a complete, free operating system capable of competing with Unix.
-He considered using Trix, which was a research project from MIT
-\parencite{stallman_kth_transcript_1986}.
+The GNU community considered two existing projects for the GNU operating system kernel
+before arriving at Linux:
+in \citeyear{stallman_kth_transcript_1986}, Stallman planned on using Trix,
+which was a research project from MIT; by 1990, he planned to build a Unix-compatible
+OS layer called GNU Hurd
+\footnote{Initially called \textit{Alix}
+	after Stallman's then-girlfriend, a system administrator at MIT.}
+on top of the Mach microkernel,
+designed at Carnegie Mellon University (and later at the University of Utah)
+\parencite{stallman_the_gnu_project}.
 
-\parencite{smotherman_s1_supercomputer_1975_1988}.
+Linux Torvalds fortunately started developing Linux in 1991,
+and released it as free software in 1992, permitting the combination
+of GNU and Linux.
+Linux, compiled with GCC and paired with the other GNU utilities
+formed the Unix-compatible free operating system
+(and the community around it) that Stallman had sought after.
 
+
+\subsection{TODO: how gnu killed lots of small teams}
 % ===================
 
 There were loads of small companies that made money leasing out their compilers,
