@@ -25,7 +25,7 @@ q: quick
 
 clean:
     latexmk -C
-    rm *.bbl *.upa *.upb *-SAVE-ERROR || true
+    rm *.bbl *.upa *.upb *-SAVE-ERROR *.aux *.bcf *.blg *.run.xml *.acn *.acr *.alg *.glg *.glo *.gls *.ist || true
 
 cleanfirst: clean full
 

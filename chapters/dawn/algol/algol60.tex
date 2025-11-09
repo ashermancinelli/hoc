@@ -122,7 +122,7 @@ may find it more similar to macro expansion
 (though it is not, in fact, simply textual replacement).
 The following example illustrates the difference:
 
-\lstinputlisting[language=python,frame=single]{chapters/dawn/callbyname1.py}
+\inputminted[frame=single,linenos]{python}{chapters/dawn/callbyname1.py}
 
 Most implementations of call-by-name use zero-argument thunks to delay
 the evaluation of arguments until they are used in the body.
@@ -134,7 +134,7 @@ with an invocation of this function such that it is evaluated anew
 each time it appears.
 The prior Python example may be rewritten to emulate call-by-name as follows:
 
-\lstinputlisting[language=python,frame=single]{chapters/dawn/callbyname2.py}
+\inputminted[frame=single,linenos]{python}{chapters/dawn/callbyname2.py}
 
 \Gls{call-by-value} semantics demand that the argument to \texttt{double} be evaluated
 before entering the function, so \texttt{get\_5} is called once and
@@ -168,7 +168,7 @@ using call-by-name semantics\cite{Knuth1964ManOrBoy}.
 
 The program is as follows:
 
-\lstinputlisting[language=algol,frame=single]{chapters/dawn/knuth-man-boy-test.a68}
+\inputminted[frame=single,linenos]{pascal}{chapters/dawn/knuth-man-boy-test.a68}
 
 There are some useful applications of call-by-name semantics as well;
 it is not \textit{solely} an avenue for confusion.
@@ -180,7 +180,8 @@ There is not an especially elegant way to do this in a call-by-value language,
 but as Dijkstra points out\cite{dijkstra_defense_of_algol_60_1961},
 it can be implemented with this ALGOL program:
 
-\lstinputlisting[language=algol,frame=single]{chapters/dawn/jensens-device.a68}
+% \lstinputlisting[language=algol,frame=single]{chapters/dawn/jensens-device.a68}
+\inputminted[frame=single,linenos]{pascal}{chapters/dawn/jensens-device.a68}
 
 To simply sum the values of the array \texttt{V} from 1 to 100, one would call:
 \texttt{Sum(i, 1, 100, V[i])}.
@@ -194,7 +195,8 @@ that arise because of this feature.
 For example, a naive implementation of a swap function may easily
 cause unintended side effects:
 
-\lstinputlisting[language=algol,frame=single]{chapters/dawn/swap-error.a68}
+% \lstinputlisting[language=algol,frame=single]{chapters/dawn/swap-error.a68}
+\inputminted[frame=single,linenos]{pascal}{chapters/dawn/swap-error.a68}
 
 While calling \texttt{Swap(i, j)} may work correctly, calling
 \texttt{Swap(i+1, j+1)} or \texttt{Swap(A[i], A[j])} would not.
@@ -205,7 +207,7 @@ variables available, but provided no means of manipulating them.  ALGOL
 permitted \textit{own variables}, which are akin to static variables in C or
 SAVE variables in \FTN{}; they retain their values between entrances to the
 block.  Dijkstra also points out nowhere is the evaluation order of
-subexpressions specified\cite{dijkstra_defense_of_algol_60_1961}.
+subexpressions specified \cite{dijkstra_defense_of_algol_60_1961}.
 
 While the declared intent of defining a language detached from any particular
 manufacturer or machine was laudable (and profitable in the case of portable
