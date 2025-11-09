@@ -2,12 +2,15 @@
 \label{sec:llvm-in-detail}
 
 LLVM was introduced in \cref{sec:lattner-llvm} as part of Chris Lattner's
-history, but LLVM is a large and diverse project at this point in history,
-and it deserves discussion outside of Chris's personal and professional history.
+history, but LLVM is a large and diverse project
+and it deserves discussion outside of the context of Chris Lattner.
 
 \input{chapters/codesign/llvm-timeline-table.tex}
 
-\subsection{Architecture of the IR, Optimizer, and Code Generator}
+\subsection{Architecture of the Project}
+
+LLVM is an \textit{umbrella project} containing many \textit{subprojects}
+that can be used independently.
 
 The first (and maybe only) interaction most non-compiler-engineers have with LLVM
 is through the frontends, like Clang for C, C++, Objective-C, or Swift.
@@ -17,10 +20,12 @@ a library to perform the lexing, parsing, semantic analysis and whatever else th
 for that specific language is expected to do (like module dependency analysis in Swift, for example),
 and then various other LLVM subprojects.
 
-Most of the time, these other subprojects include the pieces from the LLVM subproject,
-which does optimization and code generation.
+Most of the time, these other subprojects include pieces from the LLVM subproject,
+which does optimization and code generation (among other things).
 
-\subsubsection{The IR}
+\todo{refer to \parencite[11.4.2. LLVM is a Collection of Libraries]{brown_wilson_lattner_aosa_vol1_2011}}
+
+\subsection{The IR}
 
 Lattner et al refer to LLVM's \acrshort{ir} as \textit{C with vectors} in \parencite{lattner_amini_mlir_og_paper_2021}.
 Type annotations are needed in more places than with C and many constructs are lower-level than C
@@ -103,7 +108,7 @@ base pointers, and explicit types were required. Pointer types were specified wi
 that does not specify the pointee type, and \texttt{ptradd} is used instead of \texttt{getelementptr}
 with no required type annotation.
 
-\subsubsection{The Interface}
+\subsection{The Interface}
 
 As already discussed, a huge part of LLVM's value proposition is its ability
 to be consumed by other applications by virtue of its modular design.
@@ -220,3 +225,9 @@ will be in the year 2100, but I know it will look like ML.
 Perhaps the part of LLVM that is least-known among \textit{users} of LLVM is
 its \textit{Tablegen} system. Tablegen is a program for declarative metaprogramming
 inside LLVM.
+
+\parencite[11.6.2. Unit Testing the Optimizer]{brown_wilson_lattner_aosa_vol1_2011}.
+
+\subsection{Testing}
+
+\todo{lit, filecheck, generate-test-case.py, other tools.}
