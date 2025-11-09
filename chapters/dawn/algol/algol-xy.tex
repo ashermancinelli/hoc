@@ -12,6 +12,7 @@ significant changes and additions to the language.
 ALGOL X would be intended to solve the issues of ALGOL 60 in the short-term,
 compared to the "radically reconstructed future ALGOL Y"
 \cite{cleaning_up_algol60_duncan_wijngaarden_1964}.
+
 To summarize the following section: three draft reports were proposed,
 Adriaan Van Wijngaarden was asked to revise his draft report until the other
 two authors were satisfied,
@@ -189,23 +190,23 @@ which asks whether the input program contains an assignation, and to determine t
 we must test if we have a destination, followed by some language construct that
 becomes a symbol, followed by a source.
 
-\begin{lstlisting}[language=prolog,frame=single]
+\begin{minted}{prolog}
 assignation(ref(MODE)) :-
       destination(ref(MODE)), becomes_symbol, source(MODE).
-\end{lstlisting}
+\end{minted}
 
 The corresponding rule in the [MR93] draft report is as follows
 \cite{draft_report_algol_1968}:
-\begin{lstlisting}[frame=single]
+\begin{minted}{ebnf}
 MODE assignation :
     reference to MODE destination, becomes symbol, MODE source.
-\end{lstlisting}
+\end{minted}
 
 Substituting \textbfit{int} for our \textbfit{MODE}, we have:
-\begin{lstlisting}[frame=single]
+\begin{minted}{ebnf}
 int assignation :
     reference to int destination, becomes symbol, int source.
-\end{lstlisting}
+\end{minted}
 
 If you squint your eyes, maybe you can see how \textit{i := 5} fits the mold for this
 grammar, where the \textbfit{MODE} is \textbfit{int}, the \textbfit{destination} is
@@ -272,12 +273,12 @@ Structure types are equivalent if their members are equivalent, as opposed to na
 which would have implied two structures with the same members but different names
 are not equivalent.
 The following two types are equivalent by structural comparison:
-\begin{lstlisting}[language=algol,frame=single]
+\begin{minted}{pascal}
 mode a = struct (int val,
                  ref a next);
 mode b = struct (int val,
                  ref struct (int val, ref b next) next);
-\end{lstlisting}
+\end{minted}
 
 
 \subsection{Concepts of ALGOL 68}
@@ -290,12 +291,12 @@ Firstly, ALGOL 68 is an expression-oriented language;
 there is fundamentally no distinction between statements and expressions,
 allowing for constructs like the following:
 
-\begin{lstlisting}[language=algol,frame=single]
+\begin{minted}{pascal}
 x := (real a = p*q;
       real b = p/q;
       if a>b then a else b fi)
       + (y := 2*z);
-\end{lstlisting}
+\end{minted}
 
 One of the key goals of the committee was to design language features that
 would be \textit{orthogonal}--\citeauthor{programming_language_pragmatics_2009}
@@ -314,7 +315,7 @@ put it well in \cite{programming_language_pragmatics_2009}:
 
 There were numerous extensions to arrays, including higher-dimensional arrays,
 complicated slicing mechanisms, and flexible arrays, such as the following:
-\begin{lstlisting}[language=algol,frame=single]
+\begin{minted}{pascal}
 loc[1:4, 1:5] int a45;
 a45[2  ,    ] # row 2 #
 a45[   , 3  ] # column 3 #
@@ -324,7 +325,7 @@ a45[2:3, 2:4] # a little square in the middle.  #
 loc flex [1:0] int array; # initially empty #
 array := (1, 2, 3);       # now it has bounds [1:3] #
 array := (4, 5, 6, 7, 8); # now it has bounds [1:5] #
-\end{lstlisting}
+\end{minted}
 
 \Gls{call-by-name} as it was known in ALGOL 60 was removed in favor of
 \gls{call-by-value} and \gls{call-by-reference}; some of the other proposals
@@ -368,9 +369,9 @@ One particularly problematic coercion rule was \textit{proceduring}.
 This allowed users to force call-by-name semantics by coercing an expression
 into a parameterless procedure, like so:
 
-\begin{lstlisting}[language=algol,frame=single]
+\begin{minted}{pascal}
       PROC x plus 1 = INT : x + 1;
-\end{lstlisting}
+\end{minted}
 
 The right hand side of this expression is a \textit{cast}
 (a term originally coined for the specification of ALGOL)
@@ -382,7 +383,7 @@ obviate the need for call-by-name semantics, but that call-by-substitution is wh
 ALGOL 60's call-by-name effectively was, and this was still possible with ALGOL 68
 via this \textit{proceduring} coercion:
 
-\begin{lstlisting}[language=algol,frame=single]
+\begin{minted}{pascal}
 proc series = (int k, ref int i, proc real term) real expr
     begin
     real sum(0);
@@ -397,7 +398,7 @@ x := series (100, i, real expr(1/i));
 
 # Or, via proceduring: #
 x := series (100, i, 1/i);
-\end{lstlisting}
+\end{minted}
 
 This facility was abandoned in the ALGOL 68-R implementation which
 led to its removal in the revised report of 1973,
@@ -417,22 +418,7 @@ relatively advanced features even for today.
 The revised report contains this example
 \cite[Section 11.2, Innerproduct 1]{revised_report_on_the_algorithmic_language_algol_68_1976}:
 
-\begin{lstlisting}[language=algol,frame=single]
-proc innerproduct 1 = (int n, proc (int) real x, y) real:
-# the innerproduct of two vectors, each with 'n'
-components, x (i), y (i), i = 1, ... , n, where 'x' and 'y'
-are arbitrary mappings from integer to real number #
-begin long real s := long 0;
-    for i to n do
-        s +:= leng x (i) \times leng y (i)
-    od;
-    shorten s
-end
-
-# Real-calls using innerproduct 1: #
-innerproduct 1 (m, (int j) real: x1[j], (int j) real: y1[i])
-innerproduct 1 (n, nsin, ncos)
-\end{lstlisting}
+\inputminted{modula2}{chapters/dawn/inner-product2.a68}
 
 ALGOL 60 was the first programming language to permit
 nested functions, a feature ALGOL 68 retained.
