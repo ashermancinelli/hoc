@@ -39,7 +39,7 @@ this stopped being the case.
 
 For a programmer to get the best possible performance from a CPU that supports \acrshort{simd}
 instructions, they must either rewrite and possibly restructure their application to explicitly use SIMD
-instructions, or they must rely on \gls{autovec}ation, where the compiler infers parallelism
+instructions, or they must rely on \gls{autovec}, where the compiler infers parallelism
 by analyzing the user's program and generating SIMD instructions automatically.
 
 There are two issues with SIMD, both stemming from the lack of cooperation between the design
@@ -53,7 +53,7 @@ units (or the lack thereof), but should instead program in a language with a com
 that took care of it for them--and here we are in the 21\textsuperscript{st} century
 asking users to \textit{go back} to writing assembly to get the best performance from their CPUs.
 
-\Gls{autovec}ation was (and sometimes still is) unreliable, though lots and lots of programs
+\Gls{autovec} was (and sometimes still is) unreliable, though lots and lots of programs
 benefit greatly from it.
 When auto-vectorization works, it can seem almost magical--the user simply recompiles thier
 code with a better compiler, and suddenly they can take advantage of all the performance
@@ -74,7 +74,7 @@ to run any faster than the non-SIMD version.
 If a user wants to debug the failure modes of auto-vectorization, they have to
 understand the intricacies of the compiler's analyses, know how to get those analysis
 results from the compiler, and how to change their code to better take advantage
-of \gls{autovec}ation.
+of \gls{autovec}.
 This is a leaky abstraction, because the users suddenly need to understand the compiler
 at a deep level, instead of relying on the compiler to do its job.
 \todo{compilers are not debuggable, macros, special flags, leaky abstractions. sometimes

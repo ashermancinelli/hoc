@@ -135,8 +135,18 @@
 	description={}
 }
 
+\newglossaryentry{forward}{
+	name={forward},
+	description={A compiler optimization where a load of a memory reference is replaced by the value last stored to it. Sometimes called forward substitution}
+}
+
+\newglossaryentry{strength-reduction}{
+	name={strength reduction},
+	description={A compiler optimization \todo{}}
+}
+
 \newglossaryentry{autovec}{
-	name={automatic vectoriz},
+	name={automatic vectorization},
 	description={A process for leveraging \acrshort{simd} instructions where the compiler \textit{infers} the opportunities to exploit parallelism in the user's program. The user does not \textit{necessarily} have to change their program, but they can often benefit from it or provide compiler flags or preprocessor directives to explicitly request it}
 }
 
@@ -155,36 +165,50 @@
 \newacronym[
 	description={The internal format of a program as it exists inside the compiler}
 ]{ir}{IR}{intermediate representation}
+
 \newacronym[description={}]{cl}{CL}{combinatory logic}
+
 \newacronym[
 	description={A tree representation of the program after being parsed}
 ]{ast}{AST}{abstract syntax tree}
+
 \newacronym[
 	description={A compilation methodology where the program is compiled as it is needed by the program instead of ahead of time. See also \gls{online-compilation}}
 ]{jit}{JIT}{just-in-time}
+
 \newacronym[
-	description={A methodology for performing the same operation on multiple pieces of data at the same time. With SIMD operations on a CPU data is usually stored in \textit{vectors} and entire vectors are processed at the same time via vector instructions. Often achieved with \gls{autovec}ation or explicit use of SIMD instructions with compiler intrinsics or inline assembly}
+	description={A methodology for performing the same operation on multiple pieces of data at the same time. With SIMD operations on a CPU data is usually stored in \textit{vectors} and entire vectors are processed at the same time via vector instructions. Often achieved with \gls{autovec} or explicit use of SIMD instructions with compiler intrinsics or inline assembly}
 ]{simd}{SIMD}{single instruction, multiple data}
+
 \newacronym[
 	description={A methodology for parallel computing where a set of identical instructions are dispatched to multiple threads to process the same data. This is how most GPUs are programmed at the lowest level (with CUDA for example). SIMT is akin to an advanced, predicated form of \acrshort{simd}}
 ]{simt}{SIMT}{single instruction, multiple thread}
+
 \newacronym[
 	description={todo}
 ]{spmd}{SPMD}{single program, multiple data}
+
 \newacronym[
 	description={A format for \acrshort{ir}s where there are infinite registers, and each can be assigned to only once}
 ]{ssa}{SSA}{static single assignment}
+
 \newacronym[
 	description={todo}
 ]{risc}{RISC}{reduced instruction set computer}
+
 \newacronym[
 	description={In compiler theory, the control-flow graph is a directed graph representing the possible paths of control flow through a program. Nodes of the graph are usually \gls{basicblock}s}
 ]{cfg}{CFG}{control-flow graph}
+
+\newacronym[
+	description={A low-level \acrlong{ir} used to symbolically represent machine instructions in a target-independent format}
+]{rtl}{RTL}{register transfer language}
 
 \newglossaryentry{pgo}{
 	name={profile-guided optimization},
 	description={Compiler optimizations that take advantage of statistics from the execution of a program to improve the compiler's heuristics. A user might compile and run a very program with special compiler flags such that loop hotness and \gls{tripcount}s are recorded, and then re-compile their program such that the compiler can use those statistics to drive its optimization decisions}
 }
+
 \newglossaryentry{licm}{
 	name={loop-invariant code motion},
 	description={Loop-invariant code motion is an optimization that moves code outside of a loop if it does not depend in any way on the loop's \gls{inducvar}s}

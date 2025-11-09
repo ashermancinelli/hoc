@@ -53,7 +53,7 @@ Stallman \footnote{Again, this is Stallman's word against Weinreb's.
 	There are many conflicting accounts.} kept LMI in business out of spite
 for Symbolics, because he percieved them to have taken away his community.
 
-\subsection{Birth of GNU}
+\subsection{Birth of GNU and GCC}
 
 Stallman tired of attempting to punish Symbolics and began considering
 what he should do next.
@@ -67,8 +67,8 @@ at MIT, which he took over from Guy Steele
 \parencite[footnote 1]{stallman_my_lisp_experiences_2002}),
 the GNU C compiler followed quickly.
 
-\citeauthor{von_hagen_definitive_guide_gcc_2011} notes that the idea for GCC predates
-the larger GNU project:
+\citeauthor{von_hagen_definitive_guide_gcc_2011} notes that the idea for GCC
+actually predates the wider GNU project:
 
 \begin{quotation}
 	In late 1983, just before he started
@@ -85,6 +85,73 @@ the larger GNU project:
 
 GCC originally stood for the GNU C Compiler, but as the GNU project grew,
 new frontends were added for other languages, thus GCC now stands for the GNU Compiler Collection.
+Stallman recals in \parencite{stallman_the_gnu_project} that he thereafter obtained
+the code for a cross-platform compiler from Lawrence Livermore National Laboratory
+called \textit{Pastel}, because it compiled (and was written in) an "off-color Pascal,"
+as the authors described it to Stallman \parencite{stallman_kth_transcript_1986}.
+
+Pastel was an interesting language and compiler in its own right.
+The compiler supported parameterized types and complicated features
+handled by template metaprogramming in C++.
+Stallman points to the example of strings; in Pastel, a programmer
+could specify a \texttt{string} if they wanted a dynamically sized string,
+or \texttt{string(n)} if they knew the length ahead of time.
+The compiler could then store the string in static memory and reuse it
+with each function call, saving an allocation and deallocation.
+
+He began to add a C frontend and a Motorola 68000 backend to this compiler,
+but he ran into some issues stemming from the extended Pascal it was
+written in.
+This version of Pascal did not require users to forward-declare functions,
+meaning the compiler had to process the entire file to find the declarations
+for every function all at once, consuming an amount of memory proportional
+to the size of the file being compiled.
+Stallman was working on what he called "a horrible version of Unix"
+\parencite{stallman_kth_transcript_1986} with
+needlessly limited stack space, which further complicated the use of this compiler.
+When he attempted to perform liveness analysis of temporary values
+(where the compiler determines which values are used by the program in a given region)
+he needed a quadratic matrix of bits, which took up to several hundred kilobytes
+for large functions.
+
+Stallman also took inspiration from the University of Arizona
+Portable Optimizer
+\footnote{This optimizer was also called PO,
+	which stands for \textit{peephole optimizer} and not \textit{portable optimizer}},
+especially in store-to-load \gls{forward}ing and \gls{strength-reduction}.
+In this USENET discussion, \citeauthor{fraser_register_transfer_language_gcc_usenet_1990}
+responds to a question about why GCC uses \acrfull{rtl} for an intermediate representation
+instead of simple Lisp tuples:
+
+\begin{quotation}
+	GCC is based in part on PO, a retargetable peephole optimizer that Jack
+	Davidson and I developed at the University of Arizona starting in 1978\dots
+
+	Most peephole optimizers operate on machine instructions, and they need to
+	know what the instructions do. A machine-specific peephole optimizer can
+	use a machine-specific representation for instructions, and the programmer
+	can burn into the optimizer machine-specific information about the effects
+	of instructions. A retargetable peephole optimizer, however, needs a
+	machine-independent way to represent the effects of machine-specific
+	instructions. (If that sounds like a contradiction, consider C: one can
+	write machine-specific C programs, but the language itself is machine
+	independent.) Register transfers are such a representation.
+	\parencite{fraser_register_transfer_language_gcc_usenet_1990}
+\end{quotation}
+
+\acrshort{rtl} is discussed at length in \parencite{davidson_regalloc_peephole_ops_rtl_1984}.
+
+\subsection{GDB}
+
+Based on DBX debugger.
+
+\subsection{The Kernel}
+
+Linux was started by Linus Torvalds after Stallman began work on GNU,
+so as far as Stallman knew, he still needed to come up with a kernel
+to provide a complete, free operating system capable of competing with Unix.
+He considered using Trix, which was a research project from MIT
+\parencite{stallman_kth_transcript_1986}.
 
 \parencite{smotherman_s1_supercomputer_1975_1988}.
 
