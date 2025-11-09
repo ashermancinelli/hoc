@@ -42,3 +42,4 @@
 *.swp
 *.bcf
 hoc.pdf
+_minted-hoc/

@@ -140,6 +140,13 @@
 	description={A process for leveraging \acrshort{simd} instructions where the compiler \textit{infers} the opportunities to exploit parallelism in the user's program. The user does not \textit{necessarily} have to change their program, but they can often benefit from it or provide compiler flags or preprocessor directives to explicitly request it}
 }
 
+\newglossaryentry{peephole}{
+	name={peephole optimization},
+	description={Sometimes called a \textit{peep}, this kind of transformation typically
+			traverses the entire program searching for a small pattern that can be simplified or otherwise
+			transformed in a beneficial way}
+}
+
 \newacronym[
 	description={The internal format of a program as it exists inside the compiler}
 ]{ir}{IR}{intermediate representation}
