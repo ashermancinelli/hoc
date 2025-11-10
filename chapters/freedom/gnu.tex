@@ -125,10 +125,10 @@ Bachelor's thesis makes note of this interaction
 	for good code generation came from the Amber Pastel compiler.
 \end{quotation}
 
-Pastel was an interesting language and compiler in its own right.
-The compiler supported parameterized types and complicated features
-handled by template metaprogramming in C++.
-Stallman points to the example of strings; in Pastel, a programmer
+Pastel was an interesting language and compiler in its own right;
+the compiler supported parameterized types and complicated features
+that would be handled by template metaprogramming in the equivalent C++ program.
+Stallman points to the example of strings: in Pastel, a programmer
 could specify a \texttt{string} if they wanted a dynamically sized string,
 or \texttt{string(n)} if they knew the length ahead of time.
 The compiler could then store the string in static memory and reuse it
@@ -147,15 +147,32 @@ needlessly limited stack space, which further complicated the use of this compil
 When he attempted to perform liveness analysis of temporary values
 (where the compiler determines which values are used by the program in a given region)
 he needed a quadratic matrix of bits, which took up to several hundred kilobytes
-for large functions.
+for large functions, which ran up against the onerous memory limits imposed
+by this version of Unix.
+
+In \citeyear{stallman_kth_transcript_1986}, Stallman finally decided to throw
+out this Pastel compiler and start over, using his experience with Pastel
+and the University of Arizona's optimizer to build a new C compiler.
 
 \subsubsection{The Portable Optimizer}
+\label{sec:software-gnu-portable-optimizer}
 
 Stallman also took inspiration from the University of Arizona
 Portable Optimizer
 especially in store-to-load \gls{forward}ing and \gls{strength-reduction}.
 This optimizer was also called PO, which stands for \textit{peephole optimizer}
 and not \textit{portable optimizer}.
+
+This optimizer was interesting in large part because it operated on \textit{object code},
+and was designed to be portable across different architectures.
+The machine description for each architecture supported by the compiler was
+a Lex program that recognized instructions and their properties,
+and the rest of the compiler would use that information in a relatively
+machine-independent way.
+As of \citeyear{davidson_fraser_retargetable_peephole_optimizer_po_1980},
+PO was written in only five pages of SNOBOL--a curious language discussed in
+\cref{sec:software-unix-snobol}.
+
 In this USENET discussion, \citeauthor{fraser_register_transfer_language_gcc_usenet_1990}
 responds to a question about why GCC uses \acrfull{rtl} for an intermediate representation
 instead of simple Lisp tuples, connecting GCC to its history with PO:
@@ -179,12 +196,45 @@ instead of simple Lisp tuples, connecting GCC to its history with PO:
 \acrshort{rtl} is discussed at length in \parencite{davidson_regalloc_peephole_ops_rtl_1984}.
 GCC continues to use \acrshort{rtl} in its backend, as well as machine-specific
 peephole optimizations initially developed by Jack Davidson and Chris Fraser.
+PO represented instructions symbolically; for example, \texttt{r[4]=r[4]+1}
+increments the value in register 4 by 1.
+Stallman used \gls{sexpr}s to represent the same information.
+The previous example would be \texttt{(set (reg 4) (+ (reg 4) (int 1)))} in
+Stallman's representation.
 
-\todo{review content in \parencite{smotherman_s1_supercomputer_1975_1988}.}
+This new representation also had an infinite number of pseudo-registers
+which get converted to real registers and stack slots by a legalization phase.
+The part of the compiler generating the \arcshort{ir} does not have to
+concern itself with register allocation.
+This legalization phase also performs liveness analysis to determine which
+pseudo-registers are in use in the same region, implying that they cannot
+go in the same physical register.
 
-\subsection{GDB}
+Many other issues needed to be addressed in cleanup passes too,
+especially when dealing with machine-specific details.
+For example, on the 68000, you cannot make the output of an operation a
+memory location, so to add two values stored in memory, you must first store
+one of them to a register, then perform the addition, and finally store the
+result back to memory.
 
-Based on DBX debugger.
+Many of these issues were solved or being solved by other teams in the
+same time period \todo{graph coloring algorithm, ask Sanjin}.
+
+PO also performed \acrlong{cfg} simplification and \acrlong{dce} by identifying redundant nodes
+in the \acrshort{cfg}.
+These optimizations are critical in modern compilers because many
+optimizations rely on the \acrshort{ir} being in a \gls{normal-form}
+to be maximally effective.
+
+
+\subsection{GCC Takes Form}
+
+In \citeyear{stallman_kth_transcript_1986}, Stallman's compiler still generated
+debugging information in the DBX debugger's format, but could also
+use GDB's internal format.
+There were numerous compiler tools developed in this era, beginning with
+the \textit{lint} tool (discussed in \cref{sec:software-c});
+we discuss these compiler tools in detail in \cref{sec:freedom-tools}.
 
 \subsection{The Kernel}
 
@@ -209,6 +259,16 @@ Linux, compiled with GCC and paired with the other GNU utilities
 formed the Unix-compatible free operating system
 (and the community around it) that Stallman had sought after.
 
+\subsection{The Experimental/Enhanced GNU Compiler Suite (EGCS)}
+
+\begin{quotation}
+	In April 1999, GCC’s
+	maintainers, the GNU Project, and the EGCS steering committee formally merged. At the same time,
+	GCC’s name was changed to the GNU Compiler Collection and the separately maintained (but, as
+	noted, closely synchronized) code trees were formally combined, ending a long fork and incorporating the many bug fixes and enhancements made in EGCS into GCC. This is why EGCS is often
+	mentioned, though it is officially defunct.
+	\parencite{von_hagen_definitive_guide_gcc_2011}
+\end{quotation}
 
 \subsection{TODO: how gnu killed lots of small teams}
 % ===================

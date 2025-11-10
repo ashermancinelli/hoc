@@ -132,21 +132,21 @@ he claimed it was proprietary and nobody else could use it.
 TMG was a top-down recursive-descent compiler-compiler for context-free grammars
 and procedural elements similar to Yacc, a tool to help write compiler
 front-ends.
-See this example from Doug's TMG manual\cite{tmg_manual_mcilroy_1972}
+See this example from Doug's TMG manual \parencite{tmg_manual_mcilroy_1972}
 and notice the similarities to modern parser generators and Backus-Naur Form:
 
 \begin{quotation}
 	This simple program defines the translation of fully parenthesized infix
 	expressions to Polish postfix for a stack machine.
-	\begin{lstlisting}[frame=single]
-    expr: <(>/exp1 expr operator expr <)> = { 3 1 2 };
-    exp1: ident = { < LOAD > 1 };
-    operator:
-    op0: <+>/op1 = { < ADD > };
-    op1: <->/op2 = { < SUB > };
-    op2: <*>/op3 = { < MPY > };
-    op3: </>     = { < DIV > };
-\end{lstlisting}
+	\begin{minted}{yacc}
+        expr: <(>/exp1 expr operator expr <)> = { 3 1 2 };
+        exp1: ident = { < LOAD > 1 };
+        operator:
+        op0: <+>/op1 = { < ADD > };
+        op1: <->/op2 = { < SUB > };
+        op2: <*>/op3 = { < MPY > };
+        op3: </>     = { < DIV > };
+    \end{minted}
 \end{quotation}
 
 Ken recounts\cite{kernighan_interviews_thompson_2019}
@@ -300,6 +300,7 @@ Dennis renamed the B compiler to \texttt{NB}, or \textit{New-B}, and then \texti
 shortly thereafter.
 
 \subsection{C}
+\label{sec:software-c}
 
 Dennis's new language now had types and new addressing schemes, and it evolved quickly.
 \textit{New-B} existed so briefly that no full description of its syntax or semantics was
@@ -408,6 +409,50 @@ Using pcc as a reference compiler became impractical.
 The X3J11 committee formed in 1983 to standardize C.
 Continue with \citetitle{development_of_c_language_chist_ritchie_1996}.
 \todo{includes early criticism of C.}
+
+\subsection{SNOBOL}
+\label{sec:software-unix-snobol}
+
+Before we continue with regular expressions and string-processing languages,
+we must first discuss one of the first languages developed at Bell Labs,
+and one which most other string-processing languages were inspired by.
+
+SNOBOL would soon be eclipsed by Awk, Perl, Lex, Yacc, and other languages
+filling similar roles--it gained traction in some universities,
+but was not used much outside of Bell Labs.
+
+The first publication mentioning SNOBOL was
+\parencite{farber_snobol_string_manip_lang_1964}; the authors also
+recieved help from Doug McIlroy, though he is not listed as an author
+\footnote{The authors make this remark in the conclusion:
+	"The enthusiasm and numerous suggestions
+	of M. D. McIlroy have been particularly helpful.
+	In addition, his string macro
+	package greatly facilitated the implementation."}
+.
+SNOBOL was developed to address the limitations of an earlier string-processing language
+called \textit{COMIT}, the only language with a syntax similar to that of SNOBOL.
+COMIT did not support named variables or arithmetic, which largely motivated
+the development of SNOBOL.
+\parencite{farber_snobol_string_manip_lang_1964} uses the following program
+do describe the syntax of SNOBOL:
+
+\begin{minted}{snobol}
+START     VOWEL = "A,E,I,O,U"
+V1 VOWEL *V* "," = /F(END)
+V2 TEXT   V      = /S(V2)F(V1)
+END       START
+\end{minted}
+
+This program removes all the vowels from the string defined by \textt{TEXT}.
+
+While SNOBOL never gained significant traction,
+it's important to note the language's legacy and influence on the
+far more popular string-processing compiler technologies that Bell Labs would
+produce in the following years.
+One notable application of SNOBOL outside of Bell Labs was the
+University of Arizona's PO, an object-code optimizing compiler,
+discussed in \cref{sec:software-gnu-portable-optimizer}.
 
 \subsection{Regular Expressions: Grep, Yacc, Lex}
 \label{sec:software-unix-regex}

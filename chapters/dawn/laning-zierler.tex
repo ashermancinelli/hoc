@@ -62,22 +62,22 @@ the likes of which would not be worked out until Alfred Aho's work at Bell Labs
 \ref{sec:software-unix-regex}.
 
 Their user manual gives the following example of an iterative algorithm for
-calculating the power series of $cosine x$:
+calculating the power series of $cosine(x)$:
 
-\begin{lstlisting}[frame=single]
+\begin{minted}{basic}
     x = 0,
 1   y = 10,
     z = 1,
 2   z = 1 - z x^2/y (y - 1),
     y = y - 2,
-    e = 1 - У,
+    e = 1 - y,
     CP 2,
     PRINT x, Z.
     x = x + O.l,
     a = x - 1.05,
     CP 1,
     STOP
-\end{lstlisting}
+\end{minted}
 
 While this might seem trivial today, it was a significant deviation from the
 best-known methods for computing at the time. To write a program with their algebraic
@@ -95,18 +95,20 @@ they provide a table of supported subroutines:
 	process has been begun for our computer and at present the following
 	functions are available:
 	\\
-	\begin{center}
-		\begin{tabular}{|c|c|}
-			\hline
-			\underline{Designation} & \underline{Function} \\
-			$F^1$                   & Square Root          \\
-			$F^2$                   & sine                 \\
-			$F^3$                   & cosine               \\
-			$F^4$                   & tangent              \\
-			$F^5$                   & $\sin^{-1}$          \\
-			\hline
-		\end{tabular}
-	\end{center}
+	\begin{table}[h!]
+		\centering
+		\begin{tabularx}{0.3\columnwidth}{cX}
+			\toprule
+			Designation          & Function                 \\
+			\midrule
+			F\textsuperscript{1} & Square Root              \\
+			F\textsuperscript{2} & sine                     \\
+			F\textsuperscript{3} & cosine                   \\
+			F\textsuperscript{4} & tangent                  \\
+			F\textsuperscript{5} & sine\textsuperscript{-1} \\
+			\bottomrule
+		\end{tabularx}
+	\end{table}
 
 	The sine of x may be obtained by writing simply $F^{2}(x)$ and
 	such an expression may be treated arithmetically in the same way

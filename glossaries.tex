@@ -155,6 +155,28 @@
 	description={A type of computer designed to run Lisp as the primary programming language, usually with some level of hardware support}
 }
 
+\newglossaryentry{sexpr}{
+	name={s-expression},
+	description={A data structure used to represent arbitrary lists in Lisp, such as \textit{(a b c)}.
+			Some tools and programming languages outside of Lisp use s-expressions to represent lists
+			and list-like data structures}
+}
+
+\newglossaryentry{normal-form}{
+	name={normal form},
+	description={Many optimizations rely on the program being in the simplest possible form.
+			Just as we expect fractions to be in their simplest form (it would be unusual to see
+			\frac{5}{10}\textsuperscript{ths}), optimizations often expect or require their input
+			programs to be as reduced as possible form to be maximally effective.
+			See \href{https://llvm.org/docs/LoopTerminology.html#loop-simplify-form}{LLVM's loop simplify form}
+			for an example}
+}
+
+\newglossaryentry{canonical-form}{
+	name={canonical form},
+	description={See \gls{normal-form}}
+}
+
 \newglossaryentry{peephole}{
 	name={peephole optimization},
 	description={Sometimes called a \textit{peep}, this kind of transformation typically
@@ -199,6 +221,10 @@
 \newacronym[
 	description={In compiler theory, the control-flow graph is a directed graph representing the possible paths of control flow through a program. Nodes of the graph are usually \gls{basicblock}s}
 ]{cfg}{CFG}{control-flow graph}
+
+\newacronym[
+	description={A compiler optimization that removes code that is never executed}
+]{dce}{DCE}{dead code elimination}
 
 \newacronym[
 	description={A low-level \acrlong{ir} used to symbolically represent machine instructions in a target-independent format}
