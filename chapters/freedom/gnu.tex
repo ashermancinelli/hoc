@@ -150,10 +150,6 @@ he needed a quadratic matrix of bits, which took up to several hundred kilobytes
 for large functions, which ran up against the onerous memory limits imposed
 by this version of Unix.
 
-In \citeyear{stallman_kth_transcript_1986}, Stallman finally decided to throw
-out this Pastel compiler and start over, using his experience with Pastel
-and the University of Arizona's optimizer to build a new C compiler.
-
 \subsubsection{The Portable Optimizer}
 \label{sec:software-gnu-portable-optimizer}
 
@@ -204,7 +200,7 @@ Stallman's representation.
 
 This new representation also had an infinite number of pseudo-registers
 which get converted to real registers and stack slots by a legalization phase.
-The part of the compiler generating the \arcshort{ir} does not have to
+The part of the compiler generating the \acrshort{ir} does not have to
 concern itself with register allocation.
 This legalization phase also performs liveness analysis to determine which
 pseudo-registers are in use in the same region, implying that they cannot
@@ -220,21 +216,12 @@ result back to memory.
 Many of these issues were solved or being solved by other teams in the
 same time period \todo{graph coloring algorithm, ask Sanjin}.
 
-PO also performed \acrlong{cfg} simplification and \acrlong{dce} by identifying redundant nodes
-in the \acrshort{cfg}.
+PO also performed some rudimentary \acrlong{cfg} simplification and
+\acrlong{dce} by identifying and simplifying redundant nodes in the \acrshort{cfg},
+particularly branch chains \todo{could expand on this...}.
 These optimizations are critical in modern compilers because many
 optimizations rely on the \acrshort{ir} being in a \gls{normal-form}
 to be maximally effective.
-
-
-\subsection{GCC Takes Form}
-
-In \citeyear{stallman_kth_transcript_1986}, Stallman's compiler still generated
-debugging information in the DBX debugger's format, but could also
-use GDB's internal format.
-There were numerous compiler tools developed in this era, beginning with
-the \textit{lint} tool (discussed in \cref{sec:software-c});
-we discuss these compiler tools in detail in \cref{sec:freedom-tools}.
 
 \subsection{The Kernel}
 
@@ -259,13 +246,126 @@ Linux, compiled with GCC and paired with the other GNU utilities
 formed the Unix-compatible free operating system
 (and the community around it) that Stallman had sought after.
 
+\subsection{Cygnus and GCC}
+
+In \citeyear{stallman_kth_transcript_1986}, Stallman finally decided to throw
+out this Pastel compiler and start over, using his experience with Pastel
+and the University of Arizona's optimizer to build a new C compiler
+(though he did re-use the C frontend from his modified Pastel compiler).
+
+Throughout the 1980s, progress on GCC was relatively slow because Stallman
+prioritized developing Emacs.
+In the 90s though, the GNU project piqued the interest of more developers
+who began contributing to the compiler.
+The company Cygnus Solutions made significant contributions and built
+their entire organization around the GNU project.
+Their business model was so innovative and impactful to the market for
+compilers and compiler engineers that the company's history deserves
+its own section.
+
+At this point, there were loads of proprietary compilers from virtually
+every hardware company.
+The embedded systems market supported many small compiler companies
+since the larger companies were primarily focused on compilers for
+their flagship.
+These smaller companies charged high markups for their compilers
+and expensive "seats" that companies had to purchase for every single
+developer that used their compilers (sometimes up to \$10,000 in 1990s dollars).
+This environment was ripe for disruption--and that was exactly what Cygnus'
+intended to do.
+
+Cygnus Solutions was founded in 1989 by
+\citeauthor{gilmore_tiemann_henkel_wallace_cygnus_history_2006}
+in Palo Alto, California,
+at which point GCC compiled itself and produced pretty good machine code
+for the DEC Vax and the Motorola 68000.
+Linux would not be created and joined with the GNU project until years later.
+The founders thought they might be able to replace the compiler departments
+at larger companies like Sun, SGI, and DEC in favor of paying Cygnus
+for support contracts.
+While the larger companies did not adopt GCC or purchase Cygnus' support contracts,
+they did find product-market fit with companies working on embedded systems.
+
+Cygnus put significant efforts into making GCC a robust cross-compiler
+to better support these embedded systems.
+Sony and Cisco were their first large customers.
+For Sony, their support contract with Cygnus for cross-compilers and emulators
+for their game consoles meant that game developers could start developing games
+for an upcoming console long before the game hit the market, allowing their
+customers to get more and better games, earlier than the competition.
+
+For the customers, Cygnus' value proposition was favorable compared to the
+proprietary compilers they could buy from the smaller compiler companies;
+for instance, if Sony didn't like Cygnus' support after a couple years, they could
+always take GCC and modify it to their liking. Cygnus had to earn their
+keep every single development cycle.
+Additionally, it lowered the bringup cost for new chips, since they didn't have to
+throw away the compiler every time they wanted to significantly change the architecture.
+They could simply send patches to the GNU project to add support for their new chips,
+and the compilers and debuggers they were used to would continue to work.
+
+With this business model, Cygnus obliterated many small compiler companies.
+Many of them were bought out by their customers, and many of their customers
+moved to open-source compilers even if they didn't purchase support contracts
+from Cygnus.
+This pattern was primarily restricted to the embedded market since the large companies
+could afford to keep many compiler engineers in-house and produce compilers that
+genuinely out-performed their open source alternatives, but this trend would
+continue to grow.
+
+Cygnus employees continued to contribute to the GNU project and put small
+proprietary compiler companies out of business, and their influence
+in the GNU project continued to grow.
+In \parencite{gilmore_tiemann_henkel_wallace_cygnus_history_2006}, Gilmore
+claimed that Michael Tiemann's C++ compiler was the first true C++ compiler
+\todo{awkward placement}:
+
+\begin{quotation}
+	Our C++ compiler, g++, was the first true compiler for C++, producing assembler
+	code rather than translating C++ into C. It implements all the features of AT&T C+
+	+ 2.0. It runs on any machine that gcc supports, and does the same optimizations. It
+	also provides additional C++ specific optimizations\dots
+	[Michael Tiemann] is the author of GNU C++, the first available native code C++ compiler.
+\end{quotation}
+
+In the 1990s, a subset of the GCC contributors (most of whom were employed by Cygnus)
+began releasing \textit{EGCS}, or the Experimental/Enhanced GNU Compiler Suite.
+This was the first and last major fork of the GCC project to date
+\footnote{The Pentium Compiler Group also had a fork, but while EGCS
+	was separately maintained, PGCC (not to be confused with the \textit{Portland} Group C Compiler)
+	closely tracked the EGCS code base, and development of the project seemed to have died
+	out once EGCS was merged back into GCC.},
+
+\begin{quotation}
+	EGCS was intended to be a more actively developed and more
+	efficient compiler than GCC, but was otherwise effectively the same compiler because it closely
+	tracked the GCC code base and EGCS enhancements were fed back into the GCC code base maintained
+	by the GNU Project. Nonetheless, the two code bases were separately maintained. In April 1999, GCC’s
+	maintainers, the GNU Project, and the EGCS steering committee formally merged. At the same time,
+	GCC’s name was changed to the GNU Compiler Collection and the separately maintained (but, as
+	noted, closely synchronized) code trees were formally combined, ending a long fork and
+	incorporating the many bug fixes and enhancements made in EGCS into GCC. This is why EGCS is often
+	mentioned, though it is officially defunct.
+	\parencite{von_hagen_definitive_guide_gcc_2011}
+\end{quotation}
+
+\todo{
+	In \citeyear{stallman_kth_transcript_1986}, Stallman's compiler still generated
+	debugging information in the DBX debugger's format, but could also
+	use GDB's internal format.
+	There were numerous compiler tools developed in this era, beginning with
+	the \textit{lint} tool (discussed in \cref{sec:software-c});
+	we discuss these compiler tools in detail in \cref{sec:freedom-tools}.
+}
+
 \subsection{The Experimental/Enhanced GNU Compiler Suite (EGCS)}
 
 \begin{quotation}
 	In April 1999, GCC’s
 	maintainers, the GNU Project, and the EGCS steering committee formally merged. At the same time,
 	GCC’s name was changed to the GNU Compiler Collection and the separately maintained (but, as
-	noted, closely synchronized) code trees were formally combined, ending a long fork and incorporating the many bug fixes and enhancements made in EGCS into GCC. This is why EGCS is often
+	noted, closely synchronized) code trees were formally combined, ending a long fork
+	and incorporating the many bug fixes and enhancements made in EGCS into GCC. This is why EGCS is often
 	mentioned, though it is officially defunct.
 	\parencite{von_hagen_definitive_guide_gcc_2011}
 \end{quotation}

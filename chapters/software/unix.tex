@@ -138,7 +138,7 @@ and notice the similarities to modern parser generators and Backus-Naur Form:
 \begin{quotation}
 	This simple program defines the translation of fully parenthesized infix
 	expressions to Polish postfix for a stack machine.
-	\begin{minted}{yacc}
+	\begin{minted}{text}
         expr: <(>/exp1 expr operator expr <)> = { 3 1 2 };
         exp1: ident = { < LOAD > 1 };
         operator:
@@ -187,15 +187,15 @@ Dennis Ritchie points out the following two examples as only being possible
 in BCPL and not in B or C due to memory constraints
 \cite{development_of_c_language_chist_ritchie_1996}:
 
-\begin{lstlisting}[language=c,frame=single]
-let P1 be (*@\textbfit{procedure}@*)
-and P2 be (*@\textbfit{procedure}@*)
-and P3 be (*@\textbfit{procedure}@*)
+\begin{minted}{sml}
+let P1 be |\textbfit{procedure}|
+and P2 be |\textbfit{procedure}|
+and P3 be |\textbfit{procedure}|
 
-E1 := valof ( (*@\textbfit{declarations}@*) ;
-              (*@\textbfit{commands}@*) ;
+E1 := valof ( |\textbfit{declarations}| ;
+              |\textbfit{commands}| ;
               resultis E2 ) + 1
-\end{lstlisting}
+\end{minted}
 
 Because the entire program was held in memory, the BCPL compiler could make
 procedure \textbfit{P3} available to expressions inside procedure \textbfit{P1},
@@ -231,16 +231,16 @@ Since pointers were just integers representing offsets into memory, pointer arit
 was natural in both languages, and both had syntax sugar to facilitate pointer arithmetic
 and dereferencing of offsets into arrays.
 
-\begin{lstlisting}[language=c,frame=single]
+\begin{minted}{text}
 /* Declaring an array of 10 integers */
-let V = vec 10 /* BCPL */
-auto V[10];    /* B    */
+let V = vec 10 |\textbfit{In BCPL}|
+auto V[10];    |\textbfit{In B}|
 
 /* Accessing element i of array V */
-V!i            /* BCPL */
-*(V+i)         /* B    */
-V[i]           /* B    */
-\end{lstlisting}
+V!i            |\textbfit{In BCPL}|
+*(V+i)         |\textbfit{In B}|
+V[i]           |\textbfit{Also in B}|
+\end{minted}
 
 After Ken had the TMG version of B working, he \gls{bootstrap}ped the compiler
 by implemented it in B.
@@ -332,11 +332,11 @@ simple as possible.
 For example, the precedence of \texttt{\&} and \texttt{==} were made equal in C,
 thereby requiring parentheses in the second expression below:
 
-\begin{lstlisting}[language=c,frame=single]
+\begin{minted}{c}
 if (a == b & c) { /* ... */ }
 if ((c & b) == a) { /* ... */ }
 /*  ^ Parentheses required here */
-\end{lstlisting}
+\end{minted}
 
 While many features were added to C in 1972-1973, the preprocessor was likely the most
 significant. Dennis implemented it partly at the request of Alan Snyder
@@ -430,6 +430,10 @@ recieved help from Doug McIlroy, though he is not listed as an author
 	In addition, his string macro
 	package greatly facilitated the implementation."}
 .
+McIlroy's prior works (like his unpublished paper
+\textit{String Manipulation System for FAP Programs})
+and influence on the development of string processing languages were significant.
+
 SNOBOL was developed to address the limitations of an earlier string-processing language
 called \textit{COMIT}, the only language with a syntax similar to that of SNOBOL.
 COMIT did not support named variables or arithmetic, which largely motivated
@@ -444,7 +448,7 @@ V2 TEXT   V      = /S(V2)F(V1)
 END       START
 \end{minted}
 
-This program removes all the vowels from the string defined by \textt{TEXT}.
+This program removes all the vowels from the string defined by \texttt{TEXT}.
 
 While SNOBOL never gained significant traction,
 it's important to note the language's legacy and influence on the
@@ -533,21 +537,21 @@ and it got lots of use at Bell Labs (recall that the Lab's primary output was pu
 Troff documents were marked by beginning and ending characters with a leading perdiod.
 An Eqn equation in a troff document would start with \texttt{.EQ} and end with \texttt{.EN}\cite{kernighan_cherry_eqn_1975}:
 
-\begin{lstlisting}[frame=single]
+\begin{minted}{text}
 .EQ
 left [ x + y over 2a right ]~=~1
 .EN
-\end{lstlisting}
+\end{minted}
 
 The grammar for Eqn was defined by Yacc rules like so:
 
-\begin{lstlisting}[frame=single]
+\begin{minted}{text}
 eqn : box | eqn box
 box : text
     | { eqn }
     | box SUB box | box SUP box
     | [ROMAN | BOLD | ITALIC] box
-\end{lstlisting}
+\end{minted}
 
 This would embed the equation $ [ \frac{x + y}{2a} ] \approx 1 $ in the document.
 This was incredibly useful! Prior to typesetting programs, an author would need to deliver their
@@ -632,7 +636,8 @@ but as this book went on to be the seminal compiler textbook for a generation,
 many student's primary exposure to compiler design was almost entirely focused on
 front-end design.
 Of the 600 or so pages in the first edition, only about 100 were dedicated to
-optimization and data-flow analysis\cite[Chapters 12, 13, and 14]{the_dragon_book_aho_ullman_1977}.
+optimization and data-flow analysis \cite[Chapters 12, 13, and 14]{the_dragon_book_aho_ullman_1977}.
+
 
 \subsection{Trusting Trust}
 

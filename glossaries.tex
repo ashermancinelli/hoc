@@ -167,9 +167,9 @@
 	description={Many optimizations rely on the program being in the simplest possible form.
 			Just as we expect fractions to be in their simplest form (it would be unusual to see
 			\frac{5}{10}\textsuperscript{ths}), optimizations often expect or require their input
-			programs to be as reduced as possible form to be maximally effective.
-			See \href{https://llvm.org/docs/LoopTerminology.html#loop-simplify-form}{LLVM's loop simplify form}
-			for an example}
+			programs to be as reduced as possible form to be maximally effective.}
+	% See \href{https://llvm.org/docs/LoopTerminology.html#loop-simplify-form}{LLVM's loop simplify form}
+	% for an example}
 }
 
 \newglossaryentry{canonical-form}{
@@ -229,6 +229,10 @@
 \newacronym[
 	description={A low-level \acrlong{ir} used to symbolically represent machine instructions in a target-independent format}
 ]{rtl}{RTL}{register transfer language}
+
+\newacronym[
+	description={A compiler analysis pass that determines how values change across iterations of a loop}
+]{scev}{SCEV}{scalar evolution}
 
 \newglossaryentry{pgo}{
 	name={profile-guided optimization},
