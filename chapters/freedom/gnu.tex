@@ -371,21 +371,35 @@ C was sold separately from SunOS.
 This left their users with an easy decision--start paying more (roughly \$2000 for each user
 of each compiler), or start using and contributing to the new GCC compilers.
 All that was needed was a Sparc backend for GCC--which it already had.
+Recall that GCC first broke onto the scene by having great support for
+cross-compilation and backends for exotic architectures; adding and
+updating the backends would be straightforward for the users and well-received
+by the GNU developers.
 
 Peter Salus recalls in \parencite{salus_reed_daemon_gnu_penguin_2008}
 that the \acrshort{fsf} saw far more orders of CD copies of GCC after Sun's decision.
 Their compilers cost only \$45 each.
 
-\todo{sun had to sell their products internally too, that's why they charged for it bryan cantril.}
+\todo{sun had to sell their products internally too, that's why they charged for it (bryan cantril).}
 
-\todo{
-	In \citeyear{stallman_kth_transcript_1986}, Stallman's compiler still generated
-	debugging information in the DBX debugger's format, but could also
-	use GDB's internal format.
-	There were numerous compiler tools developed in this era, beginning with
-	the \textit{lint} tool (discussed in \cref{sec:software-c});
-	we discuss these compiler tools in detail in \cref{sec:freedom-tools}.
-}
+In \citeyear{stallman_kth_transcript_1986}, Stallman's compiler still generated
+debugging information in the DBX debugger's format, but could also
+use GDB's internal format.
+There were numerous compiler tools developed in this era, beginning with
+the \textit{lint} tool (discussed in \cref{sec:software-c});
+we discuss these compiler tools in detail in \cref{sec:freedom-tools}.
+
+\subsection{GIMPLE}
+
+\acrshort{rtl} was GCC's only \acrshort{ir} for many years,
+
+\subsection{GCC in C++}
+
+Bjarne's inital C++ compiler was a relatively slow and fragile macro-based compiler
+called \texttt{cfront}, which targeted C code instead of machine code directly.
+C++'s reputation was not great in the 1990s, but was helped along by the GNU
+C++ compiler \texttt{g++}, which outperformed \texttt{cfront}, generated native
+code directly, and leveraged the optimizer and code generators of GCC.
 
 % There were loads of small companies that made money leasing out their compilers,
 % and GNU put them all out of business essentially overnight.

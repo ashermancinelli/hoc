@@ -10,21 +10,21 @@ one now only specified the final formula of the loop, or the \gls{backedge}.
 In the following loop, \texttt{I} begins at 1 and increments by 1 until it reaches 5, and for
 each iteration, \texttt{N(I)} is accessed, multiplied with \texttt{I} and stored in \texttt{A(I)}:
 
-\begin{lstlisting}[language=Fortran,frame=single]
+\begin{minted}{fortran}
 10    DO 20 I=1,5
 20    A(I) = I*N(I)
 30
-\end{lstlisting}
+\end{minted}
 
 IF-statements were still quite unweildy; they took three formulas, the first if the
 condition yielded a negative value, the second if it was zero, and the third if it was positive:
 
-\begin{lstlisting}[language=Fortran,frame=single]
+\begin{minted}{fortran}
 10    IF(A(I)) 20,30,40
 20    ! ... Jump to here if A(I) < 0
 30    ! ... Jump to here if A(I) = 0
 40    ! ... Jump to here if A(I) > 0
-\end{lstlisting}
+\end{minted}
 
 To be fair to John Backus, he is quite self-deprecating when recalling these details about the
 language design process.
@@ -151,12 +151,12 @@ In 1957 they published a small addendum to the Programmer's Reference Manual,
 documenting \textit{functions statements}, which have persisted through to modern Fortran.
 They allow users to define functions in a single statement, like so:
 
-\begin{lstlisting}
+\begin{minted}{fortran}
 FIRSTF(X) = A*X+B
 SECONDF(X, B) = A*X+B
 THIRDF(D) = FIRSTF(E)/ D
 FOURTHF(F,G) = SECONDF(F, THIRDF(G))
-\end{lstlisting}
+\end{minted}
 
 There were numerous language features specific to the 704 as well,
 such as the SENSE LIGHT statement, which toggled specific sensor lights:
@@ -249,7 +249,7 @@ So, a FORTRAN program accessing elements of $A$ linearly as they
 are stored in memory (also known as \gls{stride1})
 \href{https://godbolt.org/z/T6M4dvMP4}{would look like this:}
 
-\begin{lstlisting}[language=Fortran,frame=single]
+\begin{minted}{fortran}
       real A(3,3)
       integer i,j
 c     Innermost loop is the fastest-moving index
@@ -270,7 +270,7 @@ c     3           2
 c     1           3
 c     2           3
 c     3           3
-\end{lstlisting}
+\end{minted}
 
 Now, the FORTRAN team's concern was that their compiler would not be able to recognize
 that a program like the one above was accessing memory in a way consistent with the
@@ -291,7 +291,7 @@ matrix, and the \gls{inducvar} $i$ is incremented by one via the DO loop,
 and is not modified in the loop body.
 Consider the following program, where it is not \textit{quite} so clear:
 
-\begin{lstlisting}[language=fortran,frame=single]
+\begin{minted}{fortran}
       real A(3,3)
       integer i,j
 c     Innermost loop is the fastest-moving index
@@ -302,7 +302,7 @@ c     Innermost loop is the fastest-moving index
             print *, i, j
    10 continue
       end
-\end{lstlisting}
+\end{minted}
 
 Does this loop access $A$ with \gls{stride1}?
 Yes, it does, but I hope the potential problems are becoming clear.
