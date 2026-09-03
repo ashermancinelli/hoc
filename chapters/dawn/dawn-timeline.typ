@@ -75,13 +75,12 @@
   [],
   [Numerous US government agencies have adopted the A-2],
   [1954],
-  [John Backus at IBM begins work on #mono[FORTRAN]{}],
+  [John Backus at IBM begins work on #mono[FORTRAN]],
   [1954],
   [Nora Moser of US Army sends Hopper modifications to the A-2],
   [1957],
-  [John Backus at IBM released the first #mono[FORTRAN]{} compiler, the first commercial compiler],
+  [John Backus at IBM released the first #mono[FORTRAN] compiler, the first commercial compiler],
 )],
   kind: table,
   caption: [Timeline of early developments in programming languages and compilers.]
 ) <fig:dawn-timeline>
-

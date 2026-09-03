@@ -159,17 +159,17 @@ He then went over to Ken's keyboard and typed in the program that his TMG-TMG co
 had produced, and with astonishingly few errors, they had a working TMG compiler on the PDP-7.
 
 Ken's logical next step was to use this new TMG compiler to
-write a #mono[Fortran]{} compiler for the PDP-7 because
-"no computer was complete without #mono[Fortran]{}."
+write a #mono[Fortran] compiler for the PDP-7 because
+"no computer was complete without #mono[Fortran]."
 Now, the PDP-7 was only 8k of 18-bit words of memory and Ken's Unix system needed
 about half of that just to run, leaving only 4k for user programs.
-Once completed, the new #mono[Fortran]{} compiler took far more memory than was available for
+Once completed, the new #mono[Fortran] compiler took far more memory than was available for
 user programs, so he had to cut down the TMG program to get a program small enough to
 fit on the machine but capable enough to facilitate a usable programming language.
 Once he finally cut down his compiler to 4k, he called that programming language #emph[B].
-His ill-fated attempt at producing a #mono[Fortran]{} compiler ended up being a very different language,
-based more so on BCPL than on #mono[Fortran]{}
-#footnote[The origins are really unclear. Ken himself mentions #mono[Fortran]{} as his only inspiration
+His ill-fated attempt at producing a #mono[Fortran] compiler ended up being a very different language,
+based more so on BCPL than on #mono[Fortran]
+#footnote[The origins are really unclear. Ken himself mentions #mono[Fortran] as his only inspiration
 	for B in a live interview#cite(<kernighan_interviews_thompson_2019>, form: "normal"),
 	however Dennis Ritchie describes it as a "language of his own" and
 	"BCPL squeezed into 8K bytes of memory and filtered through Thompson's brain"
@@ -201,7 +201,7 @@ On the other hand, some BCPL features were purposefully left out of B; for examp
 to share data between separately compiled source files, BCPL programs had to use
 a global buffer. To make a procedure or variable available to other source files,
 the programmer had to manually associate the name with an offset into this buffer,
-similar to the #mono-text("COMMON") block in #mono[Fortran]{} programs.
+similar to the #mono-text("COMMON") block in #mono[Fortran] programs.
 In more mature B compilers and later in C, the linker handles this automatically.
 
 #figure(

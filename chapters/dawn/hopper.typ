@@ -490,7 +490,7 @@ John Backus described the A-2 compiler's 1954 May update as a significant
 improvement because of these pseudocode instructions
 #cite(<hopl_backus_history_of_fortran>, form: "normal").
 He placed the A-2 with Laning and Zierler's algebraic compiler and
-his own #mono[FORTRAN I]{} compiler as the primary compilers of significance in the
+his own #mono[FORTRAN I] compiler as the primary compilers of significance in the
 mid 1950s.
 
 Along with pseudocode instructions, this compiler also produced
@@ -620,7 +620,7 @@ Because the MATH-MATIC translated source code into A-3 pseudocode
 as an intermediate step, one might also consider this the first compiler
 to have an internal intermediate representation.
 The MATH-MATIC would last until about 1961, at which point UNIVAC users
-were already expecting #mono[FORTRAN]{} compilers available on their UNIVAC systems,
+were already expecting #mono[FORTRAN] compilers available on their UNIVAC systems,
 favoring IBM's language to Hopper's.
 
 These layers of translation worked against them; the vast majority
@@ -632,7 +632,7 @@ their new machine, the IBM 704, should have index registers and floating point
 processing hardware, which is exactly what both UNIVAC and IBM 701 customers
 lacked and were spending all their time on.
 Now that the 704 accounted for these prior deficiencies in both machines,
-Backus's #mono[FORTRAN]{} combined with the 704's hardware entirely outclassed the
+Backus's #mono[FORTRAN] combined with the 704's hardware entirely outclassed the
 UNIVAC I and Hopper's MATH-MATIC.
 
 #quote(block: true)[
