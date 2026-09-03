@@ -1,47 +1,16 @@
-default := "quick"
-job := "hoc"
-latex := "lualatex --shell-escape --jobname=" + job + " main.tex"
-publish-name := "History of Compilers"
-publish-pdf := publish-name + ".pdf"
+default := "build"
 
-default: quick
+revision := `git -C ../hoc rev-parse --short HEAD 2>/dev/null || echo working-tree`
 
-biber-clear-cache:
-    rm -rf `biber --cache`
+build:
+    typst compile --root . --input revision={{revision}} main.typ hoc.pdf
 
-fix: biber-clear-cache
+watch:
+    typst watch --root . --input revision={{revision}} main.typ hoc.pdf
 
-full:
-    {{latex}}
-    biber {{job}}
-    makeglossaries {{job}}
-    {{latex}}
-    {{latex}}
-
-quick:
-    {{latex}}
-
-q: quick
+open: build
+    open hoc.pdf
 
 clean:
-    latexmk -C
-    rm *.bbl *.upa *.upb *-SAVE-ERROR *.aux *.bcf *.blg *.run.xml *.acn *.acr *.alg *.glg *.glo *.gls *.ist || true
+    rm -f hoc.pdf
 
-cleanfirst: clean full
-
-publish: cleanfirst
-    cp "{{job}}.pdf" "publish/{{publish-pdf}}"
-    git add "publish/{{publish-pdf}}"
-    git commit -m publish
-    git push
-
-pub: publish
-
-open:
-    killall Preview||:
-    open "{{job}}.pdf"
-
-o: open
-
-qo: q o
-fo: full open

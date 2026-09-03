@@ -1,0 +1,668 @@
+#import "../../macros.typ": *
+#import "../../glossaries.typ": *
+
+
+== Bell Lab's Computing Science Research Center
+
+
+=== Multics and Unix at Bell Labs
+
+
+There is no avoiding Multics and UNIX if we are to discuss the development of compilers at Bell Labs.
+We will cover the history of the American Telephone and Telegraph Company (AT&T)
+in #emph[very] broad strokes to contextualize the development of the programming languages
+and compiler tools developed in this time period.
+
+In very broad strokes, American Telephone and Telegraph Company (AT&T) was a government-sanctioned
+monopoly that provided telephone service to the United States.
+They became a monopoly by buying up smaller telephone companies across the country.
+Over time, they found they needed quite a bit of fundamental science in order to keep up with the
+requirements of servicing the entire country, so in 1925 they created Bell Telephone
+Laboratories in New York. If they did not continue providing quality service, the government could
+(and very often did) threaten to break up the company, so this need was existential.
+
+During the second world war, they expanded to New Jersey, early 1960s they moved to Murray Hill,
+in suburban New Jersey, where they had a few thousand employees.
+The laboratory was responsible solely for research, and thousands of other employees
+worked on applying the research and developing the process knowledge needed to bring the
+research into the phone system.
+This research led to numerous fundamental discoveries and inventions in physics,
+materials science and many more domains; these discoveries include the transistor, lasers,
+fiber-optics and solar cells, to name a small subset.
+Patents were the laboratory's primary measure of success, and they produced many.
+At its peak, AT&T was the nation's largest private employer with over 1 million employees.
+If you are interested in an account of Bell Labs in anything close to the proper detail,
+I recommend #emph[The Idea Factory] by Jon Gertner; our focus if far too narrow to do
+it justice here.
+
+In the early 1960s, the labs spun off a new department, the Computing Sciences Research Center,
+off of the mathematics group. This group had about 25 people tasked with software and computing
+research, which included operating systems.
+In 1961, Fernando Corbató at MIT created a timesharing system called CTSS,
+or the Compatible Time Sharing System, with relative success.
+In 1965 MIT set out to make a successor system with all kinds of enhancements; they partnered with
+Bell Labs and General Electric to create the operating system called #emph[Multics].
+The machine was developed at GE (Multics required a special machine), Multics was designed at MIT,
+and Bell Labs was responsible for large parts of the software development,
+which was primarily done in IBM's PL/1 programming language.
+Ken Thompson described it as "monstrously over-engineered" and "typical second-system syndrome"
+#cite(<kernighan_interviews_thompson_2019>, form: "normal");
+while they had a wonderful time-sharing system in CTSS, they got too ambitious with thier sophomore project.
+Ultimately, this project ran long past deadlines and was slow to run and altogether not what
+the labs was hoping for, so in 1969 they pulled out of the project.
+Honeywell took over Bell Labs' share of the project.
+
+This left a bad taste in their mouths, and Bell Labs leadership sought to avoid operating
+systems work in the wake of this venture.
+Some of the members of the Multics team had other ideas; they had gotten a taste for
+operating systems work, and now they had not operating system to work #emph[on].
+These included Ken Thompson, Dennis Ritchie, and Doug McIlroy.
+
+At the time, Ken Thompson was researching file systems on an outdated and underused
+Digital Equipment Corporation (DEC) PDP-7 machine from the acoustics group.
+#footnote[Because acoustics research was so core to Bell Labs' and AT&T's mission,
+	that department got just about anything they asked for in terms of computing resources,
+	hence the outdated PDP-7 sat unused in their offices--they already had more powerful machines.]
+He originally just used it for writing video games, until finally getting around to
+his research on file systems.
+He developed disc scheduling algorithms to maximize throughput on the PDP-7's disc drive.
+To adequately test the performance of his file system algorithms, he needed some test
+programs to stress the file system.
+At some point in this process, he realized he was not far off from an
+operating system of his own#cite(<kernighan_interviews_thompson_2019>, form: "normal"):
+
+#quote(block: true)[
+At some point, I realized with out knowing it up until that point, that I was
+	three weeks from operating system, with three programs, one a week. I needed an
+	editor to write code, I needed an assembler to turn the code into language I
+	could run, and I needed a kernel overlay, call it an operating system.
+	Luckily, right at that moment, my wife went on a three-week vacation to take my
+	one-year-old to visit her parents in California. One week, one week, one week,
+	and we had Unix.
+]
+
+
+Thompson's assembler was not a complete toolchain; there were no libraries, linkers, or loaders.
+The entire assembly program had to be presented to the assembler all at once,
+and the output was directly executable. Thus the #mono-text("a.out") naming convention for
+the default executable output of modern compilers was born (#emph[a]ssembly #emph[out]put).
+Even after the system gained more toolchain components, the name remained.
+
+Very early on, Thompson's system picked up very impressive users.
+Two at a time, Dennis Ritchie, Doug McIlroy, Morris McMahon, and Brain Kernighan
+all became users on Thompson's new system.
+They sent a proposal to get a PDP-10, which was top-of-the-line at the time,
+to port Unix to a more powerful machine.
+This was rejected as soon as Labs leadership saw it was related to operating systems,
+in spite of the fact that their request was well within budget.
+Joe Ossanna (another colleague) came up with a proposal that
+positioned their need for a PDP-10 as a research project to develop better typesetting
+software for filing patent applications (notably missing any mention of operating
+systems).
+Ossanna developed the Nroff and Troff typesetting programs to fullfil their claimed
+goal of helping the patent office.
+The patent office loved their software, and they ended up buying the computing group
+a PDP-11#footnote[While many resources will mention the PDP-11, they usually refer to the
+	PDP-11#emph[/22]; very few of original PDP-11s (which the computing center worked on)
+	were ever produced, but the refreshed models had many users.] sometime in the early 1970s.
+Unix came up on the PDP-11 almost immediately.
+Thus we have the basis for discussing the subsequent development of compilers
+and programming languages at Bell Labs.
+
+#include "unix-personal-histories.typ"
+
+
+=== The First Unix Compilers
+
+
+Alfred Aho described this era of compiler history
+as as cambrian explosion of programming languages and compiler tools
+#cite(<aho_bell_labs_role_in_programming_languages_2025>, form: "normal"),
+and there were several reasons for that.
+Tools were developed that made the description of compiler front-end
+tools extremely simple, the computing center got access to machines with
+more memory, and the theory of parsing context-free grammars advanced.
+The Labs employees worked all of these together to produce many compiler
+tools.
+
+While Doug was the department head of the Computing Sciences Research Center,
+he would regularly stop into the offices of his employees and drop ideas and requests
+to them. In one case, he mentioned to Ken how convenient it would be to have
+a tool for searching text files for patterns.
+Ken already had a rough version of such a tool in his home directory,
+so the next day he showed Doug his program and thus was born #mono-text("grep");
+many such tools came to be like this.
+
+On another similar occasion, Doug walked into Ken's office to discuss the TMG language
+(standing for TransMoGrifier),
+designed by Robert McClure#cite(<mcclure_tmg_compiler_compiler_1965>, form: "normal"), one of his friends at the lab.
+McClure had gotten defensive about this language, and when he left the lab,
+he claimed it was proprietary and nobody else could use it.
+TMG was a top-down recursive-descent compiler-compiler for context-free grammars
+and procedural elements similar to Yacc, a tool to help write compiler
+front-ends.
+See this example from Doug's TMG manual #cite(<tmg_manual_mcilroy_1972>, form: "normal")
+and notice the similarities to modern parser generators and Backus-Naur Form:
+
+#quote(block: true)[
+This simple program defines the translation of fully parenthesized infix
+	expressions to Polish postfix for a stack machine.
+	#code-block("        expr: <(>/exp1 expr operator expr <)> = { 3 1 2 };\n        exp1: ident = { < LOAD > 1 };\n        operator:\n        op0: <+>/op1 = { < ADD > };\n        op1: <->/op2 = { < SUB > };\n        op2: <*>/op3 = { < MPY > };\n        op3: </>     = { < DIV > };\n    ", lang: "text")
+]
+
+
+Ken recounts#cite(<kernighan_interviews_thompson_2019>, form: "normal")
+the story of how Doug brought a full TMG compiler #emph[written in TMG,
+	on paper] to Ken's office. He then decided to feed the TMG program into his TMG compiler
+#emph[by hand] to produce an assembly listing of the TMG program.
+He then went over to Ken's keyboard and typed in the program that his TMG-TMG compiler
+had produced, and with astonishingly few errors, they had a working TMG compiler on the PDP-7.
+
+Ken's logical next step was to use this new TMG compiler to
+write a #mono[Fortran]{} compiler for the PDP-7 because
+"no computer was complete without #mono[Fortran]{}."
+Now, the PDP-7 was only 8k of 18-bit words of memory and Ken's Unix system needed
+about half of that just to run, leaving only 4k for user programs.
+Once completed, the new #mono[Fortran]{} compiler took far more memory than was available for
+user programs, so he had to cut down the TMG program to get a program small enough to
+fit on the machine but capable enough to facilitate a usable programming language.
+Once he finally cut down his compiler to 4k, he called that programming language #emph[B].
+His ill-fated attempt at producing a #mono[Fortran]{} compiler ended up being a very different language,
+based more so on BCPL than on #mono[Fortran]{}
+#footnote[The origins are really unclear. Ken himself mentions #mono[Fortran]{} as his only inspiration
+	for B in a live interview#cite(<kernighan_interviews_thompson_2019>, form: "normal"),
+	however Dennis Ritchie describes it as a "language of his own" and
+	"BCPL squeezed into 8K bytes of memory and filtered through Thompson's brain"
+	#cite(<development_of_c_language_chist_ritchie_1996>, form: "normal").
+	He describes the name as either a contraction of BCPL or (less likely) a contraction
+	of Bon, a language Thompson developed for Multics.].
+BCPL had been designed by Martin Richards at MIT in the mid-1960s, and thus had found
+its way onto MIT's CTSS system, which Bell Labs employees were familiar with.
+
+
+=== BCPL and B
+
+
+BCPL, B and C may differ syntactically, but semantically they are very similar
+and operate at a similar level of abstraction.
+The BCPL compiler was allowed to use more memory than Thompson had on the PDP-7,
+so it allowed for more complicated expression-oriented language features.
+Dennis Ritchie points out the following two examples as only being possible
+in BCPL and not in B or C due to memory constraints
+#cite(<development_of_c_language_chist_ritchie_1996>, form: "normal"):
+
+#code-block("let P1 be procedure\nand P2 be procedure\nand P3 be procedure\n\nE1 := valof ( declarations ;\n              commands ;\n              resultis E2 ) + 1", lang: "sml")
+
+
+Because the entire program was held in memory, the BCPL compiler could make
+procedure #strong[#emph[P3]] available to expressions inside procedure #strong[#emph[P1]],
+but the B compiler was limited to a one-pass technique and could not provide such features.
+On the other hand, some BCPL features were purposefully left out of B; for example,
+to share data between separately compiled source files, BCPL programs had to use
+a global buffer. To make a procedure or variable available to other source files,
+the programmer had to manually associate the name with an offset into this buffer,
+similar to the #mono-text("COMMON") block in #mono[Fortran]{} programs.
+In more mature B compilers and later in C, the linker handles this automatically.
+
+#figure(
+  [#image("../../resource/software/unix/bell-threaded-code-figures.png", width: 80%)],
+  kind: image,
+  caption: [Execution of Threaded Code#cite(<bell_threaded_code_1973>, form: "normal")]
+) <fig:bell-threaded-code>
+
+
+The B compiler did not emit machine code directly, but instead used
+#emph[threaded code]#cite(<bell_threaded_code_1973>, form: "normal"), an early form of #gls("bytecode")
+operating on a simple stack machine, which was then interpreted.
+James Bell claimed that this threaded code needed no interpreter,
+but really, the execution model for threaded code is just a specification
+for an interpreter without outside the routines responsible for executing a given
+bytecode instruction.
+Today this would be considered a bytecode interpreter, but in the day when interpreters
+were only known to interpret the source language directly, his ideas may have seemed
+distinct from other forms of interpretation.
+See Bell's depiction of the execution of threaded code #xref(<fig:bell-threaded-code>, capital: false).
+
+Neither B nor BCPL had types; only the addressable size of data for the particular machine.
+Since pointers were just integers representing offsets into memory, pointer arithmetic
+was natural in both languages, and both had syntax sugar to facilitate pointer arithmetic
+and dereferencing of offsets into arrays.
+
+#code-block("/* Declaring an array of 10 integers */\nlet V = vec 10 In BCPL\nauto V[10];    In B\n\n/* Accessing element i of array V */\nV!i            In BCPL\n*(V+i)         In B\nV[i]           Also in B", lang: "text")
+
+
+After Ken had the TMG version of B working, he #gls("bootstrap")ped the compiler
+by implemented it in B.
+Dennis Ritchie recalls#cite(<development_of_c_language_chist_ritchie_1996>, form: "normal"):
+
+#quote(block: true)[
+During development, he continually struggled against memory limitations: each
+	language addition inflated the compiler so it could barely fit, but each
+	rewrite taking advantage of the feature reduced its size. For example, B
+	introduced generalized assignment operators, using x=+y to add y to x. The
+	notation came from Algol 68 via McIlroy, who had incorporated
+	it into his version of TMG.
+]
+
+
+Dennis also recalls this about their language design and implementation decisions:
+
+#quote(block: true)[
+Although we entertained occasional thoughts about implementing one of the major
+	languages of the time like Fortran, PL/1, or Algol 68, such a project seemed
+	hopelessly large for our resources: much simpler and smaller tools were called
+	for. All these languages influenced our work, but it was more fun to do things
+	on our own.
+]
+
+
+By 1970, the team had been able to acquire the PDP-11, which they promptly ported Unix to,
+along with the B #gls("bytecode") interpreter and a small assembler written in B.
+As the number of PDP-11 users grew, so too did their B codebase, which now included
+quite a few programs and subroutines, as a result of the tedium of writing assembly,
+which was the only alternative.
+B proved useful--however, the new machine revealed some serious inadequacies.
+The only data type in BCPL and B was the #mono-text("cell"), roughly equivalent to the hardware's
+machine word.
+The 18-bit PDP-7#footnote[18-bit might seem like an odd choice to the modern reader;
+	most mainframe computers had 36-bit words, and the PDP-7 was marketed as a smaller system.
+	Thus at 18-bits, it would be marketed as roughly half a mainframe.]
+did not map cleanly to the 16-bit PDP-11.
+BCPL on the PDP-7 had support for floating-point operations through special operators, but this
+only worked because the floats could fit in a single word and this was not possible on the PDP-11.
+
+#quote(block: true)[
+For all these reasons, it seemed that a typing scheme was necessary to cope
+	with characters and byte addressing, and to prepare for the coming
+	floating-point hardware. Other issues, particularly type safety and interface
+	checking, did not seem as important then as they became later.
+	Aside from the problems with the language itself, the B compiler's
+	threaded-code technique yielded programs so much slower than their
+	assembly-language counterparts that we discounted the possibility of recoding
+	the operating system or its central utilities in B.
+	#cite(<development_of_c_language_chist_ritchie_1996>, form: "normal")
+]
+
+
+In 1971, Dennis Ritchie began extending B by adding a character type and directly generating
+PDP-11 machine code.
+Thus the creation of a compiler capable of generating efficient machine code on a system with
+very little memory and the transition from B to C were simultaneous.
+Dennis renamed the B compiler to #mono-text("NB"), or #emph[New-B], and then #emph[C]
+shortly thereafter.
+
+
+=== C
+
+ <sec:software-c>
+
+Dennis's new language now had types and new addressing schemes, and it evolved quickly.
+#emph[New-B] existed so briefly that no full description of its syntax or semantics was
+ever written.
+
+The run-time overhead associated with BCPL and B's vector indexing semantics were
+addressed in C:
+
+#quote(block: true)[
+Values stored in the cells bound to array and pointer names were the machine
+	addresses, measured in bytes, of the corresponding storage area. Therefore,
+	indirection through a pointer implied no run-time overhead to scale the pointer
+	from word to byte offset. On the other hand, the machine code for array
+	subscripting and pointer arithmetic now depended on the type of the array or
+	the pointer: to compute #mono-text("iarray[i]") or #mono-text("ipointer+i") implied
+	scaling the addend #mono-text("i") by the size of the object referred to.
+	#cite(<development_of_c_language_chist_ritchie_1996>, form: "normal")
+]
+
+
+C gained a type system, overlaying semantics onto the raw bits that BCPL and B users
+were working with.
+The type system was heavily inspired by ALGOL 68, though not necessarily in a way the
+authors of the ALGOL language would have been happy with, as Dennis himself admits
+#cite(<development_of_c_language_chist_ritchie_1996>, form: "normal").
+Many features were added to the language in a short time; some of the warts that persist in
+even modern C were because of Dennis's desire to make porting programs from B to C as
+simple as possible.
+
+For example, the precedence of #mono-text("&") and #mono-text("==") were made equal in C,
+thereby requiring parentheses in the second expression below:
+
+#code-block("if (a == b & c) { /* ... */ }\nif ((c & b) == a) { /* ... */ }\n/*  ^ Parentheses required here */", lang: "c")
+
+
+While many features were added to C in 1972-1973, the preprocessor was likely the most
+significant. Dennis implemented it partly at the request of Alan Snyder
+(who had also suggested that Dennis add the #mono-text("&&") and #mono-text("||") to make
+boolean logic more explicit) at MIT
+in #cite-title(<snyder_portable_compiler_for_c_1975>), and
+partly inspired by the textual inclusion mechanisms in PL/1 and BCPL.
+The first version could only #mono-text("\\#include") other files and do simple textual
+substitution, though it was soon extended by Mike Lesk and John Reiser to handle macros
+with arguments and support conditional compilation.
+
+In the summer of 1973, the language and compiler were mature enough that the team was able
+to rewrite the Unix kernel in C.
+Ken Thompson had tried once before to port Unix to C, but the language did not support
+structures at the time, making the task too onerous to continue.
+The compiler was also ported to the Honeywell 635 and IBM 360 and 370, and commonly used
+procedures coalesced into what eventually became the standard library.
+The first of these major library components was Mike Lesk's input/output library, which
+became the basis of the C #emph[standard I/O].
+Dennis and Brian Kernighan wrote the seminal #cite(<the_c_programming_language_1ed_ritchie_kernighan_1989>, form: "normal").
+Brian wrote most of the exposition and Dennis wrote most of the programs.
+This would come to be common; Brian's gift for technical writing that was easy to understand
+made him a common author of documentation and publications.
+
+The subsequent period was filled with language features focusing on type safety
+and portability as Unix and all the tools they had rewritten in C had to be ported to more and
+more systems, and much of the codebase remained untyped, harkening back to its B and assembly
+heritage. In the same vein, pointers and integers were mutually assignable in C,
+absent of any syntactic indication that the programmer's intent had changed.
+This practice fell out of style, and #emph[casts] were introduced to the language,
+inspired by a similar #emph[but distinct] concept in ALGOL 68.
+Similarly, the member-dereference operation did not care much about the type of the pointer
+being dereferenced; #mono-text("ptr->field") could be used regardless of the type of #mono-text("ptr"),
+and #mono-text("field") was taken to mean an offset from some pointer into a structure.
+#footnote[
+	Perhaps they should have preserved more of ALGOL 68's type system; these pointer rules
+	plague optimizers working with C programs to this very day.
+	The modern Linux kernel is #emph[not] compiled with a flag usually spelled
+	#mono-text("-fstrict-aliasing"), which allows the optimizer to take advantage of the C language's
+	aliasing rules. These aliasing rules specify that a pointer cannot refer to multiple incompatible types,
+	and programs that use such behavior are #gls("ub").
+	This flag would theoretically allow the compiler to better optimize the Linux kernel,
+	however, strict aliasing rules are broken so often in the kernel's source that the flag
+	results in a buggy kernel, so it cannot be enabled.
+	Programs that make use of casting to and from #mono-text("void*") or
+	type-pun through unions are also common in C,
+	and in general the aliasing rules are not very friendly to optimization when compared to
+	Fortran, for example.
+]
+
+In 1978, Steve Johnson started work on a C compiler that was easy to retarget to other machines
+while he, Dennis and Thompson worked on porting Unix to the Interdata 8/32.
+While the language continued to evolve and some older practices fell out of style, Johnson
+came up with the #mono-text("lint") program, adapted from his #emph[Portable C Compiler] #mono-text("pcc"),
+to search a set of source files for coding practices that might need to be updated.
+This is one of the first (if not #emph[the] first) static-analysis tool, its namesake lives on
+in today's tools; one still talks of a #emph[linter] remarking on a dubious construct
+in one's code.
+
+The third version of Unix, System III, was the first one to be primarily written in C.
+As Unix matured and its System III and System V versions were distributed,
+institutions outside AT&T developed Unix distributions
+(particularly at the University of California at Berkeley, yielding the Berkeley
+Software Distribution of Unix), and C compilers were ported to many new machines,
+C became a mainstay of the software world, as it remains today.
+
+
+=== Standardization of C
+
+
+Using pcc as a reference compiler became impractical.
+The X3J11 committee formed in 1983 to standardize C.
+Continue with #cite-title(<development_of_c_language_chist_ritchie_1996>).
+#todo[includes early criticism of C.]
+
+Dennis Ritchie as quoted in #cite(<salus_quarter_century_unix_1994>, form: "normal"):
+
+#quote(block: true)[
+I think [the C Standard] is a good job. In fact, almost a
+	model for a successful standardization effort. They took something that was basically not broken, but in serious need of
+	clarification and updating, and clarified it and updated it
+	without breaking it. There are certainly many criticisms that
+	can be made... But still, when you compare what happened
+	with other languages, like FORTRAN 8X and even Pascal
+	when standards bodies try to define languages, the fate of C
+	was highly favorable.
+]
+
+
+=== SNOBOL
+
+ <sec:software-unix-snobol>
+
+Before we continue with regular expressions and string-processing languages,
+we must first discuss one of the first languages developed at Bell Labs,
+and one which most other string-processing languages were inspired by.
+
+SNOBOL would soon be eclipsed by Awk, Perl, Lex, Yacc, and other languages
+filling similar roles--it gained traction in some universities,
+but was not used much outside of Bell Labs.
+
+The first publication mentioning SNOBOL was
+#cite(<farber_snobol_string_manip_lang_1964>, form: "normal"); the authors also
+recieved help from Doug McIlroy, though he is not listed as an author
+#footnote[The authors make this remark in the conclusion:
+	"The enthusiasm and numerous suggestions
+	of M. D. McIlroy have been particularly helpful.
+	In addition, his string macro
+	package greatly facilitated the implementation."]
+.
+McIlroy's prior works (like his unpublished paper
+#emph[String Manipulation System for FAP Programs])
+and influence on the development of string processing languages were significant.
+
+SNOBOL was developed to address the limitations of an earlier string-processing language
+called #emph[COMIT], the only language with a syntax similar to that of SNOBOL.
+COMIT did not support named variables or arithmetic, which largely motivated
+the development of SNOBOL.
+#cite(<farber_snobol_string_manip_lang_1964>, form: "normal") uses the following program
+do describe the syntax of SNOBOL:
+
+#code-block("START     VOWEL = \"A,E,I,O,U\"\nV1 VOWEL *V* \",\" = /F(END)\nV2 TEXT   V      = /S(V2)F(V1)\nEND       START", lang: "snobol")
+
+
+This program removes all the vowels from the string defined by #mono-text("TEXT").
+
+While SNOBOL never gained significant traction,
+it's important to note the language's legacy and influence on the
+far more popular string-processing compiler technologies that Bell Labs would
+produce in the following years.
+One notable application of SNOBOL outside of Bell Labs was the
+University of Arizona's PO, an object-code optimizing compiler,
+discussed in #xref(<sec:software-gnu-portable-optimizer>, capital: false).
+
+
+=== Regular Expressions: Grep, Yacc, Lex
+
+ <sec:software-unix-regex>
+
+Regular expressions were a large part in the explosion of new programming languages
+and compiler tools at the labs in the early 1970s.
+
+One such use of regular expressions was Ken Thompson's #mono-text("s")
+program ("s" for "search") to do pattern-based searching
+in his home directory sometime after working on Unix on the PDP-11.
+In one of those casual drop-ins, his boss McIlroy asked him to come up with a program for finding
+patterns in files and searching through directories and these things, to which Ken responded
+"ah, let me think about it overnight" knowing he already had the perfect program.
+After a night of cleaning up his program, he gave it to Doug who loved the program
+and moved it from Ken's home directory into the shared binary directory.
+It was at this time renamed #mono-text("grep") after the command in the #mono-text("ed") editor
+which performed the same function: #mono-text("g/re/p"), for global, regular-expression, print.
+Many small programs like this formed over time at the Labs.
+
+On another occasion, Steven Johnson came into Alfred Aho's office to ask about
+parsing algorithms for his Portable C Compiler. He was having trouble getting the C parser
+working properly, so he went to Aho for his theoretical background in parsing algorithms
+and automata theory and asked how he would go about constructing a parser.
+Aho replied that first he would construct a grammar for the language, and then apply
+Knuth's LAR parsing algorithm--Aho got some sheets of cardboard from the stockroom,
+and did the sets-of-items construction for the grammar that Johnson had given him
+over the weekend.
+
+On Monday, he would give Johnson the constructed parsing table, Johnson would implement it,
+and find issues with Aho's cardboard construction. After a few iterations of this, Johnson
+asked Aho to explain the theory, which he implemented. This program went on to become the
+#mono-text("yacc") program, standing for #emph[Yet Another Compiler-Compiler], which is used
+for generating parsers from a context-free grammar.
+Aho and Johnson continued to improve the performance of the program and it vastly decreased the
+effort required to create a parser for a new language.
+Johnson's Yacc program was especially useful because it would inform the user of shift-reduce
+and reduce-reduce conflicts, so they knew if they had any difficult-to-parse constructs in their
+grammar.
+Yacc became one of the most widely used tools for creating parsers, even outside Bell Labs
+in computer science courses.
+#todo[Aho's egrep program that constructed the regexes lazily.]
+
+In a mailing list, Johnson recalled that:
+#quote(block: true)[
+The name cames as a result of a comment by Jeff Ullman -- Al was
+	telling him about the program,
+	and he said "What? Yet Another Parser Generator?"
+	So I started calling it Yacc.
+
+	The first implementation was really slow.  We were all sharing a
+	single PDP 11 with Unix on it, and
+	Yacc could take 20 minutes to generate a 50-rule grammar table.
+	Everyone would groan when  i
+	started the program: "Ohhhh.  Johnson's running Yacc again".
+]
+
+
+After Al and Johnson's optimization efforts, the group was eventually able to
+parse #gls-cap("F77").
+
+One of the fast regular expression algorithms that Aho had come up with also saw use in the
+#mono-text("lex") program, which is used for generating lexical analyzers from regular expressions.
+Eric Schmidt, summer intern at Bell Labs but perhaps better known today as the
+CEO and co-founder of Google, used one of Aho's algorithms and worked with Mike Lesk of Bell Labs
+to produce the first version of #mono-text("lex").
+Using these tools in tandem allowed for very tight iteration cycles for designing and
+developing new programming languages and compilers. With Lex for the lexer and Yacc for the parser,
+one could quickly develop the front-end of a compiler based only on the grammar for the language.
+
+
+=== Applications of Yacc and Lex: Eqn and AWK
+
+
+In 1974, Brian Kernighan and Linda Cherry developed one of the first programs
+using Lex and Yacc to develop compilers.
+It was called #mono-text("eqn") and was used for typesetting mathematical expressions,
+usually as a part of #emph[troff] documents.
+At the time, troff was the state-of-the-art typesetting tool,
+and it got lots of use at Bell Labs (recall that the Lab's primary output was publications).
+
+Troff documents were marked by beginning and ending characters with a leading perdiod.
+An Eqn equation in a troff document would start with #mono-text(".EQ") and end with #mono-text(".EN")#cite(<kernighan_cherry_eqn_1975>, form: "normal"):
+
+#code-block(".EQ\nleft [ x + y over 2a right ]~=~1\n.EN", lang: "text")
+
+
+The grammar for Eqn was defined by Yacc rules like so:
+
+#code-block("eqn : box | eqn box\nbox : text\n    | { eqn }\n    | box SUB box | box SUP box\n    | [ROMAN | BOLD | ITALIC] box", lang: "text")
+
+
+This would embed the equation $[ (x + y) / (2a) ] approx 1$ in the document.
+This was incredibly useful! Prior to typesetting programs, an author would need to deliver their
+hand-written notes to a typesetter to produce a draft before sending the typeset drafts to
+publishers and editors. Placing the typesetting programs in the hands of the authors themselves
+allowed them to see more or less the final product as they wrote.
+
+Usually, papers would not be typeset until they were already accepted and published.
+When the Bell Labs employees started writing papers with Eqn and Troff, their papers
+would be rejected by converences and editors because they "didn't want to publish anything that
+had already been published elsewhere."
+Of course these papers had not already been published, but they were so refined
+that the reviewers assumed they had been.
+
+Kernighan and Cherry wanted to be able to typeset equations in publications by typing
+something similar to plain-English descriptions, similar to how one mathematician would
+describe an equation to another over the phone.
+Al and Steve helped Brian and Linda develop Eqn, and were their first users,
+along with Richard Hamming and Doug McIlroy.
+Many of Eqn's features were eventually incorporated into Donald Knuth's TeX typesetting program.
+
+Al recalls that the first Fortran compiler took 18 staff-years to create at IBM,
+while the folks at Bell Labs were able to produce programming languages and compilers left and right
+thanks to his new tools and the developments in parsing theory they built upon.
+
+Another significant use of Lex and Yacc that perhaps sees more use today than Eqn is the AWK language,
+named after its creators Alfred Aho, Brian Kernighan, and Peter Weinberger.
+At the time, they considered it a throwaway tool and nobody else would be interested in it.
+It was designed to be a pattern-action language; programs describe a pattern and a corresponding
+action to be performed on every instance of that pattern in the input.
+
+#todo[Ratfor, AMPL, other Kernighan languages.]
+#todo[continue with typesetting...]
+
+
+=== The Dragon Book
+
+
+#figure(
+  [#image("../../resource/software/unix/dragon-book-1ed.png", height: 30%)],
+  kind: image,
+  caption: [Cover of the first edition of the Dragon Book]
+) <fig:dragon-book>
+
+
+Jeffrey Ullman and Alfred Aho continued working together on
+developing compiler theory and parsing algorithms.
+Other folks at the Labs would impress on Al that it was important to write
+about what you were working on to build your reputation in the
+scientific community, an idea that Jeff also bought into.
+They decided they ought to write a book together about their parsing
+techniques in light of how much interest the development of Unix and C
+had generated. Lots of people were newly interested in developing new
+programming languages and compilers, and they were well-positioned to
+write about it; thus was #emph[The Dragon Book] born.
+
+#quote(block: true)[
+As with the algorithms book, what we did was we performed research
+	on efficient algorithms for parsing and for some of the other phases of
+	compilation, wrote papers on those and presented them at conferences. But we
+	took the important ideas that we developed and the community had developed over
+	several decades and codified them into what are now called the dragon books. The
+	first dragon book was published in 1977.We did have theorems and proofs in the
+	book, and Jeff had this brilliant idea that the book should have a cover with a
+	fierce dragon on it representing the complexity of compiler design,and then a
+	knight in armor with a lance. The armor and the lance were emblazoned with
+	techniques from formal language theory and compiler theory to slay the
+	complexity of compiler design.
+	#cite(<aho_oral_history_2022>, form: "normal")
+]
+
+
+They published updates to the dragon book over time as well;
+they co-authored the second edition with Ravi Sethi, another Bell Labs researcher,
+in the 1980s. The second edition had grown to over 800 pages, and the third edition
+was published in 2007 at close to a thousand pages.
+At this point none of the original authors wanted to work on a fourth edition
+because of how much the field of compiler design had grown since then.
+
+The first edition (with the iconic green dragon in Figure #xref(<fig:dragon-book>, capital: false))
+had a very heavy focus
+on lexing, parsing, and semantic analysis, all but omitting optimization
+techniques. This makes sense because parsing algorithms were Al and Jeff's specialties,
+but as this book went on to be the seminal compiler textbook for a generation,
+many student's primary exposure to compiler design was almost entirely focused on
+front-end design.
+Of the 600 or so pages in the first edition, only about 100 were dedicated to
+optimization and data-flow analysis #cite(<the_dragon_book_aho_ullman_1977>, form: "normal", supplement: [Chapters 12, 13, and 14]).
+
+
+=== Trusting Trust
+
+
+#cite-title(<trusting_trust_1984>).
+
+
+=== Standard ML at Bell Labs
+
+
+Just as Aho and Ullman were collaborating on compiler technologies at Bell Labs and Princeton respectively,
+so too were David MacQueen and Andrew Appel working on Standard ML at the same respective institutions.
+
+
+=== C++
+
+
+Bjarne wanted simula 67 stuff in C. Started C with classes, built on the C preprocessor,
+which allowed all the other Bell people to use his stuff since it dropped right into C.
+Eventually needed to do more than the C preprocessor could handle, so he built a new
+preprocessor #emph[cfront], which grew to become a complete and distinct compiler.
+#cite(<bjarne_stroustrup_design_of_cpp_1995>, form: "normal").
+David Macqueen interview had interesting perspectives on this.
