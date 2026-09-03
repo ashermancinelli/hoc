@@ -11,3 +11,4 @@
 // citations. A tiny CSL style supplies the title-only form used throughout the
 // manuscript's source discussions and Quotes chapter.
 #let cite-title(key) = cite(key, style: "styles/title-only.csl")
+#let citen(key) = cite(key, form: "normal")
