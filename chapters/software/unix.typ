@@ -147,7 +147,16 @@ and notice the similarities to modern parser generators and Backus-Naur Form:
 #quote(block: true)[
 This simple program defines the translation of fully parenthesized infix
 	expressions to Polish postfix for a stack machine.
-	#code-block("        expr: <(>/exp1 expr operator expr <)> = { 3 1 2 };\n        exp1: ident = { < LOAD > 1 };\n        operator:\n        op0: <+>/op1 = { < ADD > };\n        op1: <->/op2 = { < SUB > };\n        op2: <*>/op3 = { < MPY > };\n        op3: </>     = { < DIV > };\n    ", lang: "text")
+	```text
+        expr: <(>/exp1 expr operator expr <)> = { 3 1 2 };
+        exp1: ident = { < LOAD > 1 };
+        operator:
+        op0: <+>/op1 = { < ADD > };
+        op1: <->/op2 = { < SUB > };
+        op2: <*>/op3 = { < MPY > };
+        op3: </>     = { < DIV > };
+
+```
 ]
 
 
@@ -191,7 +200,15 @@ Dennis Ritchie points out the following two examples as only being possible
 in BCPL and not in B or C due to memory constraints
 #cite(<development_of_c_language_chist_ritchie_1996>, form: "normal"):
 
-#code-block("let P1 be procedure\nand P2 be procedure\nand P3 be procedure\n\nE1 := valof ( declarations ;\n              commands ;\n              resultis E2 ) + 1", lang: "sml")
+```sml
+let P1 be procedure
+and P2 be procedure
+and P3 be procedure
+
+E1 := valof ( declarations ;
+              commands ;
+              resultis E2 ) + 1
+```
 
 
 Because the entire program was held in memory, the BCPL compiler could make
@@ -228,7 +245,16 @@ Since pointers were just integers representing offsets into memory, pointer arit
 was natural in both languages, and both had syntax sugar to facilitate pointer arithmetic
 and dereferencing of offsets into arrays.
 
-#code-block("/* Declaring an array of 10 integers */\nlet V = vec 10 In BCPL\nauto V[10];    In B\n\n/* Accessing element i of array V */\nV!i            In BCPL\n*(V+i)         In B\nV[i]           Also in B", lang: "text")
+```text
+/* Declaring an array of 10 integers */
+let V = vec 10 In BCPL
+auto V[10];    In B
+
+/* Accessing element i of array V */
+V!i            In BCPL
+*(V+i)         In B
+V[i]           Also in B
+```
 
 
 After Ken had the TMG version of B working, he #gls("bootstrap")ped the compiler
@@ -327,7 +353,11 @@ simple as possible.
 For example, the precedence of #mono-text("&") and #mono-text("==") were made equal in C,
 thereby requiring parentheses in the second expression below:
 
-#code-block("if (a == b & c) { /* ... */ }\nif ((c & b) == a) { /* ... */ }\n/*  ^ Parentheses required here */", lang: "c")
+```c
+if (a == b & c) { /* ... */ }
+if ((c & b) == a) { /* ... */ }
+/*  ^ Parentheses required here */
+```
 
 
 While many features were added to C in 1972-1973, the preprocessor was likely the most
@@ -450,7 +480,12 @@ the development of SNOBOL.
 #cite(<farber_snobol_string_manip_lang_1964>, form: "normal") uses the following program
 do describe the syntax of SNOBOL:
 
-#code-block("START     VOWEL = \"A,E,I,O,U\"\nV1 VOWEL *V* \",\" = /F(END)\nV2 TEXT   V      = /S(V2)F(V1)\nEND       START", lang: "snobol")
+```snobol
+START     VOWEL = "A,E,I,O,U"
+V1 VOWEL *V* "," = /F(END)
+V2 TEXT   V      = /S(V2)F(V1)
+END       START
+```
 
 
 This program removes all the vowels from the string defined by #mono-text("TEXT").
@@ -547,12 +582,22 @@ and it got lots of use at Bell Labs (recall that the Lab's primary output was pu
 Troff documents were marked by beginning and ending characters with a leading perdiod.
 An Eqn equation in a troff document would start with #mono-text(".EQ") and end with #mono-text(".EN")#cite(<kernighan_cherry_eqn_1975>, form: "normal"):
 
-#code-block(".EQ\nleft [ x + y over 2a right ]~=~1\n.EN", lang: "text")
+```text
+.EQ
+left [ x + y over 2a right ]~=~1
+.EN
+```
 
 
 The grammar for Eqn was defined by Yacc rules like so:
 
-#code-block("eqn : box | eqn box\nbox : text\n    | { eqn }\n    | box SUB box | box SUP box\n    | [ROMAN | BOLD | ITALIC] box", lang: "text")
+```text
+eqn : box | eqn box
+box : text
+    | { eqn }
+    | box SUB box | box SUP box
+    | [ROMAN | BOLD | ITALIC] box
+```
 
 
 This would embed the equation $[ (x + y) / (2a) ] approx 1$ in the document.

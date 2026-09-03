@@ -3,15 +3,7 @@
 #let todo(body) = text(fill: red, font: "DejaVu Sans Mono", [TODO: #body])
 #let unsupported(name, body) = text(fill: rgb("9c2f2f"), [#body])
 
-#let code-block(source, lang: "text") = block(
-  width: 100%,
-  inset: 8pt,
-  stroke: (top: 0.5pt, bottom: 0.5pt),
-  breakable: true,
-  raw(source, block: true, lang: lang),
-)
-
-#let code-file(path, lang: "text") = code-block(read(path), lang: lang)
+#let code-file(path, lang: "text") = raw(read(path), block: true, lang: lang)
 
 #let xref(target, capital: false) = ref(target)
 

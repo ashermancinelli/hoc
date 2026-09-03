@@ -203,16 +203,25 @@ which asks whether the input program contains an assignation, and to determine t
 we must test if we have a destination, followed by some language construct that
 becomes a symbol, followed by a source.
 
-#code-block("assignation(ref(MODE)) :-\n      destination(ref(MODE)), becomes_symbol, source(MODE).", lang: "prolog")
+```prolog
+assignation(ref(MODE)) :-
+      destination(ref(MODE)), becomes_symbol, source(MODE).
+```
 
 
 The corresponding rule in the [MR93] draft report is as follows
 #cite(<draft_report_algol_1968>, form: "normal"):
-#code-block("MODE assignation :\n    reference to MODE destination, becomes symbol, MODE source.", lang: "ebnf")
+```ebnf
+MODE assignation :
+    reference to MODE destination, becomes symbol, MODE source.
+```
 
 
 Substituting #strong[#emph[int]] for our #strong[#emph[MODE]], we have:
-#code-block("int assignation :\n    reference to int destination, becomes symbol, int source.", lang: "ebnf")
+```ebnf
+int assignation :
+    reference to int destination, becomes symbol, int source.
+```
 
 
 If you squint your eyes, maybe you can see how #emph[i := 5] fits the mold for this
@@ -281,7 +290,12 @@ Structure types are equivalent if their members are equivalent, as opposed to na
 which would have implied two structures with the same members but different names
 are not equivalent.
 The following two types are equivalent by structural comparison:
-#code-block("mode a = struct (int val,\n                 ref a next);\nmode b = struct (int val,\n                 ref struct (int val, ref b next) next);", lang: "pascal")
+```pascal
+mode a = struct (int val,
+                 ref a next);
+mode b = struct (int val,
+                 ref struct (int val, ref b next) next);
+```
 
 
 === Concepts of ALGOL 68
@@ -295,7 +309,12 @@ Firstly, ALGOL 68 is an expression-oriented language;
 there is fundamentally no distinction between statements and expressions,
 allowing for constructs like the following:
 
-#code-block("x := (real a = p*q;\n      real b = p/q;\n      if a>b then a else b fi)\n      + (y := 2*z);", lang: "pascal")
+```pascal
+x := (real a = p*q;
+      real b = p/q;
+      if a>b then a else b fi)
+      + (y := 2*z);
+```
 
 
 One of the key goals of the committee was to design language features that
@@ -316,7 +335,17 @@ One of the principal design goals of Algol 68 was to make the various features
 
 There were numerous extensions to arrays, including higher-dimensional arrays,
 complicated slicing mechanisms, and flexible arrays, such as the following:
-#code-block("loc[1:4, 1:5] int a45;\na45[2  ,    ] # row 2 #\na45[   , 3  ] # column 3 #\na45[2:3, 3  ] # part of column 3 #\na45[2:3, 2:4] # a little square in the middle.  #\n\nloc flex [1:0] int array; # initially empty #\narray := (1, 2, 3);       # now it has bounds [1:3] #\narray := (4, 5, 6, 7, 8); # now it has bounds [1:5] #", lang: "pascal")
+```pascal
+loc[1:4, 1:5] int a45;
+a45[2  ,    ] # row 2 #
+a45[   , 3  ] # column 3 #
+a45[2:3, 3  ] # part of column 3 #
+a45[2:3, 2:4] # a little square in the middle.  #
+
+loc flex [1:0] int array; # initially empty #
+array := (1, 2, 3);       # now it has bounds [1:3] #
+array := (4, 5, 6, 7, 8); # now it has bounds [1:5] #
+```
 
 
 #gls-cap("call-by-name") as it was known in ALGOL 60 was removed in favor of
@@ -363,7 +392,9 @@ One particularly problematic coercion rule was #emph[proceduring].
 This allowed users to force call-by-name semantics by coercing an expression
 into a parameterless procedure, like so:
 
-#code-block("      PROC x plus 1 = INT : x + 1;", lang: "pascal")
+```pascal
+      PROC x plus 1 = INT : x + 1;
+```
 
 
 The right hand side of this expression is a #emph[cast]
@@ -376,7 +407,22 @@ obviate the need for call-by-name semantics, but that call-by-substitution is wh
 ALGOL 60's call-by-name effectively was, and this was still possible with ALGOL 68
 via this #emph[proceduring] coercion:
 
-#code-block("proc series = (int k, ref int i, proc real term) real expr\n    begin\n    real sum(0);\n    for j to k do\n        begin i := j;\n              sum plus term\n        end;\n    sum\n    end\n\nx := series (100, i, real expr(1/i));\n\n# Or, via proceduring: #\nx := series (100, i, 1/i);", lang: "pascal")
+```pascal
+proc series = (int k, ref int i, proc real term) real expr
+    begin
+    real sum(0);
+    for j to k do
+        begin i := j;
+              sum plus term
+        end;
+    sum
+    end
+
+x := series (100, i, real expr(1/i));
+
+# Or, via proceduring: #
+x := series (100, i, 1/i);
+```
 
 
 This facility was abandoned in the ALGOL 68-R implementation which
