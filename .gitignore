@@ -32,7 +32,6 @@
 *.synctex.gz
 *.fdb_latexmk
 *.synctex.gz(busy)
-*.pdf # if you only want to track source files and not the compiled PDF
 
 # Editor-specific or OS-specific files
 .DS_Store
@@ -41,5 +40,5 @@
 *.bak
 *.swp
 *.bcf
-hoc.pdf
+/hoc.pdf
 _minted-hoc/

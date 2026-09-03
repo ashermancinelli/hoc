@@ -8,6 +8,9 @@ build:
 watch:
     typst watch --root . --input revision={{revision}} main.typ hoc.pdf
 
+publish: build
+    cp "hoc.pdf" "publish/hoc.pdf"
+
 open: build
     open hoc.pdf
 
