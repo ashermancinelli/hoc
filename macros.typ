@@ -19,13 +19,3 @@
 // citations. A tiny CSL style supplies the title-only form used throughout the
 // manuscript's source discussions and Quotes chapter.
 #let cite-title(key) = cite(key, style: "styles/title-only.csl")
-
-#let deferred(title, source) = block(
-  width: 100%,
-  inset: 8pt,
-  fill: rgb("f4f1e8"),
-  stroke: rgb("b8aa84"),
-  [*#title — deferred during the Typst migration.*
-
-  #raw(source, block: true, lang: "lua")],
-)
