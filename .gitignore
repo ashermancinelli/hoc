@@ -41,4 +41,5 @@
 *.swp
 *.bcf
 /hoc.pdf
+/chapters/codesign/flang.png
 _minted-hoc/
