@@ -142,8 +142,6 @@ general-purpose programming language to do so.
 === Flang
 
 
-#deferred("Generated Lua content", "shell = require(\"lua/shell\")\n\tpng = shell.dot_to_png(\"chapters/codesign/flang.dot\")\n\ttex.sprint(\"\\\\begin{figure}[h!]\")\n\t\ttex.sprint(\"\\\\centering\")\n\t\ttex.sprint(\"\\\\includegraphics[width=.7\\\\textwidth]{\" .. png .. \"}\")\n\t\ttex.sprint(\"\\\\caption{MLIR Lowering in Flang}\")\n\t\ttex.sprint(\"\\\\label{fig:flang-mlir-lowering}\")\n\t\ttex.sprint(\"\\\\end{figure}\")")
-
 #figure(
   code-file("chapters/codesign/flang.dot", lang: "dot"),
   kind: image,

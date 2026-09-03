@@ -13,6 +13,7 @@
 
 #include "codesign/mlir.typ"
 
+#include "codesign/tracing.typ"
 
 // \section{Accelerators}
 // fpgas.
