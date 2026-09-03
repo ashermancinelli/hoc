@@ -259,7 +259,9 @@ the formulas starting with 10 and ending with 14 would be executed
 9 times in total, starting with i taking the value of 4 and incrementing by 2
 until reaching 20; once completed, control resumes at formula 30:
 
-#code-block("      do 10 14 30 i=4,20,2", lang: "fortran")
+```fortran
+      do 10 14 30 i=4,20,2
+```
 
 
 Whew! For such a fundamental concept, the #acr-short("cfg") is potentially very complex.

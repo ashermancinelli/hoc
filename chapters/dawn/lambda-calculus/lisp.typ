@@ -269,7 +269,14 @@ If the search did not find such an #mono-text("x"), then the function containing
 the remainder of the computation taking no arguments #mono-text("u") should be called and its value
 returned.
 
-#code-block("(define (testr x p f u)\n  (cond\n    [(p x) (f x)]\n    [(not (pair? x)) (u)]\n    [else (testr (car x) p f (lambda () (testr (car x) p f u)))]))\n    ;                         Which x is this?  ^^^^^", lang: "lisp")
+```lisp
+(define (testr x p f u)
+  (cond
+    [(p x) (f x)]
+    [(not (pair? x)) (u)]
+    [else (testr (car x) p f (lambda () (testr (car x) p f u)))]))
+    ;                         Which x is this?  ^^^^^
+```
 
 
 The issue, pointed out in a comment in the code block, is that the #mono-text("(car x)")

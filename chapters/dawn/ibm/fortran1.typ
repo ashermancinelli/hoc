@@ -15,13 +15,22 @@ one now only specified the final formula of the loop, or the #gls("backedge").
 In the following loop, #mono-text("I") begins at 1 and increments by 1 until it reaches 5, and for
 each iteration, #mono-text("N(I)") is accessed, multiplied with #mono-text("I") and stored in #mono-text("A(I)"):
 
-#code-block("10    DO 20 I=1,5\n20    A(I) = I*N(I)\n30", lang: "fortran")
+```fortran
+10    DO 20 I=1,5
+20    A(I) = I*N(I)
+30
+```
 
 
 IF-statements were still quite unweildy; they took three formulas, the first if the
 condition yielded a negative value, the second if it was zero, and the third if it was positive:
 
-#code-block("10    IF(A(I)) 20,30,40\n20    ! ... Jump to here if A(I) < 0\n30    ! ... Jump to here if A(I) = 0\n40    ! ... Jump to here if A(I) > 0", lang: "fortran")
+```fortran
+10    IF(A(I)) 20,30,40
+20    ! ... Jump to here if A(I) < 0
+30    ! ... Jump to here if A(I) = 0
+40    ! ... Jump to here if A(I) > 0
+```
 
 
 To be fair to John Backus, he is quite self-deprecating when recalling these details about the
@@ -152,7 +161,12 @@ In 1957 they published a small addendum to the Programmer's Reference Manual,
 documenting #emph[functions statements], which have persisted through to modern Fortran.
 They allow users to define functions in a single statement, like so:
 
-#code-block("FIRSTF(X) = A*X+B\nSECONDF(X, B) = A*X+B\nTHIRDF(D) = FIRSTF(E)/ D\nFOURTHF(F,G) = SECONDF(F, THIRDF(G))", lang: "fortran")
+```fortran
+FIRSTF(X) = A*X+B
+SECONDF(X, B) = A*X+B
+THIRDF(D) = FIRSTF(E)/ D
+FOURTHF(F,G) = SECONDF(F, THIRDF(G))
+```
 
 
 There were numerous language features specific to the 704 as well,
@@ -243,7 +257,28 @@ So, a FORTRAN program accessing elements of $A$ linearly as they
 are stored in memory (also known as #gls("stride1"))
 #link("https://godbolt.org/z/T6M4dvMP4")[would look like this:]
 
-#code-block("      real A(3,3)\n      integer i,j\nc     Innermost loop is the fastest-moving index\n      do 10 j = 1, 3\n         do 10 i = 1, 3\n            A(i,j) = real(i)/real(j)\n            print *, i, j\n   10 continue\n      end\n\nc     Program prints:\nc     1           1\nc     2           1\nc     3           1\nc     1           2\nc     2           2\nc     3           2\nc     1           3\nc     2           3\nc     3           3", lang: "fortran")
+```fortran
+      real A(3,3)
+      integer i,j
+c     Innermost loop is the fastest-moving index
+      do 10 j = 1, 3
+         do 10 i = 1, 3
+            A(i,j) = real(i)/real(j)
+            print *, i, j
+   10 continue
+      end
+
+c     Program prints:
+c     1           1
+c     2           1
+c     3           1
+c     1           2
+c     2           2
+c     3           2
+c     1           3
+c     2           3
+c     3           3
+```
 
 
 Now, the FORTRAN team's concern was that their compiler would not be able to recognize
@@ -265,7 +300,18 @@ matrix, and the #gls("inducvar") $i$ is incremented by one via the DO loop,
 and is not modified in the loop body.
 Consider the following program, where it is not #emph[quite] so clear:
 
-#code-block("      real A(3,3)\n      integer i,j\nc     Innermost loop is the fastest-moving index\n      do 10 j = 0, 2\n         do 10 i = 1, 3\n            i = i + 1\n            A(i,j) = real(i)/real(j)\n            print *, i, j\n   10 continue\n      end", lang: "fortran")
+```fortran
+      real A(3,3)
+      integer i,j
+c     Innermost loop is the fastest-moving index
+      do 10 j = 0, 2
+         do 10 i = 1, 3
+            i = i + 1
+            A(i,j) = real(i)/real(j)
+            print *, i, j
+   10 continue
+      end
+```
 
 
 Does this loop access $A$ with #gls("stride1")?

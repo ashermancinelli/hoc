@@ -71,7 +71,20 @@ the likes of which would not be worked out until Alfred Aho's work at Bell Labs
 Their user manual gives the following example of an iterative algorithm for
 calculating the power series of $"cosine"(x)$:
 
-#code-block("    x = 0,\n1   y = 10,\n    z = 1,\n2   z = 1 - z x^2/y (y - 1),\n    y = y - 2,\n    e = 1 - y,\n    CP 2,\n    PRINT x, Z.\n    x = x + O.l,\n    a = x - 1.05,\n    CP 1,\n    STOP", lang: "basic")
+```basic
+    x = 0,
+1   y = 10,
+    z = 1,
+2   z = 1 - z x^2/y (y - 1),
+    y = y - 2,
+    e = 1 - y,
+    CP 2,
+    PRINT x, Z.
+    x = x + O.l,
+    a = x - 1.05,
+    CP 1,
+    STOP
+```
 
 
 While this might seem trivial today, it was a significant deviation from the

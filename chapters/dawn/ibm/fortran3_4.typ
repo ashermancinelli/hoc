@@ -109,7 +109,23 @@ but there are lots of mistakes that are hard to avoid with COMMON blocks.
 For example, take the following subroutines, and assume they are
 defined in different files (and thus different #gls("translation-unit")s):
 
-#code-block("! f.F\nsubroutine f()\n  real n\n  real A(10)\n  common /lab/ A, n\n  ! uses of A and n...\nend subroutine\n\n! g.F\nsubroutine g()\n  real n\n  real A(5)\n  common /lab/ n, A\n  ! uses of A and n...\nend subroutine", lang: "fortran")
+```fortran
+! f.F
+subroutine f()
+  real n
+  real A(10)
+  common /lab/ A, n
+  ! uses of A and n...
+end subroutine
+
+! g.F
+subroutine g()
+  real n
+  real A(5)
+  common /lab/ n, A
+  ! uses of A and n...
+end subroutine
+```
 
 
 Notice how the declarations of #mono-text("A") and #mono-text("n") differ between the two

@@ -50,7 +50,28 @@ The #acr-full("cfg") is also explicit; functions are made up of #gls("basicblock
 basic blocks are made up of instructions and terminated by branches or terminators,
 and functions end in exactly one terminator (like a #mono-text("return")):
 
-#code-block("; Perhaps not the most efficient way to add two numbers.\n; unsigned add2(unsigned a, unsigned b) {\n;   if (a == 0) return b;\n;   return add2(a-1, b+1);\n; }\n\ndefine i32 @add2(i32 %a, i32 %b) {\nentry:\n  %tmp1 = icmp eq i32 %a, 0\n  br i1 %tmp1, label %done, label %recurse\n\nrecurse:\n  %tmp2 = sub i32 %a, 1\n  %tmp3 = add i32 %b, 1\n  %tmp4 = call i32 @add2(i32 %tmp2, i32 %tmp3)\n  ret i32 %tmp4\n\ndone:\n  ret i32 %b\n}", lang: "llvm")
+```llvm
+; Perhaps not the most efficient way to add two numbers.
+; unsigned add2(unsigned a, unsigned b) {
+;   if (a == 0) return b;
+;   return add2(a-1, b+1);
+; }
+
+define i32 @add2(i32 %a, i32 %b) {
+entry:
+  %tmp1 = icmp eq i32 %a, 0
+  br i1 %tmp1, label %done, label %recurse
+
+recurse:
+  %tmp2 = sub i32 %a, 1
+  %tmp3 = add i32 %b, 1
+  %tmp4 = call i32 @add2(i32 %tmp2, i32 %tmp3)
+  ret i32 %tmp4
+
+done:
+  ret i32 %b
+}
+```
 
 
 There are few instructions and some of them are overloaded, making the IR
@@ -60,7 +81,12 @@ The IR as it was when Lattner published his PhD thesis had only 31 opcodes
 
 Structs are represented in an unsurprising way:
 // \begin{lstlisting}[language=llvm,frame=single]
-#code-block("; struct RT {char A; int B[10][20]; char C;};\n; struct ST {int X; double Y; struct RT Z;};\n%struct.ST = type { i32, double, %struct.RT }\n%struct.RT = type { i8, [10 x [20 x i32]], i8 }", lang: "llvm")
+```llvm
+; struct RT {char A; int B[10][20]; char C;};
+; struct ST {int X; double Y; struct RT Z;};
+%struct.ST = type { i32, double, %struct.RT }
+%struct.RT = type { i8, [10 x [20 x i32]], i8 }
+```
 
 
 Memory operations are represented by the #mono-text("load") and #mono-text("store")
@@ -70,7 +96,11 @@ this in modern LLVM IR:
 
 // https://godbolt.org/z/oozebnznf
 // \begin{lstlisting}[frame=single]
-#code-block("%0 = ; pointer to value of type ST\n%1 = getelementptr i8, ptr %0, i64 1296\n%2 = load i32, ptr %2", lang: "llvm")
+```llvm
+%0 = ; pointer to value of type ST
+%1 = getelementptr i8, ptr %0, i64 1296
+%2 = load i32, ptr %2
+```
 
 
 LLVM IR was initially more strongly typed than it is today:
@@ -112,7 +142,13 @@ directly on a regular basis.
 
 The above snippet of C++ constructs the function in LLVM IR below:
 
-#code-block("define i32 @add_ints(i32 %0, i32 %1) {\nentry:\n  %2 = add i32 %0, %1\n  ret i32 %2\n}", lang: "llvm")
+```llvm
+define i32 @add_ints(i32 %0, i32 %1) {
+entry:
+  %2 = add i32 %0, %1
+  ret i32 %2
+}
+```
 
 
 The modular interfaces for working with IR do not stop with the #emph[construction]
@@ -121,14 +157,30 @@ there are also rich interfaces for constructing compiler passes and pattern-matc
 The example instruction-simplification pass below from #cite(<brown_wilson_lattner_aosa_vol1_2011>, form: "normal")
 demonstrates how the pattern-matching interfaces might be used in a #gls("peephole") optimization:
 
-#code-block("// X - 0 -> X\nif (match(Op1, m_Zero()))\n  return Op0;\n// X - X -> 0\nif (Op0 == Op1)\n  return Constant::getNullValue(Op0->getType());\n// (X*2) - X -> X\nif (match(Op0, m_Mul(m_Specific(Op1), m_ConstantInt<2>())))\n  return Op1;\n// …\nreturn nullptr;  // Nothing matched, return null to indicate no transformation.", lang: "cpp")
+```cpp
+// X - 0 -> X
+if (match(Op1, m_Zero()))
+  return Op0;
+// X - X -> 0
+if (Op0 == Op1)
+  return Constant::getNullValue(Op0->getType());
+// (X*2) - X -> X
+if (match(Op0, m_Mul(m_Specific(Op1), m_ConstantInt<2>())))
+  return Op1;
+// …
+return nullptr;  // Nothing matched, return null to indicate no transformation.
+```
 
 
 This function might be called in a simplification pass that traverses
 all the instructions in a #gls("basicblock"), and if a simpler version
 of the instruction is found, the simpler version replaces the original instruction like so:
 
-#code-block("for (auto &I : BB)\n  if (auto *NewValue = simplifyInstruction(I))\n    I.replaceAllUsesWith(NewValue);", lang: "cpp")
+```cpp
+for (auto &I : BB)
+  if (auto *NewValue = simplifyInstruction(I))
+    I.replaceAllUsesWith(NewValue);
+```
 
 
 ==== Aside: Influence of ML on LLVM
