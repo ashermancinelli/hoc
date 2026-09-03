@@ -149,7 +149,7 @@ choosing based out of IBM's Manhattan headquarters, including Irving Ziller,
 #todo[list other members]. They released #cite(<IBM_1954_FORTRAN_Specifications>, form: "normal")
 after about one year of working
 together.
-Roughly two years after its first conception, #mono[FORTRAN]{} was released for
+Roughly two years after its first conception, #mono[FORTRAN] was released for
 the first time. It would go on to ship with every IBM 704 and become the
 primary means of programming in the scientific community.
 
@@ -162,7 +162,7 @@ and his team would continue to develop and stabilize this compiler for several
 years, though.
 
 #quote(block: true)[
-#mono[FORTRAN]{} did not really grow out of some brainstorm about the beauty of
+#mono[FORTRAN] did not really grow out of some brainstorm about the beauty of
 	programming in mathematical notation; instead it began with the recognition
 	of a basic problem of economics: programming and debugging costs already
 	exceeded the cost of running a program, and as computers became faster
@@ -198,7 +198,7 @@ Backus himself#cite(<Backus_1980_Programming_in_America_in_1950s>, form: "normal
 came #emph[after] Backus and Ziller had been given a demonstration of Laning
 and Zierler's algebraic compiler for the Whirlwind at MIT at the ONR symposium
 of 1954. When they received this demonstration, there were already four members
-of the #mono[FORTRAN]{} team, Irving Ziller, Robert Nelson, Harlan Herrick, and Backus
+of the #mono[FORTRAN] team, Irving Ziller, Robert Nelson, Harlan Herrick, and Backus
 himself. In Backus's words#cite(<Backus_1980_Programming_in_America_in_1950s>, form: "normal"):
 
 #quote(block: true)[
@@ -229,7 +229,7 @@ as well.
 I am not sure who to believe either!
 
 With the support of his new boss Cuthbert Hurd, his family, friends, and his
-team, the first report of #mono[FORTRAN]{} was released externally to 704 users. This
+team, the first report of #mono[FORTRAN] was released externally to 704 users. This
 brought interest from a variety of users, many of whom offered up members of
 their teams to help.
 

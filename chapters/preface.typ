@@ -14,7 +14,7 @@ but never told its own rite.
 For example, there are wonderful
 retellings of the very first compilers on Konrad Zuse's Z4 computer at the ETH
 Zurichand and Grace Hopper's pioneering work on the A-series compilers for the
-UNIVAC I, and John Backus' work on the first commercial compiler for #mono[FORTRAN]{}
+UNIVAC I, and John Backus' work on the first commercial compiler for #mono[FORTRAN]
 at IBM, but these are often isolated stories. When they are woven together, they
 are often not connected to the #emph[next]
 developments in compiler technology at Bell Labs: Aho and Ullman's

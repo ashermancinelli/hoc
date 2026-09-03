@@ -71,7 +71,7 @@ Despite great strides in software, programming always seemed to be in a state of
 ]
 
 
-Backus describes this as part of the motivation for beginning work on #mono[Fortran]{}
+Backus describes this as part of the motivation for beginning work on #mono[Fortran]
 #cite(<hopl_backus_history_of_fortran>, form: "normal", supplement: [#emph[The Economics of Programming]]):
 #quote(block: true)[
 Another factor that influenced the development of Fortran was the economics

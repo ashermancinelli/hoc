@@ -19,7 +19,7 @@ description was an idea whose time had not yet come.
 As far as I know that paper had only one reader, Peter Naur"
 #cite(<Backus_1980_Programming_in_America_in_1950s>, form: "normal").
 
-Backus was involved in two programming languages at the time, #mono[FORTRAN]{} and IAL,
+Backus was involved in two programming languages at the time, #mono[FORTRAN] and IAL,
 having already moved on from Speedcoding.
 Backus had been made aware of the logician Emil Post and her work on computability
 in a course given by Martin Davis, in particular, Post's notion of a "production."
@@ -220,7 +220,7 @@ Among the now-unusual argument evaluation semantics, ALGOL also lacked any I/O
 facilities as we have already discussed.  The language also made string
 variables available, but provided no means of manipulating them.  ALGOL
 permitted #emph[own variables], which are akin to static variables in C or
-SAVE variables in #mono[FORTRAN]{}; they retain their values between entrances to the
+SAVE variables in #mono[FORTRAN]; they retain their values between entrances to the
 block.  Dijkstra also points out nowhere is the evaluation order of
 subexpressions specified #cite(<dijkstra_defense_of_algol_60_1961>, form: "normal").
 

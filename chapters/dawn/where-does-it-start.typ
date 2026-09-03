@@ -56,7 +56,7 @@ Once could argue that any of these efforts constituted the first compiler:
   [Grace Hopper's A-0 and A-1 compilers for the UNIVAC I at
 	      Remington Rand in 1951],
   [Laning and Zierler's algebraic compiler for the Whirlwind at MIT in 1950],
-  [John Backus's #mono[FORTRAN I]{} compiler at IBM],
+  [John Backus's #mono[FORTRAN I] compiler at IBM],
 )
 
 
