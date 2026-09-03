@@ -1,7 +1,15 @@
 #import "prelude.typ": *
 #import "macros.typ": *
 #import "glossaries.typ": *
+#import "@preview/retrofit:0.2.0": backrefs
 
+#show: backrefs.with(
+  format: links => text(fill: rgb("666666"), size: 0.85em)[
+    (Cited on #if links.len() == 1 { [p.] } else { [pp.] }
+    #links.join(", ", last: " and "))
+  ],
+  read: path => read(path),
+)
 #show: book
 
 #let revision = sys.inputs.at("revision", default: "working tree")
@@ -31,10 +39,8 @@
 
 #bibliography(
   "refs.bib",
-  title: [Bibliography],
   style: "chicago-author-date",
   full: true,
 )
 
 #print-glossaries()
-
