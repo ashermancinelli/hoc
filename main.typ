@@ -1,7 +1,10 @@
 #import "prelude.typ": *
 #import "macros.typ": *
 #import "glossaries.typ": *
+#import "@preview/bookly:5.0.0": *
 #import "@preview/retrofit:0.2.0": backrefs
+
+#let revision = sys.inputs.at("revision", default: "working tree")
 
 #show: backrefs.with(
   format: links => text(fill: rgb("666666"), size: 0.85em)[
@@ -10,23 +13,38 @@
   ],
   read: path => read(path),
 )
-#show: book
+#show: bookly.with(
+  title: "A Brief History of Compilers",
+  author: "Asher Mancinelli",
+  theme: classic,
+  lang: "en",
+  fonts: (
+    size: 12pt,
+    body: "Libertinus Serif",
+  ),
+  colors: (
+    primary: rgb("245b8a"),
+  ),
+  title-page: book-title-page(
+    subtitle: none,
+    edition: none,
+    series: "Compiler History",
+    institution: "A Brief History of Compilers",
+    version-usage: [Revision #revision],
+  ),
+  config-options: (
+    paper-size: "us-letter",
+    open-right: true,
+    alt-margins: false,
+    par-indent: false,
+  ),
+)
+#show: highlight-links
 
-#let revision = sys.inputs.at("revision", default: "working tree")
+#show: front-matter
+#tableofcontents
 
-#align(center)[
-  #v(18%)
-  #text(size: 30pt, weight: "bold")[A Brief History of Compilers]
-  #v(1.5em)
-  #text(size: 16pt)[Asher Mancinelli]
-  #v(1em)
-  #datetime.today().display("[month repr:long] [day], [year]") \
-  Revision: #revision
-]
-
-#pagebreak()
-#outline(title: [Contents], depth: 5)
-#pagebreak()
+#show: main-matter
 
 #include "chapters/preface.typ"
 #include "chapters/read-instead.typ"
@@ -37,6 +55,7 @@
 #include "chapters/codesign.typ"
 #include "chapters/quotes.typ"
 
+#show: back-matter
 #bibliography(
   "refs.bib",
   style: "chicago-author-date",
