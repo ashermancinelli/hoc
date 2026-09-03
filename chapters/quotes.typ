@@ -1,0 +1,398 @@
+#import "../macros.typ": *
+#import "../glossaries.typ": *
+
+
+= Quotes
+
+This section should not be included in the final copy;it contains quotes and
+bibliographic references that may be useful in the writing of the
+book.
+
+== #cite-title(<allen_catalogue_1971>)
+#cite(<allen_catalogue_1971>, form: "prose")
+
+One of the earliest publications about compiler optimizations. Mentions
+inlining/IPO.
+#quote(block: true)[
+The term #emph[optimization]
+	is a misnomer in that it is not generally clear that a particular, so called,
+	optimizing transformation even results in an improvement to the program. A more
+	correct term would be "amelioration."
+]
+
+
+== #cite-title(<hopl_keynote>)
+#cite(<hopl_keynote>, form: "prose")
+
+#quote(block: true)[
+Mark I had built-in programs for sine, cosine, exponential, arctangent,
+	.-... On theother hand, because they were wired into the machine, they had to
+	be completely general.Any problem that we solved, we found we did not need
+	complete generality; we alwaysknew something about what we were doing--that was
+	what the problem was. And the answer was--we started writing subroutines, only
+	we thought they were pieces of coding.And if I needed a sine subroutine, angle
+	less than zr/4, I'd whistle at Dick and say, "Can Ihave your sine subroutine?"
+	and I'd copy it out of his notebook. We soon found that weneeded just a
+	generalized format of these if we were going to copy them, and I found
+	ageneralized subroutine for Mark I. With substitution of certain numbers, it
+	can be copiedinto any given program. So as early as 1944 we started putting
+	together things which wouldmake it easier to write more accurate programs and
+	get them written faster. I think we've forgotten to some extent how early that
+	started.
+]
+
+
+== #cite-title(<the-first-computers-2002>)
+#cite(<the-first-computers-2002>, form: "prose")
+
+#quote(block: true)[
+The chief programmer of Mark I, Richard M. Bloch, kept a notebook in which he
+	wrote out pieces of code that had been checked out and were known to be correct.
+	One of Bloch's routines computed sines for positive angles less than 45 degrees
+	to only ten digits. Rather than use the slow sine unit built into themachine,
+	Grace Hopper simply copied Dick's routine into her own program whenever she
+	knew it would suit her requirements. This practice ultimately allowed the
+	programmers to dispense with the sine, logarithm, and exponential units
+	altogether. Both Bloch and Bob Campbell had notebooks full of such pieces of
+	code. Years later, the programmers realized that they were pioneering the art of
+	subroutines and actually developing the possibility of building compilers.
+]
+
+#quote(block: true)[
+There were sets of instructions for integers, floating-point numbers, packed
+	decimal numbers, and character strings; operating in a variety of modes. This
+	philosophy had evolved in an environment dominated bymagnetic core memory, to
+	which access was slow relative to processor operations. Thus it made sense
+	tospecify in great detail what one wanted to do with a piece of data before
+	going off to memory to get it. Theinstruction sets also reflected the state of
+	compiler technology. If the processor could perform a lot ofarithmetic on data
+	with only one instruction, then the compiler would have that much less work to
+	do. A richinstruction set would reduce the "semantic gap" between the
+	English-like commands of a high-levelprogramming language and the primitive and
+	tedious commands of machine code. Cheap read-only memorychips meant that the
+	designer could create these rich instruction sets at low cost if the computer
+	was micro-programmed.
+]
+
+
+== #cite-title(<grace_hopper_and_the_invention_of_the_information_age_2009>)
+#cite(<grace_hopper_and_the_invention_of_the_information_age_2009>, form: "prose")
+
+#quote(block: true)[
+Though it is sometimes difficult to identify the motivation behind
+	particularinventions, it appears that a dearth of talented programmers, a
+	personalfrustration with the monotony of existing programming techniques, and
+	the lack of resourcesmade available by senior management at Remington Rand to
+	support computerclients led Hopper to invent the technologies and techniques,
+	such as the compiler,that allowed the computers to, in effect, help program
+	themselves.Interestingly enough, as her A-0 compiler evolved into the A-1 and
+	the A-2,Hopper's reasoning in regard to the invention changed. Compilers became
+	lessabout relievingprogrammers of the monotony of coding and more about
+	reducing programming costs and processing time.
+]
+
+#emph[Programming]
+was considered the action of writing machine code directly;writing code in a
+high-level language was not even considered programming.The motivation for
+writing Hopper's first compiler was to offload this taskto the computer
+itself.
+#quote(block: true)[
+First andforemost, the central motivations for automatic programmingwere far
+	more personal in the 1952 paper. With the constructionof a functioning
+	compiler, Hopper hoped, "the programmermay return to being a mathematician."
+	Though Hopper hadsincerely enjoyed the challenge of coding since first being
+	introduced to computers 8 years earlier, she wrote, "the novelty ofinventing
+	programs wears off and degenerates into the dull laborof writing and checking
+	programs. The duty now looms as animposition on the human brain." By teaching
+	computers toprogram themselves, Hopper would be free to explore
+	otherintellectual pursuits.
+]
+
+#quote(block: true)[
+These computing pioneers, according toHopper, created machines and methods that
+	removed the arithmetical chore from the mathematician. This chore, however,
+	wasreplaced by the new burden of writing code, thus turning mathematicians into
+	programmers. Hopper's paper boldly offers thenext step in the history of
+	computing: shifting the human-machine interface once again so as to free the
+	mathematicianfrom this new burden, and making "the compiling routine bethe
+	programmer and perform all those services necessary to theproduction of a
+	finished program."
+]
+
+#quote(block: true)[
+He [the mathematician] is supplied with a catalogue of subroutines. Nolonger
+	does he need to have available formulas or tables of elementaryfunctions. He
+	does not even need to know the particular instructioncode used by the computer.
+	He needs only to be able to use the catalogue to supply information to the
+	computer about his problem.20The "catalog of subroutines" was a menu that
+	listed all theinput information needed by the compiler to look up subroutines
+	in the library, assemble them in the proper order, manageaddress assignments,
+	allocate memory, transcribe code, and createa final program in the computer's
+	specific machine code.21 Asubroutine entry in the catalogue consisted of a
+	subroutine"call-number" and the order in which arguments, controls, andresults
+	were to be stated. The call-number identifi ed the type ofsubroutine (t for
+	trigonometric, x for exponential, etc.), specifiedtransfer of control (entrance
+	and exit points in each subroutine),and set operating and memory requirements.
+	In fact, languagesuch as "call-number" and "library" compelled Hopper to
+	nameher program generator a "compiler," for it compiled subroutinesinto a
+	program in much the same way that historians compilebooks into an organized
+	bibliography.22
+]
+
+#quote(block: true)[
+A program generated by a compiler could not only berun as a stand alone program
+	whenever desired; it also "may itselfbe placed in the library as a more
+	advanced subroutine." Thissuggested that subroutine libraries could increase in
+	size andcomplexity at an exponential rate, thus enabling mathematiciansto solve
+	problems once deemed impossible or impractical.23
+]
+
+#quote(block: true)[
+Hopper ends the paper by establishing a short-term road mapfor the future
+	development of compilers. She describes a "type B" compiler, which, by means of
+	multiple passes, could supplement computer information provided by the
+	programmer withself-generated information. Such a compiler, she imagines,
+	wouldbe able to automate the process of solving complex differentialequations.
+	To obtain a program to compute $f(x)$ and its first $n$derivatives, only $f(x)$
+	and the value of n would have to be given.The formulas for the derivatives of
+	$f(x)$ would be derived byrepeated application of the type-B compiler.24Hopper
+	also admits that the current version of her compilerdid not have the ability to
+	produce efficient code.For example, if both sine and cosine were called for in
+	a routine,#todo[make note about me doing this in NVHPC compilers]
+	a smart programmer would figure out how to have the programcompute them
+	simultaneously. Hopper's compiler would embed botha sine subroutine and a
+	cosine subroutine in sequence, thuswasting valuable memory and processing time.
+	Hopper statesboldly that the skills of an experienced programmer could
+	eventually be distilled and made available to the compiler. She concludes as
+	follows:
+]
+
+#quote(block: true)[
+Although the test results appear to be a smashing endorsementof the A-0
+	compiler, Ridgway dedicates a substantial amount ofhis paper to the
+	inefficiency of run-programs. (A "run-program"was the final product of the
+	compiler process. Today, such aprogram is called object or machine code.)
+	During the 5 monthssince Hopper had introduced compilers, critics had pointed
+	outthat run-programs generated by compilers were less efficient thanthose
+	created by seasoned programmers...Furthermore, an hour of computer time was far
+	more costly in 1952 than an hour of programmer time.
+]
+
+#quote(block: true)[
+Ridgway acknowledged that using compilers took up morecomputer time, both as a
+	result of compiling a program and asa consequence of inefficient code. But "in
+	this case," he argued,"the compiler used was the 'antique,' or A-0, the first
+	to beconstructed and the most inefficient." Ridgway was confidentthat Hopper
+	and her team at the Computation Analysis Laboratory would construct new
+	compilers that "squeezed" codinginto "neat, efficient, and compact little
+	packages of potentialcomputation."29
+]
+
+#quote(block: true)[
+A closer look at the manual for the A-2 compiler (produced by the
+	ComputationAnalysis Laboratory during the summer of 1953) suggests that,
+	despite thesignifi cant improvements over the A-0 compiler, automatic
+	programming had itslimitations.  Hopper's vision of intuitive, user-friendly,
+	hardware-independentpseudo-codes generating efficient running programs was far
+	from realization.The A-2 provided a three-address "pseudocode" specifically
+	designed for theUNIVAC I 12-character standards. The manual defined
+	"pseudo-code" as "computerwords other than the machine (C-10) code, designed
+	with regard to facilitatingcommunications between programmer and computer."32
+	Today we refer to it assource code. Since pseudo-code could not be directly
+	executed by the UNIVAC I,the A-2 compiler included a translator routine which
+	converted the pseudocodeinto machine code. (See table 8.3.) The manual states
+	that the pseudo-code is"a new language which is easier to learn and much
+	shorter and quicker towrite."33
+]
+
+#quote(block: true)[
+The most groundbreaking change was the A-2's ability to debugpseudo-code and
+	flag errors automatically. The compiler generated twelve-character error codes
+	that captured the nature of theerror, a miraculous innovation for any
+	programmer who hadexperienced the pain and monotony of debugging computercode.
+	(See table 8.4.)
+]
+
+Pseudocode was actually the innovation of compilers as we know them today,which
+didn't wasn't part of Hopper's compilers until the A-2.Prior to that, it was
+really a way to link/load programs from a library of
+subroutines.
+#quote(block: true)[
+First, the designer of the compiler now was a linguist. That is,the compiler
+	programmer had the ability to design the syntax ofthe
+	pseudo-code.
+]
+
+#quote(block: true)[
+Not only would it be far easier to learnthan machine code; its intuitive logic
+	would help users debugtheir work. "I felt," Hopper recalled, "that sooner or
+	later…
+	our attitude should be not that people should have to learn howto code for the
+	computer but rather the computer should learnhow to respond to people because I
+	figured we weren't going toteach the whole population of the United States how
+	to writecomputer code, and that therefore there had to be an interfacebuilt
+	that would accept things which were people-oriented andthen use the computer to
+	translate to machine code."38She mentioned that compilerscould be designed to
+	program the machine code of any computer. "A problem stated in a basic
+	pseudo-code can thus beprepared for running on one or more computers if the
+	corresponding compiler and subroutine library is available," she wrote.Just as
+	the compiler freed the user from knowing how to programin machine language,
+	pseudo-code was now liberated from a specific type of hardware. A payroll
+	pseudo-code could run on a UNIVAC or an IBM computer, so long as the
+	appropriate compiler was running on both. Hopper stated that as of May 1952 such
+	a benefit was theoretical, insofar as her laboratory had tried it only once,
+	with inconclusive results.39Though interpreters were simpler to use than
+	programming in machine code, Hopper believed the approach was a step in the
+	wrong direction. Compiling the A-2 pseudo-code was time consuming in the short
+	term, but the resultant run-program eliminated these six interpretive steps and
+	thus could run more efficiently. In her final comparison of interpreters and
+	compilers, Hopper wrote: "In both cases, the advantage over manual programming
+	is very great, once the basic subroutines have been tested and proved. The
+	saving of time for a compiler is usually greater."40
+]
+
+#quote(block: true)[
+Moreover, Hopper's network of invention attracted the enthusiastic participation
+	of many women in the programming field.  Nora Moser (of the Army Map Service),
+	Betty Holberton (at the David Taylor Basin), Margaret Harper (of the Remington
+	Rand/ Naval Aviation Supply Office), and Mildred Koss (of Remington Rand) viewed
+	the compiler as more than just a new programming concept. Indeed, they saw it as
+	the centerpiece of an innovative automated system of programming that they had a
+	hand in creating.
+]
+
+#quote(block: true)[
+The fact that Hopper wholeheartedly welcomed non-UNIVAC personnel to learn about
+	the A-2 compiler sheds some light on her beliefs concerning intellectual
+	property. Hopper did not view software as a commodity to be patented and
+	sold. Rather, she took her cue from the mathematics community. Like most other
+	academics, mathematicians shared information universally, in order to advance
+	knowledge.
+]
+
+#quote(block: true)[
+Reflecting on the negative reactions of some of her fellow programmers, Hopper
+	expressed the belief that arguments focusing on "efficiency" and "creativity"
+	covered far baser motivations: "Well, you see, someone learns a skill and works
+	hard to learn that skill, and then if you come along and say, 'you don't
+	need that, here's something else that's better,' they are going to be
+	quite indignant." In fact, Hopper felt that by the mid 1950s many programmers
+	viewed themselves as "high priests," for only they could communicate with such
+	sophisticated machines. Hopper was not the only one who came to this
+	conclusion. John Backus, developer of Speedcode and later of FORTRAN, was
+	conscious of the programming community's reaction to his contributions: "Just as
+	freewheeling westerners developed a chauvinistic pride in their frontiersmanship
+	and a corresponding conservatism, so many programmers of the freewheeling 1950s
+	began to regard themselves as members of a priesthood guarding skills and
+	mysteries far too complex for ordinary mortals."54 But themore the likes of
+	Backus and Hopper preached the benefits ofautomatic programming, the more
+	concerned the programming priesthood became about the spreading
+	technology.
+]
+
+
+== #cite-title(<dealers_of_lightning_xerox_parc_hiltzik1999>)
+#cite(<dealers_of_lightning_xerox_parc_hiltzik1999>, form: "prose")
+
+Vendor lock-in was tremendously powerful at the time, if only for hardware
+reasons (expensive, difficult to move/transition).The instruction set was only
+part of the problem.Compilers gave a way to break out of vendor lock-in at the
+ISA level by giving programmersa higher-level target, but still depended on
+orgs being able and willing to switch hardware.
+#quote(block: true)[
+Once IBM sold the system to United Airlines, it could rest assured that the
+	frightful effort of rewriting software,retraining, staff, and moving tons of
+	iron and steel cabinets around would make unit very long and hard
+	beforereplacing its IBM system by one made by, say, Honeywell.
+]
+
+Xerox and SDS execs wanted to try and break out of scientific computing and
+into business computing,competing with IBM.When the Xerox folks met with
+potential business customers, compilers were part of the value chain.Chapter 7.
+The Clone.
+#quote(block: true)[
+"How good is your COBOL compiler?" they asked...On hearing the question, Bob
+	Spinrad recognized as though for the first time the enormity of the task
+	confronting the company.Scientific and research programmers, like those who
+	worked for SDS and its traditional customers,would not be caught dead working
+	in COBOL, which they considered a lame language suitable only for clerks and
+	drones.He shifted uneasily in his chair."It's not a question of how good our
+	COBOL compiler is," he told the visitors."Why not?""Because we don't have
+	one."
+]
+
+The SDS folks didn't understand software's role in value chain for users,and
+they weren't willing to make hardware changes.
+#quote(block: true)[
+Headquarters executives thought of software as the gobbledygook that made a
+	machine run,    like the hamster driving the wheel. They could not understand
+	why the decision between the PDP-10    and the Sigma needed to be any more
+	complicated than, say, choosing an albino rodent over a brown one.    But from
+	a technical point of view, the issue was hardly that casual.    Software was
+	the factor that defined the fundamental incompatibility between the Sigma and
+	PDP machines    and the superiority, for PARC's purposes, of the latter.    The
+	architectures of the two computers were so radically different that software
+	written for the PDP would not    properly fit into the memory space the Sigma
+	allocated for data.    Although it was theoretically possible to simply "port"
+	all the PDP software over to the Sigma, the CSL    engineers calculated that
+	such a job would mean rewriting every single line of every PDP program,    a
+	task that would take three years and cost \$4 million dollars…
+	They had made an issue out of hardware--what machine they could buy
+	--when their real concern was software--what programs they could
+	run.
+]
+
+PARC folks replicated the PDP-10's instructions in
+microcode.
+== #cite-title(<new-history-of-modern-computing>)
+#cite(<new-history-of-modern-computing>, form: "prose")
+
+#quote(block: true)[
+The development of Unix shifted gradually from assembler to a new higher-level
+	language...Instead of writing, a whole operating system, all that was needed
+	was a C compiler able togenerate code in the new machines language, and some
+	work to tweak the Unix kernel andstandard libraries to accommodate its
+	quirks.
+]
+
+
+== #cite-title(<konrad-zuses-z4-2000>)
+#cite(<konrad-zuses-z4-2000>, form: "prose")
+
+#quote(block: true)[
+[Eduard Stiefel] sent two of his assistants, Heinz Rutishauser and
+	myself,to the United States with the assignment of studying the new technology
+	in order to start a similar project atthe ETH. We spent most of the year 1949
+	with Howard Aiken at Harvard and John von Neumann atPrinceton, but we also
+	looked at other installations, among them the ENIAC at Aberdeen and the Mark II
+	atDahlgren. We gratefully acknowledge the hospitality with which we were
+	received and the openness withwhich we were given information.Despite the fact
+	that the Z4 was only barely operational, he decided that the idea of
+	transferring it to Zurichshould by all means be considered.
+]
+
+Zuse introduced the #mono-text("undef")
+/#mono-text("poison")
+values in the original Z4!
+#quote(block: true)[
+In the following sections, expressions such as "hardware", "software", "machine
+	language", "compiler","architecture" and the like are used freely, although
+	they were unknown in 1950. They only arrived a decadelater, but the underlying
+	concepts were quite familiar to us.Konrad Zuse must be credited with seven
+	fundamental inventions:…
+	4. Look-ahead execution: The program's instruction stream is read two
+	instructions in advance, testing if memory instructions can be executed ahead
+	of time.6. Special values
+]
+
+#quote(block: true)[
+We also made some hardware changes. Rutishauser, who was exceptionally
+	creative, devised a way ofletting the Z4 run as a compiler, a mode of operation
+	which Zuse had never intended. For this purpose, thenecessary instructions were
+	interpreted as numbers and stored in the memory. Then, a compiler
+	programcalculated the program and punched it out on a tape. All this required
+	certain hardware changes. Rutishausercompiled a program with as many as 4000
+	instructions. Zuse was quite impressed when we showed him
+	thisachievement.
+]
+

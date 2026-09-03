@@ -1,0 +1,14 @@
+proc innerproduct 1 = (int n, proc (int) real x, y) real:
+# the innerproduct of two vectors, each with 'n'
+components, x (i), y (i), i = 1, ... , n, where 'x' and 'y'
+are arbitrary mappings from integer to real number #
+begin long real s := long 0;
+    for i to n do
+        s +:= leng x (i) \times leng y (i)
+    od;
+    shorten s
+end
+
+# Real-calls using innerproduct 1: #
+innerproduct 1 (m, (int j) real: x1[j], (int j) real: y1[i])
+innerproduct 1 (n, nsin, ncos)

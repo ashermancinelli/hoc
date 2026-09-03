@@ -1,0 +1,10 @@
+begin
+    procedure innerproduct
+        (real a, real procedure b,
+         integer value k, integer p, real result y);
+    begin y := 0; p := 1;
+        while p<=k do begin y := y + a * b; p := p + l end
+    end; 
+    real array [1:n] x1, y1; integer j; real z;
+    innerproduct(x1[j], y1[j], n, j, z);
+end

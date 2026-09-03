@@ -1,0 +1,209 @@
+#import "../../macros.typ": *
+#import "../../glossaries.typ": *
+
+
+== LLVM
+
+ <sec:llvm-in-detail>
+
+LLVM was introduced in #xref(<sec:lattner-llvm>, capital: false) as part of Chris Lattner's
+history, but LLVM is a large and diverse project
+and it deserves discussion outside of the context of Chris Lattner.
+
+#include "llvm-timeline-table.typ"
+
+
+=== Architecture of the Project
+
+
+LLVM is an #emph[umbrella project] containing many #emph[subprojects]
+that can be used independently.
+
+The first (and maybe only) interaction most non-compiler-engineers have with LLVM
+is through the frontends, like Clang for C, C++, Objective-C, or Swift.
+This betrays the complexity and elegance with which the pieces of LLVM fit together.
+These frontends are typically wrappers around the LLVM command-line parsing library,
+a library to perform the lexing, parsing, semantic analysis and whatever else the frontend
+for that specific language is expected to do (like module dependency analysis in Swift, for example),
+and then various other LLVM subprojects.
+
+Most of the time, these other subprojects include pieces from the LLVM subproject,
+which does optimization and code generation (among other things).
+
+#todo[refer to #cite(<brown_wilson_lattner_aosa_vol1_2011>, form: "normal", supplement: [11.4.2. LLVM is a Collection of Libraries])]
+
+
+=== The IR
+
+
+Lattner et al refer to LLVM's #acr-short("ir") as #emph[C with vectors] in #cite(<lattner_amini_mlir_og_paper_2021>, form: "normal").
+Type annotations are needed in more places than with C and many constructs are lower-level than C
+(like control flow), but the approximations is accurate.
+The IR was designed to preserve high-level information from diverse programming languages,
+but it is apparent that it is designed especially for C and C++.
+
+There are no physical registers in LLVM IR. It is an #acr-full("ssa") ir,
+meaning there are infinite "registers" and each can be assigned to only once.
+Typically, #acr-short("ssa") IRs use a #emph[phi] or φ instruction to merge
+values from different paths, like the value #mono-text("x") in the C expression #mono-text("if (cond) x = 1; else x = 2;").
+The #acr-full("cfg") is also explicit; functions are made up of #gls("basicblock")s,
+basic blocks are made up of instructions and terminated by branches or terminators,
+and functions end in exactly one terminator (like a #mono-text("return")):
+
+#code-block("; Perhaps not the most efficient way to add two numbers.\n; unsigned add2(unsigned a, unsigned b) {\n;   if (a == 0) return b;\n;   return add2(a-1, b+1);\n; }\n\ndefine i32 @add2(i32 %a, i32 %b) {\nentry:\n  %tmp1 = icmp eq i32 %a, 0\n  br i1 %tmp1, label %done, label %recurse\n\nrecurse:\n  %tmp2 = sub i32 %a, 1\n  %tmp3 = add i32 %b, 1\n  %tmp4 = call i32 @add2(i32 %tmp2, i32 %tmp3)\n  ret i32 %tmp4\n\ndone:\n  ret i32 %b\n}", lang: "llvm")
+
+
+There are few instructions and some of them are overloaded, making the IR
+look very similar to #acr-short("risc") assembly languages.
+The IR as it was when Lattner published his PhD thesis had only 31 opcodes
+#cite(<lattner_phd_thesis_pointer_intensive_programs_2005>, form: "normal").
+
+Structs are represented in an unsurprising way:
+// \begin{lstlisting}[language=llvm,frame=single]
+#code-block("; struct RT {char A; int B[10][20]; char C;};\n; struct ST {int X; double Y; struct RT Z;};\n%struct.ST = type { i32, double, %struct.RT }\n%struct.RT = type { i8, [10 x [20 x i32]], i8 }", lang: "llvm")
+
+
+Memory operations are represented by the #mono-text("load") and #mono-text("store")
+instructions.
+The access #mono-text("s[1].Z.B[5][13];") in the snippet above looks roughly like
+this in modern LLVM IR:
+
+// https://godbolt.org/z/oozebnznf
+// \begin{lstlisting}[frame=single]
+#code-block("%0 = ; pointer to value of type ST\n%1 = getelementptr i8, ptr %0, i64 1296\n%2 = load i32, ptr %2", lang: "llvm")
+
+
+LLVM IR was initially more strongly typed than it is today:
+
+#quote(block: true)[
+One of the fundamental design features of LLVM is the inclusion of a language-independent type
+	system. Every SSA register and explicit memory object has an associated type, and all operations
+	obey strict type rules.
+	#cite(<lattner_phd_thesis_pointer_intensive_programs_2005>, form: "normal")
+]
+
+
+This strictness has been eased over time.
+The #mono-text("getelementptr") instruction was used to compute address offsets on
+base pointers, and explicit types were required. Pointer types were specified with
+#mono-text("i8*"), just as one would write in C. Now, with the shift to
+#emph[opaque pointers] (or #emph[untyped pointers]), there is a simple #mono-text("ptr") type
+that does not specify the pointee type, and #mono-text("ptradd") is used instead of #mono-text("getelementptr")
+with no required type annotation.
+
+#todo[review #link("https://discourse.llvm.org/t/rfc-de-type-ification-of-llvm-ir-why/88257")[https://discourse.llvm.org/t/rfc-de-type-ification-of-llvm-ir-why/88257].]
+
+
+=== The Interface
+
+
+As already discussed, a huge part of LLVM's value proposition is its ability
+to be consumed by other applications by virtue of its modular design.
+Another project can link against LLVM's libraries and use its interfaces
+to procedurally build IR, or they can just write LLVM IR to a file and
+pass it to the LLVM tools.
+This means LLVM's interfaces for constructing IR are more important than in other
+compiler projects; other developers #emph[outside of LLVM] depend on those interfaces.
+The users of LLVM's interfaces far outnumber the developers contributing to LLVM
+directly on a regular basis.
+
+#code-file("chapters/codesign/llvm-example.cpp", lang: "cpp")
+
+
+The above snippet of C++ constructs the function in LLVM IR below:
+
+#code-block("define i32 @add_ints(i32 %0, i32 %1) {\nentry:\n  %2 = add i32 %0, %1\n  ret i32 %2\n}", lang: "llvm")
+
+
+The modular interfaces for working with IR do not stop with the #emph[construction]
+of IR;
+there are also rich interfaces for constructing compiler passes and pattern-matching.
+The example instruction-simplification pass below from #cite(<brown_wilson_lattner_aosa_vol1_2011>, form: "normal")
+demonstrates how the pattern-matching interfaces might be used in a #gls("peephole") optimization:
+
+#code-block("// X - 0 -> X\nif (match(Op1, m_Zero()))\n  return Op0;\n// X - X -> 0\nif (Op0 == Op1)\n  return Constant::getNullValue(Op0->getType());\n// (X*2) - X -> X\nif (match(Op0, m_Mul(m_Specific(Op1), m_ConstantInt<2>())))\n  return Op1;\n// …\nreturn nullptr;  // Nothing matched, return null to indicate no transformation.", lang: "cpp")
+
+
+This function might be called in a simplification pass that traverses
+all the instructions in a #gls("basicblock"), and if a simpler version
+of the instruction is found, the simpler version replaces the original instruction like so:
+
+#code-block("for (auto &I : BB)\n  if (auto *NewValue = simplifyInstruction(I))\n    I.replaceAllUsesWith(NewValue);", lang: "cpp")
+
+
+==== Aside: Influence of ML on LLVM
+
+
+As a brief (and opinionated) aside: in #cite(<brown_wilson_lattner_aosa_vol1_2011>, form: "normal"),
+Lattner makes this remark about the pattern matching features in LLVM:
+
+#quote(block: true)[
+LLVM is implemented in C++, which isn't well known for its
+	pattern matching capabilities (compared to functional languages like Objective Caml),
+	but it does offer a very general template system that allows us to
+	implement something similar. The match function and the #mono-text("m_") functions allow
+	us to perform declarative pattern matching operations on LLVM IR code.
+	For example, the #mono-text("m_Specific") predicate only matches if the left hand
+	side of the multiplication is the same as #mono-text("Op1").
+]
+
+
+And in this interview
+#cite(<lattner_minsky_why_ml_needs_new_programming_language_2025>, form: "normal"),
+Chris elaborates further:
+
+#quote(block: true)[
+#strong[Chris]
+	And so Clang has some really cool stuff that allowed it to scale and
+	things like that, but I was also burned out. We had just shipped it. It was
+	amazing. I’m like, there has to be something better. And so, Swift really came
+	starting in 2010. It was a nights and weekends project.
+	Turns out, programming languages are a mature space. It’s not like you
+	need to invent pattern matching at this point. It’s embarrassing that C++
+	doesn’t have good pattern matching.
+
+	#strong[Ron]
+	We should just pause for a second, because I think this is like a small
+	but really essential thing. I think the single best feature coming out of
+	language like ML in the mid-seventies…
+	having this pattern matching facility that lets you basically in a
+	reliable way do the case analysis so you can break down what the possibilities
+	are—is just incredibly useful. And very few mainstream languages have picked it
+	up. I mean Swift again is an example, but languages like ML, SML, and Haskell,
+	and OCaml.
+
+	#strong[Chris]
+	I mean pattern matching, it is not an exotic feature. Here we’re
+	talking about 2010.
+	And so pattern matching, when I learned OCaml, it’s so beautiful. It
+	makes it so easy and expressive to build very simple things.
+]
+
+
+It appears to me that #emph[every] compiler is written in ML to some degree--for
+whatever reason, the language features that Landin envisioned in #cite(<landin_next_700_prog_langs_1966>, form: "normal")
+and were expanded upon in LCF/ML #todo[needs citation, refer to the ML section]
+happen to be particularly useful
+when designing compilers.
+
+This quote is often attributed to Tony Hoare:
+"I don't know what the language of the year 2000
+will look like, but I know it will be called Fortran."
+Well, I don't know what the language of choice for writing compilers
+will be in the year 2100, but I know it will look like ML.
+
+
+=== Tablegen
+
+
+Perhaps the part of LLVM that is least-known among #emph[users] of LLVM is
+its #emph[Tablegen] system. Tablegen is a program for declarative metaprogramming
+inside LLVM.
+
+#cite(<brown_wilson_lattner_aosa_vol1_2011>, form: "normal", supplement: [11.6.2. Unit Testing the Optimizer]).
+
+
+=== Testing
+
+
+#todo[lit, filecheck, generate-test-case.py, other tools.]

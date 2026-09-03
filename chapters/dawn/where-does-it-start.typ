@@ -1,0 +1,251 @@
+#import "../../macros.typ": *
+#import "../../glossaries.typ": *
+
+
+== Where Does it Start?
+
+
+There is significant debate about who created the first compiler,in no small
+part due to ambiguous nomenclature. The term #emph[software] came into use
+sometime between 1959 and 1962, as #cite(<the-first-computers-2002>, form: "author") note:
+
+#quote(block: true)[
+[Expressions] such as "hardware", "software", "machine language",
+	"compiler", "architecture" and the like... were unknown in 1950.
+	They only arrived a decade later, but the underlying concepts were
+	quite familiar to us.
+	#cite(<the-first-computers-2002>, form: "normal")
+]
+
+
+This Honeywell advertisement #emph[A Few Quick Facts on Software] sought to
+clarify these terms as well:
+
+#quote(block: true)[
+Software is a new and important addition to the jargon of computer
+	users and builders. It refers to the automatic programming aids that
+	simplify the task of telling the computer 'hardware' how to do its
+	job.
+	#cite(<new-history-of-modern-computing>, form: "normal", supplement: [ch.5])
+]
+
+
+At this time, hardware was the only piece that mattered to customers. Software
+was an afterthought, if a thought at all. The instruction set of the machine was
+important, because that was the user's interface to the machine. It should come
+as no surprise, then, that the origins of our modern understanding of the term
+#emph[compiler] are similarly murky, especially considering the fact that
+#emph[compiler] already carried meaning in English, and was repurposed for
+computing. John Backus even pointed out how the ambiguity around the term
+#emph[compiler] makes computing history circa 1950s especially difficult to
+untangle #cite(<Backus_1980_Programming_in_America_in_1950s>, form: "normal"):
+
+#quote(block: true)[
+There is an obstacle to understanding, now, developments in
+	programming in the early 1950s. There was a rapid change in the
+	meaning of some important terms during the 1950s. We tend to assume
+	that the modern meaning of a word is the same one it had in an early
+	paper, but this is sometimes not the case. Let me illustrate this
+	point with examples concerning the word "compiler."
+]
+
+
+Once could argue that any of these efforts constituted the first compiler:
+#list(
+  [Konrad Zuse's run-programs for the Z4 at the ETH Zurich in 1950],
+  [Grace Hopper's A-0 and A-1 compilers for the UNIVAC I at
+	      Remington Rand in 1951],
+  [Laning and Zierler's algebraic compiler for the Whirlwind at MIT in 1950],
+  [John Backus's #mono[FORTRAN I]{} compiler at IBM],
+)
+
+
+I attempt to discuss these in order, however their efforts overlap
+significantly in time. I try to tell their stories as a whole, though each story
+contains references to the others;if you find yourself confused by names
+introduced out of context, please finish the chapter or search for the content
+within this chapter before giving up.
+
+
+== The Z4
+
+
+=== Konrad Zuse
+
+
+The historians Paul Ceruzzi and Raul Rojas have written extensively about
+Zuse and his work on the Z3, Z4, and the special-purpose S1 and S2 machines--
+the reader is encouraged to consult their works for a more exhaustive account
+#cite(<ceruzzi_early_computers_of_zuse_1981>, form: "normal")
+#cite(<rojas_arch_of_zuses_machines_2000>, form: "normal"),
+as well as Konrad's son's account of his father's life#cite(<zuse2009life>, form: "normal").
+
+We will meet Konrad Zuse, a German civil engineer, during World War II when
+he began work on the Z4.
+Funded partially by his family and partially by the Nazi government, his
+prior works demonstrated significant creativity and ingenuity, and they were
+leveraged to build precursors to modern cruise missiles and guided bombs. Most of
+Zuse's machines prior to the Z4 were destroyed during the war;
+he rescued his Z4 by moving it himself to a remote alpine village
+called Hinterstein#cite(<Knuth_TrabbPardo_1976_Early_Development>, form: "normal").
+While he was funded by the Third Reich at some point, he was primarily #emph[denied]
+funding by the government. In a lecture in New Mexico in 1976, he claimed
+that his computers were never used to carry out their #emph[final solution].
+
+At this time, computers were transitioning from #emph[sequenced calculators]
+(capable only of executing straight-line arithmetic calculations)
+to "true" computers capable of control flow.
+The Z3 was unique in its ability to perform conditional jumps, qualifying it
+as a "true" computer, more advanced than the sequenced calculators.
+It also had floating-point arithmetic units, which were missing from other
+early computers like Commander Howard Aiken's Mark I at Harvard and IBM's 703.
+
+After the war, he began looking for a market for some of his wartime inventions.
+His machines were unique, containing floating-point arithmetic units and a
+bespoke memory system.
+From 1943 to 1945, he worked on the #emph[Plankalkül] (for #emph[Plan Calculus]),
+an algebraic programming language and possibly the first high-level programming language,
+though it was not implemented until 1975 in Joachim Hohmann's PhD dissertation
+#cite(<hohmann1979plankalkul>, form: "normal").
+
+Towards the end of the war, Zuse and his pregnant wife fled Berlin.
+Thanks to some confusion about the purpose of Zuse's machine, he was able to leverage
+transport vehicles from the German army.
+At the time, the German military was working on a new generation of rocket, which
+went by the name #emph[V2]. At the time, Konrad named his machines V1, V2, and so on,
+where V stood for #emph[Versuchsmodell], or #emph[trial models].
+Thus the German army believed his machine was somehow related to the rocket program,
+and he was able to commandeer transport vehicles from the army.
+
+He was originally to take his machine to the underground factories in Nordhausen
+where the V2 rocket was under production. After being shocked by #emph[twenty thousand]
+concentration camp workers toiling in miles of underground tunnels, he
+decided to take his wife and computer as far away as possible.
+Thus they fled to Hinterstein, Germany and then Hopferau, Bavaria, to
+hopefully restore the machine.
+
+It is unclear how Professor Stiefel learned of Zuse's Z4, but it was in Hopferau
+where he met Konrad Zuse and first saw the Z4 in action.
+
+
+/* Inactive LaTeX source retained for later editing:
+
+	In a turn of events Konrad Zuse was made
+	aware of Aiken's Mark I through his daughter
+	\cite{howard_aiken_and_the_dawn_of_the_computer_age_2000}:
+
+	\begin{quotation}
+		Konrad Zuse told me an amusing anecdote about how he first
+		encountered the work of Aiken. The occasion of our conversation was
+		a luncheon in Zuse's honor, hosted by Ralph Gomory at the Watson
+		Research Laboratory of IBM before a lecture given by Zuse to the
+		staff of the lab. When Zuse learned that I was gathering materials
+		for a book on Aiken, he told me that he had come across Aiken and
+		Mark I in an indirect manner, through the daughter of his
+		bookkeeper. She was working for the German Secret
+		Service (Geheimdienst) and knew through her father of Zuse's work on
+		a large scale calculator. According to Zuse,the young woman never
+		learned any details about his machine, which was shrouded in
+		war-time secrecy. But she knew enough about Zuse's machine to
+		recognize that the material filed in a certain drawer related to
+		advice that seemed somewhat like Zuse's. She reported this event
+		to her father, giving the file number of the drawer, and the father
+		at once informed Zuse of her discovery. Zuse, of course, could not
+		go to the Secret Service and ask for the document since that would
+		give away the illegal source of his information. Zuse was well
+		connected, however, and was able to send two of his assistants to
+		the Secret Service, armed with an official demand for information
+		from the Air Ministry, requesting any information that might be in
+		the files concerning a device or machine in any way similar
+		to Zuse's. Zuse's assistants were at first informed that no such
+		material existed in the files, but they persisted and eventually got
+		to the right drawer. There they found a newspaper clipping (most
+		likely from a Swiss newspaper), containing a picture of Mark I and a
+		brief description about Aiken and the new machine. But there was not
+		enough technical information to enable Zuse to learn the machine's
+		architecture.
+	\end{quotation}
+
+*/
+
+
+=== The ETH's Acquisition of the Z4
+
+
+There were several early efforts to create programs that produced punch
+cards which contained machine code instructions, which could then be fed back
+into the machine as input punchcards. The programs produced by these early
+compilers were called #emph[run-programs], and the process of using them was
+called #emph[automatic programming], a term later coined by Grace Hopper. The
+first of these programs was run on a machine called the Z4, designed by Konrad
+Zuse in Germany.
+
+Professor Eduard Stiefel, shortly after establishing the
+Institute of Applied Mathematics to study numerical analysis at the Swiss
+Federal Institute of Technology (ETH) in Zurich, began searching for a computer
+for the institute. He learned of the computing advancements in the United
+States, Great Britain, and Germany,but no machines were readily available at
+the time. He sent his assistants Heinz Rutishauser and Ambros P. Speiser to the
+US to study the latest developments in computing; they spent most of 1949
+with Howard Aiken at Harvard and John von Neumann at Princeton.
+
+#quote(block: true)[
+Before we returned, that is, in the middle of 1949, Stiefel was informed
+	about the existence of Konrad Zuse's Z4. At that time Zuse was living in
+	Hopferau, a German village near the Swiss border. Stiefel was told that the
+	machine might be for sale. He visited Zuse, inspected the device, and reviewed
+	the specifications. Despite the fact that the Z4 was only barely
+	operational, he
+	decided that the idea of transferring it to Zurich should by all means be
+	considered. Stiefel wrote a letter to Rutishauser and me (we were at Harvard at the time),
+	describing the situation and asking us to get Aiken's opinion.
+	Aiken's reply was very critical - the future belonged to electronics
+	and, rather
+	than spending time on a relay calculator, we should now concentrate our efforts
+	on building a computer of our own.
+	#cite(<konrad-zuses-z4-2000>, form: "normal")
+]
+
+
+The Z4 was a bespoke machine with unique components; the computational logic
+was wired together with telephone relays and the memory was entirely mechanical.
+
+#quote(block: true)[
+The Z4 could be used as a kind of manually triggered calculator: the
+	operator could enter decimal numbers through the decimal keyboard, these
+	were transformed into the floating point representation of the Z4, and were
+	loaded to the CPU registers, first to OR-I, then to ORII. Then, it was possible
+	to start an operation using the "operations keyboard" (an addition, for
+	example). The result was held in OR-I and the user could continue loading
+	numbers and computing. The result in OR-I could be made visible in decimal
+	notation by transferring it to a decimal lamp array (at the push of a button).
+	It could also be printed using an electric typewriter.
+	#cite(<architecture-of-konrad-zuses-z4-computer-2021>, form: "normal")
+]
+
+
+It notably featured instructions for conditional branching and subroutine
+calling, which both proved essential for the compiler development that would
+follow at the ETH. Stiefel was undeterred by Aiken's criticism, and convinced
+the ETH to purchase the Z4. In 1950, Heinz Rutishauser at Switzerland's ETH
+obtains a Z4.
+
+#quote(block: true)[
+We also made some hardware changes. Rutishauser, who was exceptionally
+	creative, devised a way of letting the Z4 run as a compiler, a mode
+	of operation
+	which Zuse had never intended. For this purpose, the necessary
+	instructions were
+	interpreted as numbers and stored in the memory. Then, a compiler
+	program calculated the program and punched it out on a tape. All this required
+	certain hardware changes. Rutishauser compiled a program with as many as 4000
+	instructions. Zuse was quite impressed when we showed him this achievement.
+	#cite(<konrad-zuses-z4-2000>, form: "normal")
+]
+
+
+Thus were the first run-programs produced. This is what we will
+consider #strong[the first compiler], though it was not called that
+at the time. Shortly after Stiefel's assistants' stints in the US and
+correspondence with Aiken,one of Aiken's engineers would find
+considerably more success exploring related ideas.

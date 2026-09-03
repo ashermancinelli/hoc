@@ -1,0 +1,74 @@
+#import "../../../macros.typ": *
+#import "../../../glossaries.typ": *
+
+
+
+=== FORTRAN II
+
+
+FORTRAN II was developed primarily to address the restrictions required for the
+optimization of FORTRAN programs discussed in the last section and quality of
+life enhancements to address common issues programmers reported.
+After debugging in the field, the team noted the need for improved compile time,
+proper diagnostics, and subroutines.
+FORTRAN II was mostly designed by Irv Ziller, John Backus and Robert Nelson,
+and it was implemented by Lois Mitchell, and
+the first report to contain these additions was #cite-title(<fortran_ii_proposal_1957>) in
+#cite(<fortran_ii_proposal_1957>, form: "year").
+
+Some statements in this report did not make it to the final language, but it
+nonetheless set out the design for more structured programming.
+Subroutines were defined with #mono-text("SUBROUTINE DEFINITION, NAME(ARGUMENT1,ARGUMENT2)")
+which is not #emph[too] far off of the language as it would come to be.
+The #emph[END] and #emph[RETURN] statements were also introduced.
+
+#gls-cap("separable-compilation") features were introduced as well.
+In the original FORTRAN, the entire program was a single FORTRAN program
+that had to be compiled as one #gls("translation-unit"), thus any changes to any
+part of the program required recompilation of everything.
+This became quite expensive as the team continued to add optimizations
+and analyses.
+
+In the new separable compilation model,
+information from the symbol table of the original program could be kept
+in the object code so that a loader could combine references between subroutines
+compiled in different source files into one program.
+The loader program, the #emph[Binary Symbolic Subroutine (BSS) Loader],
+would load the separately compiled subroutines together into one program using
+the symbolic information kept in the #emph[transfer vectors] in object code.
+#footnote[The symbolic information kept in object programs that the BSS loader
+	used is not the same as the BSS section in ELF programs on modern computers--
+	the latter is used for program-scoped uninitialized or zero-initialized data.]
+The transfer vectors were placed at the start of the compiled subroutine and
+contained the symbolic information about the subroutine to follow.
+
+This allowed the final deck of punchcards to be placed in the card reader
+with each independently compiled subroutine in any order, and the symbol information
+allowed the BSS loader to build a table of the available subroutines and replace
+symbolic references to external subroutines with actual addresses.
+The BSS loader was a two-pass program: the first pass traversed all the compiled
+subroutines and scanned their transfer vectors, storing the actual addresses of
+the referenced subroutines in a symbol table.
+The second pass replaces occurrences of symbolic references to subroutines
+with their actual respective addresses.
+The proposal suggests that programs of mixed FORTRAN and machine code could
+also be loaded in this way, but did this was merely a suggestion.
+
+The biggest gripe users had with this version of FORTRAN was
+likely still compilation time.
+While this edition of the language allowed for separable compilation and users did not need to recompile
+the entire program after every single change, the compiler still spent significant time
+during optimization.
+When writing and debugging new programs, this optimization effort was wasted, and
+there were no tuning options to allow users to opt-out, as modern compilers do.
+
+Users adopted FORTRAN II widely and immediately, and the use of the language
+accellerated greatly in this period.
+Jean Sammet remarked that a significant portion of the resources on FORTRAN
+from the early 1960s did not explicitly mention #emph[FORTRAN II] anywhere
+even though they covered material specific to that version of the language,
+so some sources that appear to cover FORTRAN I may really cover the
+second version#cite(<sammet_programming_languages_history_and_fundamentals_1969>, form: "normal"):
+"In other words, FORTRAN II was issued so relatively soon after FORTRAN
+I that the distinction rapidly became blurred and to some extent was even
+dropped, although it was clear in Program Library references."

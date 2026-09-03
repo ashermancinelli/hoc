@@ -1,0 +1,16 @@
+#import "../../macros.typ": *
+#import "../../glossaries.typ": *
+
+
+== Pascal
+
+ <sec:pascal>
+
+Runtime checking. tagged pointers and objects had tags such that if the tags didn't
+match you would get a runtime error (like the lisp machines).
+If your program compiled and didn't get any
+runtime errors, your program was probably correct.
+
+pascal started as teaching, couldn't do anything with it.
+then they made modula to make it usable.
+omsi pascal named after our own omsi in oregon.

@@ -1,0 +1,13 @@
+begin
+    real procedure Sum(k, l, u, ak)
+        value l, u;
+        integer k, l, u;
+        real ak;
+    begin
+        real s;
+        s := 0;
+        for k := l step 1 until u do
+            s := s + ak;
+        Sum := s
+    end;
+end
