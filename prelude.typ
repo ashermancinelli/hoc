@@ -17,9 +17,13 @@
   show cite: set text(fill: rgb("245b8a"))
   show heading.where(level: 1): it => {
     pagebreak(weak: true)
-    block(above: 0pt, below: 1.5em, inset: 0.7em, stroke: 0.8pt)[
-      #align(center, text(size: 22pt, weight: "bold", it.body))
-    ]
+    if it.body == [Bibliography] {
+      it
+    } else {
+      block(above: 0pt, below: 1.5em, inset: 0.7em, stroke: 0.8pt)[
+        #align(center, text(size: 22pt, weight: "bold", it.body))
+      ]
+    }
   }
   show figure.caption: set text(size: 10pt)
   body
