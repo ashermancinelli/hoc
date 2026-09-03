@@ -12,6 +12,9 @@ watch: diagrams
 
 diagrams: flang-diagram
 
+get-section file section:
+    @awk '/START_{{section}}/{p=1; next} /END_{{section}}/{p=0} p' {{file}}
+
 flang-diagram:
     @if ! command -v dot >/dev/null 2>&1; then echo "error: Graphviz 'dot' is required (macOS: brew install graphviz)" >&2; exit 127; fi
     @if [ ! -f "{{ flang_diagram }}" ] || [ "{{ flang_dot }}" -nt "{{ flang_diagram }}" ]; then \

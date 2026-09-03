@@ -77,6 +77,9 @@
 #let acr-long(key) = acronym-entries.at(key).long
 #let acr-full(key) = [#acr-long(key) (#acr-short(key))]
 
+// acr and gls entries i use a lot
+#let ir = acr-short("ir")
+
 #let print-glossaries() = {
   pagebreak()
   heading(level: 1, outlined: true)[Acronyms]

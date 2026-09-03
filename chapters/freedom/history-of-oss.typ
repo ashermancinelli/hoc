@@ -55,6 +55,6 @@ The discussion of the GNU/Linux
 	software movement has a strong tie to the beginnings of the personal computer's
 	invention. Early actions by Microsoft and its founders played an important role
 	here as well. We begin with the
-	antitrust trial.#cite(<history_of_modern_computing_2003_ceruzzi>, form: "normal")
+	antitrust trial. #citen(<history_of_modern_computing_2003_ceruzzi>)
 ]
 
