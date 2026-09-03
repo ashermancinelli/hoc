@@ -143,7 +143,7 @@ general-purpose programming language to do so.
 
 
 #figure(
-  code-file("chapters/codesign/flang.dot", lang: "dot"),
+  image("flang.png", width: 100%),
   kind: image,
   caption: [MLIR Lowering in Flang],
 ) <fig:flang-mlir-lowering>
