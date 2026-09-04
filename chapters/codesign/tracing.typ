@@ -54,16 +54,19 @@ The staging decorator might look like this:
 
 #code-file(path("./tracing/ex0.py"), lang: "python")
 
+The jitted function might be called like this:
+
+#code-file(path("./tracing/ex1.py"), lang: "python")
+
 Note how the actual arguments are converted into symbolic values before being
-passed into the function's first stage of execution. This is so that the
-operations that should really happen at runtime are not _evaluated_ in this
-first stage, but are _recorded_ in the #ir to be further compiled and then
-executed in the second stage of evaluation.
+passed into the function's first stage of execution;
+This _delays_ the evaluation of those operations so they happen in the second
+stage and not the first.
 
-The #ir after the first stage might look like this:
+The operations are instead recorded in the #ir, which might look like this:
 
-#code-file(path("./tracing/output.txt"), lang: "text")
+#code-file(path("./tracing/output.txt"), lang: "python")
 
-// #code-file(path("./tracing/ex1.py"), lang: "python")
-
+This _staged program_ would then be compiled to the target's native format where
+the next stage of execution takes place.
 
