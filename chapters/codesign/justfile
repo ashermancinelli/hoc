@@ -1,6 +1,2 @@
-import '../../tools/justfile'
-
 gen:
-  just get-sections ./tracing/example-dsl.py
-  python ./tracing/example-dsl.py > ./tracing/example-dsl-output.txt
-  just get-sections ./tracing/example-dsl-output.txt
+  ../../.venv/bin/python -m tracing.example_dsl > ./tracing/example_dsl_output.txt

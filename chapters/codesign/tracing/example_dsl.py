@@ -32,6 +32,7 @@ class SymbolicArray():
 
 @contextmanager
 def capture_ir():
+    _ir.clear()
     yield _ir
     pprint(_ir)
 
@@ -71,5 +72,9 @@ a, b, c = [], [], []
 def kernel(a, b, c):
     a[0] = a[0] + b[0] * c[0]
 
-kernel(a, b, c)
+def main():
+    kernel(a, b, c)
 # END_1
+
+if __name__ == "__main__":
+    main()
