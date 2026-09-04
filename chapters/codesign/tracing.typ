@@ -52,11 +52,11 @@ into PTX and then into the cubin format and then the kernel is launched using th
 
 The staging decorator might look like this:
 
-#code-file(path("./tracing/ex0.py"), lang: "python")
+#code-file(path("./tracing/example_dsl.py"), lang: "python", region: 0)
 
 The jitted function might be called like this:
 
-#code-file(path("./tracing/ex1.py"), lang: "python")
+#code-file(path("./tracing/example_dsl.py"), lang: "python", region: 1)
 
 Note how the actual arguments are converted into symbolic values before being
 passed into the function's first stage of execution;
@@ -65,14 +65,14 @@ stage and not the first.
 
 The operations are instead recorded in the #ir, which might look like this:
 
-#code-file(path("./tracing/output.txt"), lang: "python")
+#code-file(path("./tracing/example_dsl_output.txt"), lang: "python")
 
 This _staged program_ would then be compiled to the target's native format where
 the next stage of execution takes place.
 
 Some tracing DSLs like CuTe DSL take this even further. Consider the following program:
 
-#code-file(path("./tracing/ex2.txt"), lang: "python")
+#code-file(path("./tracing/example_dsl2.py"), lang: "python", region: 0)
 
 
 

@@ -42,4 +42,5 @@
 *.bcf
 /hoc.pdf
 /chapters/codesign/flang.png
+__pycache__/
 _minted-hoc/
