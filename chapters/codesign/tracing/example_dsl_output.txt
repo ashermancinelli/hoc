@@ -1,6 +1,0 @@
-[Op(name='getitem', operands=(SymbolicArray, 0)),
- Op(name='getitem', operands=(SymbolicArray, 0)),
- Op(name='getitem', operands=(SymbolicArray, 0)),
- Op(name='mul', operands=(SymbolicScalar, SymbolicScalar)),
- Op(name='add', operands=(SymbolicScalar, SymbolicScalar)),
- Op(name='setitem', operands=(SymbolicArray, 0, SymbolicScalar))]
