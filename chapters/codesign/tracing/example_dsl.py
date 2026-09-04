@@ -8,11 +8,19 @@ class Op:
     operands: tuple
 
 _ir = []
+_id = 0
+
+def gensym():
+    global _id
+    s = '$%d' % _id
+    _id += 1
+    return s
 
 class SymbolicScalar():
-    def __repr__(self): return 'SymbolicScalar'
-    def __init__(self, thing):
+    def __repr__(self): return f'SymbolicScalar{self.name}'
+    def __init__(self, thing, name=None):
         self.thing = thing
+        self.name = name or gensym()
     def __add__(self, other):
         _ir.append(Op('add', (self, other)))
         return SymbolicScalar(_ir[-1])
@@ -21,9 +29,10 @@ class SymbolicScalar():
         return SymbolicScalar(_ir[-1])
 
 class SymbolicArray():
-    def __repr__(self): return 'SymbolicArray'
-    def __init__(self, real_array):
+    def __repr__(self): return f'SymbolicArray{self.name}'
+    def __init__(self, real_array, name=None):
         self.real_array = real_array
+        self.name = name or gensym()
     def __getitem__(self, indices):
         _ir.append(Op('getitem', (self, indices)))
         return SymbolicScalar(_ir[-1])
@@ -62,19 +71,4 @@ class jit:
         dso = ir_to_native(ir)
         func = load_function_pointer_from_dso(dso)
         func(*args) # or launch on GPU with driver api
-
 # END_0
-
-a, b, c = [], [], []
-
-# START_1
-@jit
-def kernel(a, b, c):
-    a[0] = a[0] + b[0] * c[0]
-
-def main():
-    kernel(a, b, c)
-# END_1
-
-if __name__ == "__main__":
-    main()
