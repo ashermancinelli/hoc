@@ -1,4 +1,3 @@
-// Generated from hoc/glossaries.tex by tools/convert.py.
 #import "macros.typ": mono, mono-text, todo, unsupported
 #let glossary-entries = (
   "bytecode": (name: [bytecode], description: [A compiler intermediate representation for the purpose of interpretation or execution instead of optimization]),

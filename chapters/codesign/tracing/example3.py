@@ -3,7 +3,7 @@ _print = print
 from pprint import pprint as print
 a, b, c = [], [], []
 
-_print('# Dynamic bounds')
+_print('# Dynamic bounds (not unrolled)')
 # REGION dyn
 @jit
 def kernel(a, N):
@@ -15,7 +15,7 @@ kernel(a, 5)
 print(kernel.ir)
 # ENDREGION dyn
 
-_print('# Static bounds')
+_print('# Static bounds (fully unrolled)')
 # REGION static
 @jit
 def kernel(a):

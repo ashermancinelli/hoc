@@ -427,6 +427,8 @@ called #mono-text("cfront"), which targeted C code instead of machine code direc
 C++'s reputation was not great in the 1990s, but was helped along by the GNU
 C++ compiler #mono-text("g++"), which outperformed #mono-text("cfront"), generated native
 code directly, and leveraged the optimizer and code generators of GCC.
+This eventually (to much outrage) led to the incorporation of C++ features in
+the GCC compilers themselves, which were originally written in C.
 
 // There were loads of small companies that made money leasing out their compilers,
 // and GNU put them all out of business essentially overnight.
