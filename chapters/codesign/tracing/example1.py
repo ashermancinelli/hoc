@@ -1,4 +1,4 @@
-from .example_dsl import *
+from example_dsl import *
 from pprint import pprint
 
 a, b, c = [], [], []
@@ -13,4 +13,4 @@ kernel(a)
 # ENDREGION loop-kernel
 
 print('# First iteration only')
-pprint(get_last_ir()[:6] + [ellipsis])
+pprint(kernel.ir)

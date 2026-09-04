@@ -1,7 +1,7 @@
 # First iteration only
-[Op(name='setitem', operands=(SymbolicArray$0, 0, 0)),
- Op(name='setitem', operands=(SymbolicArray$0, 1, 1)),
- Op(name='setitem', operands=(SymbolicArray$0, 2, 2)),
- Op(name='setitem', operands=(SymbolicArray$0, 3, 3)),
- Op(name='setitem', operands=(SymbolicArray$0, 4, 4)),
- ...]
+FunctionIR(block_args=(SymbolicArray0,),
+           body=[Op(name='set', operands=(SymbolicArray0, 0, 0)),
+                 Op(name='set', operands=(SymbolicArray0, 1, 1)),
+                 Op(name='set', operands=(SymbolicArray0, 2, 2)),
+                 Op(name='set', operands=(SymbolicArray0, 3, 3)),
+                 Op(name='set', operands=(SymbolicArray0, 4, 4))])

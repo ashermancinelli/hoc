@@ -1,6 +1,7 @@
+from typing import Callable
 from contextlib import contextmanager
-from dataclasses import dataclass
-from pprint import pprint
+from dataclasses import dataclass, field
+from pprint import pprint, pformat
 
 class Ellipsis:
     def __repr__(self):
@@ -21,26 +22,42 @@ class Op:
     name: str
     operands: tuple
 
-_ir = []
+@dataclass
+class InsertionPoint:
+    ref: object = None
+    def append(self, other):
+        self.ref.append(other)
+    def __getitem__(self, *args):
+        return self.ref.__getitem__(*args)
+
+ip = InsertionPoint()
 _id = 0
+
+@contextmanager
+def insertion_point(new_body):
+    old = ip.ref
+    ip.ref = new_body
+    yield
+    ip.ref = old
 
 def gensym():
     global _id
-    s = '$%d' % _id
+    # pyrefly: ignore [division-by-zero]
+    s = '%d' % _id
     _id += 1
     return s
 
 class SymbolicScalar():
     def __repr__(self): return f'SymbolicScalar{self.name}'
-    def __init__(self, thing, name=None):
+    def __init__(self, thing=None, name=None):
         self.thing = thing
         self.name = name or gensym()
     def __add__(self, other):
-        _ir.append(Op('add', (self, other)))
-        return SymbolicScalar(_ir[-1])
+        ip.append(Op('add', (self, other)))
+        return SymbolicScalar(ip[-1])
     def __mul__(self, other):
-        _ir.append(Op('mul', (self, other)))
-        return SymbolicScalar(_ir[-1])
+        ip.append(Op('mul', (self, other)))
+        return SymbolicScalar(ip[-1])
 
 class SymbolicArray():
     def __repr__(self): return f'SymbolicArray{self.name}'
@@ -48,24 +65,45 @@ class SymbolicArray():
         self.real_array = real_array
         self.name = name or gensym()
     def __getitem__(self, indices):
-        _ir.append(Op('getitem', (self, indices)))
-        return SymbolicScalar(_ir[-1])
+        ip.append(Op('get', (self, indices)))
+        return SymbolicScalar(ip[-1])
     def __setitem__(self, indices, value):
-        _ir.append(Op('setitem', (self, indices, value)))
+        ip.append(Op('set', (self, indices, value)))
 
-def get_last_ir():
-    global _ir
-    return _ir
+@dataclass(frozen=True, kw_only=True)
+class RuntimeLoop:
+    bounds: range
+    induction_variable: SymbolicScalar = field(default_factory=SymbolicScalar)
+    body: Callable[[int], None] = field(default_factory=list)
 
-@contextmanager
-def capture_ir():
-    _ir.clear()
-    yield _ir
+@dataclass(frozen=True)
+class FunctionIR:
+    block_args: list
+    body: list
+
+# REGION for-decorator
+def fori(bounds):
+    def decorator(body):
+        match bounds:
+            case int():
+                # Evaluate the loop in Python
+                for i in range(bounds):
+                    body(i)
+            case SymbolicScalar():
+                # Defer evaluation of the loop by turning it into IR
+                loop = RuntimeLoop(bounds=bounds)
+                with insertion_point(loop.body):
+                    body(loop.induction_variable)
+                ip.append(loop)
+            case _:
+                raise TypeError()
+    return decorator
+# ENDREGION for-decorator
 
 def to_symbol(runtime_value):
     match runtime_value:
         case int() | float():
-            return runtime_value
+            return SymbolicScalar(runtime_value)
         case list():
             return SymbolicArray(runtime_value)
         case _:
@@ -78,14 +116,16 @@ def load_function_pointer_from_dso(dso): return lambda *x: None
 class jit:
     def __init__(self, func):
         self.func = func
+        self.ir = None
 
     def __call__(self, *args):
         # First stage
-        syms = (to_symbol(arg) for arg in args)
-        with capture_ir() as ir:
-            self.func(*syms)
+        block_args = tuple(to_symbol(arg) for arg in args)
+        self.ir = FunctionIR(block_args, [])
+        with insertion_point(self.ir.body):
+            self.func(*block_args)
         # Second stage
-        dso = ir_to_native(ir)
+        dso = ir_to_native(self.ir)
         func = load_function_pointer_from_dso(dso)
         func(*args) # or launch on GPU with driver api
 # ENDREGION jit

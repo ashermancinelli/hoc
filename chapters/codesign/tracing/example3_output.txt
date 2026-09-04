@@ -1,0 +1,15 @@
+# Dynamic bounds
+FunctionIR(block_args=(SymbolicArray0, SymbolicScalar1),
+           body=[RuntimeLoop(bounds=SymbolicScalar1,
+                             induction_variable=SymbolicScalar2,
+                             body=[Op(name='set',
+                                      operands=(SymbolicArray0,
+                                                SymbolicScalar2,
+                                                SymbolicScalar2))])])
+# Static bounds
+FunctionIR(block_args=(SymbolicArray3,),
+           body=[Op(name='set', operands=(SymbolicArray3, 0, 0)),
+                 Op(name='set', operands=(SymbolicArray3, 1, 1)),
+                 Op(name='set', operands=(SymbolicArray3, 2, 2)),
+                 Op(name='set', operands=(SymbolicArray3, 3, 3)),
+                 Op(name='set', operands=(SymbolicArray3, 4, 4))])
