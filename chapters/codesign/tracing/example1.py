@@ -1,11 +1,16 @@
-from example_dsl import jit
+from .example_dsl import *
+from pprint import pprint
 
 a, b, c = [], [], []
 
-# START_1
+# REGION loop-kernel
 @jit
-def kernel(a, b, c):
-    a[0] = a[0] + b[0] * c[0]
+def kernel(a):
+    for i in range(5):
+        a[i] = i
 
-kernel(a, b, c)
-# END_1
+kernel(a)
+# ENDREGION loop-kernel
+
+print('# First iteration only')
+pprint(get_last_ir()[:6] + [ellipsis])

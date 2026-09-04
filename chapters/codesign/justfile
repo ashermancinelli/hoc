@@ -1,2 +1,5 @@
 gen:
-  ../../.venv/bin/python -m tracing.example_dsl > ./tracing/example_dsl_output.txt
+  for ex in 0 1; do \
+    ../../.venv/bin/python -m tracing.example${ex} \
+      > ./tracing/example${ex}_output.txt; \
+  done

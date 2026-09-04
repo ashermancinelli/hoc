@@ -2,6 +2,20 @@ from contextlib import contextmanager
 from dataclasses import dataclass
 from pprint import pprint
 
+class Ellipsis:
+    def __repr__(self):
+        return '...'
+
+ellipsis = Ellipsis()
+
+def comment(text):
+    class Comment:
+        def __init__(self, text):
+            self.text = text
+        def __repr__(self):
+            return '# ' + self.text
+    return Comment(text)
+
 @dataclass(frozen=True)
 class Op:
     name: str
@@ -39,11 +53,14 @@ class SymbolicArray():
     def __setitem__(self, indices, value):
         _ir.append(Op('setitem', (self, indices, value)))
 
+def get_last_ir():
+    global _ir
+    return _ir
+
 @contextmanager
 def capture_ir():
     _ir.clear()
     yield _ir
-    pprint(_ir)
 
 def to_symbol(runtime_value):
     match runtime_value:
@@ -57,7 +74,7 @@ def to_symbol(runtime_value):
 def ir_to_native(ir): return None
 def load_function_pointer_from_dso(dso): return lambda *x: None
 
-# START_0
+# REGION jit
 class jit:
     def __init__(self, func):
         self.func = func
@@ -71,4 +88,4 @@ class jit:
         dso = ir_to_native(ir)
         func = load_function_pointer_from_dso(dso)
         func(*args) # or launch on GPU with driver api
-# END_0
+# ENDREGION jit

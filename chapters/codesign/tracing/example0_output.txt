@@ -1,0 +1,6 @@
+[Op(name='getitem', operands=(SymbolicArray$0, 0)),
+ Op(name='getitem', operands=(SymbolicArray$1, 0)),
+ Op(name='getitem', operands=(SymbolicArray$2, 0)),
+ Op(name='mul', operands=(SymbolicScalar$4, SymbolicScalar$5)),
+ Op(name='add', operands=(SymbolicScalar$3, SymbolicScalar$6)),
+ Op(name='setitem', operands=(SymbolicArray$0, 0, SymbolicScalar$7))]

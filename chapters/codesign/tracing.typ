@@ -52,11 +52,11 @@ into PTX and then into the cubin format and then the kernel is launched using th
 
 The staging decorator might look like this:
 
-#code-file(path("./tracing/example_dsl.py"), lang: "python", region: 0)
+#code-file(path("./tracing/example_dsl.py"), lang: "python", region: "jit")
 
 The jitted function might be called like this:
 
-#code-file(path("./tracing/example_dsl.py"), lang: "python", region: 1)
+#code-file(path("./tracing/example0.py"), lang: "python", region: "scalar-kernel")
 
 Note how the actual arguments are converted into symbolic values before being
 passed into the function's first stage of execution;
@@ -65,15 +65,40 @@ stage and not the first.
 
 The operations are instead recorded in the #ir, which might look like this:
 
-#code-file(path("./tracing/example_dsl_output.txt"), lang: "python")
+#code-file(path("./tracing/example0_output.txt"), lang: "python")
 
 This _staged program_ would then be compiled to the target's native format where
 the next stage of execution takes place.
 
 Some tracing DSLs like CuTe DSL take this even further. Consider the following program:
 
-#code-file(path("./tracing/example_dsl2.py"), lang: "python", region: 0)
+#code-file(path("./tracing/example1.py"), lang: "python", region: "loop-kernel")
 
+In which stage should the `for` loop be evaluated?
+The loop bounds are all known during the first stage (`range(5)` does not depend
+on any symbolic values) so the loop can run in the Python interpreter in the
+first stage.
+This is exactly what happens in our example DSL:
 
+#code-file(path("./tracing/example1_output.txt"), lang: "python")
 
-When should that `if` statement be evaluated, in the first stage or the second?
+What about this kernel?
+
+#code-file(path("./tracing/example2.py"), lang: "python", region: "loop-kernel-dyn")
+
+The loop iterates over `range(N)` where `N` is a symbolic value.
+What should happen in the first stage?
+
+#todo[ast rewriting.]
+
+#todo[
+show snippets from Guray's llvmdev presentation.
+
+- Fact 1: Fast GPU kernels are simple at runtime
+	- No function calls
+	- No object-oriented programming, polymorphism
+	- No complex branching or deeply fused logic
+- Fact 2: But developers love these concepts at authoring time
+	- Meta-programming
+	- Clean, structured Python code
+]

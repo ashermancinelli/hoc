@@ -8,9 +8,9 @@
 
   if region != none {
     let lines = source.split("\n")
-    let start-marker = "START_" + str(region)
-    let end-marker = "END_" + str(region)
-    let start = lines.position(line => line.contains(start-marker))
+    let start-marker = "REGION " + str(region)
+    let end-marker = "ENDREGION " + str(region)
+    let start = lines.position(line => line.contains(start-marker) and not line.contains(end-marker))
     let end = lines.position(line => line.contains(end-marker))
 
     assert(start != none, message: "code region " + str(region) + " has no start marker")
