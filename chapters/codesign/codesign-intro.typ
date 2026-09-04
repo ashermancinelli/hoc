@@ -59,7 +59,7 @@ units (or the lack thereof), but should instead program in a language with a com
 that took care of it for them--and here we are in the 21#super[st] century
 asking users to #emph[go back] to writing assembly to get the best performance from their CPUs.
 
-#gls-cap("autovec") was (and sometimes still is) unreliable, though lots and lots of programs
+#Gls("autovec") was (and sometimes still is) unreliable, though lots and lots of programs
 benefit greatly from it.
 When auto-vectorization works, it can seem almost magical--the user simply recompiles thier
 code with a better compiler, and suddenly they can take advantage of all the performance

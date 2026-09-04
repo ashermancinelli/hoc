@@ -126,7 +126,7 @@ While neither Naur's revised report nor Edgar Dijkstra's
 #cite-title(<dijkstra_primer_of_algol_programming_1962>)
 point out the implications of this distinction, it is important to note
 the subtle implications.
-#gls-cap("call-by-name") is not common in modern programming languages, and readers
+#Gls("call-by-name") is not common in modern programming languages, and readers
 may find it more similar to macro expansion
 (though it is not, in fact, simply textual replacement).
 The following example illustrates the difference:
@@ -147,7 +147,7 @@ The prior Python example may be rewritten to emulate call-by-name as follows:
 #code-file("chapters/dawn/callbyname2.py", lang: "python")
 
 
-#gls-cap("call-by-value") semantics demand that the argument to #mono-text("double") be evaluated
+#Gls("call-by-value") semantics demand that the argument to #mono-text("double") be evaluated
 before entering the function, so #mono-text("get_5") is called once and
 #emph[the result] is passed to #mono-text("double").
 With call-by-name semantics, #mono-text("get_5") is passed the expression itself,

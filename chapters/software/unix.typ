@@ -557,7 +557,7 @@ The name cames as a result of a comment by Jeff Ullman -- Al was
 
 
 After Al and Johnson's optimization efforts, the group was eventually able to
-parse #gls-cap("F77").
+parse #Gls("F77").
 
 One of the fast regular expression algorithms that Aho had come up with also saw use in the
 #mono-text("lex") program, which is used for generating lexical analyzers from regular expressions.
