@@ -3,11 +3,12 @@ default := "build"
 revision := `git -C ../hoc rev-parse --short HEAD 2>/dev/null || echo working-tree`
 flang_dot := "chapters/codesign/flang.dot"
 flang_diagram := "chapters/codesign/flang.png"
+tag := `date 2>&1 | perl -ne 'chomp; s#([[:space:]]|:)#-#g; print; print "\n"'`
 
 mod chapters './chapters/justfile'
 
-build: gen
-    typst compile --root . --input revision={{ revision }} main.typ hoc.pdf
+build output="hoc.pdf": gen
+    typst compile --root . --input revision={{ revision }} main.typ {{output}}
 
 watch: gen
     watchexec -e typ,py,cls,txt -- bash -c 'just gen && just build'
@@ -21,8 +22,8 @@ flang-diagram:
       dot -Tpng -Gdpi=180 "{{ flang_dot }}" -o "{{ flang_diagram }}"; \
     fi
 
-publish: build
-    cp "hoc.pdf" "publish/hoc.pdf"
+publish:
+    just build "publish/{{tag}}.pdf"
 
 open: build
     open hoc.pdf
