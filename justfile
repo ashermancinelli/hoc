@@ -1,14 +1,19 @@
 default := "build"
 
-revision := `git -C ../hoc rev-parse --short HEAD 2>/dev/null || echo working-tree`
+revision := `git rev-parse HEAD`
+revision_short := `git rev-parse HEAD|cut -c 6`
 flang_dot := "chapters/codesign/flang.dot"
 flang_diagram := "chapters/codesign/flang.png"
 tag := `date 2>&1 | perl -ne 'chomp; s#([[:space:]]|:)#-#g; print; print "\n"'`
+latest_publish := `ls publish/*.pdf|tail -1`
 
 mod chapters './chapters/justfile'
 
+link:
+    @printf "https://cdn.jsdelivr.net/gh/ashermancinelli/hoc@{{revision}}/publish/{{latest_publish}}\n"
+
 build output="hoc.pdf": gen
-    typst compile --root . --input revision={{ revision }} main.typ {{output}}
+    typst compile --root . --input revision={{ revision_short }} main.typ {{output}}
 
 watch: gen
     watchexec -e typ,py,cls,txt -- bash -c 'just gen && just build'
