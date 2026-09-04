@@ -52,16 +52,18 @@ into PTX and then into the cubin format and then the kernel is launched using th
 
 The staging decorator might look like this:
 
-```python
+#code-file(path("./tracing/ex0.py"), lang: "python")
 
-```
+Note how the actual arguments are converted into symbolic values before being
+passed into the function's first stage of execution. This is so that the
+operations that should really happen at runtime are not _evaluated_ in this
+first stage, but are _recorded_ in the #ir to be further compiled and then
+executed in the second stage of evaluation.
 
-```python
-@jit
-def kernel(a, b, c):
-    a[0] = a[0] + b[0] * c[0]
+The #ir after the first stage might look like this:
 
-a, b, c = # create torch tensors...
-kernel(a, b, c)
-```
+#code-file(path("./tracing/output.txt"), lang: "text")
+
+// #code-file(path("./tracing/ex1.py"), lang: "python")
+
 

@@ -4,16 +4,15 @@ revision := `git -C ../hoc rev-parse --short HEAD 2>/dev/null || echo working-tr
 flang_dot := "chapters/codesign/flang.dot"
 flang_diagram := "chapters/codesign/flang.png"
 
-build: diagrams
+mod chapters './chapters/justfile'
+
+build: gen
     typst compile --root . --input revision={{ revision }} main.typ hoc.pdf
 
-watch: diagrams
+watch: gen
     typst watch --root . --input revision={{ revision }} main.typ hoc.pdf
 
-diagrams: flang-diagram
-
-get-section file section:
-    @awk '/START_{{section}}/{p=1; next} /END_{{section}}/{p=0} p' {{file}}
+gen: flang-diagram chapters::gen
 
 flang-diagram:
     @if ! command -v dot >/dev/null 2>&1; then echo "error: Graphviz 'dot' is required (macOS: brew install graphviz)" >&2; exit 127; fi
