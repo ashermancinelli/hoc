@@ -1,4 +1,4 @@
-from .example_dsl import *
+from example_dsl import *
 from pprint import pprint
 
 a, b, c = [], [], []
@@ -11,4 +11,4 @@ def kernel(a, b, c):
 kernel(a, b, c)
 # ENDREGION scalar-kernel
 
-pprint(get_last_ir())
+pprint(kernel.ir)

@@ -1,5 +1,6 @@
 gen:
-  for ex in 0 1; do \
-    ../../.venv/bin/python -m tracing.example${ex} \
-      > ./tracing/example${ex}_output.txt; \
-  done
+  @make -C tracing
+# for ex in 0 1; do \
+#   ../../.venv/bin/python -m tracing.example${ex} \
+#     > ./tracing/example${ex}_output.txt; \
+# done

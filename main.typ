@@ -42,7 +42,12 @@
 #show: highlight-links
 
 #show: front-matter
-#tableofcontents
+
+#{
+  show outline: set heading(bookmarked: true)
+  tableofcontents
+}
+// #tableofcontents
 
 #show: main-matter
 
