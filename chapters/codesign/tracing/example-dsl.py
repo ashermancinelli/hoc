@@ -1,5 +1,6 @@
 from contextlib import contextmanager
 from dataclasses import dataclass
+from pprint import pprint
 
 @dataclass(frozen=True)
 class Op:
@@ -32,7 +33,7 @@ class SymbolicArray():
 @contextmanager
 def capture_ir():
     yield _ir
-    [print(i) for i in _ir]
+    pprint(_ir)
 
 def to_symbol(runtime_value):
     match runtime_value:
