@@ -22,7 +22,7 @@ Subroutines were defined with #mono-text("SUBROUTINE DEFINITION, NAME(ARGUMENT1,
 which is not #emph[too] far off of the language as it would come to be.
 The #emph[END] and #emph[RETURN] statements were also introduced.
 
-#gls-cap("separable-compilation") features were introduced as well.
+#Gls("separable-compilation") features were introduced as well.
 In the original FORTRAN, the entire program was a single FORTRAN program
 that had to be compiled as one #gls("translation-unit"), thus any changes to any
 part of the program required recompilation of everything.

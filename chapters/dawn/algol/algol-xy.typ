@@ -348,7 +348,7 @@ array := (4, 5, 6, 7, 8); # now it has bounds [1:5] #
 ```
 
 
-#gls-cap("call-by-name") as it was known in ALGOL 60 was removed in favor of
+#Gls("call-by-name") as it was known in ALGOL 60 was removed in favor of
 #gls("call-by-value") and #gls("call-by-reference"); some of the other proposals
 (such as Seegmüller's) preserved the two cases of call-by-name
 under different terms, but this was not adopted.

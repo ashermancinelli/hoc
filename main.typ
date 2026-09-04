@@ -39,6 +39,8 @@
     par-indent: false,
   ),
 )
+#show: make-glossary
+#register-glossaries()
 #show: highlight-links
 
 #show: front-matter
