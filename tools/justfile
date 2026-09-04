@@ -1,3 +1,22 @@
+tmp := "/tmp/t.txt"
+
+log text:
+  @printf "== %s\n" "{{text}}" >&2
+
 get-section file section:
-    @echo Extracting section {{section}} of {{file}} >&2
-    @awk '/START_{{section}}/{p=1; next} /END_{{section}}/{p=0} p' {{file}}
+  awk '/START_{{section}}/{p=1; next} /END_{{section}}/{p=0} p' {{file}}
+
+[script]
+get-sections file:
+  filepath={{ quote(file) }}
+  base={{ quote(without_extension(file)) }}
+  ext={{ quote(extension(file)) }}
+  for i in `seq 0 100`; do
+    just get-section {{file}} $i > {{tmp}}
+    if [ -s {{tmp}} ]; then
+      mv {{tmp}} "${base}_${i}.${ext}"
+    else
+      rm {{tmp}}
+      break
+    fi
+  done

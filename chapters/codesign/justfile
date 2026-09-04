@@ -1,12 +1,6 @@
 import '../../tools/justfile'
 
 gen:
-  @if [ ./tracing/example-dsl.py -nt ./tracing/ex0.py ]; then \
-    just get-section ./tracing/example-dsl.py 0 > ./tracing/ex0.py; \
-    just get-section ./tracing/example-dsl.py 1 > ./tracing/ex1.py; \
-  fi;
-  @if [ ./tracing/example-dsl.py -nt ./tracing/output.txt ]; then \
-    python ./tracing/example-dsl.py > ./tracing/output.txt; \
-  fi
-  
-    
+  just get-sections ./tracing/example-dsl.py
+  python ./tracing/example-dsl.py > ./tracing/example-dsl-output.txt
+  just get-sections ./tracing/example-dsl-output.txt

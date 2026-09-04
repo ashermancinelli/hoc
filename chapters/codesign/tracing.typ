@@ -70,3 +70,10 @@ The operations are instead recorded in the #ir, which might look like this:
 This _staged program_ would then be compiled to the target's native format where
 the next stage of execution takes place.
 
+Some tracing DSLs like CuTe DSL take this even further. Consider the following program:
+
+#code-file(path("./tracing/ex2.txt"), lang: "python")
+
+
+
+When should that `if` statement be evaluated, in the first stage or the second?
