@@ -10,7 +10,7 @@ latest_publish := `ls publish/*.pdf|tail -1`
 mod chapters './chapters/justfile'
 
 link:
-    @printf "https://cdn.jsdelivr.net/gh/ashermancinelli/hoc@{{revision}}/publish/{{latest_publish}}\n"
+    @printf "https://cdn.jsdelivr.net/gh/ashermancinelli/hoc@{{revision}}/{{latest_publish}}\n"
 
 build output="hoc.pdf": gen
     typst compile --root . --input revision={{ revision_short }} main.typ {{output}}

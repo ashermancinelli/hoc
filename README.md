@@ -5,6 +5,6 @@ This document contains my exploration of the history.
 
 <a
 target="blank"
-href="https://cdn.jsdelivr.net/gh/ashermancinelli/hoc@4c34799f97360c2396d5c0aba953a1205dfa58b6/publish/publish/Fri-Sep--4-13-47-50-PDT-2026.pdf">
+href="https://cdn.jsdelivr.net/gh/ashermancinelli/hoc@d1d420b39aa2c647fb2d05aaf439dccda0c458b9/publish/Fri-Sep--4-13-47-50-PDT-2026.pdf">
 Link to rendered pdf
 </a>
