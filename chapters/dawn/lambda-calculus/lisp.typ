@@ -170,7 +170,7 @@ use functions as arguments, one needs a notation for functions, and it seemed
 ]
 
 
-Again, we see how far Alonzo Church's λ-calculus was ahead of the actual
+Again, we see how far Alonzo Church's #gls("lambda-calculus") was ahead of the actual
 implementation of programming languages capable of representing its concepts.
 McCarthy also ran into the problem of deallocation of these list structures.
 While list-processing made some problems far more convenient,

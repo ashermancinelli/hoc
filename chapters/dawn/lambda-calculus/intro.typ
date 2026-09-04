@@ -5,7 +5,7 @@
 A surprising number of the foundations for programming language
 theory were laid before
 many familiar programming concepts were developed.
-Higher-order logic, combinatory logic, and λ-calculus{} were
+Higher-order logic, combinatory logic, and #gls("lambda-calculus") were
 all being developed prior to their uses in programming languages
 with the aim of providing a firm foundation for #emph[mathematics],
 and would only cross-polinate with programming languages later on.
@@ -32,7 +32,8 @@ of mathematics and point out the limits of provability.
 These led to several efforts to establish a firm foundation for the entire
 field of mathematics, some of which were based on sets and other functions
 and the two that we concern ourselves with here are #emph[combinatory logic]
-(abbreviated #emph[#acr-short("cl")] from here) and λ-calculus (occasionally abbreviated λ{}),
+(abbreviated #emph[#acr-short("cl")] from here) and #gls("lambda-calculus")
+(occasionally abbreviated #gls("lambda-calculus", display: "λ")),
 which were attempts to use functions.
 They are closely related and share many concepts.
 These efforts directly led to functional programming and type theory,

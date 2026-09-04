@@ -7,13 +7,13 @@
  <sec:type-theory>
 
 #cite(<cardone_hindley_history_of_lambda_calcl_2006>, form: "normal") summarizes the importance
-of λ-calculus and #acr-short("cl") to compilers and programming langauges as follows:
+of #gls("lambda-calculus") and #acr-short("cl") to compilers and programming langauges as follows:
 
 #quote(block: true)[
-λ and CL are used extensively in higher-order logic and computing.
+#gls("lambda-calculus", display: "λ") and CL are used extensively in higher-order logic and computing.
 	Rather like the chassis of a bus, which supports the vehicle but is unseen by its users,
-	versions of λ or CL underpin several important logical systems and programming
-	languages. Further, λ and CL gain most of their purpose at second hand from
+	versions of #gls("lambda-calculus", display: "λ") or CL underpin several important logical systems and programming
+	languages. Further, #gls("lambda-calculus", display: "λ") and CL gain most of their purpose at second hand from
 	such systems, just as an isolated chassis has little purpose in itself.
 ]
 

@@ -1,15 +1,11 @@
 # Dynamic bounds (not unrolled)
-FunctionIR(block_args=(SymbolicArray0, SymbolicScalar1),
-           body=[RuntimeLoop(bounds=SymbolicScalar1,
-                             induction_variable=SymbolicScalar2,
-                             body=[Op(name='set',
-                                      operands=(SymbolicArray0,
-                                                SymbolicScalar2,
-                                                SymbolicScalar2))])])
+def kernel(SymbolicArray0, SymbolicScalar1):
+    for SymbolicScalar2 in range(SymbolicScalar1):
+        setitem(SymbolicArray0, SymbolicScalar2, SymbolicScalar2)
 # Static bounds (fully unrolled)
-FunctionIR(block_args=(SymbolicArray3,),
-           body=[Op(name='set', operands=(SymbolicArray3, 0, 0)),
-                 Op(name='set', operands=(SymbolicArray3, 1, 1)),
-                 Op(name='set', operands=(SymbolicArray3, 2, 2)),
-                 Op(name='set', operands=(SymbolicArray3, 3, 3)),
-                 Op(name='set', operands=(SymbolicArray3, 4, 4))])
+def kernel(SymbolicArray3):
+    setitem(SymbolicArray3, 0, 0)
+    setitem(SymbolicArray3, 1, 1)
+    setitem(SymbolicArray3, 2, 2)
+    setitem(SymbolicArray3, 3, 3)
+    setitem(SymbolicArray3, 4, 4)

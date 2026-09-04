@@ -29,7 +29,7 @@ If #xref(<sec:intro-lambda-calc>, capital: false) is especially interesting to y
 I recommend reading #cite(<cardone_hindley_history_of_lambda_calcl_2006>, form: "author")'s
 #cite(<cardone_hindley_history_of_lambda_calcl_2006>, form: "normal").
 It thoroughly covers the pre-history of higher-order logic and the
-eventual interactions between combinatory logic, λ calculus,
+eventual interactions between combinatory logic, #gls("lambda-calculus"),
 programming languages, and compiler theory.
 
 In general, when discussing topics where I feel another work may interest or

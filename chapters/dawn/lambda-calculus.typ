@@ -2,7 +2,7 @@
 #import "../../glossaries.typ": *
 
 
-== The λ-Calculus{}
+== The #gls("lambda-calculus", update: false, link: false)
 
  <sec:intro-lambda-calc>
 
@@ -17,7 +17,7 @@
 #include "lambda-calculus/conclusion.typ"
 
 
-=== todo: notes on history of λ-Calculus{}
+=== todo: notes on history of #gls("lambda-calculus", update: false, link: false)
 
 #cite-title(<cardone_hindley_history_of_lambda_calcl_2006>)
 #cite-title(<hindley_lambda_calc_intro_2008>)
@@ -127,4 +127,3 @@ and then we'll do type theory in Software section.
 	which would become the foundation for type theory.
 
 */
-

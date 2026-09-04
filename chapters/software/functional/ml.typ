@@ -7,7 +7,7 @@
 
 LCF, standing for #emph[Logic for Computable Functions], was a proof assistant program
 which attempted to translate the formalized logic for computable functions
-from #cite(<scott_type_theory_iswim_cuch_1969>, form: "normal") into λ, originally
+from #cite(<scott_type_theory_iswim_cuch_1969>, form: "normal") into #gls("lambda-calculus", display: "λ"), originally
 developed by #cite(<milner_implementation_of_lcf_1972>, form: "author")
 at Stanford #cite(<milner_implementation_of_lcf_1972>, form: "normal").
 This program, originally implemented in Lisp on the PDP-10, would continue to be developed

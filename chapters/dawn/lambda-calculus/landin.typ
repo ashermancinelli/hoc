@@ -8,17 +8,17 @@
 
 Exemplary of the varied approaches to formalizing the design of ALGOL 60,
 Peter Landin sought to express the language's semantics in the
-λ-calculus in #cite(<landin_algol_lambda_1965>, form: "normal")
+#gls("lambda-calculus") in #cite(<landin_algol_lambda_1965>, form: "normal")
 #footnote[See #xref(<sec:algol60>, capital: false) for more details on the development of ALGOL 60.].
-A few years earlier, McCarthy adopted some components of the λ-calculus in
-Lisp, however McCarthy's language broke with λ in a few key areas,
+A few years earlier, McCarthy adopted some components of the #gls("lambda-calculus") in
+Lisp, however McCarthy's language broke with #gls("lambda-calculus", display: "λ") in a few key areas,
 namely #gls("dynamic-binding")
 #footnote[ For a more complete treatment of Lisp, see #xref(<sec:lisp>, capital: false). ].
-ALGOL's semantics provided a much cleaner relationship to λ, thanks to
+ALGOL's semantics provided a much cleaner relationship to #gls("lambda-calculus", display: "λ"), thanks to
 its block structure and lexical scoping rules, thus Landin
-made it possible to look at λ as a programming language in and of itself
+made it possible to look at #gls("lambda-calculus", display: "λ") as a programming language in and of itself
 in a more complete way than McCarthy had done with Lisp.
 
 In parallel with his translation of ALGOL, Landin developed in
 #cite(<landin_eval_of_expressions_1964>, form: "normal") an abstract machine for
-λ called the #emph[SECD-machine].
+#gls("lambda-calculus", display: "λ") called the #emph[SECD-machine].

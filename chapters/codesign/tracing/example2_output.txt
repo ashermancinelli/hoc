@@ -2,7 +2,7 @@ Traceback (most recent call last):
   File "example2.py", line 23, in <module>
     kernel(a, 5)
     ~~~~~~^^^^^^
-  File "example_dsl.py", line 126, in __call__
+  File "example_dsl.py", line 150, in __call__
     self.func(*block_args)
     ~~~~~~~~~^^^^^^^^^^^^^
   File "example2.py", line 20, in kernel

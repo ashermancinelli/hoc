@@ -5,9 +5,9 @@
 === Peter Landin's ISWIM
 
 
-In #xref(<sec:intro-lambda-calc>, capital: false) we established the λ-calculus and its early
+In #xref(<sec:intro-lambda-calc>, capital: false) we established the #gls("lambda-calculus") and its early
 applications to compilers in Lisp, and in #xref(<sec:algol60>, capital: false) we discussed Landin's
-use of λ to formalize the semantics of ALGOL 60.
+use of #gls("lambda-calculus", display: "λ") to formalize the semantics of ALGOL 60.
 Like many of the prominent British computer scientists of the time,
 he was heavily involved in the development of ALGOL, and then
 took that experience to further programming language design efforts.
@@ -18,8 +18,8 @@ In this paper, he describes a general framework for programming languages
 called #emph[ISWIM], standing for
 #emph[If You See What I Mean]
 #footnote[ISWIM is sometimes pronounced #emph[eye-swim] #cite(<macqueen_history_lcf_ml_2025>, form: "normal").],
-which conveyed the semantics of λ with
-a particularly elegant syntax over λ constructs.
+which conveyed the semantics of #gls("lambda-calculus", display: "λ") with
+a particularly elegant syntax over #gls("lambda-calculus", display: "λ") constructs.
 This language represented his vision for the future of programming languages
 with an emphasis on expressing the programmer's intent uncluttered by
 the details of the machine running the program.
@@ -44,7 +44,7 @@ Landin described the grammar of ISWIM in informal English, which was perhaps
 a step backwards from John Backus and Peter Naur's formal grammars #cite(<naur_backus_algol_1960>, form: "normal")
 which were also being developed for the specification of ALGOL, though
 the strict evaluation semantics and emphasis on expressivity
-made the conception of λ as a programming language more concrete.
+made the conception of #gls("lambda-calculus", display: "λ") as a programming language more concrete.
 
 While ISWIM was not statically typed, Landin did describe an informal way to
 describe data types in ISWIM, which he used for describing the data structures
@@ -55,7 +55,7 @@ The only true implementation of ISWIM as it was in the paper
 developed by #cite(<evans_pal_language_designed_for_teaching_programming_linguistics_1968>, form: "author")
 at MIT.
 
-#todo[was dynamically typed, much like lisp but with semantics closer to λ.]
+#todo[was dynamically typed, much like lisp but with semantics closer to #gls("lambda-calculus", display: "λ").]
 // He argued that the programmer ought to only consider their intent, and the compiler ought to
 // consider the operations that would be needed to carry out their intent.
 

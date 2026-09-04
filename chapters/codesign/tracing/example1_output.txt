@@ -1,7 +1,7 @@
 # First iteration only
-FunctionIR(block_args=(SymbolicArray0,),
-           body=[Op(name='set', operands=(SymbolicArray0, 0, 0)),
-                 Op(name='set', operands=(SymbolicArray0, 1, 1)),
-                 Op(name='set', operands=(SymbolicArray0, 2, 2)),
-                 Op(name='set', operands=(SymbolicArray0, 3, 3)),
-                 Op(name='set', operands=(SymbolicArray0, 4, 4))])
+def kernel(SymbolicArray0):
+    setitem(SymbolicArray0, 0, 0)
+    setitem(SymbolicArray0, 1, 1)
+    setitem(SymbolicArray0, 2, 2)
+    setitem(SymbolicArray0, 3, 3)
+    setitem(SymbolicArray0, 4, 4)

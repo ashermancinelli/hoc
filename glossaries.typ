@@ -48,6 +48,7 @@
 			transformed in a beneficial way]),
   "pgo": (name: "profile-guided optimization", description: [Compiler optimizations that take advantage of statistics from the execution of a program to improve the compiler's heuristics. A user might compile and run a very program with special compiler flags such that loop hotness and trip counts are recorded, and then re-compile their program such that the compiler can use those statistics to drive its optimization decisions]),
   "licm": (name: "loop-invariant code motion", description: [Loop-invariant code motion is an optimization that moves code outside of a loop if it does not depend in any way on the loop's induction variables]),
+  "lambda-calculus": (name: "λ-calculus", description: [A formal system introduced by Alonzo Church for expressing computation through function abstraction and application. The symbol λ is commonly used as an abbreviation.]),
 )
 
 #let acronym-data = (
@@ -116,8 +117,8 @@
 
 // Preserve the manuscript's explicit choice of short, long, or expanded
 // acronym forms while making every occurrence a linked glossary reference.
-#let gls(key) = glossarium.gls(key, first: false)
-#let Gls(key) = glossarium.Gls(key, first: false)
+#let gls(key, ..args) = glossarium.gls(key, first: false, ..args)
+#let Gls(key, ..args) = glossarium.Gls(key, first: false, ..args)
 #let gls-upper(key) = glossarium.gls(key, first: false, display: upper(short-form(key)))
 #let acr-short(key) = glossarium.gls(key, first: false)
 #let acr-long(key) = glossarium.gls-long(key, link: true, update: true)
@@ -125,6 +126,7 @@
 
 // acr and gls entries i use a lot
 #let ir = acr-short("ir")
+#let ast = acr-short("ast")
 
 #let print-glossaries() = {
   pagebreak()

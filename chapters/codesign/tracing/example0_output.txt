@@ -1,7 +1,7 @@
-FunctionIR(block_args=(SymbolicArray0, SymbolicArray1, SymbolicArray2),
-           body=[Op(name='get', operands=(SymbolicArray0, 0)),
-                 Op(name='get', operands=(SymbolicArray1, 0)),
-                 Op(name='get', operands=(SymbolicArray2, 0)),
-                 Op(name='mul', operands=(SymbolicScalar4, SymbolicScalar5)),
-                 Op(name='add', operands=(SymbolicScalar3, SymbolicScalar6)),
-                 Op(name='set', operands=(SymbolicArray0, 0, SymbolicScalar7))])
+def kernel(SymbolicArray0, SymbolicArray1, SymbolicArray2):
+    SymbolicScalar3 = getitem(SymbolicArray0, 0)
+    SymbolicScalar4 = getitem(SymbolicArray1, 0)
+    SymbolicScalar5 = getitem(SymbolicArray2, 0)
+    SymbolicScalar6 = mul(SymbolicScalar4, SymbolicScalar5)
+    SymbolicScalar7 = add(SymbolicScalar3, SymbolicScalar6)
+    setitem(SymbolicArray0, 0, SymbolicScalar7)

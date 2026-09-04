@@ -1,4 +1,5 @@
 from typing import Callable
+import textwrap
 from contextlib import contextmanager
 from dataclasses import dataclass, field
 from pprint import pprint, pformat
@@ -17,16 +18,26 @@ def comment(text):
             return '# ' + self.text
     return Comment(text)
 
+class Symbol: ...
+
 @dataclass(frozen=True)
 class Op:
     name: str
     operands: tuple
+    result: Symbol | None = None
+
+    def __repr__(self):
+        op = f'{self.name}(' + (', '.join(pformat(i) for i in self.operands)) + ')'
+        if self.result is None:
+            return op
+        return pformat(self.result) + ' = ' + op
 
 @dataclass
 class InsertionPoint:
     ref: object = None
     def append(self, other):
         self.ref.append(other)
+        return other.result
     def __getitem__(self, *args):
         return self.ref.__getitem__(*args)
 
@@ -47,39 +58,52 @@ def gensym():
     _id += 1
     return s
 
-class SymbolicScalar():
+class SymbolicScalar(Symbol):
     def __repr__(self): return f'SymbolicScalar{self.name}'
     def __init__(self, thing=None, name=None):
         self.thing = thing
         self.name = name or gensym()
     def __add__(self, other):
-        ip.append(Op('add', (self, other)))
-        return SymbolicScalar(ip[-1])
+        return ip.append(Op('add', (self, other), result=SymbolicScalar()))
     def __mul__(self, other):
-        ip.append(Op('mul', (self, other)))
-        return SymbolicScalar(ip[-1])
+        return ip.append(Op('mul', (self, other), result=SymbolicScalar()))
 
-class SymbolicArray():
+class SymbolicArray(Symbol):
     def __repr__(self): return f'SymbolicArray{self.name}'
     def __init__(self, real_array, name=None):
         self.real_array = real_array
         self.name = name or gensym()
     def __getitem__(self, indices):
-        ip.append(Op('get', (self, indices)))
-        return SymbolicScalar(ip[-1])
+        return ip.append(Op('getitem', (self, indices), result=SymbolicScalar()))
     def __setitem__(self, indices, value):
-        ip.append(Op('set', (self, indices, value)))
+        return ip.append(Op('setitem', (self, indices, value)))
+
+INDENT = ' ' * 4
 
 @dataclass(frozen=True, kw_only=True)
 class RuntimeLoop:
     bounds: range
     induction_variable: SymbolicScalar = field(default_factory=SymbolicScalar)
     body: Callable[[int], None] = field(default_factory=list)
+    result = None
+
+    def __repr__(self):
+        s = f'for {self.induction_variable} in range({self.bounds}):\n'
+        body = '\n'.join(pformat(i) for i in self.body)
+        s += textwrap.indent(body, INDENT)
+        return s
+
 
 @dataclass(frozen=True)
 class FunctionIR:
+    name: str
     block_args: list
     body: list
+
+    def __repr__(self):
+        body = f'def {self.name}(' + ', '.join(pformat(i) for i in self.block_args) + '):\n'
+        body += textwrap.indent('\n'.join(pformat(i) for i in self.body), INDENT)
+        return body
 
 # REGION for-decorator
 def fori(bounds):
@@ -121,7 +145,7 @@ class jit:
     def __call__(self, *args):
         # First stage
         block_args = tuple(to_symbol(arg) for arg in args)
-        self.ir = FunctionIR(block_args, [])
+        self.ir = FunctionIR(self.func.__name__, block_args, [])
         with insertion_point(self.ir.body):
             self.func(*block_args)
         # Second stage

@@ -60,7 +60,7 @@ $ ⟨ "expression" ⟩ ::=
 The attempts to formalize ALGOL 60 were varied;
 in #cite(<landin_algol_lambda_1965>, form: "normal"), #cite(<landin_algol_lambda_1965>, form: "author")
 attempted to formalize the semantics of ALGOL 60 by translating them into
-the λ-calculus
+the #gls("lambda-calculus")
 #footnote[This is more thoroughly discussed in #xref(<sec:landin-lambda-calculus>, capital: false)]
 .
 The inclination to formalize the semantics of a programming language before
