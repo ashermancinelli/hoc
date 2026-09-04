@@ -16,6 +16,8 @@
 
 #include "dawn/algol.typ"
 
+#include "dawn/simula.typ"
+
 #include "dawn/lambda-calculus.typ"
 
 // \input{chapters/dawn/lisp.tex} % should this come right after FORTRAN?

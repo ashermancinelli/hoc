@@ -6,9 +6,9 @@
 === Legacy of ALGOL
 
 
-It is difficult to overstate the impact of the design decisions of both ALGOL 60 and 68,
-even though neither saw widespread adoption in the industry outside depictions of
-algorithms in academic papers.
+It is difficult to overstate the impact of both ALGOL 60 and 68,
+even though neither saw widespread adoption in the industry (outside depictions of
+algorithms in academic papers).
 When Dennis Ritchie extended Ken Thompson's B compiler with a type system, he drew heavy
 inspiration from ALGOL 68:
 
@@ -46,40 +46,10 @@ be found in Andrey Terekhov's 2014 paper #cite(<algol_68_ussr_2014>, form: "norm
 The influence of ALGOL was so wide that it is hard to point to compilers or programming
 languages that are #emph[not] heavily influenced by it.
 A few languages stand out as exceptions because their authors were involved in the
-design of ALGOL and went on to develop new languages in light of those.
-Among others, the most notable were Ada, Pascal, and SIMULA.
-We will treat these more thoroughly in the following chapter, but
-we briefly introduce their connections to ALGOL here.
-
-
-==== Pascal
-
-
-Nicolas Writh wrote the language based on ALGOL 60.
-He was heavily involved in the development of ALGOL X, or ALGOL 68 as it came to be known.
-His proposal for ALGOL X was not taken up by the committee after they determined
-that #todo[what's his name again?] would move forward with his W-grammar, and the
-ALGOL 68 process divulged into complexity and political back-and-forths.
-Wirth picked up his proposal and continued developing it until it became Pascal
-#cite(<wirth_50_years_of_pascal_2021>, form: "normal").
-See  #xref(<sec:pascal>, capital: false) for the full discussion.
-
-
-==== SIMULA
-
-
-SIMULA is unique among programming languages: it was developed
-as a direct extension of ALGOL 60.
-The #emph[SIMU]lation #emph[LA]nguage was developed by #todo[who?]
-for the UNIVAC 1107 in early 1965 by tacking on features related to parallelism.
-#cite-title(<wirth_50_years_of_pascal_2021>).
-
-// \subsection{Criticism of ALGOL 68}
-
-// Numerous committee members and readers of the \textit{ALGOL Bulletin} criticized
-// the original report for its complexity; Lindsey (our faithful defender of the
-// language) conceded that "much of the mud slung at [the original report] is
-// probably still sticking" \cite{a_history_of_algol_68_1993}.
+design of ALGOL and went on to develop new languages in light of those;
+the languages most concretely derived from ALGOL were Pascal and SIMULA.
+Pascal is discussed in detail in 
+and SIMULA in #xref(<sec:simula>, capital: false).
 
 #todo[Defined in Wijngaarden Grammar by Adriaan van Wijngaarden.
 	Contains parsing and things which in other langauges are called semantics.]
