@@ -1,8 +1,9 @@
 #import "../../macros.typ": *
 #import "../../glossaries.typ": *
+
 == SIMULA
-// \section{SIMULA}
-// \label{sec:simula}
+
+ <sec:simula>
 
 SIMULA was one of several domain-specific languages of the time.
 It is singled out because of its impact on programming languages and compilers,

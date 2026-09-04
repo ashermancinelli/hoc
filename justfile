@@ -10,7 +10,7 @@ build: gen
     typst compile --root . --input revision={{ revision }} main.typ hoc.pdf
 
 watch: gen
-    typst watch --root . --input revision={{ revision }} main.typ hoc.pdf
+    watchexec -e typ,py,cls,txt -- bash -c 'just gen && just build'
 
 gen: flang-diagram chapters::gen
 
