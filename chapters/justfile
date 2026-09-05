@@ -1,3 +1,0 @@
-mod codesign './codesign/justfile'
-
-gen: codesign::gen
