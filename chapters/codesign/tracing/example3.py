@@ -4,6 +4,7 @@ from pprint import pprint as print
 a, b, c = [], [], []
 
 _print('# Dynamic bounds (not unrolled)')
+
 # REGION dyn
 @jit
 def kernel(a, N):

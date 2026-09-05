@@ -1,43 +1,51 @@
 ROOT := $(CURDIR)
-MAKEFLAGS += --no-print-directory
-MAKEFLAGS += --include-dir=$(ROOT)/tools
-MAKEFLAGS += ROOT=$(ROOT)
-include tools/common.mk
+PYTHON := $(ROOT)/.venv/bin/python
 
 .DEFAULT_GOAL := hoc.pdf
+.DELETE_ON_ERROR:
+
 # MAKEFLAGS += --silent
-revision := $(shell git rev-parse HEAD)
-revision_short := $(shell bash -c "git rev-parse HEAD|cut -c 1-6")
-flang_dot := chapters/codesign/flang.dot
-flang_diagram := chapters/codesign/flang.png
-tag := $(shell date '+%a-%b-%d-%H-%M-%S-%Z-%Y')
-latest_publish := $(shell ls publish/*.pdf|tail -1)
-typ := $(shell find . -name '*.typ')
-mk := $(shell find . -name Makefile)
-typst_flags := \
+REVISION := $(shell git rev-parse HEAD)
+REVISION_SHORT := $(shell bash -c "git rev-parse HEAD|cut -c 1-6")
+
+TAG := $(shell date '+%a-%b-%d-%H-%M-%S-%Z-%Y')
+PUB := $(shell ls publish/*.pdf|tail -1)
+SRC := $(shell find . -name '*.typ')
+TYPST_FLAGS := \
 		--diagnostic-format short \
 		--root . \
-		--input revision=$(revision_short)
-link := https://cdn.jsdelivr.net/gh/ashermancinelli/hoc@$(revision)/$(latest_publish)
+		--input revision=$(REVISION_SHORT)
+LINK := https://cdn.jsdelivr.net/gh/ashermancinelli/hoc@$(REVISION)/$(PUB)
 
+.PHONY: config gen watch open publish
 config:
-	@echo rev: $(revision) $(revision_short)
-	@echo tag: $(tag)
-	@echo typst sources: $(words $(typ))
-	@echo lateset published version: $(latest_publish)
-	@echo link: $(link)
+	@echo rev: $(REVISION) $(REVISION_SHORT)
+	@echo tag: $(TAG)
+	@echo typst sources: $(words $(SRC))
+	@echo lateset published version: $(PUB)
+	@echo link: $(LINK)
 
-.PHONY: gen
-gen:
-	@$(MAKE) -C chapters
+D := chapters/codesign/tracing
+TRACING_EXAMPLES := $(wildcard $(D)/example*.py)
+TRACING_OUTPUTS := $(patsubst %.py,%_output.txt,$(TRACING_EXAMPLES))
+$(D)/%_output.txt: $(D)/%.py $(D)/dsl.py $(D)/__init__.py Makefile
+	cd $(@D) && $(PYTHON) $(<F) > $(@F)
+
+chapters/codesign/flang.png: chapters/codesign/flang.dot
+	dot -Tpng -Gdpi=180 $< -o $@
+
+gen: chapters/codesign/flang.png $(TRACING_OUTPUTS)
 
 watch:
-	watchexec -N -f Makefile -e mk,dot,typ,py,cls,txt -- make hoc.pdf
+	watchexec -N -f Makefile -e mk,dot,typ,py,cls,txt -- make -j8 hoc.pdf
 
-%.pdf: gen $(typ) $(mk)
-	typst compile $(typst_flags) main.typ $@
+%.pdf: gen $(SRC) Makefile
+	typst compile $(TYPST_FLAGS) main.typ $@
 
 open: hoc.pdf
 	open $<
 
-publish: config publish/$(tag).pdf
+publish/$(TAG).pdf: hoc.pdf
+	@cp hoc.pdf publish/$(TAG).pdf
+
+publish: config publish/$(TAG).pdf
