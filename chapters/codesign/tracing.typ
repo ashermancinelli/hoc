@@ -12,7 +12,16 @@ hardware and inputs and typical GPU programming models can make this difficult.
 Prior to the popularization of tracing JITs, state of the art GPU programs were often written
 using a CUDA C++ template library called CUTLASS #citen(<nvidia_cutlass_2023>),
 which can have poor compile times and be difficult to use but can generate good
-performance from relatively high level information.
+performance from relatively high level information
+#footnote[
+Michael Goldfarb of NVIDIA summarized the tradeoff as follows
+@Goldfarb2025CuTeDSLJAX:
+- C++ templates are slow to compile
+- C++ templates are inconvenient
+- DL community has fully embraced Python
+This is not to say CUDA C++ is not used anymore, but for many developers,
+Python kernel authoring frameworks provide better tradeoffs.
+].
 
 The two-stage process of writing programs that _generate_ kernels and then
 executing those generated programs lends itself well to metaprogramming.
