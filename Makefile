@@ -1,6 +1,7 @@
-root := $(CURDIR)
+ROOT := $(CURDIR)
 MAKEFLAGS += --no-print-directory
-MAKEFLAGS += --include-dir=$(root)/tools
+MAKEFLAGS += --include-dir=$(ROOT)/tools
+MAKEFLAGS += ROOT=$(ROOT)
 include tools/common.mk
 
 .DEFAULT_GOAL := hoc.pdf
@@ -26,7 +27,7 @@ gen:
 	@$(MAKE) -C chapters
 
 watch:
-	watchexec -N -f Makefile -e dot,typ,py,cls,txt -- make hoc.pdf
+	watchexec -N -f Makefile -e mk,dot,typ,py,cls,txt -- make hoc.pdf
 
 %.pdf: gen $(typ) $(mk)
 	typst compile $(typst_flags) main.typ $@

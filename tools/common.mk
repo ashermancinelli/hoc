@@ -13,7 +13,8 @@
 # $(^F)   filename parts of $^
 # $(@)    same as $@
 # $(^)    same as $^
-PYTHON := $(root)/.venv/bin/python
+
+PYTHON := $(ROOT)/.venv/bin/python
 
 %.png: %.dot
 	dot -Tpng -Gdpi=180 $< -o $@

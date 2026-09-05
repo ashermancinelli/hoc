@@ -1,11 +1,11 @@
 Traceback (most recent call last):
-  File "example2.py", line 23, in <module>
+  File "example2.py", line 34, in <module>
     kernel(a, 5)
     ~~~~~~^^^^^^
   File "example_dsl.py", line 150, in __call__
     self.func(*block_args)
     ~~~~~~~~~^^^^^^^^^^^^^
-  File "example2.py", line 20, in kernel
+  File "example2.py", line 30, in kernel
     for i in range(N):
              ~~~~~^^^
 TypeError: 'SymbolicScalar' object cannot be interpreted as an integer
