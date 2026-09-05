@@ -1,4 +1,4 @@
-from example_dsl import *
+from dsl import *
 from pprint import pprint
 
 a, b, c = [], [], []

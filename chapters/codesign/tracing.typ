@@ -79,7 +79,7 @@ into PTX and then into the cubin format and then the kernel is launched using th
 
 The staging decorator might look like this:
 
-#code-file(path("./tracing/example_dsl.py"), lang: "python", region: "jit")
+#code-file(path("./tracing/dsl.py"), lang: "python", region: "jit")
 
 The jitted function might be called like this:
 
@@ -130,7 +130,7 @@ and static loop bounds will be evaluated in the first stage.
 
 The `fori` decorator decides which stage the loop should be evaluated in:
 
-#code-file(path("./tracing/example_dsl.py"), lang: "python", region: "for-decorator")
+#code-file(path("./tracing/dsl.py"), lang: "python", region: "for-decorator")
 
 CuTe DSL#footnote[As of version 4.8, which is the latest version at the time of writing.]
 handles this with a third stage of evaluation prior to running the program

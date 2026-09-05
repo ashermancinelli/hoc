@@ -7,7 +7,7 @@ include tools/common.mk
 .DEFAULT_GOAL := hoc.pdf
 # MAKEFLAGS += --silent
 revision := $(shell git rev-parse HEAD)
-revision_short := $(shell bash -c "git rev-parse HEAD|cut -c 6")
+revision_short := $(shell bash -c "git rev-parse HEAD|cut -c 1-6")
 flang_dot := chapters/codesign/flang.dot
 flang_diagram := chapters/codesign/flang.png
 tag := $(shell date '+%a-%b-%d-%H-%M-%S-%Z-%Y')
@@ -18,9 +18,14 @@ typst_flags := \
 		--diagnostic-format short \
 		--root . \
 		--input revision=$(revision_short)
+link := https://cdn.jsdelivr.net/gh/ashermancinelli/hoc@$(revision)/$(latest_publish)
 
-link:
-	@printf "https://cdn.jsdelivr.net/gh/ashermancinelli/hoc@$(revision)/$(latest_publish)\n"
+config:
+	@echo rev: $(revision) $(revision_short)
+	@echo tag: $(tag)
+	@echo typst sources: $(words $(typ))
+	@echo lateset published version: $(latest_publish)
+	@echo link: $(link)
 
 .PHONY: gen
 gen:
@@ -35,4 +40,4 @@ watch:
 open: hoc.pdf
 	open $<
 
-publish: publish/$(tag).pdf
+publish: config publish/$(tag).pdf

@@ -1,7 +1,7 @@
 import os
 import sys
 import traceback
-from example_dsl import *
+from dsl import *
 from pprint import pprint
 
 def relative_excepthook(type, value, tb):
@@ -36,4 +36,3 @@ except Exception as e:
     sys.excepthook(*sys.exc_info())
     sys.exit(0)
 raise RuntimeError()
-

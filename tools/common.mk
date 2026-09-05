@@ -15,6 +15,8 @@
 # $(^)    same as $^
 
 PYTHON := $(ROOT)/.venv/bin/python
+penultimate = $(word $(shell expr $(words $(1)) - 1),$(1))
+D := $(dir $(abspath $(call penultimate,$(MAKEFILE_LIST))))
 
 %.png: %.dot
 	dot -Tpng -Gdpi=180 $< -o $@
