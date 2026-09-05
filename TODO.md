@@ -7,4 +7,4 @@
 * cite @two_bits_cultural_significance_free_software_2008 in history of oss
 * cite @Verlaguet2026HackPHPFacebook in history-of-oss.typ where i mention `Facebook php->c++ compiler`
     * type theory forall podcast episode about that process
-* read @Priestley2008
+* read @Priestley2008_logic_dev_of_pl_1930_1975
