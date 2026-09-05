@@ -1,7 +1,33 @@
 #import "macros.typ": mono, mono-text, todo, unsupported
 #import "@preview/glossarium:0.5.10" as glossarium
 
+#let glossary-ref(key, ..args) = glossarium.gls(
+  key,
+  first: false,
+  update: false,
+  ..args,
+)
+
 #let glossary-data = (
+  "pallas": (
+    name: "Pallas",
+    description: [The kernel authoring language part of the #glossary-ref("jax") framework.]
+  ),
+  "jax": (
+    name: "JAX",
+    description: [Machine-learning focused GPU and TPU framework.]
+  ),
+  "cutedsl": (
+    name: "CuTe DSL",
+    description: [#glossary-ref("dsl") evolved out of #glossary-ref("cutlass").]
+  ),
+  "cutlass": (
+    name: "CUTLASS",
+    description: [
+      CUDA C++ templates and Python #glossary-ref("dsl")s designed for high performance
+      matrix multiplication NVIDIA GPU programs.
+    ]
+  ),
   "bytecode": (name: "bytecode", description: [A compiler intermediate representation for the purpose of interpretation or execution instead of optimization]),
   "sift": (name: "sift", description: [The process of automatically translating code in one high-level language to another, preserving semantics and pointing out components of the source code that must be manually translated]),
   "bootstrap": (name: "bootstrap", description: [The process of writing a compiler in the language that it compiles, such that an older version of the compiler can be used to compile a newer version of itself]),
@@ -52,6 +78,14 @@
 )
 
 #let acronym-data = (
+  "dsl": (
+    short: "DSL", long: "Domain-specific language", description: [
+      A language with a specific (often narrow) purpose,
+      often embedded in another language to make a particular
+      subset of programs easier to write with syntax different from the embedded
+      language.
+    ]
+  ),
   "hpc": (short: "HPC", long: "high-performance computing", description: [A subset of computing primarily concerned with scientific applications
 	on very large-scale systems, often referred to as supercomputers or compute clusters]),
   "pgi": (short: "PGI", long: "The Portland Group", description: [A compiler company based in Portland, Oregon that specialized in

@@ -40,7 +40,7 @@ feature sets for different _stages_ of programming.
 // traced programming models #footnote[See also Guray Ozen's talk on CuTe DSL
 // @Ozen2025_CUTLASS_PythonDSL_CUTEDSL and the CuTe DSL documentation @NVIDIACUTLASSDocs.].
 
-=== Staged Programming
+=== Two-Stage Programming
 
 Staged programming involves several _stages_ where only _parts_ of the user's program
 are evaluated.
@@ -132,7 +132,36 @@ The `fori` decorator decides which stage the loop should be evaluated in:
 
 #code-file(path("./tracing/dsl.py"), lang: "python", region: "for-decorator")
 
-CuTe DSL#footnote[As of version 4.8, which is the latest version at the time of writing.]
+This is how some tracing programming models like #Gls("pallas") work.
+To write a GPU program that contains a while loop at runtime, the user must call
+a higher ordered function and pass in functions describing the body of the loop @jax_docs[`while_loop`]:
+
+#quote(block: true)[
+  The semantics of `while_loop` are given by this Python implementation:
+
+```python
+def while_loop(cond_fun, body_fun, init_val):
+  val = init_val
+  while cond_fun(val):
+    val = body_fun(val)
+  return val
+```
+
+Unlike that Python version, `while_loop` is a JAX primitive and is lowered to a single WhileOp.
+That makes it useful for reducing compilation times for jit-compiled functions,
+since native Python loop constructs in an `@jit` function are unrolled, leading to large XLA computations.
+]
+
+To use dynamic control flow in programming models like these, users must write
+something other than the Python syntax they are used to.
+First-stage control flow always happens in regular Python and uses regular Python syntax
+while second-stage control flow always uses special syntax like #gls("jax")'s `while_loop`
+
+This is not the only approach.
+
+=== Three-Stage Programming
+
+#gls("cutedsl")#footnote[As of version 4.8, which is the latest version at the time of writing.]
 handles this with a third stage of evaluation prior to running the program
 in the Python interpreter.
 The three stages of the CuTe DSL compiler are _pre-staging_ where the AST is preprocessed,
@@ -151,7 +180,10 @@ perform #acr-short("ast")-level transformations themselves without the help of t
   programs, but these programming models typically generate another program as a
   by product of execution.
 ]
-#todo[cite @Karpenkov2026TracingDSL, note how pallas doesn't do the ast rewrite stuff]
+
+#todo[
+  cite @Karpenkov2026TracingDSL, note how pallas doesn't do the ast rewrite stuff
+]
 
 === Why Is This Useful?
 
