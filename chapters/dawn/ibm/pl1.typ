@@ -2,7 +2,6 @@
 #import "../../../glossaries.typ": *
 
 
-
 === PL/1
 
 NPL was later renamed to PL/I.
@@ -40,6 +39,15 @@ One of the core design principles would be (@Randin1965_NPL_highlights_of_new_pl
     have many warning messages ("Are you sure you want to
     do this strange thing?"). This will help to insure realistic
     compatibility between different NPL compilers,
+]
+
+Mark Priestley describes NPL this way @Priestley2008_logic_dev_of_pl_1930_1975:
+
+#quote(block: true)[
+  The overall impression gained is that
+  NPL was intended in many respects to emulate natural, not formal, languages: the programmer,
+  or ‘speaker’, was allowed a great range and flexibility of expression, and it was assumed that the
+  interpreter had a considerable degree of sophistication enabling it to make out the intended meaning.
 ]
 
 #todo[
