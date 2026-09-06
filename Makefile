@@ -1,6 +1,8 @@
 D := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 ROOT := $(patsubst %/,%,$(D))
-PYTHON := $(ROOT)/.venv/bin/python
+VENV := $(ROOT)/.venv
+PYTHON := $(VENV)/bin/python
+SBCL := $(VENV)/bin/sbcl
 
 .DEFAULT_GOAL := hoc.pdf
 .DELETE_ON_ERROR:
@@ -26,13 +28,21 @@ config:
 	@echo lateset published version: $(PUB)
 	@echo link: $(LINK)
 
-$(PYTHON):
+$(VENV):
 	uv venv --seed --clear .venv
+
+$(PYTHON): $(VENV)
+
+$(SBCL): $(VENV)
+	@if ! command -V sbcl; then \
+		echo Need to install sbcl first; \
+	fi
+	ln -sf `which sbcl` $(SBCL)
 
 gen: chapters-gen
 
 watch:
-	watchexec -N -f Makefile -e mk,dot,typ,py,cls,txt -- make -j8 hoc.pdf
+	watchexec -N -f Makefile -e lisp,mk,dot,typ,py,cls,txt -- make -j8 hoc.pdf
 
 %.pdf: gen $(SRC) Makefile
 	typst compile $(TYPST_FLAGS) main.typ $@
