@@ -28,8 +28,9 @@
   title-page: {
     book-title-page(
       subtitle: none,
-      edition: none,
-      series: "Compiler History",
+      // edition: none,
+      series: none,
+      edition: "Draft",
       institution: "A Brief History of Compilers",
       version-usage: [Revision #revision],
     )

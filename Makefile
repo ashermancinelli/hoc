@@ -1,4 +1,5 @@
-ROOT := $(CURDIR)
+D := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+ROOT := $(patsubst %/,%,$(D))
 PYTHON := $(ROOT)/.venv/bin/python
 
 .DEFAULT_GOAL := hoc.pdf
@@ -25,16 +26,10 @@ config:
 	@echo lateset published version: $(PUB)
 	@echo link: $(LINK)
 
-D := chapters/codesign/tracing
-TRACING_EXAMPLES := $(wildcard $(D)/example*.py)
-TRACING_OUTPUTS := $(patsubst %.py,%_output.txt,$(TRACING_EXAMPLES))
-$(D)/%_output.txt: $(D)/%.py $(D)/dsl.py $(D)/__init__.py Makefile
-	cd $(@D) && $(PYTHON) $(<F) > $(@F)
+$(PYTHON):
+	uv venv --seed --clear .venv
 
-chapters/codesign/flang.png: chapters/codesign/flang.dot
-	dot -Tpng -Gdpi=180 $< -o $@
-
-gen: chapters/codesign/flang.png $(TRACING_OUTPUTS)
+gen: chapters-gen
 
 watch:
 	watchexec -N -f Makefile -e mk,dot,typ,py,cls,txt -- make -j8 hoc.pdf
@@ -46,6 +41,11 @@ open: hoc.pdf
 	open $<
 
 publish/$(TAG).pdf: hoc.pdf
-	@cp hoc.pdf publish/$(TAG).pdf
+	cp hoc.pdf publish/$(TAG).pdf
 
-publish: config publish/$(TAG).pdf
+publish/latest.pdf: publish/$(TAG).pdf
+	cd publish && ln -sf $(TAG).pdf latest.pdf
+
+publish: config publish/latest.pdf
+
+include $(D)chapters/Makefile

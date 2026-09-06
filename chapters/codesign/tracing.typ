@@ -55,8 +55,11 @@ The user's program may first execute regular Python code on the CPU, and the
 generated program may be a GPU kernel that needs to be executed with a call
 to a driver library.
 
-This model is distinct from macro programming in Lisp #xref(<sec:lisp>) because Lisp
-macros are programs that take programs and return new programs, but 
+This model is distinct from macro programming in Lisp #xref(<sec:lisp>).
+Lisp macros are programs that take programs and return new programs, but
+in traced metaprogramming, the meta program produces another program as it
+executes.
+This will be expanded on in #todo[cite section with lisp exampmles].
 
 Most popular modern traced programming models are built in Python, so that is
 what we will use for examples in this section.
