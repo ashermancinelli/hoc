@@ -5,9 +5,11 @@
 #import "@preview/retrofit:0.2.0": backrefs
 
 #let revision = sys.inputs.at("revision", default: "working tree")
+#let quote-rgb = rgb("5897cd")
+#let backref-rgb = rgb("666666")
 
 #show: backrefs.with(
-  format: links => text(fill: rgb("666666"), size: 0.85em)[
+  format: links => text(fill: backref-rgb, size: 0.85em)[
     (Cited on #if links.len() == 1 { [p.] } else { [pp.] }
     #links.join(", ", last: " and "))
   ],
@@ -59,6 +61,20 @@
     par-indent: true,
   ),
 )
+
+#show quote.where(block: true): it => pad(x: 1em)[
+  #block(
+    width: 100%,
+    inset: (left: 1em),
+    stroke: (left: 2pt + quote-rgb),
+    above: 0.8em,
+    below: 0.8em,
+  )[
+    #set par(first-line-indent: 0pt)
+    #it.body
+  ]
+]
+
 #show: make-glossary
 #register-glossaries()
 #show: highlight-links
