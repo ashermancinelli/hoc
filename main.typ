@@ -36,7 +36,7 @@
     paper-size: "us-letter",
     open-right: true,
     alt-margins: false,
-    par-indent: false,
+    par-indent: true,
   ),
 )
 #show: make-glossary
