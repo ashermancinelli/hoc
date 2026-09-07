@@ -32,6 +32,8 @@ Python features available to them (like classes, polymorphism, higher-ordered pr
 but the generated programs do not need these features.
 This set of needs led to an explosion of programming models that provide different
 feature sets for different _stages_ of programming.
+Python-based metaprogramming built on MLIR compilers for specialized hardware
+became one of the most prominent compiler technologies in this time period.
 
 // While not the first tracing DSL, Tensorflow's DSL #citen(<agrawal2019tensorflow>)
 // is a useful example because we have a well-established corpus of open-source Tensorflow
@@ -80,6 +82,7 @@ into PTX and then into the cubin format and then the kernel is launched using th
 // #footnote[Note that the driver api then JIT-compiles the PTX into SASS code!]
 .
 
+We will look at a small Python DSL to illustrate how other fully featured DSLs work.
 The staging decorator might look like this:
 
 #code-file(path("./tracing/dsl.py"), lang: "python", region: "jit")

@@ -1,6 +1,13 @@
+(defstruct ir-block
+  (args '())
+  (ops (make-array 0 :adjustable t :fill-pointer 0))
+  )
+(defstruct ir-loop start stop body)
+(defstruct ir-function name args body)
 
 (defun make-ir () (make-array 0 :adjustable t :fill-pointer 0))
 (defparameter *ip* nil)
+(defparameter *args* nil)
 (defparameter *outer* nil)
 (defparameter *debug* t)
 
@@ -38,13 +45,8 @@
          (lambda (,i) ,body-ir)
          ))))
 
-(defmacro with-ip (ip &rest body)
-  `(let ((*outer* *ip* *ip* ip))
-     ,@body
-     (emit *outer*)))
-
 (defun jit-call (callee &rest rest)
-  (let ((out (gensym "jit-call")))
+  (let ((out (gensym "call")))
     (emit `(setq ,out (,callee ,@rest)))
     out))
 
@@ -61,8 +63,6 @@
     ((atom form) form)            ; skip atoms
     ((eq (car form) 'quote) form) ; skip quotes
     ((eq (car form) 'loop) (rewrite-loop form))
-    ((eq (car form) '+)
-     `(jit-call '+ ,@(mapcar #'jit-compile (cdr form))))
     ((eq (car form) 'setf)
      (destructuring-bind (_setf (_aref arr idx) val) form
        `(set-item
@@ -73,6 +73,8 @@
      `(get-item
         ,(jit-compile (second form))
         ,(jit-compile (third form))))
+    ((and (consp form) (symbolp (first form)))
+     `(jit-call ',(first form) ,@(mapcar #'jit-compile (cdr form))))
     (t (mapcar #'jit-compile form))))
 
 (defun jit-compile (form)
@@ -102,9 +104,26 @@
   (loop for i from 0 below N do
         (setf (aref a i)
               (+ (elt a i) i))))
+
+(defun show-ir (ir)
+  (loop for op across ir do
+        (pprint op))
+  (format t "~%"))
+
 (let* ((N 5)
        (a (make-array N))
        (ir (foo a N)))
   (format t "Result: ~a~%" a)
-  (loop for op across ir do
-        (pprint op)))
+  (show-ir ir))
+
+(trace-jit
+  bar (a N)
+  (loop for i from 0 below (elt a 0) do
+        (setf (aref a i)
+              (+ (elt a i) i))))
+
+(let* ((N 5)
+       (a (make-array N))
+       (ir (bar a N)))
+  (format t "Result: ~a~%" a)
+  (show-ir ir))
