@@ -1,0 +1,61 @@
+jitting: FOO
+(DEFUN FOO (A N)
+  ((LOOP FOR I FROM 0 BELOW N
+         DO (SETF (AREF A I) (+ (ELT A I) I)))))
+SYMBOL from BIT to SYMBOL (SETF (AREF A I) (+ (ELT A I) I))
+--- (ELT A I)
++++ (GET-ITEM A I)
+
+--- (+ (ELT A I) I)
++++ (JIT-CALL '+ (GET-ITEM A I) I)
+
+--- (SETF (AREF A I) (+ (ELT A I) I))
++++ (SET-ITEM A I (JIT-CALL '+ (GET-ITEM A I) I))
+
+--- (LOOP FOR I FROM 0 BELOW N
+          DO (SETF (AREF A I) (+ (ELT A I) I)))
++++ (JIT-FOR 0 N (LAMBDA (I) (SET-ITEM A I (JIT-CALL '+ (GET-ITEM A I) I))))
+
+Result: #(0 0 0 0 0)
+
+(SETQ #:|get-item116| (GET-ITEM #:|arg115| 0))
+(SETQ #:|call117| (+ #:|get-item116| 0))
+(SET-ITEM #:|arg115| 0 #:|call117|)
+(SETQ #:|get-item118| (GET-ITEM #:|arg115| 1))
+(SETQ #:|call119| (+ #:|get-item118| 1))
+(SET-ITEM #:|arg115| 1 #:|call119|)
+(SETQ #:|get-item120| (GET-ITEM #:|arg115| 2))
+(SETQ #:|call121| (+ #:|get-item120| 2))
+(SET-ITEM #:|arg115| 2 #:|call121|)
+(SETQ #:|get-item122| (GET-ITEM #:|arg115| 3))
+(SETQ #:|call123| (+ #:|get-item122| 3))
+(SET-ITEM #:|arg115| 3 #:|call123|)
+(SETQ #:|get-item124| (GET-ITEM #:|arg115| 4))
+(SETQ #:|call125| (+ #:|get-item124| 4))
+(SET-ITEM #:|arg115| 4 #:|call125|)
+jitting: BAR
+(DEFUN BAR (A N)
+  ((LOOP FOR I FROM 0 BELOW (ELT A 0)
+         DO (SETF (AREF A I) (+ (ELT A I) I)))))
+SYMBOL from BIT to CONS (SETF (AREF A I) (+ (ELT A I) I))
+--- (ELT A I)
++++ (GET-ITEM A I)
+
+--- (+ (ELT A I) I)
++++ (JIT-CALL '+ (GET-ITEM A I) I)
+
+--- (SETF (AREF A I) (+ (ELT A I) I))
++++ (SET-ITEM A I (JIT-CALL '+ (GET-ITEM A I) I))
+
+--- (ELT A 0)
++++ (GET-ITEM A 0)
+
+--- (LOOP FOR I FROM 0 BELOW (ELT A 0)
+          DO (SETF (AREF A I) (+ (ELT A I) I)))
++++ (JIT-FOR 0 (GET-ITEM A 0)
+             (LAMBDA (I) (SET-ITEM A I (JIT-CALL '+ (GET-ITEM A I) I))))
+
+Result: #(0 0 0 0 0)
+
+(SETQ #:|get-item128| (GET-ITEM #:|arg127| 0))
+(JIT-FOR 0 #:|get-item128| #<FUNCTION (LAMBDA (I) :IN BAR) {800617C02B}>)

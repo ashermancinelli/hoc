@@ -97,7 +97,7 @@ class RuntimeLoop:
 @dataclass(frozen=True)
 class FunctionIR:
     name: str
-    block_args: list
+    block_args: list | tuple
     body: list
 
     def __repr__(self):
@@ -153,3 +153,26 @@ class jit:
         func = load_function_pointer_from_dso(dso)
         func(*args) # or launch on GPU with driver api
 # ENDREGION jit
+
+# REGION ast-xformer
+def rewrite_ast(ast):
+    return ast
+# ENDREGION ast-xformer
+
+# REGION jit-ast-xformer
+class jit2:
+    def __init__(self, func):
+        self.func = rewrite_ast(func)
+        self.ir = None
+
+    def __call__(self, *args):
+        # First stage
+        block_args = tuple(to_symbol(arg) for arg in args)
+        self.ir = FunctionIR(self.func.__name__, block_args, [])
+        with insertion_point(self.ir.body):
+            self.func(*block_args)
+        # Second stage
+        dso = ir_to_native(self.ir)
+        func = load_function_pointer_from_dso(dso)
+        func(*args) # or launch on GPU with driver api
+# ENDREGION jit-ast-xformer

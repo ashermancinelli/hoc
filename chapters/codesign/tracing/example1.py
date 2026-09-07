@@ -12,5 +12,5 @@ def kernel(a):
 kernel(a)
 # ENDREGION loop-kernel
 
-print('# First iteration only')
+# print('# First iteration only')
 pprint(kernel.ir)

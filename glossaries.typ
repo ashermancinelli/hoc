@@ -161,6 +161,7 @@
 // acr and gls entries i use a lot
 #let ir = acr-short("ir")
 #let ast = acr-short("ast")
+#let dsl = acr-short("dsl")
 
 #let print-glossaries() = {
   pagebreak()

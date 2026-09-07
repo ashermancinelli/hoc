@@ -1,4 +1,3 @@
-# First iteration only
 def kernel(SymbolicArray0):
     setitem(SymbolicArray0, 0, 0)
     setitem(SymbolicArray0, 1, 1)

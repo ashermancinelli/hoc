@@ -34,10 +34,10 @@ $(VENV):
 $(PYTHON): $(VENV)
 
 $(SBCL): $(VENV)
-	@if ! command -V sbcl; then \
-		echo Need to install sbcl first; \
+	@if ! test -f $(SBCL); then \
+		command -V sbcl || echo Needs sbcl; \
+		ln -sf `which sbcl` $(SBCL); \
 	fi
-	ln -sf `which sbcl` $(SBCL)
 
 gen: chapters-gen
 
