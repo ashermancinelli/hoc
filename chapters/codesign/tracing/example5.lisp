@@ -16,7 +16,7 @@
 (defun jit-call (callee &rest args)
   (let ((sym (gensym "call-result"))
         )
-    (emit `(,callee ,@args))
+    (emit `(setq ,sym ,callee ,@args))
     sym))
 
 (defun jit-for (start end body)
@@ -30,7 +30,7 @@
     (_l _f i _f start _b end _d body)
     loop-form
     (format t "~a from ~a to ~a ~a~%" (type-of i) (type-of start) (type-of end) body)
-    (let ((*ir* (make-ir))
+    (let ((*ip* (make-ir))
           (body-ir (jit-compile body)))
       `(jit-for
          ,(jit-compile start)
@@ -42,6 +42,11 @@
   `(let ((*outer* *ip* *ip* ip))
      ,@body
      (emit *outer*)))
+
+(defun jit-call (callee &rest rest)
+  (let ((out (gensym "jit-call")))
+    (emit `(setq ,out (,callee ,@rest)))
+    out))
 
 (defun set-item (arr idx val)
   (emit `(set-item ,arr ,idx ,val)))
@@ -56,7 +61,8 @@
     ((atom form) form)            ; skip atoms
     ((eq (car form) 'quote) form) ; skip quotes
     ((eq (car form) 'loop) (rewrite-loop form))
-    ((eq (car form) '+) `(jit-call ,@form))
+    ((eq (car form) '+)
+     `(jit-call '+ ,@(mapcar #'jit-compile (cdr form))))
     ((eq (car form) 'setf)
      (destructuring-bind (_setf (_aref arr idx) val) form
        `(set-item
@@ -75,19 +81,21 @@
       (format t "--- ~a~%+++ ~a~%~%" form after))
     after))
 
+(defun symbolify (value)
+  (cond
+    ((integerp value) value)
+    (t (gensym "arg"))))
+
 (defmacro trace-jit (name args &body body)
-  (format t "JIT-compiling ~a~%~a~%" name `(defun ,name ,args ,body))
+  (format t "jitting: ~a~%~a~%" name `(defun ,name ,args ,body))
   (let* ((*ip* (make-ir))
-         (arg-syms (mapcar #'(lambda (_) (quote (gensym "jit-arg"))) args))
-         (fn (gensym "ast-compiled"))
-         (compiled
-           `(defun ,name ,args
-              (let ((*ip* (make-ir))
-                    (,fn (lambda ,args ,@(mapcar #'jit-compile body))))
-                (funcall ,fn ,@arg-syms)
-                *ip*))))
-    (format t "AST-preprocessed function:~%~a~%" compiled)
-    compiled))
+         (ast-compiled (mapcar #'jit-compile body))
+         (fn (gensym "ast-compiled")))
+   `(defun ,name ,args
+      (let ((*ip* (make-ir))
+            (,fn (lambda ,args ,@ast-compiled)))
+        (funcall ,fn ,@(mapcar (lambda (arg) `(symbolify ,arg)) args))
+        *ip*))))
 
 (trace-jit
   foo (a N)
@@ -97,4 +105,6 @@
 (let* ((N 5)
        (a (make-array N))
        (ir (foo a N)))
-  (format t "Result: ~a~%IR: ~a~%" a ir))
+  (format t "Result: ~a~%" a)
+  (loop for op across ir do
+        (pprint op)))
