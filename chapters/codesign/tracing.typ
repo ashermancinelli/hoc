@@ -14,11 +14,12 @@ using a CUDA C++ template library called CUTLASS #citen(<nvidia_cutlass_2023>),
 which can have poor compile times and be difficult to use but can generate good
 performance from relatively high level information
 #footnote[
-Michael Goldfarb of NVIDIA summarized the tradeoff as follows
-@Goldfarb2025CuTeDSLJAX:
-- C++ templates are slow to compile
-- C++ templates are inconvenient
-- DL community has fully embraced Python
+Michael Goldfarb of NVIDIA summarized the motivation for the switch to Python
+DSLs as:
+C++ templates are slow to compile,
+C++ templates are inconvenient, and
+the DL community has fully embraced Python
+@Goldfarb2025CuTeDSLJAX.
 This is not to say CUDA C++ is not used anymore, but for many developers,
 Python kernel authoring frameworks provide better tradeoffs.
 ].
@@ -35,7 +36,7 @@ feature sets for different _stages_ of programming.
 Python-based metaprogramming built on MLIR compilers for specialized hardware
 became one of the most prominent compiler technologies in this time period
 #footnote[
-Triton @triton-tillet (arguably the most influential Python DSL discussed here)
+Triton @triton-tillet (arguably the most influential Python DSL in this space)
 and cuTile Python @NVIDIAcuTilePython are also influential Python DSLs for GPU
 programming, but they are parsed from Python source.
 PyTorch's `torch.compile` and Numba parse Python bytecode which is another form
