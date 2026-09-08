@@ -65,11 +65,24 @@ def json_text(value):
 
 def compiler_diagnostics(result):
     lines = []
-    for channel in ("stdout", "stderr"):
-        for entry in result.get(channel, []):
-            text = entry.get("text", "") if isinstance(entry, dict) else str(entry)
-            if text:
-                lines.append(text)
+    pending = [result]
+    while pending:
+        current = pending.pop(0)
+        if not isinstance(current, dict):
+            continue
+        for channel in ("stdout", "stderr"):
+            entries = current.get(channel, [])
+            if isinstance(entries, str):
+                entries = [entries]
+            for entry in entries:
+                text = entry.get("text", "") if isinstance(entry, dict) else str(entry)
+                if text and text not in lines:
+                    lines.append(text)
+        pending.extend(
+            current.get(key)
+            for key in ("buildResult", "execResult")
+            if current.get(key) is not None
+        )
     return "\n".join(lines)
 
 
@@ -82,6 +95,25 @@ def assembly_text(result):
         text = entry.get("text", "") if isinstance(entry, dict) else str(entry)
         lines.append(text)
     return "\n".join(lines) + "\n"
+
+
+def output_text(entries):
+    if isinstance(entries, str):
+        return entries
+    if not isinstance(entries, list):
+        raise RuntimeError("Compiler Explorer response did not contain the requested output")
+    lines = []
+    for entry in entries:
+        text = entry.get("text", "") if isinstance(entry, dict) else str(entry)
+        lines.append(text)
+    return "\n".join(lines) + ("\n" if lines else "")
+
+
+def library_spec(value):
+    library, separator, version = value.partition(":")
+    if not separator or not library or not version:
+        raise argparse.ArgumentTypeError("library must have the form ID:VERSION")
+    return {"id": library, "version": version}
 
 
 def fetch_compilers(args):
@@ -112,13 +144,14 @@ def compile_source(args):
         for path in args.files
     ]
 
+    execute = args.format == "stdout"
     payload = {
         "source": source.read_text(encoding="utf-8"),
         "options": {
             "userArguments": args.arguments,
             "compilerOptions": {
                 "skipAsm": False,
-                "executorRequest": False,
+                "executorRequest": execute,
                 "overrides": [],
             },
             "filters": {
@@ -127,7 +160,7 @@ def compile_source(args):
                 "commentOnly": args.comment_only,
                 "demangle": args.demangle,
                 "directives": args.directives,
-                "execute": False,
+                "execute": execute,
                 "intel": args.intel,
                 "labels": True,
                 "libraryCode": False,
@@ -135,7 +168,12 @@ def compile_source(args):
                 "debugCalls": False,
             },
             "tools": [],
-            "libraries": [],
+            "libraries": args.library,
+            "executeParameters": {
+                "args": args.execute_argument,
+                "stdin": args.stdin,
+                "runtimeTools": [],
+            },
         },
         "files": files,
     }
@@ -154,7 +192,23 @@ def compile_source(args):
             message += f":\n{diagnostics}"
         raise RuntimeError(message)
 
-    contents = json_text(result) if args.format == "json" else assembly_text(result)
+    if args.format == "json":
+        contents = json_text(result)
+    elif args.format == "asm":
+        contents = assembly_text(result)
+    else:
+        execution = result.get("execResult")
+        if execution is None and result.get("didExecute"):
+            execution = result
+        if not isinstance(execution, dict):
+            raise RuntimeError("Compiler Explorer response did not contain an execution result")
+        if execution.get("code") != 0:
+            diagnostics = output_text(execution.get("stderr", []))
+            message = f"Compiler Explorer execution failed with exit code {execution.get('code')}"
+            if diagnostics:
+                message += f":\n{diagnostics.rstrip()}"
+            raise RuntimeError(message)
+        contents = output_text(execution.get("stdout", []))
     atomic_write(args.output, contents)
 
 
@@ -183,7 +237,27 @@ def parser():
     )
     compile_parser.add_argument("--language", help="optional Compiler Explorer language ID")
     compile_parser.add_argument("--arguments", default="", help="compiler command-line arguments")
-    compile_parser.add_argument("--format", choices=("json", "asm"), default="json")
+    compile_parser.add_argument(
+        "--library",
+        action="append",
+        default=[],
+        type=library_spec,
+        metavar="ID:VERSION",
+        help="enable a Compiler Explorer library (repeatable)",
+    )
+    compile_parser.add_argument(
+        "--format",
+        choices=("json", "asm", "stdout"),
+        default="json",
+        help="stdout requests execution and writes only program stdout",
+    )
+    compile_parser.add_argument(
+        "--execute-argument",
+        action="append",
+        default=[],
+        help="program argument for stdout execution (repeatable)",
+    )
+    compile_parser.add_argument("--stdin", default="", help="standard input for stdout execution")
     compile_parser.add_argument("--comment-only", action=argparse.BooleanOptionalAction, default=True)
     compile_parser.add_argument("--demangle", action=argparse.BooleanOptionalAction, default=True)
     compile_parser.add_argument("--directives", action=argparse.BooleanOptionalAction, default=True)

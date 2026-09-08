@@ -9,4 +9,4 @@
     * type theory forall podcast episode about that process
 * read @Priestley2008_logic_dev_of_pl_1930_1975
 * make llvm builder api use actually compiling examples instead of the copy
-  pasted stuff
+  pasted stuff.

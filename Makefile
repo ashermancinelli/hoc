@@ -3,6 +3,7 @@ ROOT := $(patsubst %/,%,$(D))
 VENV := $(ROOT)/.venv
 PYTHON := $(VENV)/bin/python
 SBCL := $(VENV)/bin/sbcl
+TMP := /tmp/
 
 .DEFAULT_GOAL := hoc.pdf
 .DELETE_ON_ERROR:
@@ -19,6 +20,7 @@ TYPST_FLAGS := \
 		--root . \
 		--input revision=$(REVISION_SHORT)
 LINK := https://cdn.jsdelivr.net/gh/ashermancinelli/hoc@$(REVISION)/$(PUB)
+include tools/ce.mk
 
 .PHONY: config gen watch open publish
 config:
